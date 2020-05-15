@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" th:href="@{/}" href="#">Tienda</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+		  <ul class="navbar-nav">
+			<li class="nav-item active">
+			  <a class="nav-link" th:href="@{/}" href="#">Inicio <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/personas}">Personas</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" th:href="@{/clientes}">Clientes</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" th:href="@{/empleados}">Empleados</a>
+			  </li>
+			  <li class="nav-item">
+			  <a class="nav-link" th:href="@{/locales}">Locales</a>
+			</li>
+		  </ul>
+		</div>
+	  </nav>
+
+	<div class="container mt-4">
+	<a th:href="@{/personas/new}" class="btn btn-primary">Agregar Persona</a>
+		<table class="table" >
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>DNI</th>
+					<th>NOMBRE</th>
+					<th>APELLIDO</th>
+					<th>FECHA DE NACIMIENTO</th>
+					<th></th>
+				</tr>
+			<tbody>
+				<tr th:each="persona:${personas}">
+
+					<td th:text="${persona.id}"></td>
+					<td th:text="${persona.dni}"></td>
+					<td th:text="${persona.nombre}"></td>
+					<td th:text="${persona.apellido}"></td>
+					<td th:text="${persona.fechaNacimiento}"></td>
+					<td>
+						<a th:href="@{personas/editar/} + ${persona.id}" class="btn btn-warning">Editar</a>
+						<a th:href ="@{personas/eliminar/} + ${persona.id}" class="btn btn-danger">Eliminar</a>
+					</td>
+
+				</tr>
+
+			</tbody>
+
+
+
+		</table>
+
+
+
+
+	</div>
+
+
+
+</body>
+</html>
