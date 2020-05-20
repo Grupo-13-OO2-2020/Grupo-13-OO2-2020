@@ -43,7 +43,7 @@
 					<th>HORARIO DE SALIDA</th>
 					<th>TIPO EMPLEADO</th>
 					<th>SUELDO</th>
-					<th>ID LOCAL</th>
+					<th>LOCAL</th>
 				</tr>
 			<tbody>
 				<tr th:each="empleado:${empleados}">
@@ -57,12 +57,15 @@
 					<td th:text="${empleado.horarioSalida}"></td>
 					<td th:text="${empleado.tipoEmpleado}"></td>
 					<td th:text="${empleado.sueldo}"></td>
-					<td th:text="${empleado.idLocal}"></td>
+					<td th:text="${empleado.local.direccion}"></td>
 					<td>
-					<a th:href="@{empleados/editar/} + ${empleado.id}" class="btn btn-warning">Editar</a>
-					<a th:href ="@{empleados/eliminar/} + ${empleado.id}" onclick="alert('El empleado fue eliminado con exito!')" class="btn btn-danger">Eliminar</a>
+					<td>
+						<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-warning">Editar</a>
 					</td>
-
+					
+					<td>
+						<a th:href ="@{/empleados/eliminar/{id}(id=${empleado.id})}" onclick="alert('El empleado fue eliminado con exito!')" class="btn btn-danger">Eliminar</a>
+					</td>
 				</tr>
 
 			</tbody>

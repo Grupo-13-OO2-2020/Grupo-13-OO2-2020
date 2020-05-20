@@ -10,7 +10,7 @@
 
 	<div class="container mt-4">
 		<div class="col-sm-6">
-			<form th:action="@{/locales/save}" th:object=${local} method="POST">
+			<form action="#" th:action="@{/locales/save}" th:object=${local} method="POST">
 				<div class="card">
 					<div class="card-header"></div>
 					<h1></h1>
@@ -35,22 +35,28 @@
 					<div class="form-group">
 						<label>NUMERO TEL</label> <input th:field="*{numeroTelefono}" type="text" class="form-control" />
 					</div>
-<!-- 					<div class="form-group"> -->
-<!-- 						<label>GERENTE</label> <input th:field="*{gerente}" type="text" class="form-control" /> -->
-<!-- 					</div> -->
+					<select th:field="*{empleado}" >
+							<option th:each="empleado : *{empleados}" th:value="${empleado.id}">
+								<p th:text="${empleado.nombre}"/>
+							</option>
+					</select>
+					
 					<div class="card-footer">
 						<input type="submit" style="background:yellow" value="Guardar" class="btn btn-succes"/>
 
 
 					</div>
+<!-- 					<div class="form-group"> -->
+<!-- 						<label>GERENTE</label> <input th:field="*{gerente}" type="text" class="form-control" /> -->
+<!-- 					</div> -->
+					
+	
 				</div>
 			</form>
 
 
 		</div>
 
-
 	</div>
-
 </body>
 </html>

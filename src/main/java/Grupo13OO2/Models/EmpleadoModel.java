@@ -6,10 +6,14 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import Grupo13OO2.Entities.Local;
 
 public class EmpleadoModel extends PersonaModel{
 	@Temporal(TemporalType.TIME)
@@ -20,26 +24,32 @@ public class EmpleadoModel extends PersonaModel{
 	private Date  horarioSalida;
 	private String tipoEmpleado;
 	private double sueldo;
-	private int idLocal;
+	@ManyToOne
+	private Local local;
+	@OneToOne(mappedBy = "empleado")
+	private Local localGerente;
 
 	public EmpleadoModel() {}
 
 	public EmpleadoModel(int id, String nombre, int dni, String apellido, Date fechaNacimiento,
-			Date  horarioEntrada,	 Date  horarioSalida, String tipoEmpleado, double sueldo, int idLocal) {
+			Date  horarioEntrada,Date  horarioSalida, String tipoEmpleado, double sueldo, Local local, Local localGerente) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
 		this.horarioSalida = horarioSalida;
 		this.tipoEmpleado = tipoEmpleado;
 		this.sueldo = sueldo;
-		this.idLocal = idLocal;
+		this.local = local;
+		this.localGerente = localGerente;
 	}
 
-	
-  public Date getHorarioEntrada() { return horarioEntrada; }
-	  
-	  public void setHorarioEntrada(Date horarioEntrada) { 
-		  this.horarioEntrada = horarioEntrada; }
-	 
+	public Date getHorarioEntrada() {
+		return horarioEntrada;
+	}
+
+	public void setHorarioEntrada(Date horarioEntrada) {
+		this.horarioEntrada = horarioEntrada;
+	}
+
 	public Date  getHorarioSalida() {
 		return horarioSalida;
 	}
@@ -64,12 +74,30 @@ public class EmpleadoModel extends PersonaModel{
 		this.sueldo = sueldo;
 	}
 
-	public int getIdLocal() {
-		return idLocal;
+	public Local getlocalGerente() {
+		return localGerente;
 	}
 
-	public void setIdLocal(int idLocal) {
-		this.idLocal = idLocal;
+	public void setlocalGerente(Local local) {
+		this.localGerente = local;
 	}
+
+	public Local getLocal() {
+		return local;
+	}
+
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+
+	public Local getLocalGerente() {
+		return localGerente;
+	}
+
+	public void setLocalGerente(Local localGerente) {
+		this.localGerente = localGerente;
+	}
+
+	
 
 }

@@ -9,12 +9,12 @@ import Grupo13OO2.Models.EmpleadoModel;
 public class EmpleadoConverter {
 	public EmpleadoModel entityToModel(Empleado objeto) {
 		return new EmpleadoModel(objeto.getId(), objeto.getNombre(), objeto.getDni(), objeto.getApellido(), objeto.getFechaNacimiento(), objeto.getHorarioEntrada(), objeto.getHorarioSalida(),
-				objeto.getTipoEmpleado(), objeto.getSueldo(), objeto.getIdLocal());
+				objeto.getTipoEmpleado(), objeto.getSueldo(), objeto.getLocal(), objeto.getlocalGerente());
 	}
 
 	public Empleado modelToEntity(EmpleadoModel objeto) {
 		return new Empleado(objeto.getId(), objeto.getNombre(), objeto.getDni(), objeto.getApellido(),
 				objeto.getFechaNacimiento(), objeto.getHorarioEntrada(), objeto.getHorarioSalida(),
-				objeto.getTipoEmpleado(), objeto.getSueldo(), objeto.getIdLocal());
+				objeto.getTipoEmpleado(), objeto.getSueldo(), objeto.getLocal(), objeto.getLocalGerente());
 	}
 }

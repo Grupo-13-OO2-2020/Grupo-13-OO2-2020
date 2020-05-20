@@ -9,54 +9,62 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import Grupo13OO2.Models.ClienteModel;
+import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.ILocalService;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
-@RequestMapping
+@RequestMapping("/locales")
 public class LocalController {
 	
-	  @Autowired
+	  	@Autowired
 	    @Qualifier("localService")
 	    private ILocalService localService;
+	  	
+	  	@Autowired
+	    @Qualifier("empleadoService")
+	    private IEmpleadoService empleadoService;
 	  
-	  @GetMapping("/locales")
+	  @GetMapping("")
 	    public ModelAndView index(){
 	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_INDEX); 
 	        mAV.addObject("locales", localService.getAll());
+	        return mAV;
+	    }
+	    
+	    @GetMapping("/new")
+	    public ModelAndView create() {
+	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_FORM); 
 	        mAV.addObject("local", new LocalModel());
 	        return mAV;
 	    }
-	  
-	  @GetMapping("/locales/new")
-	    public ModelAndView create(@ModelAttribute("local") LocalModel localModel) {
-	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_FORM); 
-	        return mAV;
+
+	    @PostMapping("/save")
+	    public RedirectView create(@ModelAttribute("local") LocalModel localModel) {
+	    	localService.insertOrUpdate(localModel);
+	        return new RedirectView("/locales");
 	    }
-	  
-	  @PostMapping("/locales/save")
-	    public String save(@ModelAttribute("local") LocalModel localModel) {
-	        localService.insertOrUpdate(localModel);
-	        return "redirect:/locales";
-	    }
-	  @GetMapping("/locales/editar/{id}")
-		public ModelAndView ModelAndView( @ModelAttribute("cliente") LocalModel localModel, @PathVariable int id) {
+	    @GetMapping("/editar/{id}")
+		public ModelAndView get(@PathVariable("id") int id) {
 			
 	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_FORM); 
-	        LocalModel local = localService.ListarId(id);
-	        mAV.addObject("local", local);
+	        mAV.addObject("local", localService.ListarId(id));
 			return mAV;
 		}
 		
-		@GetMapping("/locales/eliminar/{id}")
-		public String delete(Model model, @PathVariable int id) {
+	    @GetMapping("/eliminar/{id}")
+		public RedirectView delete (Model model,@PathVariable("id") int id) {
 			localService.delete(id);
-			return "redirect:/locales";
+			return new RedirectView("/locales");
 		}
+		
 	  public static double distanciaCoord( double lat1 , double lng1 , double lat2 , double lng2 ) {
 		  double radioTierra = 6371; // en kilómetros
 		  double dLat = Math. toRadians ( lat2 - lat1 );

@@ -40,6 +40,7 @@
 					<th>LONGITUD</th>
 					<th>CODIGO</th>
 					<th>NUM.TELEFONO</th>
+					<th>GERENTE</th>
 					
 				</tr>
 			<tbody>
@@ -51,10 +52,15 @@
 					<td th:text="${local.longitud}"></td>
 					<td th:text="${local.codigo}"></td>
 					<td th:text="${local.numeroTelefono}"></td>
+					<td th:text="${local.empleado.nombre}"></td>
 					
 					<td>
-						<a th:href="@{locales/editar/} + ${local.id}" class="btn btn-warning">Editar</a>
-						<a th:href ="@{locales/eliminar/} + ${local.id}" onclick="alert('El local fue eliminado con exito!')" class="btn btn-danger">Eliminar</a>
+						<a th:href="@{/locales/editar/{id}(id=${local.id})}" class="btn btn-warning">Editar</a>
+					</td>
+					
+					<td>
+						<a th:href ="@{/locales/eliminar/{id}(id=${local.id})}" onclick="alert('El local fue eliminado con exito!')"
+						class="btn btn-danger" >Eliminar</a>
 					</td>
 
 				</tr>

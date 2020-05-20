@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
 
 import Grupo13OO2.Models.ClienteModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
@@ -17,45 +19,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
-@RequestMapping
+@RequestMapping("/clientes")
 public class ClienteController {
     @Autowired
     @Qualifier("clienteService")
     private IClienteService clienteService;
 
     
-    @GetMapping("/clientes")
+    @GetMapping("")
     public ModelAndView index(){
         ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_INDEX); 
         mAV.addObject("clientes", clienteService.getAll());
-        mAV.addObject("cliente", new ClienteModel());
         return mAV;
     }
     
-    @GetMapping("/clientes/new")
-    public ModelAndView create(@ModelAttribute("cliente") ClienteModel clienteModel) {
+    @GetMapping("/new")
+    public ModelAndView create() {
         ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM); 
+        mAV.addObject("cliente", new ClienteModel());
         return mAV;
     }
 
-    @PostMapping("/clientes/save")
-    public String save(@ModelAttribute("cliente") ClienteModel clienteModel) {
+    @PostMapping("/save")
+    public RedirectView create(@ModelAttribute("cliente") ClienteModel clienteModel) {
         clienteService.insertOrUpdate(clienteModel);
-        return "redirect:/clientes";
+        return new RedirectView("/clientes");
     }
-    @GetMapping("/clientes/editar/{id}")
-	public ModelAndView ModelAndView( @ModelAttribute("cliente") ClienteModel clienteModel, @PathVariable int id) {
+    @GetMapping("/editar/{id}")
+	public ModelAndView get(@PathVariable("id") int id) {
 		
         ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM); 
-        ClienteModel cliente = clienteService.ListarId(id);
-        mAV.addObject("cliente", cliente);
+        mAV.addObject("cliente", clienteService.ListarId(id));
 		return mAV;
 	}
 	
-	@GetMapping("/clientes/eliminar/{id}")
-	public String delete(Model model, @PathVariable int id) {
+    @GetMapping("/eliminar/{id}")
+	public RedirectView delete(Model model, @PathVariable int id) {
 		clienteService.delete(id);
-		return "redirect:/clientes";
+		return new RedirectView("/clientes");
 	}
 
 }
