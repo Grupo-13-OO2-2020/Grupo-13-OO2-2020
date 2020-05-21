@@ -16,6 +16,9 @@
 			<li class="nav-item active">
 			  <a class="nav-link" th:href="@{/}" href="#">Inicio</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/personas}">Personas</a>
+			  </li>
 			  <li class="nav-item">
 				<a class="nav-link" th:href="@{/clientes}">Clientes</a>
               </li>
@@ -59,12 +62,17 @@
 					<td th:text="${empleado.sueldo}"></td>
 					<td th:text="${empleado.local.direccion}"></td>
 					<td>
+<<<<<<< HEAD
 					<td>
 						<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-warning">Editar</a>
 					</td>
 					
 					<td>
 						<a th:href ="@{/empleados/eliminar/{id}(id=${empleado.id})}" onclick="alert('El empleado fue eliminado con exito!')" class="btn btn-danger">Eliminar</a>
+=======
+					<a th:href="@{empleados/editar/} + ${empleado.id}" class="btn btn-warning">Editar</a>
+					<a th:href ="@{empleados/eliminar/} + ${empleado.id}" class="btn btn-danger">Eliminar</a>
+>>>>>>> 2daprueba
 					</td>
 				</tr>
 
