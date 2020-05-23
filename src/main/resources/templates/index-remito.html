@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Remito</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" th:href="@{/}" href="#">Tienda</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+		  <ul class="navbar-nav">
+			<li class="nav-item active">
+			  <a class="nav-link" th:href="@{/}" href="#">Inicio <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/personas}">Personas</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" th:href="@{/clientes}">Clientes</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" th:href="@{/empleados}">Empleados</a>
+			  </li>
+			  <li class="nav-item">
+			  <a class="nav-link" th:href="@{/locales}">Locales</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" th:href="@{/pedido}">Pedido</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" th:href="@{/solicitudStock}">SolicitudStock</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" th:href="@{/remito}">Remito</a>
+			</li>
+		  </ul>
+		</div>
+	  </nav>
+
+	<div class="container mt-4">
+	<a th:href="@{/remito/new}" class="btn btn-primary">Agregar Remito</a>
+		<table class="table" >
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>FECHA</th>
+					<th>PRODUCTO</th>
+					<th>CANTIDAD</th>
+					<th>VENDEDOR</th>
+					<th>CLIENTE</th>
+					<th>FACTURADO</th>
+					<th>FORMA DE PAGO</th>
+					<th></th>
+				</tr>
+			<tbody>
+				<tr th:each="remito:${remito}">
+
+					<td th:text="${remito.id}"></td>
+					<td th:text="${remito.fecha}"></td>
+					<td th:text="${remito.producto.descripcion}"></td>
+					<td th:text="${remito.cantidad}"></td>
+					<td th:text="${remito.vendedor.nombre}"></td>
+					<td th:text="${remito.cliente.nombre}"></td>
+					<td th:text="${remito.facturado}"></td>
+					<td th:text="${remito.formaDePago}"></td>
+					<td>
+						<a th:href="@{remito/editar/} + ${remito.id}" class="btn btn-warning">Editar</a>
+						<a th:href ="@{remito/eliminar/} + ${remito.id}" class="btn btn-danger">Eliminar</a>
+					</td>
+
+				</tr>
+
+			</tbody>
+
+
+
+		</table>
+
+
+
+
+	</div>
+
+
+
+</body>
+</html>

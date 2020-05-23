@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Remito</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+</head>
+<body>
+
+	<div class="container mt-4">
+		<div class="col-sm-6">
+			<form th:action="@{/remito/save}" th:object=${pedido} method="POST">
+				<div class="card">
+					<div class="card-header"></div>
+					<h3>Modulo Remito</h3>
+					<div class="card-body"></div>
+					<div class="form-group" style="display: none">
+						<label>ID</label> <input th:field="*{id}" type="text" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>FECHA</label> <input th:field="*{fecha}" type="text" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>PRODUCTO</label> <input th:field="*{producto.descripcion}" type="text" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>CANTIDAD</label> <input th:field="*{cantidad}" type="text" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>VENDEDOR</label> <input th:field="*{vendedor.nombre}" type="date" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>CLIENTE</label> <input th:field="*{cliente.nombre}" type="date" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>FACTURADO</label> <input th:field="*{facturado}" type="date" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>FORMA DE PAGO </label> <input th:field="*{formaDePago}" type="date" class="form-control" />
+					</div>
+					<div class="card-footer">
+						<input type="submit" style="background:yellow"  value="Guardar" class="btn btn-succes"/>
+					</div>
+				</div>
+			</form>
+
+
+		</div>
+
+
+	</div>
+
+
+
+</body>
+</html>
