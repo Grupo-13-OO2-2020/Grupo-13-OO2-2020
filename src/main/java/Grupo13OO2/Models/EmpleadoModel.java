@@ -1,9 +1,5 @@
 package Grupo13OO2.Models;
 
-import java.io.Serializable;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.ManyToOne;

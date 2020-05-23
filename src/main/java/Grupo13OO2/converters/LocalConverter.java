@@ -10,13 +10,13 @@ import Grupo13OO2.Models.LocalModel;
 public class LocalConverter {
 	
 	public LocalModel entityToModel(Local local) {
-		return new LocalModel(local.getId(),local.getDireccion(),local.getLatitud(),local.getLongitud(),local.getCodigo(),
+		return new LocalModel(local.getId(),local.getDireccion(),local.getLatitud(),local.getLongitud(),
 				local.getNumeroTelefono(), local.getEmpleado(), local.getEmpleados());
 		
 	}
 	
 	public Local modelToEntity(LocalModel local) {
-		return new Local(local.getId(),local.getDireccion(),local.getLatitud(),local.getLongitud(),local.getCodigo(),
+		return new Local(local.getId(),local.getDireccion(),local.getLatitud(),local.getLongitud(),
 				local.getNumeroTelefono(), local.getEmpleado(), local.getEmpleados());
 	}
 	

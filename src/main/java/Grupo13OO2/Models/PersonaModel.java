@@ -1,6 +1,5 @@
 package Grupo13OO2.Models;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
