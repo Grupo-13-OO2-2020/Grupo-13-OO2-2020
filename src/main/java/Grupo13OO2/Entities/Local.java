@@ -4,7 +4,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,10 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-
-import Grupo13OO2.Entities.Empleado;
-
 
 @Entity
 @Table(name="local")
@@ -27,7 +22,6 @@ public class Local {
 	private String direccion;
 	private float latitud;
 	private float longitud;
-	private int codigo;
 	private int numeroTelefono;
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -39,14 +33,13 @@ public class Local {
 	
 	public Local() {}
 
-	public Local(int id, String direccion, float latitud, float longitud, int codigo, int numeroTelefono, Empleado empleado
+	public Local(int id, String direccion, float latitud, float longitud, int numeroTelefono, Empleado empleado
 			, Set<Empleado> empleados) {
 		super();
 		this.id = id;
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
-		this.codigo = codigo;
 		this.numeroTelefono = numeroTelefono;
 		this.empleado = empleado;
 		this.empleados = empleados;
@@ -84,14 +77,6 @@ public class Local {
 		this.longitud = longitud;
 	}
 
-	public int getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-
 	public int getNumeroTelefono() {
 		return numeroTelefono;
 	}
@@ -115,12 +100,5 @@ public class Local {
 	public void setEmpleados(Set<Empleado> empleados) {
 		this.empleados = empleados;
 	}
-
-	
-	
-	
-	
-	
-	
 
 }

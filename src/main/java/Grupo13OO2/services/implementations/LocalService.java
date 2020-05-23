@@ -38,7 +38,6 @@ public class LocalService implements ILocalService{
 		public LocalModel ListarId(int id) {
 	        
 	        Optional<Local> local = localRepository.findById(id);
-	        
 
 			return localConverter.entityToModel(local.get());
 		}

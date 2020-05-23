@@ -1,9 +1,6 @@
 package Grupo13OO2.Models;
 
-import java.time.LocalDate;
 import java.util.Date;
-
-import Grupo13OO2.Entities.Local;
 
 public class ClienteModel extends PersonaModel{
 
@@ -11,7 +8,6 @@ public class ClienteModel extends PersonaModel{
 	private int numero;	
 	private long cuil;
 	private long cuit;
-  //private Local local;
     
     public ClienteModel() {}
 

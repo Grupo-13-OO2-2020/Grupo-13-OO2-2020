@@ -1,10 +1,10 @@
 
 USE `db_ejemplo`;
 
-insert into local values (1,1,"Murature",50.0218, 79.5265,11112222,null);
-insert into local values (2,2,"Mentruyt",-49.4505, 153.2949,22223333,null);
-insert into local values (3,3,"Boedo",-50.0955, 147.9932,33334444,null);
-insert into local values (4,4,"Laprida",25.5277, 30.8653,44445555,null);
+insert into local values (1,"Murature",50.0218, 79.5265,11112222,null);
+insert into local values (2,"Mentruyt",-49.4505, 153.2949,22223333,null);
+insert into local values (3,"Boedo",-50.0955, 147.9932,33334444,null);
+insert into local values (4,"Laprida",25.5277, 30.8653,44445555,null);
 
 insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Martinez", 222222,'2000-11-05',"Marcos");
 insert into empleado values ( '12:00:00','20:00:00', 25000, "Vendedor",1,1);

@@ -1,7 +1,5 @@
 package Grupo13OO2.Entities;
 
-import java.sql.Time;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
