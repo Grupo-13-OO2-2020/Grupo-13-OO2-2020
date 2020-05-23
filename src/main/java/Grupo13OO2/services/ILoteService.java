@@ -9,7 +9,7 @@ public interface ILoteService {
 
 	public List <Lote> getAll();
 	
-	public LoteModel insertOrUpdate(LoteModel productoModel);
+	public LoteModel insertOrUpdate(LoteModel loteModel);
 	
 	public LoteModel ListarId(int id);
 	

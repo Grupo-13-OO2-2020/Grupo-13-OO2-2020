@@ -2,7 +2,7 @@
 <html xmlns:th="www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Producto</title>
+<title>Stock</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
 </head>
 <body>
@@ -10,27 +10,25 @@
 
 	<div class="container mt-4">
 		<div class="col-sm-6">
-			<form th:action="@{/productos/save}" th:object=${producto} method="POST">
+			<form th:action="@{/lotes/save}" th:object=${lote} method="POST">
 				<div class="card">
 					<div class="card-header"></div>
-					<h3>Modulo Local</h3>
+					<h3>Modulo Lotes</h3>
 					<div class="card-body"></div>
 					
-					<div class="form-group" style="display: none">
-						<label>ID</label> <input th:field="*{id}" type="text" class="form-control" />
+					<div class="form-group">
+						<label>NUMERO DE LOTE</label> <input th:field="*{numeroDeLote}" type="text" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label>DESCRIPCION</label> <input th:field="*{descripcion}" type="text" class="form-control" />
+						<label>CANTIDAD INICIAL</label> <input th:field="*{cantidadRecibida}" type="text" class="form-control" />
 					</div>
-					<div class="form-group">
-						<label>PRECIO_UNITARIO</label> <input th:field="*{precioUnitario}" type="text" class="form-control" />
-					</div>
-					<div class="form-group">
-						<label>CODIGO_PRODUCTO</label> <input th:field="*{codigoProducto}" type="text" class="form-control" />
-					</div>
-					<div class="form-group">
-						<label>TALLE</label> <input th:field="*{talle}" type="text" class="form-control" />
-					</div>
+					
+					<select th:field="*{productoModel}" >
+							<option th:each="productoModel : ${productos}" th:value="${productoModel.id}">
+								<p th:text="${productoModel.descripcion}"/>
+							</option>
+					</select>
+					
 					<div class="card-footer">
 						<input type="submit" style="background:yellow" value="Guardar" class="btn btn-succes"/>
 

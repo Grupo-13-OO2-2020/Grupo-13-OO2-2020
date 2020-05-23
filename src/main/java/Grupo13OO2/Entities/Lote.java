@@ -24,6 +24,7 @@ public class Lote {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
+	private int numeroDeLote;
 	private int cantidadRecibida;
 	@Column(name="fechaIngreso")
 	@CreationTimestamp
@@ -40,13 +41,12 @@ public class Lote {
 	}
 	
 	
-	public Lote(int id, int cantidadRecibida, Date fechaIngreso, Producto producto, int cantidadExistente) {
-		super();
-		this.id = id;
+	public Lote(int id,int numeroDeLote, int cantidadRecibida, Producto producto) {
+		this.id=id;
+		this.numeroDeLote = numeroDeLote;
 		this.cantidadRecibida = cantidadRecibida;
-		this.fechaIngreso = fechaIngreso;
 		this.producto = producto;
-		this.cantidadExistente = cantidadExistente;
+		this.cantidadExistente = cantidadRecibida;
 	}
 
 
@@ -59,7 +59,7 @@ public class Lote {
 	public int getCantidadRecibida() {
 		return cantidadRecibida;
 	}
-	public void setCantidadRecibida(int cantidadRecibida) {
+	protected void setCantidadRecibida(int cantidadRecibida) {
 		this.cantidadRecibida = cantidadRecibida;
 	}
 	public Date getFechaIngreso() {
@@ -79,6 +79,16 @@ public class Lote {
 	}
 	public void setCantidadExistente(int cantidadExistente) {
 		this.cantidadExistente = cantidadExistente;
+	}
+
+
+	public int getNumeroDeLote() {
+		return numeroDeLote;
+	}
+
+
+	public void setNumeroDeLote(int numeroDeLote) {
+		this.numeroDeLote = numeroDeLote;
 	}
 	
 

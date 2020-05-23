@@ -28,6 +28,12 @@
 			  <li class="nav-item">
 			  <a class="nav-link" th:href="@{/locales}">Locales</a>
 			</li>
+				<li class="nav-item">
+			  <a class="nav-link" th:href="@{/productos}">Productos</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" th:href="@{/lotes}">Stock</a>
+			</li>
 		  </ul>
 		</div>
 	  </nav>
@@ -58,17 +64,14 @@
 					<td th:text="${local.empleado.nombre}"></td>
 					
 					<td>
-<<<<<<< HEAD
+
 						<a th:href="@{/locales/editar/{id}(id=${local.id})}" class="btn btn-warning">Editar</a>
 					</td>
 					
 					<td>
 						<a th:href ="@{/locales/eliminar/{id}(id=${local.id})}" onclick="alert('El local fue eliminado con exito!')"
 						class="btn btn-danger" >Eliminar</a>
-=======
-						<a th:href="@{locales/editar/} + ${local.id}" class="btn btn-warning">Editar</a>
-						<a th:href ="@{locales/eliminar/} + ${local.id}" class="btn btn-danger">Eliminar</a>
->>>>>>> 2daprueba
+
 					</td>
 
 				</tr>

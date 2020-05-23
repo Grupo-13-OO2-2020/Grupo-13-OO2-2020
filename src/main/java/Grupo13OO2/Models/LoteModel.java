@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class LoteModel {
 	
+	private int id;
 	private int cantidadRecibida;
 	private Date fechaIngreso;
 	private ProductoModel productoModel;
@@ -16,13 +17,11 @@ public class LoteModel {
 		
 	}
 
-	public LoteModel(int cantidadRecibida, Date fechaIngreso, ProductoModel productoModel, int cantidadExistente,
-			int numeroDeLote) {
-		super();
+	public LoteModel(int id,int cantidadRecibida, ProductoModel productoModel,int numeroDeLote) {
+		this.setId(id);
 		this.cantidadRecibida = cantidadRecibida;
-		this.fechaIngreso = fechaIngreso;
 		this.productoModel = productoModel;
-		this.cantidadExistente = cantidadExistente;
+		this.cantidadExistente = cantidadRecibida;
 		this.numeroDeLote = numeroDeLote;
 	}
 
@@ -64,6 +63,14 @@ public class LoteModel {
 
 	public void setNumeroDeLote(int numeroDeLote) {
 		this.numeroDeLote = numeroDeLote;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 

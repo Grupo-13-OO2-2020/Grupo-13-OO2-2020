@@ -16,14 +16,14 @@ import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IProductoService;
 
 @Controller
-@RequestMapping
+@RequestMapping("/productos")
 public class ProductoController {
 	
 	@Autowired
 	@Qualifier("productoService")
 	private IProductoService productoService;
 	
-	@GetMapping("/productos")
+	@GetMapping("")
 	public ModelAndView index(){
 		ModelAndView mAV= new ModelAndView(ViewRouteHelper.PRODUCTO_INDEX);
 		mAV.addObject("productos", productoService.getAll());
@@ -31,25 +31,27 @@ public class ProductoController {
 		return mAV;
 		}
 
-	@GetMapping("/productos/new")
+	@GetMapping("/new")
 	public ModelAndView	create(@ModelAttribute("producto") ProductoModel productomodel) {
 		ModelAndView mAV= new ModelAndView(ViewRouteHelper.PRODUCTO_FORM);
 		return mAV;
 	}
-	@PostMapping("/productos/save")
+	@PostMapping("/save")
 	public String save(@ModelAttribute("producto") ProductoModel productoModel) {
 		productoService.insertOrUpdate(productoModel);
 		return "redirect:/productos";
 		
 	}
 	
-	@GetMapping("productos/editar/{id}")
-	public ModelAndView edit(@ModelAttribute("producto") ProductoModel productomodel, @PathVariable int id) {
+	@GetMapping("/editar/{id}")
+	public ModelAndView get(@PathVariable("id") int id) {
 		ModelAndView mAV =new ModelAndView(ViewRouteHelper.PRODUCTO_FORM);
-		ProductoModel producto= productoService.ListarId(id);
-		mAV.addObject("producto",producto);
+		mAV.addObject("producto",productoService.ListarId(id));
 		return mAV;
 	}
+	
+	
+	 
 	@GetMapping("productos/eliminar/{id}")
 	public String  delete(Model model, @PathVariable int id) {
 		productoService.delete(id);

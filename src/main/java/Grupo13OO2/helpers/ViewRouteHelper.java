@@ -8,6 +8,8 @@ public class ViewRouteHelper {
     public final static String EMPLEADO_FORM = "form-empleado";
     public final static String LOCAL_FORM = "form-local";
     public final static String PRODUCTO_FORM = "producto/form";
+    public final static String LOTE_FORM = "lote/form";
+
     
     //Redirects
     public final static String LOTE_INDEX = "lote/index";//aca esta la lista
