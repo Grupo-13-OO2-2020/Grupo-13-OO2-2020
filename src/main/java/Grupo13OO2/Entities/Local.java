@@ -1,12 +1,19 @@
 package Grupo13OO2.Entities;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+
 import Grupo13OO2.Entities.Empleado;
 
 
@@ -15,20 +22,25 @@ import Grupo13OO2.Entities.Empleado;
 public class Local {
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	private String direccion;
 	private float latitud;
 	private float longitud;
 	private int codigo;
 	private int numeroTelefono;
-//	@OneToOne
-//    @JoinColumn(name = "fk_gerente", updatable = false, nullable = false)
-//	private Empleado gerente;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "gerente_id", referencedColumnName = "id")
+	private Empleado empleado;
+	
+	@OneToMany(mappedBy="local", cascade = CascadeType.ALL)
+    private Set<Empleado> empleados;
 	
 	public Local() {}
 
-	public Local(int id, String direccion, float latitud, float longitud, int codigo, int numeroTelefono) {
+	public Local(int id, String direccion, float latitud, float longitud, int codigo, int numeroTelefono, Empleado empleado
+			, Set<Empleado> empleados) {
 		super();
 		this.id = id;
 		this.direccion = direccion;
@@ -36,6 +48,8 @@ public class Local {
 		this.longitud = longitud;
 		this.codigo = codigo;
 		this.numeroTelefono = numeroTelefono;
+		this.empleado = empleado;
+		this.empleados = empleados;
 	}
 
 	public int getId() {
@@ -84,6 +98,22 @@ public class Local {
 
 	public void setNumeroTelefono(int numeroTelefono) {
 		this.numeroTelefono = numeroTelefono;
+	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
+
+	public Set<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(Set<Empleado> empleados) {
+		this.empleados = empleados;
 	}
 
 	

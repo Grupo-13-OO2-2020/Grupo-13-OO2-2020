@@ -18,11 +18,7 @@ public class Cliente extends Persona {
 	private int numero;
 	private long cuil;
 	private long cuit;
-	// private Local local;
-
-//  @OneToOne(mappedBy = "gerente", cascade = CascadeType.ALL)
-//  private Local local;
-
+	
 	public Cliente() {
 	}
 

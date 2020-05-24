@@ -1,5 +1,11 @@
 package Grupo13OO2.Models;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import Grupo13OO2.Entities.Empleado;
 
 public class LocalModel {
@@ -10,11 +16,16 @@ public class LocalModel {
 	private float longitud;
 	private int codigo;
 	private int numeroTelefono;
-//	private Empleado gerente;
+	@OneToOne
+	private Empleado empleado;
+	@OneToMany
+    private Set<Empleado> empleados;
+	
 	
 	public LocalModel() {}
 
-	public LocalModel(int id, String direccion, float latitud, float longitud, int codigo, int numeroTelefono) {
+	public LocalModel(int id, String direccion, float latitud, float longitud, int codigo, int numeroTelefono, Empleado empleado
+			, Set<Empleado> empleados) {
 		super();
 		this.id = id;
 		this.direccion = direccion;
@@ -22,7 +33,8 @@ public class LocalModel {
 		this.longitud = longitud;
 		this.codigo = codigo;
 		this.numeroTelefono = numeroTelefono;
-//		this.gerente = gerente;
+		this.empleado = empleado;
+		this.empleados = empleados;
 	}
 
 	public int getId() {
@@ -72,14 +84,23 @@ public class LocalModel {
 	public void setNumeroTelefono(int numeroTelefono) {
 		this.numeroTelefono = numeroTelefono;
 	}
-//
-//	public Empleado getGerente() {
-//		return gerente;
-//	}
-//
-//	public void setGerente(Empleado gerente) {
-//		this.gerente = gerente;
-//	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
+
+	public Set<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(Set<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+	
 	
 
 }

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Locales</title>
+<title>Stock</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
 </head>
 <body>
@@ -20,7 +20,7 @@
 				<a class="nav-link" th:href="@{/personas}">Personas</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" th:href="@{/clientes}">Clientes</a>
+				<a class="nav-link" th:href="@{/clientes}">Clientes<span class="sr-only">(current)</span></a>
 			  </li>
 			  <li class="nav-item">
 				<a class="nav-link" th:href="@{/empleados}">Empleados</a>
@@ -39,39 +39,29 @@
 	  </nav>
 
 	<div class="container mt-4">
-	<a th:href="@{/locales/new}" class="btn btn-primary">Agregar Local</a>
+	<a th:href="@{/lotes/new}" class="btn btn-primary">Agregar lote</a>
 		<table class="table" >
 			<thead>
 				<tr>
-					<th>ID</th>
-					<th>DIRECCION</th>
-					<th>LATITUD</th>
-					<th>LONGITUD</th>
-					<th>CODIGO</th>
-					<th>NUM.TELEFONO</th>
-					<th>GERENTE</th>
-					
+					<th>NUMERO DE LOTE</th>
+					<th>CANTIDAD INICIAL</th>
+					<th>FECHA DE INGRESO</th>
+					<th>CANTIDAD EXISTENTE</th>
+					<th>CODIGO_PRODUCTO</th>
+					<th>TALLE</th>
 				</tr>
 			<tbody>
-				<tr th:each="local:${locales}">
+				<tr th:each="lote:${lotes}">
 
-					<td th:text="${local.id}"></td>
-					<td th:text="${local.direccion}"></td>
-					<td th:text="${local.latitud}"></td>
-					<td th:text="${local.longitud}"></td>
-					<td th:text="${local.codigo}"></td>
-					<td th:text="${local.numeroTelefono}"></td>
-					<td th:text="${local.empleado.nombre}"></td>
-					
+					<td th:text="${lote.numeroDeLote}"></td>
+					<td th:text="${lote.cantidadRecibida}"></td>
+					<td th:text="${lote.fechaIngreso}"></td>
+					<td th:text="${lote.cantidadExistente}"></td>
+					<td th:text="${lote.producto.codigoProducto}"></td>
+					<td th:text="${lote.producto.talle}"></td>
 					<td>
-
-						<a th:href="@{/locales/editar/{id}(id=${local.id})}" class="btn btn-warning">Editar</a>
-					</td>
-					
-					<td>
-						<a th:href ="@{/locales/eliminar/{id}(id=${local.id})}" onclick="alert('El local fue eliminado con exito!')"
-						class="btn btn-danger" >Eliminar</a>
-
+					<a th:href="@{lotes/editar/{id}(id=${lote.id})} " class="btn btn-warning">Editar</a>
+					<a th:href="@{lotes/editar/{id}(id=${lote.id})} " class="btn btn-danger" onclick="alert('El local fue eliminado con exito!')" >Eliminar</a>
 					</td>
 
 				</tr>

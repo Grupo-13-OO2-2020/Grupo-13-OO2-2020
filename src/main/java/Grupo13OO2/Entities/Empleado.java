@@ -5,6 +5,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,20 +30,27 @@ public class Empleado extends Persona {
 	
 	private String tipoEmpleado;
 	private double sueldo;
-	private int idLocal;
+	
+	@ManyToOne
+    @JoinColumn(name="local_id")
+    private Local local;
+	
+	@OneToOne(mappedBy = "empleado")
+	private Local localGerente;
 
 	public Empleado() {
 
 	}
 
 	public Empleado(int id, String nombre, int dni, String apellido, Date fechaNacimiento,
-			Date  horarioEntrada,Date  horarioSalida, String tipoEmpleado, double sueldo, int idLocal) {
+			Date  horarioEntrada,Date  horarioSalida, String tipoEmpleado, double sueldo, Local local, Local localGerente) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
 		this.horarioSalida = horarioSalida;
 		this.tipoEmpleado = tipoEmpleado;
 		this.sueldo = sueldo;
-		this.idLocal = idLocal;
+		this.local = local;
+		this.localGerente = localGerente;
 	}
 
 	public Date getHorarioEntrada() {
@@ -75,11 +85,29 @@ public class Empleado extends Persona {
 		this.sueldo = sueldo;
 	}
 
-	public int getIdLocal() {
-		return idLocal;
+	public Local getlocalGerente() {
+		return localGerente;
 	}
 
-	public void setIdLocal(int idLocal) {
-		this.idLocal = idLocal;
+	public void setlocalGerente(Local local) {
+		this.localGerente = local;
 	}
+
+	public Local getLocal() {
+		return local;
+	}
+
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+
+	public Local getLocalGerente() {
+		return localGerente;
+	}
+
+	public void setLocalGerente(Local localGerente) {
+		this.localGerente = localGerente;
+	}
+	
+	
 }
