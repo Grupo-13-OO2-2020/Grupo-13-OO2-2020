@@ -12,8 +12,7 @@
 			<form action="#" th:action="@{/empleados/save}" th:object=${empleado} method="POST">
 				<div class="card">
 					<div class="card-header"></div>
-					<h1></h1>
-					<h3 align="center">Modulo Empleado</h3>
+					<h3>Modulo Empleado</h3>
 					<div class="card-body"></div>
 					<div class="form-group" style="display: none">
 						<label>ID</label> <input th:field="*{id}" type="text" class="form-control" />
@@ -28,7 +27,7 @@
 						<label>APELLIDO</label> <input th:field="*{apellido}" type="text" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label>FECHA NACIMIENTO</label> <input th:field="*{fechaNacimiento}" type="date" class="form-control" />
+						<label>FECHA NACIMIENTO</label> <input th:field="*{fechaNacimiento}" type="text" class="form-control" />
 					</div>
 					<div class="form-group">
 						<label>HS ENTRADA</label> <input th:field="*{{horarioEntrada}}" type="time" class="form-control" />
@@ -42,10 +41,13 @@
 					<div class="form-group">
 						<label>SUELDO</label> <input th:field="*{sueldo}" type="text" class="form-control" />
 					</div>
-					<select th:field="*{local}" >
-							<option th:each="local : ${locales}" th:value="${local.id}">
-								<p th:text="${local.direccion}"/>
-							</option>
+
+					<div>
+						<label>LOCAL</label> <select class="form-control"
+						placeholder="Local" th:field="*{local}">
+						<option th:each="local : ${locales}" th:value="${local.id}"
+							th:text="${local.direccion}"></option>
+					</div>
 					</select>
 					<div class="card-footer">
 						<input type="submit" style="background:yellow" value="Guardar" class="btn btn-succes"/>

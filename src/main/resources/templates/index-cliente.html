@@ -16,6 +16,9 @@
 			<li class="nav-item active">
 			  <a class="nav-link" th:href="@{/}" href="#">Inicio <span class="sr-only">(current)</span></a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/personas}">Personas</a>
+			  </li>
 			  <li class="nav-item">
 				<a class="nav-link" th:href="@{/clientes}">Clientes<span class="sr-only">(current)</span></a>
 			  </li>
@@ -24,6 +27,12 @@
 			  </li>
 			  <li class="nav-item">
 			  <a class="nav-link" th:href="@{/locales}">Locales</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" th:href="@{/productos}">Productos</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" th:href="@{/lotes}">Stock</a>
 			</li>
 		  </ul>
 		</div>
@@ -57,12 +66,17 @@
 					<td th:text="${cliente.cuit}"></td>
 					<td th:text="${cliente.cuil}"></td>
 					<td>
+<<<<<<< HEAD
 					<td>
 						<a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-warning">Editar</a>
 					</td>
 					
 					<td>
 						<a th:href ="@{/clientes/eliminar/{id}(id=${cliente.id})}" onclick="alert('El cliente fue eliminado con exito!')" class="btn btn-danger">Eliminar</a>
+=======
+					<a th:href="@{clientes/editar/} + ${cliente.id}" class="btn btn-warning">Editar</a>
+					<a th:href ="@{clientes/eliminar/} + ${cliente.id}" class="btn btn-danger">Eliminar</a>
+>>>>>>> 2daprueba
 					</td>
 
 				</tr>
