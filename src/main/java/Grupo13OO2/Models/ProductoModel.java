@@ -14,7 +14,7 @@ public class ProductoModel {
 	}
 	public ProductoModel(int id, String descripcion, double precioUnitario, int codigoProducto, String talle) {
 	
-		this.id = id;
+		this.setId(id);
 		this.descripcion = descripcion;
 		this.precioUnitario = precioUnitario;
 		this.codigoProducto = codigoProducto;

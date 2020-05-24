@@ -29,9 +29,11 @@ public class Lote {
 	@Column(name="fechaIngreso")
 	@CreationTimestamp
 	private Date fechaIngreso;
+	
 	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn(name="producto_id", nullable=false)
 	private Producto producto;
+	
 	private int cantidadExistente;
 	
 	

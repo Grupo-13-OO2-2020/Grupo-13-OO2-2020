@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "producto")
 public class Producto {
 	

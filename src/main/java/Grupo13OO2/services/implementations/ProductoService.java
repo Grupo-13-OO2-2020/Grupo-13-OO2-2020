@@ -46,9 +46,7 @@ public class ProductoService implements IProductoService {
 	@Override
 	public ProductoModel ListarId(int id) {
 		
-		Optional<Producto> producto= productoRepository.findById(id);
-		
-		return productoConverter.entityToModel(producto.get());
+		return productoConverter.entityToModel(productoRepository.findById(id));
 	}
 
 	

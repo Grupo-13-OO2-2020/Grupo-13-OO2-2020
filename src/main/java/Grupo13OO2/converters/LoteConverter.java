@@ -15,11 +15,11 @@ public class LoteConverter {
 	private ProductoConverter productoConverter;
 
 	public LoteModel entityToModel(Lote objeto){
-	return new LoteModel (objeto.getId(),objeto.getCantidadRecibida(),productoConverter.entityToModel(objeto.getProducto()),objeto.getNumeroDeLote());
+	return new LoteModel (objeto.getId(), objeto.getNumeroDeLote(), objeto.getCantidadRecibida(),productoConverter.entityToModel(objeto.getProducto()));
 	}
 	
 	public Lote modelToEntity(LoteModel model) {
-		return new Lote(model.getId(),model.getNumeroDeLote(),model.getCantidadRecibida(),productoConverter.modelToEntity(model.getProductoModel()));
+		return new Lote(model.getId(),model.getNumeroDeLote(),model.getCantidadRecibida(),productoConverter.modelToEntity(model.getProducto()));
 	}
 	
 

@@ -47,7 +47,7 @@ public class LoteController {
 	
 
 	    @PostMapping("/save")
-	    public RedirectView create(@ModelAttribute("local") LoteModel loteModel) {
+	    public RedirectView create(@ModelAttribute("lote") LoteModel loteModel) {
 	    	loteService.insertOrUpdate(loteModel);
 	        return new RedirectView("/lotes");
 	    }
