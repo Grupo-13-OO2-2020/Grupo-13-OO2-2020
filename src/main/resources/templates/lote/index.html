@@ -61,7 +61,7 @@
 					<td th:text="${lote.producto.talle}"></td>
 					<td>
 					<a th:href="@{lotes/editar/{id}(id=${lote.id})} " class="btn btn-warning">Editar</a>
-					<a th:href="@{lotes/editar/{id}(id=${lote.id})} " class="btn btn-danger" onclick="alert('El local fue eliminado con exito!')" >Eliminar</a>
+					<a th:href="@{lotes/eliminar/{id}(id=${lote.id})} " class="btn btn-danger" onclick="alert('El local fue eliminado con exito!')" >Eliminar</a>
 					</td>
 
 				</tr>

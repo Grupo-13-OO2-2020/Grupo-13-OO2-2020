@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import Grupo13OO2.Models.ProductoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
@@ -52,10 +53,11 @@ public class ProductoController {
 	
 	
 	 
-	@GetMapping("productos/eliminar/{id}")
-	public String  delete(Model model, @PathVariable int id) {
+	@GetMapping("/eliminar/{id}")
+	public RedirectView  delete(Model model, @PathVariable("id") int id) {
 		productoService.delete(id);
-		return "redirect:/productos";
+		return new RedirectView("/productos");
+
 	}
 	
 	

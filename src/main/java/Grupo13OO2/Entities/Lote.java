@@ -29,7 +29,6 @@ public class Lote {
 	@Column(name="fechaIngreso")
 	@CreationTimestamp
 	private Date fechaIngreso;
-	
 	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn(name="producto_id", nullable=false)
 	private Producto producto;
@@ -43,12 +42,12 @@ public class Lote {
 	}
 	
 	
-	public Lote(int id,int numeroDeLote, int cantidadRecibida, Producto producto) {
-		this.id=id;
+	public Lote(int id,int numeroDeLote, int cantidadRecibida, Producto producto,int cantidadExistente) {
+		setId(id);
 		this.numeroDeLote = numeroDeLote;
 		this.cantidadRecibida = cantidadRecibida;
 		this.producto = producto;
-		this.cantidadExistente = cantidadRecibida;
+		this.cantidadExistente=cantidadExistente;
 	}
 
 
@@ -61,7 +60,7 @@ public class Lote {
 	public int getCantidadRecibida() {
 		return cantidadRecibida;
 	}
-	protected void setCantidadRecibida(int cantidadRecibida) {
+	public void setCantidadRecibida(int cantidadRecibida) {
 		this.cantidadRecibida = cantidadRecibida;
 	}
 	public Date getFechaIngreso() {

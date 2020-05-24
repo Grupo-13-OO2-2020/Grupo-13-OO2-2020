@@ -2,9 +2,7 @@ package Grupo13OO2.Models;
 
 import java.util.Date;
 
-import javax.persistence.ManyToOne;
 
-import Grupo13OO2.Entities.Producto;
 
 
 public class LoteModel {
@@ -23,13 +21,13 @@ public class LoteModel {
 	}
 	
 	
-	public LoteModel(int id,int numeroDeLote, int cantidadRecibida, ProductoModel producto) {
-		super();
-		this.id=id;
+	public LoteModel(int id,int numeroDeLote, int cantidadRecibida, ProductoModel producto,int cantidadExistente) {
+		
+		setId(id);
 		this.numeroDeLote = numeroDeLote;
 		this.cantidadRecibida = cantidadRecibida;
-		this.producto = producto;
-		this.cantidadExistente = cantidadRecibida;
+		this.producto = producto;		
+		this.cantidadExistente=cantidadExistente;
 	}
 
 
@@ -42,7 +40,7 @@ public class LoteModel {
 	public int getCantidadRecibida() {
 		return cantidadRecibida;
 	}
-	protected void setCantidadRecibida(int cantidadRecibida) {
+	public void setCantidadRecibida(int cantidadRecibida) {
 		this.cantidadRecibida = cantidadRecibida;
 	}
 	public Date getFechaIngreso() {

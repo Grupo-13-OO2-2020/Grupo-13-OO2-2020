@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import Grupo13OO2.Entities.Lote;
 import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.ILoteService;
@@ -56,9 +57,9 @@ public class LoteController {
 	    
 	    @GetMapping("/editar/{id}")
 		public ModelAndView get(@PathVariable("id") int id) {
-			
-	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_FORM); 
-	        mAV.addObject("lote", loteService.ListarId(id));
+			ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_FORM); 
+			mAV.addObject("lote", loteService.ListarId(id));
+			mAV.addObject("productos", productoService.getAll());
 			return mAV;
 		}
 		

@@ -29,3 +29,9 @@ insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Gonzalez"
 insert into cliente (cuil, cuit, email, numero, id) values (333333333333,333333333333, "Esteban@mail", 155845095,7);
 insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Espinoza", 333331,'1996-11-08',"Juan");
 insert into cliente (cuil, cuit, email, numero, id) values (444444444444,444444444444, "Juan@mail", 155845095,8);
+
+
+insert into producto(descripcion,precioUnitario,codigoProducto,talle) values ("Remera",200,7791,38)
+insert into producto(descripcion,precioUnitario,codigoProducto,talle) values ("Pantalon",400,7792,38)
+insert into producto(descripcion,precioUnitario,codigoProducto,talle) values ("Zapatilla",600,7793,42)
+insert into producto(descripcion,precioUnitario,codigoProducto,talle) values ("Ojotas",150,7794,40)
