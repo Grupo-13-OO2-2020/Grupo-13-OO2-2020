@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import Grupo13OO2.Entities.Lote;
 import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.ILoteService;
 import Grupo13OO2.services.IProductoService;
 
@@ -22,13 +23,17 @@ import Grupo13OO2.services.IProductoService;
 @RequestMapping("/lotes")
 public class LoteController {
 
-	@Autowired
-	@Qualifier("loteService")
-	private ILoteService loteService;
+  	@Autowired
+		@Qualifier("localService")
+		private ILocalService localService;
 
-	@Autowired
-	@Qualifier("productoService")
-	private IProductoService productoService;
+  	@Autowired
+		@Qualifier("loteService")
+		private ILoteService loteService;
+
+		@Autowired
+		@Qualifier("productoService")
+		private IProductoService productoService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
@@ -41,6 +46,7 @@ public class LoteController {
 	 @GetMapping("/new")
 	    public ModelAndView create() {
 	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_FORM); 
+        //mAV.addObject("local", localService.ListarId(id));
 	        mAV.addObject("lote", new LoteModel());
 	        mAV.addObject("productos", productoService.getAll());
 	        return mAV;

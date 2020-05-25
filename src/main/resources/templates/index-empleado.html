@@ -16,9 +16,6 @@
 			<li class="nav-item active">
 			  <a class="nav-link" th:href="@{/}" href="#">Inicio</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" th:href="@{/personas}">Personas</a>
-			  </li>
 			  <li class="nav-item">
 				<a class="nav-link" th:href="@{/clientes}">Clientes</a>
               </li>
@@ -68,7 +65,6 @@
 					<td th:text="${empleado.sueldo}"></td>
 					<td th:text="${empleado.local.direccion}"></td>
 					<td>
-<<<<<<< HEAD
 					<td>
 						<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-warning">Editar</a>
 					</td>

@@ -13,7 +13,7 @@ public class LoteModel {
 	private Date fechaIngreso;
 	private ProductoModel producto;
 	private int cantidadExistente;
-	
+	private LocalModel localModel;
 	
 	
 	
@@ -21,13 +21,24 @@ public class LoteModel {
 	}
 	
 	
-	public LoteModel(int id,int numeroDeLote, int cantidadRecibida, ProductoModel producto,int cantidadExistente) {
+	public LoteModel(int id,int numeroDeLote, int cantidadRecibida, ProductoModel producto,int cantidadExistente, LocalModel localModel) {
 		
 		setId(id);
 		this.numeroDeLote = numeroDeLote;
 		this.cantidadRecibida = cantidadRecibida;
 		this.producto = producto;		
 		this.cantidadExistente=cantidadExistente;
+		this.localModel=localModel;
+	}
+
+
+	public LocalModel getLocalModel() {
+		return localModel;
+	}
+
+
+	public void setLocalModel(LocalModel localModel) {
+		this.localModel = localModel;
 	}
 
 
