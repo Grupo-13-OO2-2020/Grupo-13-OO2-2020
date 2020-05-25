@@ -13,6 +13,7 @@ import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.Models.ProductoModel;
 import Grupo13OO2.converters.LoteConverter;
 import Grupo13OO2.converters.ProductoConverter;
+import Grupo13OO2.repositories.ILocalRepository;
 import Grupo13OO2.repositories.ILoteRepository;
 import Grupo13OO2.repositories.IProductoRepository;
 import Grupo13OO2.services.ILoteService;
@@ -35,6 +36,11 @@ public class LoteService implements ILoteService {
 	@Qualifier("productoRepository")
 	private IProductoRepository productoRepository;
 	
+	 @Autowired
+	@Qualifier("localRepository")
+	private ILocalRepository localRepository;
+	
+	 
 	@Autowired
 	@Qualifier("productoConverter")
 	private ProductoConverter productoConverter;
@@ -49,6 +55,7 @@ public class LoteService implements ILoteService {
 	public LoteModel insertOrUpdate(LoteModel loteModel) {
 		Lote lote=loteConverter.modelToEntity(loteModel);
 		lote.setProducto(productoRepository.findById(loteModel.getProducto().getId()));
+		lote.setLocal(localRepository.findById(loteModel.getLocalModel().getId()));
 		loteRepository.save(lote);
 		return loteConverter.entityToModel(lote);
 

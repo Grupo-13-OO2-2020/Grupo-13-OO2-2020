@@ -65,6 +65,7 @@ public class LocalController {
 	    @PostMapping("/save")
 	    public RedirectView create(@ModelAttribute("local") LocalModel localModel) {
 	    	localService.insertOrUpdate(localModel);
+	    	
 	        return new RedirectView("/locales");
 	    }
 	    @GetMapping("/editar/{id}")

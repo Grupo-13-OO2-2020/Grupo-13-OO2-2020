@@ -43,18 +43,21 @@ public class LoteController {
 		return mAV;
 	}
 	
-	 @GetMapping("/new")
-	    public ModelAndView create() {
+	 @GetMapping("/new/{id}")
+	    public ModelAndView create(@PathVariable("id") int id) {
+		 	System.out.println(id);
 	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_FORM); 
-        //mAV.addObject("local", localService.ListarId(id));
-	        mAV.addObject("lote", new LoteModel());
+//	        mAV.addObject("local", localService.ListarId(id));
+	        LoteModel lote =new LoteModel();
+	        lote.setLocalModel(localService.ListarId(id));
+	        mAV.addObject("lote", lote);
 	        mAV.addObject("productos", productoService.getAll());
 	        return mAV;
 	    }
 	
 
 	    @PostMapping("/save")
-	    public RedirectView create(@ModelAttribute("lote") LoteModel loteModel) {
+	    public RedirectView create(@ModelAttribute("lote") LoteModel loteModel) {	
 	    	loteService.insertOrUpdate(loteModel);
 	        return new RedirectView("/lotes");
 	    }
