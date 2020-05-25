@@ -16,13 +16,13 @@ public class LocalConverter {
 	private LoteConverter loteConverter;
 	
 	public LocalModel entityToModel(Local local) {
-		return new LocalModel(local.getId(),local.getDireccion(),local.getLatitud(),local.getLongitud(),local.getCodigo(),
+		return new LocalModel(local.getId(),local.getDireccion(),local.getLatitud(),local.getLongitud(),
 				local.getNumeroTelefono(), local.getEmpleado(), local.getEmpleados(),loteConverter.listEntityToModel(local.getLotes()));
 		
 	}
 	
 	public Local modelToEntity(LocalModel local) {
-		return new Local(local.getId(),local.getDireccion(),local.getLatitud(),local.getLongitud(),local.getCodigo(),
+		return new Local(local.getId(),local.getDireccion(),local.getLatitud(),local.getLongitud(),
 				local.getNumeroTelefono(), local.getEmpleado(), local.getEmpleados(),loteConverter.listModelToListEntity(local.getLotesModels()));
 	}
 	

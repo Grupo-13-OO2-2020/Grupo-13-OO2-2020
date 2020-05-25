@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import Grupo13OO2.Models.ClienteModel;
-import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.helpers.ViewRouteHelper;

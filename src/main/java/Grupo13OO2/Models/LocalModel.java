@@ -1,8 +1,6 @@
 package Grupo13OO2.Models;
 
 import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -14,7 +12,6 @@ public class LocalModel {
 	private String direccion;
 	private float latitud;
 	private float longitud;
-	private int codigo;
 	private int numeroTelefono;
 	@OneToOne
 	private Empleado empleado;
@@ -25,14 +22,13 @@ public class LocalModel {
 	 
 	public LocalModel() {}
 
-	public LocalModel(int id, String direccion, float latitud, float longitud, int codigo, int numeroTelefono, Empleado empleado
+	public LocalModel(int id, String direccion, float latitud, float longitud, int numeroTelefono, Empleado empleado
 			, Set<Empleado> empleados, Set<LoteModel> lotesM) {
 		super();
 		this.id = id;
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
-		this.codigo = codigo;
 		this.numeroTelefono = numeroTelefono;
 		this.empleado = empleado;
 		this.empleados = empleados;
@@ -68,14 +64,6 @@ public class LocalModel {
 
 	public void setLongitud(float longitud) {
 		this.longitud = longitud;
-	}
-
-	public int getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
 	}
 
 	public int getNumeroTelefono() {

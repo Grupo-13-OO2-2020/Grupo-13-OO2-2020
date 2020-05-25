@@ -20,4 +20,7 @@ public class ViewRouteHelper {
     public final static String CLIENTE_INDEX = "index-cliente";//aca esta la lista
     public final static String EMPLEADO_INDEX = "index-empleado";//aca esta la lista
     public final static String LOCAL_INDEX = "local/index-local";
+    public final static String PEDIDO_INDEX = "index-pedido";
+    public final static String SOLICITUDSTOCK_INDEX = "index-solicitudStock";
+    public final static String REMITO_INDEX = "index-remito";
 }

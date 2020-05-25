@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Locales</title>
+<title>Remito</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
 </head>
 <body>
@@ -16,7 +16,10 @@
 			<li class="nav-item active">
 			  <a class="nav-link" th:href="@{/}" href="#">Inicio <span class="sr-only">(current)</span></a>
 			</li>
-			 <li class="nav-item">
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/personas}">Personas</a>
+			  </li>
+			  <li class="nav-item">
 				<a class="nav-link" th:href="@{/clientes}">Clientes</a>
 			  </li>
 			  <li class="nav-item">
@@ -25,53 +28,48 @@
 			  <li class="nav-item">
 			  <a class="nav-link" th:href="@{/locales}">Locales</a>
 			</li>
-				<li class="nav-item">
-			  <a class="nav-link" th:href="@{/productos}">Productos</a>
+			<li class="nav-item">
+			  <a class="nav-link" th:href="@{/pedido}">Pedido</a>
 			</li>
 			<li class="nav-item">
-			  <a class="nav-link" th:href="@{/lotes}">Stock</a>
+			  <a class="nav-link" th:href="@{/solicitudStock}">SolicitudStock</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" th:href="@{/remito}">Remito</a>
 			</li>
 		  </ul>
 		</div>
 	  </nav>
 
 	<div class="container mt-4">
-	<a th:href="@{/locales/new}" class="btn btn-primary">Agregar Local</a>
+	<a th:href="@{/remito/new}" class="btn btn-primary">Agregar Remito</a>
 		<table class="table" >
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>DIRECCION</th>
-					<th>LATITUD</th>
-					<th>LONGITUD</th>
-					<th>NUM.TELEFONO</th>
-					<th>GERENTE</th>
-					
+					<th>FECHA</th>
+					<th>PRODUCTO</th>
+					<th>CANTIDAD</th>
+					<th>VENDEDOR</th>
+					<th>CLIENTE</th>
+					<th>FACTURADO</th>
+					<th>FORMA DE PAGO</th>
+					<th></th>
 				</tr>
 			<tbody>
-				<tr th:each="local:${locales}">
+				<tr th:each="remito:${remito}">
 
-					<td th:text="${local.id}"></td>
-					<td th:text="${local.direccion}"></td>
-					<td th:text="${local.latitud}"></td>
-					<td th:text="${local.longitud}"></td>
-					<td th:text="${local.numeroTelefono}"></td>
-					<td th:text="${local.empleado.nombre}"></td>
+					<td th:text="${remito.id}"></td>
+					<td th:text="${remito.fecha}"></td>
+					<td th:text="${remito.producto.descripcion}"></td>
+					<td th:text="${remito.cantidad}"></td>
+					<td th:text="${remito.vendedor.nombre}"></td>
+					<td th:text="${remito.cliente.nombre}"></td>
+					<td th:text="${remito.facturado}"></td>
+					<td th:text="${remito.formaDePago}"></td>
 					<td>
-
-						<a th:href="@{/locales/main/{id}(id=${local.id})}" class="btn btn-warning">Ingresar</a>
-					</td>
-					
-					
-					<td>
-
-						<a th:href="@{/locales/editar/{id}(id=${local.id})}" class="btn btn-warning">Editar</a>
-					</td>
-					
-					<td>
-						<a th:href ="@{/locales/eliminar/{id}(id=${local.id})}" onclick="alert('El local fue eliminado con exito!')"
-						class="btn btn-danger" >Eliminar</a>
-
+						<a th:href="@{remito/editar/} + ${remito.id}" class="btn btn-warning">Editar</a>
+						<a th:href ="@{remito/eliminar/} + ${remito.id}" class="btn btn-danger">Eliminar</a>
 					</td>
 
 				</tr>
