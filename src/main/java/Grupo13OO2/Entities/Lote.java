@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -17,7 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 
 @Entity
-@PrimaryKeyJoinColumn()
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "lote")
 public class Lote {
 	
@@ -29,11 +31,24 @@ public class Lote {
 	@Column(name="fechaIngreso")
 	@CreationTimestamp
 	private Date fechaIngreso;
-	
 	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn(name="producto_id", nullable=false)
 	private Producto producto;
+	@ManyToOne
+    @JoinColumn(name="local_id")
+    private Local local;
 	
+	
+	public Local getLocal() {
+		return local;
+	}
+
+
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+
+
 	private int cantidadExistente;
 	
 	
@@ -43,12 +58,13 @@ public class Lote {
 	}
 	
 	
-	public Lote(int id,int numeroDeLote, int cantidadRecibida, Producto producto) {
-		this.id=id;
+	public Lote(int id,int numeroDeLote, int cantidadRecibida, Producto producto,int cantidadExistente, Local local) {
+		setId(id);
 		this.numeroDeLote = numeroDeLote;
 		this.cantidadRecibida = cantidadRecibida;
 		this.producto = producto;
-		this.cantidadExistente = cantidadRecibida;
+		this.cantidadExistente=cantidadExistente;
+		this.local=local;
 	}
 
 
@@ -61,7 +77,7 @@ public class Lote {
 	public int getCantidadRecibida() {
 		return cantidadRecibida;
 	}
-	protected void setCantidadRecibida(int cantidadRecibida) {
+	public void setCantidadRecibida(int cantidadRecibida) {
 		this.cantidadRecibida = cantidadRecibida;
 	}
 	public Date getFechaIngreso() {

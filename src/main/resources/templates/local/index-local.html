@@ -30,6 +30,11 @@
 					<td th:text="${local.longitud}"></td>
 					<td th:text="${local.numeroTelefono}"></td>
 					<td th:text="${local.empleado.nombre}"></td>
+					<td>
+
+						<a th:href="@{/locales/main/{id}(id=${local.id})}" class="btn btn-warning">Ingresar</a>
+					</td>
+					
 					
 					<td>
 

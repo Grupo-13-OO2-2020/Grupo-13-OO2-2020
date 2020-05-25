@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Local </title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous" />
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" th:href="@{/}" href="#">TIENDA</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" th:href="@{/}"
+					href="#">Inicio <span class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/clientes}">Clientes<span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/empleados}">Empleados</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/locales}">Locales</a>
+				</li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/productos}">Productos</a></li>
+			</ul>
+		</div>
+	</nav>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>DIRECCION</th>
+				<th>LATITUD</th>
+				<th>LONGITUD</th>
+				<th>CODIGO</th>
+				<th>NUM.TELEFONO</th>
+				<th>GERENTE</th>
+			</tr>
+		<tbody>
+			<tr th:field="*{local}">
+				<td th:text="${local.id}"></td>
+				<td th:text="${local.direccion}"></td>
+				<td th:text="${local.latitud}"></td>
+				<td th:text="${local.longitud}"></td>
+				<td th:text="${local.codigo}"></td>
+				<td th:text="${local.numeroTelefono}"></td>
+				<td th:text="${local.empleado.nombre}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+<div class="container mt-4">
+	<a th:href="@{/lotes/new}" class="btn btn-primary">Agregar lote</a>
+		<table class="table" >
+			<thead>
+				<tr>
+					<th>NUMERO DE LOTE</th>
+					<th>CANTIDAD INICIAL</th>
+					<th>FECHA DE INGRESO</th>
+					<th>CANTIDAD EXISTENTE</th>
+					<th>CODIGO_PRODUCTO</th>
+					<th>TALLE</th>
+				</tr>
+			<tbody>
+				<tr th:each="lote:${lotes}">
+
+					<td th:text="${lote.numeroDeLote}"></td>
+					<td th:text="${lote.cantidadRecibida}"></td>
+					<td th:text="${lote.fechaIngreso}"></td>
+					<td th:text="${lote.cantidadExistente}"></td>
+					<td th:text="${lote.producto.codigoProducto}"></td>
+					<td th:text="${lote.producto.talle}"></td>
+					<td>
+					<a th:href="@{lotes/editar/{id}(id=${lote.id})} " class="btn btn-warning">Editar</a>
+					<a th:href="@{lotes/eliminar/{id}(id=${lote.id})} " class="btn btn-danger" onclick="alert('El local fue eliminado con exito!')" >Eliminar</a>
+					</td>
+
+				</tr>
+
+			</tbody>
+
+
+
+		</table>
+
+
+
+
+	</div>
+
+
+</body>
+</html>

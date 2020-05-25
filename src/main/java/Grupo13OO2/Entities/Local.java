@@ -29,12 +29,16 @@ public class Local {
 	private Empleado empleado;
 	
 	@OneToMany(mappedBy="local", cascade = CascadeType.ALL)
-    private Set<Empleado> empleados;
+    
+	private Set<Empleado> empleados;
+	
+	@OneToMany(mappedBy="local", cascade = CascadeType.ALL)
+    private Set<Lote> lotes;
 	
 	public Local() {}
 
 	public Local(int id, String direccion, float latitud, float longitud, int numeroTelefono, Empleado empleado
-			, Set<Empleado> empleados) {
+			, Set<Empleado> empleados, Set<Lote> lotes) {
 		super();
 		this.id = id;
 		this.direccion = direccion;
@@ -43,6 +47,7 @@ public class Local {
 		this.numeroTelefono = numeroTelefono;
 		this.empleado = empleado;
 		this.empleados = empleados;
+		this.lotes = lotes;
 	}
 
 	public int getId() {
@@ -100,5 +105,20 @@ public class Local {
 	public void setEmpleados(Set<Empleado> empleados) {
 		this.empleados = empleados;
 	}
+
+	public Set<Lote> getLotes() {
+		return lotes;
+	}
+
+	public void setLotes(Set<Lote> lotes) {
+		this.lotes = lotes;
+	}
+
+	
+	
+	
+	
+	
+	
 
 }

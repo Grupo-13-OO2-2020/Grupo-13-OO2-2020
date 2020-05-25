@@ -12,8 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import Grupo13OO2.Models.LocalModel;
+import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.ILocalService;
+import Grupo13OO2.services.ILoteService;
+import Grupo13OO2.services.IProductoService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -24,6 +29,15 @@ public class LocalController {
 	  	@Autowired
 	    @Qualifier("localService")
 	    private ILocalService localService;
+	  	
+	  	@Autowired
+	    @Qualifier("empleadoService")
+	    private IEmpleadoService empleadoService;
+	  	
+	  	@Autowired
+		@Qualifier("loteService")
+		private ILoteService loteService;
+
 	  
 	  @GetMapping("")
 	    public ModelAndView index(){
@@ -31,6 +45,15 @@ public class LocalController {
 	        mAV.addObject("locales", localService.getAll());
 	        return mAV;
 	    }
+	  
+	  @GetMapping("/main/{id}")
+	    public ModelAndView main(@PathVariable("id") int id){
+	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_MAIN); 
+	        mAV.addObject("local", localService.ListarId(id));
+	        mAV.addObject("lotes", loteService.getAll());
+	        return mAV;
+	    }
+	
 	    
 	    @GetMapping("/new")
 	    public ModelAndView create() {
@@ -69,13 +92,6 @@ public class LocalController {
 		  double va2 = 2 * Math. atan2 (Math. sqrt ( va1 ), Math. sqrt (1 - va1 ));
 		  return radioTierra * va2 ;
 		  }
-	  
-	  @PostMapping("/locales/distancia")
-	  public double distancia(@ModelAttribute("local")LocalModel a,@ModelAttribute("local")LocalModel b) {
-		  double total;
-		  total=distanciaCoord(a.getLatitud(),a.getLongitud(),b.getLatitud(),b.getLongitud());
-		  return total;
-	  }
-	  
+	 
 
 }

@@ -29,7 +29,8 @@
 					<td th:text="${producto.codigoProducto}"></td>
 					<td>
 					<a th:href="@{productos/editar/} + ${producto.id}" class="btn btn-warning">Editar</a>
-					<a th:href ="@{productos/eliminar/} + ${producto.id}" class="btn btn-danger">Eliminar</a>
+					<a th:href ="@{productos/eliminar/{id}(id=${producto.id})}" onclick="alert('El local fue eliminado con exito!')"
+					class="btn btn-danger">Eliminar</a>
 					</td>
 
 				</tr>

@@ -47,14 +47,9 @@ public class LoteService implements ILoteService {
 
 	@Override
 	public LoteModel insertOrUpdate(LoteModel loteModel) {
-		Producto producto = productoRepository.findById(loteModel.getProducto().getId());
-
-		ProductoModel productoModel = productoConverter.entityToModel(producto);
-
-		loteModel.setProducto(productoModel);
-		
-		Lote lote = loteRepository.save(loteConverter.modelToEntity(loteModel));
-
+		Lote lote=loteConverter.modelToEntity(loteModel);
+		lote.setProducto(productoRepository.findById(loteModel.getProducto().getId()));
+		loteRepository.save(lote);
 		return loteConverter.entityToModel(lote);
 
 	}
@@ -62,7 +57,7 @@ public class LoteService implements ILoteService {
 	@Override
 	public LoteModel ListarId(int id) {
 		Optional<Lote> lote= loteRepository.findById(id);
-		
+		lote.get().setProducto(productoRepository.findById(lote.get().getProducto().getId()));
 		return loteConverter.entityToModel(lote.get());
 	}
 

@@ -15,19 +15,23 @@
 					<div class="card-header"></div>
 					<h3>Modulo Lotes</h3>
 					<div class="card-body"></div>
-					
+						
 					<div class="form-group">
 						<label>NUMERO DE LOTE</label> <input th:field="*{numeroDeLote}" type="number" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label>CANTIDAD INICIAL</label> <input th:field="*{cantidadRecibida}" type="number" class="form-control" />
+						<label>CANTIDAD RECIBIDA</label> <input th:field="*{cantidadRecibida}" type="number" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>CANTIDAD EXISTENTE</label> <input th:field="*{cantidadExistente}" type="number" class="form-control" />
 					</div>
 
 					<div>
-						<label>PRODUCTO</label> <select class="form-control"
-						placeholder="Producto" th:field="*{producto.id}">
+						<label>PRODUCTO</label> 
+						<select class="form-control"placeholder="Producto" th:field="*{producto.id}">
 						<option th:each="producto : ${productos}" th:value="${producto.id}"
-							th:text="${producto.descripcion}"></option>
+							th:text="${producto.descripcion}+${producto.talle}"></option>
+					</select>		
 					</div>
 					
 					
