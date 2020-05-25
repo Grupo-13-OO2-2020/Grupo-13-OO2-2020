@@ -2,12 +2,15 @@ package Grupo13OO2.Models;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import Grupo13OO2.Entities.Cliente;
 import Grupo13OO2.Entities.Empleado;
 import Grupo13OO2.Entities.Producto;
 
 public class PedidoModel {
 	private int id;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
 	protected Producto producto;
 	protected int cantidad;

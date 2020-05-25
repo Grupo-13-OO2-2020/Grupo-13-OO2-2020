@@ -49,6 +49,7 @@ public class EmpleadoController {
     	empleadoService.insertOrUpdate(empleadoModel);
         return new RedirectView("/empleados");
     }
+    
     @GetMapping("/editar/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
 		

@@ -1,11 +1,8 @@
 package Grupo13OO2.Entities;
 
-import java.time.LocalDate;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -62,15 +59,6 @@ public class Cliente extends Persona {
 	public void setCuit(long cuit) {
 		this.cuit = cuit;
 	}
-
-//	public Local getLocal() {
-//		return local;
-//	}
-//
-//	public void setLocal(Local local) {
-//		this.local = local;
-//	}
-//	
 
 
 }

@@ -1,4 +1,5 @@
 package Grupo13OO2.Entities;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -7,12 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-//@Inheritance( strategy = InheritanceType.JOINED)
+@PrimaryKeyJoinColumn(referencedColumnName = "id")
 @Table(name="remito")
 public class Remito extends Pedido {
 	

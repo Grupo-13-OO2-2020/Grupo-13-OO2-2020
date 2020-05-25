@@ -2,41 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Insert title here</title>
+<title>Empleados</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<a class="navbar-brand" th:href="@{/}" href="#">Tienda</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-		  <ul class="navbar-nav">
-			<li class="nav-item active">
-			  <a class="nav-link" th:href="@{/}" href="#">Inicio</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" th:href="@{/personas}">Personas</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" th:href="@{/clientes}">Clientes</a>
-              </li>
-              <li class="nav-item">
-				<a class="nav-link" th:href="@{/empleados}">Empleados <span class="sr-only">(current)</span></a>
-			  </li>
-			  <li class="nav-item">
-			  <a class="nav-link" th:href="@{/locales}">Locales</a>
-			</li>
-				<li class="nav-item">
-			  <a class="nav-link" th:href="@{/productos}">Productos</a>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" th:href="@{/lotes}">Stock</a>
-			</li>
-		  </ul>
-		</div>
-	  </nav>
+	<div th:replace="nav :: nav"></div>
 
 	<div class="container mt-4">
 	<a th:href="@{/empleados/new}" class="btn btn-primary">Agregar Empleado</a>
@@ -53,6 +23,8 @@
 					<th>TIPO EMPLEADO</th>
 					<th>SUELDO</th>
 					<th>LOCAL</th>
+					<th></th>
+					<th></th>
 				</tr>
 			<tbody>
 				<tr th:each="empleado:${empleados}">
@@ -68,14 +40,10 @@
 					<td th:text="${empleado.sueldo}"></td>
 					<td th:text="${empleado.local.direccion}"></td>
 					<td>
-<<<<<<< HEAD
-					<td>
 						<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-warning">Editar</a>
 					</td>
-					
 					<td>
 						<a th:href ="@{/empleados/eliminar/{id}(id=${empleado.id})}" onclick="alert('El empleado fue eliminado con exito!')" class="btn btn-danger">Eliminar</a>
-
 					</td>
 				</tr>
 

@@ -9,7 +9,7 @@
 
 	<div class="container mt-4">
 		<div class="col-sm-6">
-			<form th:action="@{/pedido/save}" th:object=${pedido} method="POST">
+			<form th:action="@{/pedidos/save}" th:object=${pedido} method="POST">
 				<div class="card">
 					<div class="card-header"></div>
 					<h3>Modulo Pedido</h3>
@@ -17,24 +17,46 @@
 					<div class="form-group" style="display: none">
 						<label>ID</label> <input th:field="*{id}" type="text" class="form-control" />
 					</div>
+
 					<div class="form-group">
-						<label>FECHA</label> <input th:field="*{fecha}" type="text" class="form-control" />
+						<label>FECHA</label> <input th:field="*{fecha}" type="date" class="form-control" />
 					</div>
+
 					<div class="form-group">
-						<label>PRODUCTO</label> <input th:field="*{producto.descripcion}" type="text" class="form-control" />
+						<label>PRODUCTO</label> 
+						
+						<select class="form-control"
+						placeholder="Producto" th:field="*{producto}">
+						<option th:each="producto : ${productos}" th:value="${producto.id}"
+							th:text="${producto.descripcion}">
+						</option>
+						</select>
 					</div>
+
 					<div class="form-group">
-						<label>CANTIDAD</label> <input th:field="*{cantidad}" type="text" class="form-control" />
+						<label>CANTIDAD</label> <input th:field="*{cantidad}" type="number" class="form-control" />
 					</div>
+
 					<div class="form-group">
-						<label>VENDEDOR</label> <input th:field="*{vendedor.nombre}" type="date" class="form-control" />
+						<label>VENDEDOR</label> <select class="form-control"
+						placeholder="Empleado" th:field="*{vendedor}">
+						<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
+							th:text="${empleado.nombre}"></option>
+						</select>
 					</div>
+
 					<div class="form-group">
-						<label>CLIENTE</label> <input th:field="*{cliente.nombre}" type="date" class="form-control" />
+						<label>CLIENTE</label> <select class="form-control"
+						placeholder="Cliente" th:field="*{cliente}">
+						<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
+							th:text="${cliente.nombre}"></option>
+						</select>
 					</div>
+
 					<div class="form-group">
-						<label>FACTURADO</label> <input th:field="*{facturado}" type="date" class="form-control" />
+						<label>FACTURADO</label> <input th:field="*{facturado}" type="text" class="form-control" />
 					</div>
+
 					<div class="card-footer">
 						<input type="submit" style="background:yellow"  value="Guardar" class="btn btn-succes"/>
 					</div>

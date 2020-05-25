@@ -1,12 +1,16 @@
 package Grupo13OO2.Entities;
+
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import Grupo13OO2.Entities.*;
 
@@ -21,10 +25,17 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "producto_id", referencedColumnName = "id")
 	protected Producto producto;
 	protected int cantidad;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "vendedor_id", referencedColumnName = "id")
 	protected Empleado vendedor;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cliente_id", referencedColumnName = "id")
 	protected Cliente cliente;
 	protected boolean facturado;
 	
