@@ -10,27 +10,6 @@
 </head>
 <body>
 	<div th:replace="nav :: nav"></div>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>DIRECCION</th>
-				<th>LATITUD</th>
-				<th>LONGITUD</th>
-				<th>NUM.TELEFONO</th>
-				<th>GERENTE</th>
-			</tr>
-		<tbody>
-			<tr th:field="*{local}">
-				<td th:text="${local.id}"></td>
-				<td th:text="${local.direccion}"></td>
-				<td th:text="${local.latitud}"></td>
-				<td th:text="${local.longitud}"></td>
-				<td th:text="${local.numeroTelefono}"></td>
-				<td th:text="${local.empleado.nombre}"></td>
-			</tr>
-		</tbody>
-	</table>
 
 <div class="container mt-4">
 	<a th:href="@{/lotes/new/{id}(id=${local.id})}" class="btn btn-primary">Agregar lote</a>
@@ -45,14 +24,10 @@
 					<th>TALLE</th>
 				</tr>
 			<tbody>
-				<tr th:each="lote:${lotes}">
+				<tr th:each="lote:${local.lotes}">
 
 					<td th:text="${lote.numeroDeLote}"></td>
 					<td th:text="${lote.cantidadRecibida}"></td>
-					<td th:text="${lote.fechaIngreso}"></td>
-					<td th:text="${lote.cantidadExistente}"></td>
-					<td th:text="${lote.producto.codigoProducto}"></td>
-					<td th:text="${lote.producto.talle}"></td>
 					<td>
 					<a th:href="@{lotes/editar/{id}(id=${lote.id})} " class="btn btn-warning">Editar</a>
 					<a th:href="@{lotes/eliminar/{id}(id=${lote.id})} " class="btn btn-danger" onclick="alert('El local fue eliminado con exito!')" >Eliminar</a>

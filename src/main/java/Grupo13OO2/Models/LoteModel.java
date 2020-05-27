@@ -2,9 +2,6 @@ package Grupo13OO2.Models;
 
 import java.util.Date;
 
-
-
-
 public class LoteModel {
 	
 	private int id;
@@ -13,7 +10,7 @@ public class LoteModel {
 	private Date fechaIngreso;
 	private ProductoModel producto;
 	private int cantidadExistente;
-	private LocalModel localModel;
+	private LocalModel local;
 	
 	
 	
@@ -21,24 +18,31 @@ public class LoteModel {
 	}
 	
 	
-	public LoteModel(int id,int numeroDeLote, int cantidadRecibida, ProductoModel producto,int cantidadExistente, LocalModel localModel) {
+	public LoteModel(int id,int numeroDeLote, int cantidadRecibida, ProductoModel producto,int cantidadExistente, LocalModel local) {
 		
-		setId(id);
+		this.id = id;
 		this.numeroDeLote = numeroDeLote;
 		this.cantidadRecibida = cantidadRecibida;
 		this.producto = producto;		
 		this.cantidadExistente=cantidadExistente;
-		this.localModel=localModel;
+		this.local=local;
 	}
 
-
-	public LocalModel getLocalModel() {
-		return localModel;
+	public LoteModel(int id,int numeroDeLote, int cantidadRecibida, ProductoModel producto,int cantidadExistente) {
+		
+		this.id = id;
+		this.numeroDeLote = numeroDeLote;
+		this.cantidadRecibida = cantidadRecibida;
+		this.producto = producto;		
+		this.cantidadExistente=cantidadExistente;
 	}
 
+	public LocalModel getLocal() {
+		return local;
+	}
 
-	public void setLocalModel(LocalModel localModel) {
-		this.localModel = localModel;
+	public void setLocal(LocalModel local) {
+		this.local = local;
 	}
 
 

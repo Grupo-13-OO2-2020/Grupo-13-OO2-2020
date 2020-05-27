@@ -42,12 +42,10 @@ public class LocalService implements ILocalService{
 	        return localRepository.findAll();
 	    }
 
-	    @SuppressWarnings("unchecked")
 		@Override
 	    public LocalModel insertOrUpdate(LocalModel localModel){
 	    	
 	        Local local = localRepository.save(localConverter.modelToEntity(localModel));
-	        local.setLotes((Set<Lote>) loteRepository.findAll());
 	        return localConverter.entityToModel(local);
 	    }
 

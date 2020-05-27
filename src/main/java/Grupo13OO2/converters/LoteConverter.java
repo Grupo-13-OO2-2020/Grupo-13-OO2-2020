@@ -30,28 +30,20 @@ public class LoteConverter {
 	public Lote modelToEntity(LoteModel model) {
 		return new Lote(model.getId(), model.getNumeroDeLote(), model.getCantidadRecibida(),
 				productoConverter.modelToEntity(model.getProducto()), model.getCantidadExistente(),
-				localConverter.modelToEntity(model.getLocalModel()));
+				localConverter.modelToEntity(model.getLocal()));
 
 	}
 
-	public Set<Lote> listModelToListEntity(Set<LoteModel> lotes) {
-		Set<Lote> lotelist = new HashSet<Lote>();
-		while (!lotes.isEmpty()) {
-			for (LoteModel loteModel : lotes) {
-				lotelist.add(modelToEntity(loteModel));
-			}
-		}
-		return lotelist;
+	//Sin local
+	public LoteModel entityToModelSetLote(Lote objeto) {
+		return new LoteModel(objeto.getId(), objeto.getNumeroDeLote(), objeto.getCantidadRecibida(),
+		productoConverter.entityToModel(objeto.getProducto()), objeto.getCantidadExistente());
 	}
-
-	public Set<LoteModel> listEntityToModel(Set<Lote> lotes) {
-		Set<LoteModel> lotelist = new HashSet<LoteModel>();
-		while (!lotes.isEmpty()) {
-			for (Lote lote : lotes) {
-				lotelist.add(entityToModel(lote));
-			}
-		}
-		return lotelist;
+	
+	//Sin local
+	public Lote modelToEntitySetLote(LoteModel model) {
+		return new Lote(model.getId(), model.getNumeroDeLote(), model.getCantidadRecibida(),
+				productoConverter.modelToEntity(model.getProducto()), model.getCantidadExistente());
 	}
 
 }

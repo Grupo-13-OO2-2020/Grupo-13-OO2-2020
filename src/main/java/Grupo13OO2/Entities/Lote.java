@@ -2,6 +2,7 @@ package Grupo13OO2.Entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -31,28 +34,13 @@ public class Lote {
 	@Column(name="fechaIngreso")
 	@CreationTimestamp
 	private Date fechaIngreso;
-	@ManyToOne(fetch= FetchType.LAZY)
-	@JoinColumn(name="producto_id", nullable=false)
-	private Producto producto;
 	@ManyToOne
-    @JoinColumn(name="local_id")
-    private Local local;
+    @JoinColumn(name="producto_id")
+	private Producto producto;
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	private Local local;
 	
-	
-	public Local getLocal() {
-		return local;
-	}
-
-
-	public void setLocal(Local local) {
-		this.local = local;
-	}
-
-
 	private int cantidadExistente;
-	
-	
-	
 	
 	public Lote() {
 	}
@@ -67,6 +55,13 @@ public class Lote {
 		this.local=local;
 	}
 
+	public Lote(int id,int numeroDeLote, int cantidadRecibida, Producto producto,int cantidadExistente) {
+		setId(id);
+		this.numeroDeLote = numeroDeLote;
+		this.cantidadRecibida = cantidadRecibida;
+		this.producto = producto;
+		this.cantidadExistente=cantidadExistente;
+	}
 
 	public int getId() {
 		return id;
@@ -99,15 +94,21 @@ public class Lote {
 		this.cantidadExistente = cantidadExistente;
 	}
 
-
 	public int getNumeroDeLote() {
 		return numeroDeLote;
 	}
-
-
 	public void setNumeroDeLote(int numeroDeLote) {
 		this.numeroDeLote = numeroDeLote;
 	}
+
+	public Local getLocal() {
+		return local;
+	}
+
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+	
 	
 
 }

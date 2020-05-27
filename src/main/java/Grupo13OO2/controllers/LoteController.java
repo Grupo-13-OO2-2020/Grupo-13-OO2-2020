@@ -24,37 +24,41 @@ import Grupo13OO2.services.IProductoService;
 public class LoteController {
 
   	@Autowired
-		@Qualifier("localService")
-		private ILocalService localService;
+	@Qualifier("localService")
+	private ILocalService localService;
 
   	@Autowired
-		@Qualifier("loteService")
-		private ILoteService loteService;
+	@Qualifier("loteService")
+	private ILoteService loteService;
 
-		@Autowired
-		@Qualifier("productoService")
-		private IProductoService productoService;
+	@Autowired
+	@Qualifier("productoService")
+	private IProductoService productoService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV=new ModelAndView(ViewRouteHelper.LOTE_INDEX);
 		mAV.addObject("lotes", loteService.getAll());
-		mAV.addObject("lote", new LoteModel());
 		return mAV;
 	}
 	
 	 @GetMapping("/new/{id}")
 	    public ModelAndView create(@PathVariable("id") int id) {
-		 	System.out.println(id);
-	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_FORM); 
-//	        mAV.addObject("local", localService.ListarId(id));
-	        LoteModel lote =new LoteModel();
-	        lote.setLocalModel(localService.ListarId(id));
-	        mAV.addObject("lote", lote);
-	        mAV.addObject("productos", productoService.getAll());
+	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_FORM_MAIN); 
+			mAV.addObject("local", localService.ListarId(id));
+			mAV.addObject("lote", new LoteModel());
+			mAV.addObject("productos", productoService.getAll());
 	        return mAV;
 	    }
-	
+		
+		@GetMapping("/new")
+		public ModelAndView create() {
+			ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_FORM);
+			mAV.addObject("lote", new LoteModel());
+			mAV.addObject("productos", productoService.getAll());
+			mAV.addObject("locales", localService.getAll());
+			return mAV;
+		}
 
 	    @PostMapping("/save")
 	    public RedirectView create(@ModelAttribute("lote") LoteModel loteModel) {	
@@ -69,6 +73,7 @@ public class LoteController {
 			ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_FORM); 
 			mAV.addObject("lote", loteService.ListarId(id));
 			mAV.addObject("productos", productoService.getAll());
+			mAV.addObject("locales", localService.getAll());
 			return mAV;
 		}
 		

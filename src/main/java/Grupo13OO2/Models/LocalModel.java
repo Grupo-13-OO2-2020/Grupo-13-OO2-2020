@@ -13,25 +13,25 @@ public class LocalModel {
 	private float latitud;
 	private float longitud;
 	private int numeroTelefono;
-	@OneToOne
 	private Empleado empleado;
 	@OneToMany
     private Set<Empleado> empleados;
-	
-	 private Set<LoteModel> lotesM;
+	@OneToMany
+	private Set<LoteModel> lotes;
 	 
 	public LocalModel() {}
 
 	public LocalModel(int id, String direccion, float latitud, float longitud, int numeroTelefono, Empleado empleado
-			, Set<Empleado> empleados, Set<LoteModel> lotesM) {
+			, Set<Empleado> empleados, Set<LoteModel> lotes) {
 		super();
-		this.id = id;
+		setId(id);
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.numeroTelefono = numeroTelefono;
 		this.empleado = empleado;
 		this.empleados = empleados;
+		this.lotes = lotes;
 	}
 
 	public int getId() {
@@ -90,12 +90,12 @@ public class LocalModel {
 		this.empleados = empleados;
 	}
 
-	public Set<LoteModel> getLotesModels() {
-		return lotesM;
+	public Set<LoteModel> getLotes() {
+		return lotes;
 	}
 
-	public void setLotesModels(Set<LoteModel> lotesM) {
-		this.lotesM = lotesM;
+	public void setLotes(Set<LoteModel> lotes) {
+		this.lotes = lotes;
 	}
 	
 	

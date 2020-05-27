@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Entities.Lote;
 import Grupo13OO2.Entities.Producto;
+import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.Models.ProductoModel;
+import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.converters.LoteConverter;
 import Grupo13OO2.converters.ProductoConverter;
 import Grupo13OO2.repositories.ILocalRepository;
@@ -22,6 +25,7 @@ import Grupo13OO2.services.ILoteService;
 public class LoteService implements ILoteService {
 
 	@Autowired
+	@Qualifier("loteRepository")
 	private ILoteRepository loteRepository;
 	
 	@Autowired
@@ -35,37 +39,49 @@ public class LoteService implements ILoteService {
 	@Autowired
 	@Qualifier("productoRepository")
 	private IProductoRepository productoRepository;
-	
-	 @Autowired
-	@Qualifier("localRepository")
-	private ILocalRepository localRepository;
-	
-	 
+
 	@Autowired
 	@Qualifier("productoConverter")
 	private ProductoConverter productoConverter;
+	
+	@Autowired
+	@Qualifier("localService")
+	private LocalService localService; 
+
+	@Autowired
+	@Qualifier("localRepository")
+	private ILocalRepository localRepository;
+	
+	@Autowired
+	@Qualifier("localConverter")
+	private LocalConverter localConverter;
+
+	
 
 	@Override
 	public List<Lote> getAll() {
-		// TODO Auto-generated method stub
 		return loteRepository.findAll();
 	}
 
 	@Override
 	public LoteModel insertOrUpdate(LoteModel loteModel) {
-		Lote lote=loteConverter.modelToEntity(loteModel);
-		lote.setProducto(productoRepository.findById(loteModel.getProducto().getId()));
-		lote.setLocal(localRepository.findById(loteModel.getLocalModel().getId()));
-		loteRepository.save(lote);
+
+		Local local = localRepository.findById(loteModel.getLocal().getId());
+		LocalModel localModel = localConverter.entityToModel(local);
+		loteModel.setLocal(localModel);
+		
+		Lote lote = loteRepository.save(loteConverter.modelToEntity(loteModel));
+
+		lote.getLocal().getLotes().add(lote);
+		localService.insertOrUpdate(localConverter.entityToModel(lote.getLocal()));
+
 		return loteConverter.entityToModel(lote);
 
 	}
 
 	@Override
 	public LoteModel ListarId(int id) {
-		Optional<Lote> lote= loteRepository.findById(id);
-		lote.get().setProducto(productoRepository.findById(lote.get().getProducto().getId()));
-		return loteConverter.entityToModel(lote.get());
+		return loteConverter.entityToModel(loteRepository.findById(id));
 	}
 
 	@Override

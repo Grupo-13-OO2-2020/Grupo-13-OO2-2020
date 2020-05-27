@@ -41,37 +41,13 @@
 					<div class="form-group">
 						<label>SUELDO</label> <input th:field="*{sueldo}" type="text" class="form-control" />
 					</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 					<div>
 						<label>LOCAL</label> <select class="form-control"
 						placeholder="Local" th:field="*{local}">
 						<option th:each="local : ${locales}" th:value="${local.id}"
-							th:text="${local.direccion}"></option>
-					</div>
-					</select>
-=======
-=======
->>>>>>> 1fae62b61bedc5be15bcf7941ffeb64b38bd0d28
-				
-				
-					<div class="form-group">
-					<label>LOCALES</label>
-						<select th:field="*{local}" >
-					
-							<option th:each="local : ${locales}" th:value="${local.id}">
-								<p th:text="${local.direccion}"/>
-							</option>
-							
-						</select>
-						
+							th:text="${local.direccion}"></option></select>
 					</div>
 					
-<<<<<<< HEAD
->>>>>>> Quitamos codigo de Local
-=======
->>>>>>> 1fae62b61bedc5be15bcf7941ffeb64b38bd0d28
 					<div class="card-footer">
 						<input type="submit" style="background:yellow" value="Guardar" class="btn btn-succes"/>
 					</div>

@@ -29,16 +29,11 @@ public class LocalController {
 	  	@Autowired
 	    @Qualifier("localService")
 	    private ILocalService localService;
-	  	
-	  	@Autowired
-	    @Qualifier("empleadoService")
-	    private IEmpleadoService empleadoService;
-	  	
-	  	@Autowired
+
+		@Autowired
 		@Qualifier("loteService")
 		private ILoteService loteService;
-
-	  
+		
 	  @GetMapping("")
 	    public ModelAndView index(){
 	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_INDEX); 
@@ -49,8 +44,7 @@ public class LocalController {
 	  @GetMapping("/main/{id}")
 	    public ModelAndView main(@PathVariable("id") int id){
 	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_MAIN); 
-	        mAV.addObject("local", localService.ListarId(id));
-	        mAV.addObject("lotes", loteService.getAll());
+			mAV.addObject("local", localService.ListarId(id));
 	        return mAV;
 	    }
 	

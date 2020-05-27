@@ -37,30 +37,22 @@
 							class="form-control" />
 					</div>
 					<div class="form-group">
-						<label>CODIGO</label> <input th:field="*{codigo}" type="text"
-							class="form-control" />
-					</div>
-					<div class="form-group">
 						<label>NUMERO TEL</label> <input th:field="*{numeroTelefono}"
 							type="text" class="form-control" />
 					</div>
-					<select th:field="*{empleado}">
-						<option th:each="empleado : *{empleados}"
-							th:value="${empleado.id}">
-							<p th:text="${empleado.nombre}" />
-						</option>
+					<div>
+						<label>GERENTE</label> <select class="form-control"
+						placeholder="Local" th:field="*{empleado}">
+						<option th:each="empleado : *{empleados}" th:value="${empleado.id}"
+							th:text="${empleado.nombre}"></option>
+					</div>
 					</select>
-
 					<div class="card-footer">
 						<input type="submit" style="background: yellow" value="Guardar"
 							class="btn btn-succes" />
 
 
 					</div>
-					<!-- 					<div class="form-group"> -->
-					<!-- 						<label>GERENTE</label> <input th:field="*{gerente}" type="text" class="form-control" /> -->
-					<!-- 					</div> -->
-
 
 				</div>
 			</form>

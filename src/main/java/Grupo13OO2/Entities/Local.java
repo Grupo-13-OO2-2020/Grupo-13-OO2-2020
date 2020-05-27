@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,8 +33,8 @@ public class Local {
     
 	private Set<Empleado> empleados;
 	
-	@OneToMany(mappedBy="local", cascade = CascadeType.ALL)
-    private Set<Lote> lotes;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="local")
+	private Set<Lote> lotes;
 	
 	public Local() {}
 

@@ -11,6 +11,7 @@ public class ViewRouteHelper {
 
     public final static String PRODUCTO_FORM = "producto/form";
     public final static String LOTE_FORM = "lote/form";
+    public final static String LOTE_FORM_MAIN = "lote/form-main";
     public final static String PEDIDO_FORM = "form-pedido";
     public final static String SOLICITUDSTOCK_FORM = "form-solicitudStock";
     public final static String REMITO_FORM = "form-remito";

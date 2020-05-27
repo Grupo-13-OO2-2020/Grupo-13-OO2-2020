@@ -19,6 +19,7 @@
 					<th>CANTIDAD EXISTENTE</th>
 					<th>CODIGO_PRODUCTO</th>
 					<th>TALLE</th>
+					<th>LOCAL</th>
 				</tr>
 			<tbody>
 				<tr th:each="lote:${lotes}">
@@ -29,6 +30,7 @@
 					<td th:text="${lote.cantidadExistente}"></td>
 					<td th:text="${lote.producto.codigoProducto}"></td>
 					<td th:text="${lote.producto.talle}"></td>
+					<td th:text="${lote.local.direccion}"></td>
 					<td>
 					<a th:href="@{lotes/editar/{id}(id=${lote.id})} " class="btn btn-warning">Editar</a>
 					<a th:href="@{lotes/eliminar/{id}(id=${lote.id})} " class="btn btn-danger" onclick="alert('El local fue eliminado con exito!')" >Eliminar</a>
