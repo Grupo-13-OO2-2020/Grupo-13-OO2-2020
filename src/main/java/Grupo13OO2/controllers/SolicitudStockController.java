@@ -51,9 +51,10 @@ public class SolicitudStockController {
         return mAV;
     }
 
-    @GetMapping("/new")
-    public ModelAndView create() {
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_FORM); 
+    @GetMapping("/new/{id}")
+    public ModelAndView create(@PathVariable("id") int id) {
+        ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_FORM);
+		mAV.addObject("local", localService.ListarId(id));
         mAV.addObject("solicitudStock", new SolicitudStockModel());
         mAV.addObject("productos", productoService.getAll());
         mAV.addObject("empleados", empleadoService.getAll());
