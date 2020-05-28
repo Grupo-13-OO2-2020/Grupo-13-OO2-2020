@@ -3,6 +3,7 @@ package Grupo13OO2.Entities;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,8 +21,11 @@ public class Local {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
+	@Column(name = "direccion")
 	private String direccion;
+	@Column(name = "latitud")
 	private float latitud;
+	@Column(name = "longitud")
 	private float longitud;
 	private int numeroTelefono;
 	

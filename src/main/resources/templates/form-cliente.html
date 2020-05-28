@@ -10,7 +10,7 @@
 	<div class="container mt-4">
 		<div class="col-sm-6">
 			<form action="#" th:action="@{/clientes/save}" th:object=${cliente} method="POST">
-				<div class="card">
+				<div class="card text-center border-info mb-3">
 					<div class="card-header"></div>
 					<h3>Modulo Cliente</h3>
 					<div class="card-body"></div>
@@ -18,31 +18,31 @@
 						<label>ID</label> <input th:field="*{id}" type="text" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label>DNI</label> <input th:field="*{dni}" type="number" class="form-control" />
+						<label>Nombre</label> <input th:field="*{nombre}" type="text" class="form-control" placeholder="Nombre"  />
 					</div>
 					<div class="form-group">
-						<label>NOMBRE</label> <input th:field="*{nombre}" type="text" class="form-control" />
+						<label>Apellido</label> <input th:field="*{apellido}" type="text" class="form-control" placeholder="Apellido" />
 					</div>
 					<div class="form-group">
-						<label>APELLIDO</label> <input th:field="*{apellido}" type="text" class="form-control" />
+						<label>Dni</label> <input th:field="*{dni}" type="number" class="form-control" placeholder="Dni"  />
 					</div>
 					<div class="form-group">
-						<label>FECHA NACIMIENTO</label> <input th:field="*{fechaNacimiento}" type="date" class="form-control" />
+						<label>Fecha de Nacimiento</label> <input th:field="*{fechaNacimiento}" type="date" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label>EMAIL</label> <input th:field="*{email}" type="text" class="form-control" />
+						<label>Email</label> <input th:field="*{email}" type="text" class="form-control" placeholder="Email"  />
 					</div>
 					<div class="form-group">
-						<label>NUMERO</label> <input th:field="*{numero}" type="number" class="form-control" />
+						<label>Numero</label> <input th:field="*{numero}" type="number" class="form-control" placeholder="Numero"  />
 					</div>
 					<div class="form-group">
-						<label>CUIT</label> <input th:field="*{cuit}" type="number" class="form-control" />
+						<label>Cuit</label> <input th:field="*{cuit}" type="number" class="form-control" placeholder="Cuit" />
 					</div>
 					<div class="form-group">
-						<label>CUIL</label> <input th:field="*{cuil}" type="number" class="form-control" />
+						<label>Cuil</label> <input th:field="*{cuil}" type="number" class="form-control" placeholder="Cuil"  />
 					</div>
 					<div class="card-footer">
-						<input type="submit" style="background:yellow" value="Guardar" class="btn btn-succes"/>
+						<input type="submit" style="background:#74C1F4" value="Guardar" class="btn btn-succes"/>
 
 
 					</div>

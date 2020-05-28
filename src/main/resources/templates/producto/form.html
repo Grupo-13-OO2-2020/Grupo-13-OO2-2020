@@ -11,7 +11,7 @@
 	<div class="container mt-4">
 		<div class="col-sm-6">
 			<form th:action="@{/productos/save}" th:object=${producto} method="POST">
-				<div class="card">
+				<div class="card text-center border-info mb-3">
 					<div class="card-header"></div>
 					<h3>Modulo Producto</h3>
 					<div class="card-body"></div>
@@ -20,19 +20,19 @@
 						<label>ID</label> <input th:field="*{id}" type="number" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label>DESCRIPCION</label> <input th:field="*{descripcion}" type="text" class="form-control" />
+						<label>Descripcion</label> <input th:field="*{descripcion}" type="text" class="form-control" placeholder="Descripcion"/>
 					</div>
 					<div class="form-group">
-						<label>PRECIO_UNITARIO</label> <input th:field="*{precioUnitario}" type="number" class="form-control" />
+						<label>Precio Unitario</label> <input th:field="*{precioUnitario}" type="number" class="form-control" placeholder="Precio unitario"/>
 					</div>
 					<div class="form-group">
-						<label>CODIGO_PRODUCTO</label> <input th:field="*{codigoProducto}" type="number" class="form-control" />
+						<label>Codigo de Producto</label> <input th:field="*{codigoProducto}" type="number" class="form-control" placeholder="Codigo de producto" />
 					</div>
 					<div class="form-group">
-						<label>TALLE</label> <input th:field="*{talle}" type="number" class="form-control" />
+						<label>Talle</label> <input th:field="*{talle}" type="number" class="form-control" placeholder="Talle" />
 					</div>
 					<div class="card-footer">
-						<input type="submit" style="background:yellow" value="Guardar" class="btn btn-succes"/>
+						<input type="submit" style="background:#74C1F4" value="Guardar" class="btn btn-succes"/>
 
 
 					</div>
