@@ -50,7 +50,7 @@ public class LocalService implements ILocalService{
 	    }
 
 	    @Override
-		public LocalModel ListarId(int id) {
+		public LocalModel findById(int id) {
 
 			return localConverter.entityToModel(localRepository.findById(id));
 		}
