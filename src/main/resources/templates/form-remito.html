@@ -8,12 +8,12 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous" />
 </head>
-<body>
+<body style="background:#DBDBDB">
 
 	<div class="container mt-4">
 		<div class="col-sm-6">
 			<form th:action="@{/remitos/save}" th:object=${remito} method="POST">
-				<div class="card">
+				<div class="card text-center border-info mb-3">
 					<div class="card-header"></div>
 					<h3>Modulo Remito</h3>
 					<div class="card-body"></div>
@@ -23,6 +23,7 @@
 					</div>
 
 					<div class="form-group">
+<<<<<<< HEAD
 						<label>FECHA</label> <input th:field="*{fecha}" type="date"
 							class="form-control" />
 					</div>
@@ -33,10 +34,24 @@
 							<option th:each="producto : ${productos}"
 								th:value="${producto.id}" th:text="${producto.descripcion}">
 							</option>
+=======
+						<label>Fecha</label> <input th:field="*{fecha}" type="date" class="form-control" placeholder="Fecha" />
+					</div>
+
+					<div class="form-group">
+						<label>Producto</label> 
+						
+						<select class="form-control"
+						placeholder="Producto" th:field="*{producto}">
+						<option th:each="producto : ${productos}" th:value="${producto.id}"
+							th:text="${producto.descripcion}">
+						</option>
+>>>>>>> origin
 						</select>
 					</div>
 
 					<div class="form-group">
+<<<<<<< HEAD
 						<label>CANTIDAD</label> <input th:field="*{cantidad}"
 							type="number" class="form-control" />
 					</div>
@@ -46,18 +61,36 @@
 							placeholder="Empleado" th:field="*{vendedor}">
 							<option th:each="empleado : ${empleados}"
 								th:value="${empleado.id}" th:text="${empleado.nombre}"></option>
+=======
+						<label>Cantidad</label> <input th:field="*{cantidad}" type="number" class="form-control" />
+					</div>
+
+					<div class="form-group">
+						<label>Vendedor</label> <select class="form-control"
+						placeholder="Empleado" th:field="*{vendedor}">
+						<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
+							th:text="${empleado.nombre}"></option>
+>>>>>>> origin
 						</select>
 					</div>
 
 					<div class="form-group">
+<<<<<<< HEAD
 						<label>CLIENTE</label> <select class="form-control"
 							placeholder="Cliente" th:field="*{cliente}">
 							<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
 								th:text="${cliente.nombre}"></option>
+=======
+						<label>Cliente</label> <select class="form-control"
+						placeholder="Cliente" th:field="*{cliente}">
+						<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
+							th:text="${cliente.nombre}"></option>
+>>>>>>> origin
 						</select>
 					</div>
 
 					<div class="form-group">
+<<<<<<< HEAD
 						<label>FACTURADO</label> <input th:field="*{facturado}"
 							type="text" class="form-control" />
 					</div>
@@ -71,12 +104,23 @@
 							placeholder="Local" th:field="*{local.id}">
 							<option th:value="${local.id}" th:text="${local.direccion}"></option>
 						</select>
+=======
+						<label>Facturado</label> <input th:field="*{facturado}" type="text" class="form-control" placeholder="Facturado" />
+					</div>
+
+					<div class="form-group">
+						<label>Forma de Pago </label> <input th:field="*{formaDePago}" type="date" class="form-control" placeholder="Forma de pago"/>
+>>>>>>> origin
 					</div>
 
 
 					<div class="card-footer">
+<<<<<<< HEAD
 						<input type="submit" style="background: yellow" value="Guardar"
 							class="btn btn-succes" />
+=======
+						<input type="submit" style="background:#74C1F4"  value="Guardar" class="btn btn-succes"/>
+>>>>>>> origin
 					</div>
 				</div>
 			</form>

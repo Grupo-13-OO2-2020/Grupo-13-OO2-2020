@@ -8,6 +8,7 @@ public class ViewRouteHelper {
     public final static String EMPLEADO_FORM = "form-empleado";
     public final static String LOCAL_FORM = "local/form-local";
     public final static String LOCAL_MAIN = "local/main";
+    public final static String LOCAL_CALC_COORD = "local/calculacoordenadas";
 
     public final static String PRODUCTO_FORM = "producto/form";
     public final static String LOTE_FORM = "lote/form";

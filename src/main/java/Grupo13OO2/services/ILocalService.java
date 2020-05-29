@@ -11,7 +11,7 @@ public interface ILocalService {
 	
 	public LocalModel insertOrUpdate(LocalModel localModel);
 	
-	public LocalModel ListarId(int id);
+	public LocalModel findById(int id);
 	
 	public String delete(int id);
 
