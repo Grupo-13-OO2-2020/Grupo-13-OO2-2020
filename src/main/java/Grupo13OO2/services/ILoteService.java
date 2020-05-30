@@ -14,6 +14,11 @@ public interface ILoteService {
 	public LoteModel ListarId(int id);
 	
 	public String delete(int id);
+	
+	
+	public boolean validarStockInterno(int codigoProducto, int cantidad);
+	
+	public boolean consumirLote(ProductoModel prod,int cantidad);
 
 	
 }

@@ -90,4 +90,40 @@ public class LoteService implements ILoteService {
 		return "el lote ha sido eliminado";
 	}
 
+	@Override
+	public boolean validarStockInterno(int codigoProducto, int cantidad) {
+		boolean valido=false;
+		int cantid=0;
+		for(Lote lote : getAll()) {
+			if(lote.getProducto().getCodigoProducto()==codigoProducto) {
+				cantid=cantid+lote.getCantidadExistente();
+			}
+			if(cantidad>cantid) {
+				valido=false;
+			}else
+			{
+				valido=true;
+			}
+		}return valido;
+	}
+	
+	@Override
+    	public boolean consumirLote(ProductoModel prod,int cantidad) {
+    	boolean consumo=false;
+		
+		
+		for(Lote lote : getAll()) {
+			
+			if(lote.getProducto().getCodigoProducto()==prod.getCodigoProducto()) {
+				if(lote.getCantidadExistente()-cantidad>0) {
+					lote.setCantidadExistente(lote.getCantidadExistente()-cantidad);
+				}
+				
+				if(lote.getCantidadExistente()-cantidad==0) {
+					loteRepository.deleteById(lote.getId());
+				}
+			}
+		}return consumo;
+    }
+
 }

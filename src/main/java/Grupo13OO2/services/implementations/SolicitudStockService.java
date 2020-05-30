@@ -46,4 +46,11 @@ public class SolicitudStockService implements ISolicitudStockService {
 		return "solictud cancelada"+ id;
 	}
 
+	@Override
+	public void aceptarSolcitudStock(SolicitudStockModel solicitudStockModel,EmpleadoModel empleado,LocalModel local) {
+		solicitudStockModel.setColaborador(local.getEmpleado());
+		solicitudStockModel.setAceptado(true);
+	//	destinatario.consumoLote(solicitud.getProducto(), solicitud.getCantidad());
+	}
+
 }

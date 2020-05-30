@@ -14,4 +14,5 @@ public interface ISolicitudStockService {
 	
 	public String delete(int id);
 
+	public void aceptarSolcitudStock(SolicitudStockModel solicitudStockModel,EmpleadoModel empleado,LocalModel local);
 }
