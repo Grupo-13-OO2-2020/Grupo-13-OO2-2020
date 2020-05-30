@@ -43,8 +43,7 @@ public class ClienteService implements IClienteService{
 	public ClienteModel ListarId(int id) {
         
         Optional<Cliente> cliente = clienteRepository.findById(id);
-        
-
+   
 		return clienteConverter.entityToModel(cliente.get());
 	}
 }
