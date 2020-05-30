@@ -5,51 +5,52 @@
 <title>Formulario Empleado</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
 </head>
-<body>
+<body style="background:#DBDBDB">
 
 	<div class="container mt-4">
 		<div class="col-sm-6">
 			<form action="#" th:action="@{/empleados/save}" th:object=${empleado} method="POST">
-				<div class="card">
+				<div class="card text-center border-info mb-3">
 					<div class="card-header"></div>
+					<h1></h1>
 					<h3>Modulo Empleado</h3>
 					<div class="card-body"></div>
 					<div class="form-group" style="display: none">
-						<label>ID</label> <input th:field="*{id}" type="text" class="form-control" />
+						<label>Id</label> <input th:field="*{id}" type="text" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label>DNI</label> <input th:field="*{dni}" type="text" class="form-control" />
+						<label>Nombre</label> <input th:field="*{nombre}" type="text" class="form-control" placeholder="Nombre" />
 					</div>
 					<div class="form-group">
-						<label>NOMBRE</label> <input th:field="*{nombre}" type="text" class="form-control" />
+						<label>Apellido</label> <input th:field="*{apellido}" type="text" class="form-control" placeholder="Apellido"/>
 					</div>
 					<div class="form-group">
-						<label>APELLIDO</label> <input th:field="*{apellido}" type="text" class="form-control" />
+						<label>Dni</label> <input th:field="*{dni}" type="text" class="form-control" placeholder="Dni" />
 					</div>
 					<div class="form-group">
-						<label>FECHA NACIMIENTO</label> <input th:field="*{fechaNacimiento}" type="text" class="form-control" />
+						<label>Fecha de Nacimiento</label> <input th:field="*{fechaNacimiento}" type="date" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label>HS ENTRADA</label> <input th:field="*{{horarioEntrada}}" type="time" class="form-control" />
+						<label>Horario de Entrada</label> <input th:field="*{{horarioEntrada}}" type="time" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label>HS SALIDA</label> <input th:field="*{{horarioSalida}}" type="time" class="form-control" />
+						<label>Horario de Salida</label> <input th:field="*{{horarioSalida}}" type="time" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label>TIPO EMPLEADO</label> <input th:field="*{tipoEmpleado}" type="text" class="form-control" />
+						<label>Tipo Empleado</label> <input th:field="*{tipoEmpleado}" type="text" class="form-control" placeholder="Tipo de empleado"/>
 					</div>
 					<div class="form-group">
-						<label>SUELDO</label> <input th:field="*{sueldo}" type="text" class="form-control" />
+						<label>Sueldo</label> <input th:field="*{sueldo}" type="text" class="form-control" placeholder="Sueldo"/>
 					</div>
 					<div>
-						<label>LOCAL</label> <select class="form-control"
+						<label>Local</label> <select class="form-control"
 						placeholder="Local" th:field="*{local}">
 						<option th:each="local : ${locales}" th:value="${local.id}"
 							th:text="${local.direccion}"></option></select>
 					</div>
 					
 					<div class="card-footer">
-						<input type="submit" style="background:yellow" value="Guardar" class="btn btn-succes"/>
+						<input type="submit" style="background:#74C1F4" value="Guardar" class="btn btn-succes"/>
 					</div>
 					
 				</div>

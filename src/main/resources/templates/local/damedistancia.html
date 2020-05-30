@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Distancias Locales</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+</head>
+
+<body style="background-color:#F0F0F0;">
+
+<div th:replace="nav :: nav"></div>
+    <h1></h1>
+    <h2></h2>
+
+    <div class="container p-3 my-3 bg-dark text-white">
+
+        <div class="alert alert-success alert-dismissible" style="background-color:#D7FFFE;">
+
+            <p style="color:#47484F"><strong>Primer Local</strong></p>
+            <h1></h1>
+            <p style="color:#51535A">Ubicacion: <span th:text="${dir1}" />, Latitud: <span th:text="${lat1}" />, longitud: <span th:text="${lng1}" /></p>
+
+            <hr>
+
+            <p style="color:#47484F"><strong>Segundo Local</strong></p>
+            <p style="color:#51535A" >Ubicacion: <span th:text="${dir2}" />, Latitud: <span th:text="${lat2}" />, longitud: <span th:text="${lng2}" /></p>
+
+            <hr>
+
+            <p style="color:#47484F"><strong>La distancia en kilometros es: </strong><span th:text="${distancia}" /></p>
+
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

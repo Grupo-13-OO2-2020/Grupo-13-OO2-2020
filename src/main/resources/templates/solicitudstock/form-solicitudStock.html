@@ -2,28 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Remito</title>
+<title>SolicitudStock</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
 </head>
-<body>
+<body style="background:#DBDBDB">
 
 	<div class="container mt-4">
 		<div class="col-sm-6">
-			<form th:action="@{/remitos/save}" th:object=${remito} method="POST">
-				<div class="card">
+			<form th:action="@{/solicitudesStock/save}" th:object=${solicitudStock} method="POST">
+				<div class="card text-center border-info mb-3">
 					<div class="card-header"></div>
-					<h3>Modulo Remito</h3>
+					<h3>Modulo SolicitudStock</h3>
 					<div class="card-body"></div>
 					<div class="form-group" style="display: none">
 						<label>ID</label> <input th:field="*{id}" type="text" class="form-control" />
 					</div>
 
 					<div class="form-group">
-						<label>FECHA</label> <input th:field="*{fecha}" type="date" class="form-control" />
+						<label>Fecha</label> <input th:field="*{fecha}" type="date" class="form-control" placeholder="Fecha"/>
 					</div>
 
 					<div class="form-group">
-						<label>PRODUCTO</label> 
+						<label>Producto</label> 
 						
 						<select class="form-control"
 						placeholder="Producto" th:field="*{producto}">
@@ -34,11 +34,11 @@
 					</div>
 
 					<div class="form-group">
-						<label>CANTIDAD</label> <input th:field="*{cantidad}" type="number" class="form-control" />
+						<label>Cantidad</label> <input th:field="*{cantidad}" type="number" class="form-control" />
 					</div>
 
 					<div class="form-group">
-						<label>VENDEDOR</label> <select class="form-control"
+						<label>Vendedor</label> <select class="form-control"
 						placeholder="Empleado" th:field="*{vendedor}">
 						<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
 							th:text="${empleado.nombre}"></option>
@@ -46,7 +46,7 @@
 					</div>
 
 					<div class="form-group">
-						<label>CLIENTE</label> <select class="form-control"
+						<label>Cliente</label> <select class="form-control"
 						placeholder="Cliente" th:field="*{cliente}">
 						<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
 							th:text="${cliente.nombre}"></option>
@@ -54,21 +54,35 @@
 					</div>
 
 					<div class="form-group">
-						<label>FACTURADO</label> <input th:field="*{facturado}" type="text" class="form-control" />
+						<label>Facturado</label> <input th:field="*{facturado}" type="text" class="form-control" placeholder="Facturado" />
 					</div>
 
 					<div class="form-group">
-						<label>FORMA DE PAGO </label> <input th:field="*{formaDePago}" type="date" class="form-control" />
+						<label>Colaborador</label> <select class="form-control"
+						placeholder="Colaborador" th:field="*{colaborador}">
+						<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
+							th:text="${empleado.nombre}"></option>
+						</select>
 					</div>
 
+					<div class="form-group">
+						<label>Aceptado</label> <input th:field="*{aceptado}" type="string" class="form-control" />
+					</div>
+					
+					<div class="form-group">
+						<label>Local</label> <select class="form-control"
+						placeholder="Local" th:field="*{localDetinatario}">
+						<option th:each="local : ${locales}" th:value="${local.id}"
+							th:text="${local.direccion}"></option>
+						</select>
+					</div>
 
 					<div class="card-footer">
-						<input type="submit" style="background:yellow"  value="Guardar" class="btn btn-succes"/>
+						<input type="submit" style="background:#74C1F4"  value="Guardar" class="btn btn-succes"/>
 					</div>
 				</div>
 			</form>
-
-
+			
 		</div>
 
 

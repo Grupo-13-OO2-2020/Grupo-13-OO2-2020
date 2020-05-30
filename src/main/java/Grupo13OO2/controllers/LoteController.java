@@ -45,7 +45,7 @@ public class LoteController {
 	 @GetMapping("/new/{id}")
 	    public ModelAndView create(@PathVariable("id") int id) {
 	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_FORM_MAIN); 
-			mAV.addObject("local", localService.ListarId(id));
+			mAV.addObject("local", localService.findById(id));
 			mAV.addObject("lote", new LoteModel());
 			mAV.addObject("productos", productoService.getAll());
 	        return mAV;
