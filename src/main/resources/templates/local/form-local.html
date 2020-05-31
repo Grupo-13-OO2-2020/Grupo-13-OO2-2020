@@ -41,12 +41,12 @@
 							type="text" class="form-control" placeholder="Numero de telefono"/>
 					</div>
 					<div>
-						<label>Gerente</label> <select class="form-control"
-						placeholder="Local" th:field="*{empleado}">
-						<option th:each="empleado : *{empleados}" th:value="${empleado.id}"
-							th:text="${empleado.nombre}"></option>
+						<label>Gerente</label> 
+						<div th:each="empleado : *{empleados}" th:if="${empleado.gerente}" >
+							<div th:text="${empleado.nombre}">
+							</div>
+						</div>
 					</div>
-					</select>
 					<div class="card-footer">
 						<input type="submit" style="background:#74C1F4" value="Guardar"
 							class="btn btn-succes" />

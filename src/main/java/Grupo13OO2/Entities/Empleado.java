@@ -2,7 +2,9 @@ package Grupo13OO2.Entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -28,27 +30,35 @@ public class Empleado extends Persona {
 	
 	private String tipoEmpleado;
 	private double sueldo;
+	private boolean gerente;
 	
-	@ManyToOne
-    @JoinColumn(name="local_id")
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Local local;
-	
-	@OneToOne(mappedBy = "empleado")
-	private Local localGerente;
 
 	public Empleado() {
 
 	}
 
 	public Empleado(int id, String nombre, int dni, String apellido, Date fechaNacimiento,
-			Date  horarioEntrada,Date  horarioSalida, String tipoEmpleado, double sueldo, Local local, Local localGerente) {
+			Date  horarioEntrada,Date  horarioSalida, String tipoEmpleado, double sueldo, boolean gerente) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
 		this.horarioSalida = horarioSalida;
 		this.tipoEmpleado = tipoEmpleado;
 		this.sueldo = sueldo;
+		this.gerente = gerente;
+	}
+
+	public Empleado(int id, String nombre, int dni, String apellido, Date fechaNacimiento,
+			Date  horarioEntrada,Date  horarioSalida, String tipoEmpleado, double sueldo, boolean gerente, Local local) {
+		super(id, nombre, dni, apellido, fechaNacimiento);
+		this.horarioEntrada = horarioEntrada;
+		this.horarioSalida = horarioSalida;
+		this.tipoEmpleado = tipoEmpleado;
+		this.sueldo = sueldo;
+		this.gerente = gerente;
 		this.local = local;
-		this.localGerente = localGerente;
+		
 	}
 
 	public Date getHorarioEntrada() {
@@ -83,12 +93,12 @@ public class Empleado extends Persona {
 		this.sueldo = sueldo;
 	}
 
-	public Local getlocalGerente() {
-		return localGerente;
+	public boolean isGerente() {
+		return gerente;
 	}
 
-	public void setlocalGerente(Local local) {
-		this.localGerente = local;
+	public void setGerente(boolean gerente) {
+		this.gerente = gerente;
 	}
 
 	public Local getLocal() {
@@ -99,13 +109,7 @@ public class Empleado extends Persona {
 		this.local = local;
 	}
 
-	public Local getLocalGerente() {
-		return localGerente;
-	}
-
-	public void setLocalGerente(Local localGerente) {
-		this.localGerente = localGerente;
-	}
+	
 	
 	
 }

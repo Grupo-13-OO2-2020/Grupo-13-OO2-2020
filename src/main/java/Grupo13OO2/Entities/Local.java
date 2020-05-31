@@ -29,12 +29,7 @@ public class Local {
 	private float longitud;
 	private int numeroTelefono;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "gerente_id", referencedColumnName = "id")
-	private Empleado empleado;
-	
-	@OneToMany(mappedBy="local", cascade = CascadeType.ALL)
-    
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="local")
 	private Set<Empleado> empleados;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="local")
@@ -42,7 +37,7 @@ public class Local {
 	
 	public Local() {}
 
-	public Local(int id, String direccion, float latitud, float longitud, int numeroTelefono, Empleado empleado
+	public Local(int id, String direccion, float latitud, float longitud, int numeroTelefono
 			, Set<Empleado> empleados, Set<Lote> lotes) {
 		super();
 		this.id = id;
@@ -50,7 +45,6 @@ public class Local {
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.numeroTelefono = numeroTelefono;
-		this.empleado = empleado;
 		this.empleados = empleados;
 		this.lotes = lotes;
 	}
@@ -93,14 +87,6 @@ public class Local {
 
 	public void setNumeroTelefono(int numeroTelefono) {
 		this.numeroTelefono = numeroTelefono;
-	}
-
-	public Empleado getEmpleado() {
-		return empleado;
-	}
-
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
 	}
 
 	public Set<Empleado> getEmpleados() {

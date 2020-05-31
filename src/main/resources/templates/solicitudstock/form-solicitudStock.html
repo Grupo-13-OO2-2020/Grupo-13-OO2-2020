@@ -64,9 +64,12 @@
 							th:text="${empleado.nombre}"></option>
 						</select>
 					</div>
-
+					
 					<div class="form-group">
-						<label>Aceptado</label> <input th:field="*{aceptado}" type="string" class="form-control" />
+						<div class="custom-control custom-checkbox">
+							<input th:field="*{aceptado}" type="checkbox" class="custom-control-input" id="defaultUnchecked">
+							<label class="custom-control-label" for="defaultUnchecked">Aceptado</label>
+						</div>
 					</div>
 					
 					<div class="form-group">

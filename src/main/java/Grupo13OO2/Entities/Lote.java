@@ -34,7 +34,7 @@ public class Lote {
 	@Column(name="fechaIngreso")
 	@CreationTimestamp
 	private Date fechaIngreso;
-	@ManyToOne
+	@OneToOne
     @JoinColumn(name="producto_id")
 	private Producto producto;
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)

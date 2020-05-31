@@ -54,7 +54,10 @@
 					</div>
 
 					<div class="form-group">
-						<label>Facturado</label> <input th:field="*{facturado}" type="text" class="form-control" placeholder="Facturado" />
+						<div class="custom-control custom-checkbox">
+							<input th:field="*{facturado}" type="checkbox" class="custom-control-input" id="defaultUnchecked">
+							<label class="custom-control-label" for="defaultUnchecked">Facturado</label>
+						</div>
 					</div>
 
 					<div class="form-group">
