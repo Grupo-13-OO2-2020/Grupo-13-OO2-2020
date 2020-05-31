@@ -54,17 +54,19 @@ public class RemitoController {
     @GetMapping("/new/{id}")
     public ModelAndView create(@PathVariable("id") int id) {
         ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_FORM);
-		mAV.addObject("local", localService.ListarId(id));
+		mAV.addObject("local", localService.findById(id));
         mAV.addObject("remito", new RemitoModel());
         mAV.addObject("productos", productoService.getAll());
-        mAV.addObject("empleados", empleadoService.getAll());
+//      mAV.addObject("empleados", empleadoService.getAll());
         mAV.addObject("clientes", clienteService.getAll());
         return mAV;
     }
 
     @PostMapping("/save")
     public RedirectView create(@ModelAttribute("remito") RemitoModel remitoModel) {
+    	
         remitoService.insertOrUpdate(remitoModel);
+        
         return new RedirectView("/remitos");
     }
 

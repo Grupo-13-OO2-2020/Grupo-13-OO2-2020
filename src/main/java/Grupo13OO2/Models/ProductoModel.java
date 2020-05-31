@@ -1,12 +1,25 @@
 package Grupo13OO2.Models;
 
+import javax.validation.Valid;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+@Valid
 public class ProductoModel {
 	private int id;
+	@NotEmpty
 	private String descripcion;
+    @Valid
+    @DecimalMin("1") 
 	private double precioUnitario;
+    @Min(value = 1, message = "el codigo no puede ser 0")    
 	private int codigoProducto;
+    @NotEmpty
+    @Pattern(regexp = "[0-9]+", message="El talle solo puede tener  números")
 	private String talle;
-	
 	
 	
 	
