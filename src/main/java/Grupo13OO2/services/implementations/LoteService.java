@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Entities.Lote;
-import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
+import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.Models.ProductoModel;
 import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.converters.LoteConverter;
@@ -20,6 +20,7 @@ import Grupo13OO2.repositories.ILocalRepository;
 import Grupo13OO2.repositories.ILoteRepository;
 import Grupo13OO2.repositories.IProductoRepository;
 import Grupo13OO2.services.ILoteService;
+
 
 @Service("loteService")
 public class LoteService implements ILoteService {
@@ -105,25 +106,33 @@ public class LoteService implements ILoteService {
 				valido=true;
 			}
 		}return valido;
-	}
-	
+		}
+
 	@Override
-    	public boolean consumirLote(ProductoModel prod,int cantidad) {
+	public boolean consumirLote(RemitoModel remito) {
     	boolean consumo=false;
-		
-		
-		for(Lote lote : getAll()) {
+		int aux=remito.getCantidad();
+		while(aux>0) {
 			
-			if(lote.getProducto().getCodigoProducto()==prod.getCodigoProducto()) {
-				if(lote.getCantidadExistente()-cantidad>0) {
-					lote.setCantidadExistente(lote.getCantidadExistente()-cantidad);
+			if(remito.getVendedor().getLocal().getLotes().iterator().next().getProducto().getCodigoProducto()
+					==remito.getProducto().getCodigoProducto()) {
+				
+				if(remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente()-aux>=0) {
+					remito.getVendedor().getLocal().getLotes().iterator().next().setCantidadExistente(remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente()-aux);
+					aux=0;
+					this.insertOrUpdate(remito.getVendedor().getLocal().getLotes().iterator().next());
+					
+				}else {
+					aux=aux-remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente();
+					remito.getVendedor().getLocal().getLotes().iterator().next().setCantidadExistente(0);
+					this.insertOrUpdate(remito.getVendedor().getLocal().getLotes().iterator().next());
 				}
 				
-				if(lote.getCantidadExistente()-cantidad==0) {
-					loteRepository.deleteById(lote.getId());
-				}
+				
 			}
-		}return consumo;
+		}
+		consumo=true;
+		return consumo;
     }
 
 }

@@ -11,6 +11,8 @@ import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.converters.SolicitudStockConverter;
 import Grupo13OO2.repositories.ISolicitudStockRepository;
 import Grupo13OO2.services.ISolicitudStockService;
+import Grupo13OO2.Models.EmpleadoModel;
+import Grupo13OO2.Models.LocalModel;
 
 @Service("solicitudStockService")
 public class SolicitudStockService implements ISolicitudStockService {

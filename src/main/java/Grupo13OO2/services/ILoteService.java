@@ -4,6 +4,8 @@ import java.util.List;
 
 import Grupo13OO2.Entities.Lote;
 import Grupo13OO2.Models.LoteModel;
+import Grupo13OO2.Models.RemitoModel;
+import Grupo13OO2.Models.ProductoModel;
 
 public interface ILoteService {
 
@@ -18,7 +20,7 @@ public interface ILoteService {
 	
 	public boolean validarStockInterno(int codigoProducto, int cantidad);
 	
-	public boolean consumirLote(ProductoModel prod,int cantidad);
+	public boolean consumirLote(RemitoModel remito);
 
 	
 }
