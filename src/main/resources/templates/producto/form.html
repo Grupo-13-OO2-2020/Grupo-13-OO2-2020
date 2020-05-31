@@ -16,20 +16,24 @@
 					<h3>Modulo Producto</h3>
 					<div class="card-body"></div>
 					
-					<div class="form-group">
+					<div class="form-group" style="display: none">
 						<label>ID</label> <input th:field="*{id}" type="number" class="form-control" />
 					</div>
 					<div class="form-group">
 						<label>Descripcion</label> <input th:field="*{descripcion}" type="text" class="form-control" placeholder="Descripcion"/>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
 					</div>
 					<div class="form-group">
 						<label>Precio Unitario</label> <input th:field="*{precioUnitario}" type="number" class="form-control" placeholder="Precio unitario"/>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('precioUnitario')}" th:errors="*{precioUnitario}"></small>
 					</div>
 					<div class="form-group">
 						<label>Codigo de Producto</label> <input th:field="*{codigoProducto}" type="number" class="form-control" placeholder="Codigo de producto" />
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('codigoProducto')}" th:errors="*{codigoProducto}"></small>
 					</div>
 					<div class="form-group">
 						<label>Talle</label> <input th:field="*{talle}" type="number" class="form-control" placeholder="Talle" />
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('talle')}" th:errors="*{talle}"></small>
 					</div>
 					<div class="card-footer">
 						<input type="submit" style="background:#74C1F4" value="Guardar" class="btn btn-succes"/>
