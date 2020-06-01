@@ -38,8 +38,7 @@ public class SolicitudStockService implements ISolicitudStockService {
 
 	@Override
 	public SolicitudStockModel ListarId(int id) {
-		Optional<SolicitudStock> solicitudStock=solicitudStockRepository.findById(id);
-		return solicitudStockConverter.entityToModel(solicitudStock.get());
+		return solicitudStockConverter.entityToModel(solicitudStockRepository.findById(id));
 	}
 
 	@Override
@@ -48,11 +47,11 @@ public class SolicitudStockService implements ISolicitudStockService {
 		return "solictud cancelada"+ id;
 	}
 
-	@Override
-	public void aceptarSolcitudStock(SolicitudStockModel solicitudStockModel,EmpleadoModel empleado,LocalModel local) {
-		solicitudStockModel.setColaborador(local.getEmpleado());
-		solicitudStockModel.setAceptado(true);
-	//	destinatario.consumoLote(solicitud.getProducto(), solicitud.getCantidad());
-	}
+	// @Override
+	// public void aceptarSolcitudStock(SolicitudStockModel solicitudStockModel,EmpleadoModel empleado,LocalModel local) {
+	// 	solicitudStockModel.setColaborador(local.getEmpleado());
+	// 	solicitudStockModel.setAceptado(true);
+	// //	destinatario.consumoLote(solicitud.getProducto(), solicitud.getCantidad());
+	// }
 
 }

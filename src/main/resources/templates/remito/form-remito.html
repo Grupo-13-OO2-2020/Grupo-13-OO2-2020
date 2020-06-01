@@ -28,13 +28,12 @@
 							class="form-control" placeholder="Fecha" />
 					</div>
 
-					<div class="form-group">
-						<label>Producto</label> <select class="form-control"
-							placeholder="Producto" th:field="*{producto}">
-							<option th:each="producto : ${productos}"
-								th:value="${producto.id}" th:text="${producto.descripcion}">
-							</option>
-						</select>
+					<div>
+						<label>Producto</label> 
+						<select class="form-control"placeholder="Producto" th:field="*{producto.id}">
+						<option th:each="producto : ${productos}" th:value="${producto.id}"
+							th:text="${producto.descripcion}+${producto.talle}"></option>
+						</select>		
 					</div>
 
 					<div class="form-group">
@@ -43,21 +42,20 @@
 							type="number" class="form-control" />
 					</div>
 
-					<div class="form-group">
-						<label>Vendedor</label> <select class="form-control"
-							placeholder="Empleado" th:field="*{vendedor}">
-							<option th:each="empleado : ${local.empleados}"
-								th:value="${empleado.id}" th:text="${empleado.nombre}"></option>
-						</select>
+					<div>
+						<label>Vendedor</label> 
+						<select class="form-control"placeholder="Vendedor" th:field="*{vendedor.id}">
+						<option th:each="vendedor : ${local.empleados}" th:value="${vendedor.id}"
+							th:text="${vendedor.nombre}"></option>
+						</select>		
 					</div>
 
-					<div class="form-group">
-
-						<label>Cliente</label> <select class="form-control"
-							placeholder="Cliente" th:field="*{cliente}">
-							<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
-								th:text="${cliente.nombre}"></option>
-						</select>
+					<div>
+						<label>Cliente</label> 
+						<select class="form-control"placeholder="Cliente" th:field="*{cliente.id}">
+						<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
+							th:text="${cliente.nombre}"></option>
+						</select>		
 					</div>
 
 					<div class="form-group">

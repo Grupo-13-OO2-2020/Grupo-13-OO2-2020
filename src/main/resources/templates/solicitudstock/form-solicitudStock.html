@@ -26,35 +26,31 @@
 						<label>Fecha</label> <input th:field="*{fecha}" type="date" class="form-control" placeholder="Fecha"/>
 					</div>
 
-					<div class="form-group">
+					<div>
 						<label>Producto</label> 
-						
-						<select class="form-control"
-						placeholder="Producto" th:field="*{producto}">
+						<select class="form-control"placeholder="Producto" th:field="*{producto.id}">
 						<option th:each="producto : ${productos}" th:value="${producto.id}"
-							th:text="${producto.descripcion}">
-						</option>
-						</select>
+							th:text="${producto.descripcion}+${producto.talle}"></option>
+						</select>		
 					</div>
 
 					<div class="form-group">
 						<label>Cantidad</label> <input th:field="*{cantidad}" type="number" class="form-control" />
 					</div>
 
-					<div class="form-group">
-						<label>Vendedor</label> <select class="form-control"
-						placeholder="Empleado" th:field="*{vendedor}">
-						<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
-							th:text="${empleado.nombre}"></option>
-						</select>
+					<div>
+						<label>Vendedor</label> 
+						<select class="form-control"placeholder="Vendedor" th:field="*{vendedor.id}">
+						<option th:each="vendedor : ${empleados}" th:value="${vendedor.id}"
+							th:text="${vendedor.nombre}"></option>
+						</select>		
 					</div>
-
-					<div class="form-group">
-						<label>Cliente</label> <select class="form-control"
-						placeholder="Cliente" th:field="*{cliente}">
+					<div>
+						<label>Cliente</label> 
+						<select class="form-control"placeholder="Cliente" th:field="*{cliente.id}">
 						<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
 							th:text="${cliente.nombre}"></option>
-						</select>
+						</select>		
 					</div>
 
 					<div class="form-group">
@@ -80,13 +76,12 @@
 							<label class="custom-control-label" for="defaultUnchecked">Aceptado</label>
 						</div>
 					</div> -->
-					
-					<div class="form-group">
-						<label>Local Destinatorio</label> <select class="form-control"
-						placeholder="Local" th:field="*{localDestinatario}">
-						<option th:each="local : ${locales}" th:value="${local.id}"
-							th:text="${local.direccion}"></option>
-						</select>
+					<div>
+						<label>Local Destinatorio</label> 
+						<select class="form-control"placeholder="Local" th:field="*{localDestinatario.id}">
+						<option th:each="localDestinatario : ${locales}" th:value="${localDestinatario.id}"
+							th:text="${localDestinatario.direccion}"></option>
+						</select>		
 					</div>
 
 					<div class="card-footer">

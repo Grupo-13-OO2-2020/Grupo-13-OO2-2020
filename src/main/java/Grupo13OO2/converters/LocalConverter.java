@@ -32,7 +32,10 @@ public class LocalConverter {
 	}
 	
 	public Local modelToEntity(LocalModel local) {
-		return new Local(local.getId(),local.getDireccion(),local.getLatitud(),local.getLongitud(),
+		return new Local(local.getId(),
+		local.getDireccion(),
+		local.getLatitud(),
+		local.getLongitud(),
 				local.getNumeroTelefono(),modelToEntityEmpleados(local.getEmpleados()),modelToEntityLotes(local.getLotes()));
 	}
 	
