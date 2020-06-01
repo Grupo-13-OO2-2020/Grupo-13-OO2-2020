@@ -18,6 +18,7 @@ import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IClienteService;
 import Grupo13OO2.services.IEmpleadoService;
+import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.IProductoService;
 import Grupo13OO2.services.IRemitoService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,10 @@ import Grupo13OO2.services.ILoteService;
 @Controller
 @RequestMapping("remitos")
 public class RemitoController {
+  	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
+
 	
 	@Autowired
     @Qualifier("remitoService")
@@ -53,18 +58,20 @@ public class RemitoController {
         return mAV;
     }
 
-    @GetMapping("/new")
-    public ModelAndView create() {
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_FORM); 
+    @GetMapping("/new/{id}")
+    public ModelAndView create(@PathVariable("id") int id) {
+        ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_FORM);
+		mAV.addObject("local", localService.findById(id));
         mAV.addObject("remito", new RemitoModel());
         mAV.addObject("productos", productoService.getAll());
-        mAV.addObject("empleados", empleadoService.getAll());
+//      mAV.addObject("empleados", empleadoService.getAll());
         mAV.addObject("clientes", clienteService.getAll());
         return mAV;
     }
 
     @PostMapping("/save")
     public RedirectView create(@ModelAttribute("remito") RemitoModel remitoModel) {
+<<<<<<< HEAD
     	 if(loteService.validarStockInterno(remitoModel.getProducto().getCodigoProducto(),remitoModel.getCantidad())) {
     		 remitoService.insertOrUpdate(remitoModel);
     		 loteService.consumirLote(remitoModel);
@@ -77,6 +84,12 @@ public class RemitoController {
     		 return ViewRouteHelper.REMITO_FORM;
     	 }
         
+=======
+    	
+        remitoService.insertOrUpdate(remitoModel);
+        
+        return new RedirectView("/remitos");
+>>>>>>> master
     }
 
     @GetMapping("/editar/{id}")
