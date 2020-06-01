@@ -36,9 +36,11 @@
 					<td th:text="${solicitudStock.vendedor.nombre}"></td>
 					<td th:text="${solicitudStock.cliente.nombre}"></td>
 					<td th:text="${solicitudStock.facturado}"></td>
-					<td th:text="${solicitudStock.colaborador.nombre}"></td>
-					<td th:text="${solicitudStock.aceptado}"></td>
-					<td th:text="${solicitudStock.localDetinatario.direccion}"></td>
+					<td th:if="${solicitudStock.aceptado}" th:text="${solicitudStock.colaborador.nombre}"></td>
+					<td th:unless="${solicitudStock.aceptado}" ></td>
+					<td th:if="${solicitudStock.aceptado}" th:text="${solicitudStock.aceptado}"></td>
+					<td th:unless="${solicitudStock.aceptado}" ></td>
+					<td th:text="${solicitudStock.localDestinatario.direccion}"></td>
 					<td>
 						<a th:href="@{solicitudesStock/editar/} + ${solicitudStock.id}" class="btn btn-warning">Editar</a>
 					</td>

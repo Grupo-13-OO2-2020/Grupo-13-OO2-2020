@@ -45,7 +45,45 @@
 
 
 	</div>
+	<table class="table" >
+			<thead>
+				<tr style="text-align:center;">
+					<th>ID</th>
+					<th>FECHA</th>
+					<th>PRODUCTO</th>
+					<th>CANTIDAD</th>
+					<th>VENDEDOR</th>
+					<th>CLIENTE</th>
+					<th>FACTURADO</th>
+					<th>COLABORADOR</th>
+					<th>ACEPTADO</th>
+					<th>LOCAL</th>
+					<th></th>
+					<th></th>
+				</tr>
+			<tbody>
+				<tr th:each="solicitudStock:${solicitudes}" style="text-align:center;">
 
+					<td th:text="${solicitudStock.id}"></td>
+					<td th:text="${solicitudStock.fecha}"></td>
+					<td th:text="${solicitudStock.producto.descripcion}"></td>
+					<td th:text="${solicitudStock.cantidad}"></td>
+					<td th:text="${solicitudStock.vendedor.nombre}"></td>
+					<td th:text="${solicitudStock.cliente.nombre}"></td>
+					<td th:text="${solicitudStock.facturado}"></td>
+					<td th:if="${solicitudStock.aceptado}" th:text="${solicitudStock.colaborador.nombre}"></td>
+					<td th:unless="${solicitudStock.aceptado}" ></td>
+					<td th:if="${solicitudStock.aceptado}" th:text="${solicitudStock.aceptado}"></td>
+					<td th:unless="${solicitudStock.aceptado}" ></td>
+					<td th:text="${solicitudStock.localDestinatario.direccion}"></td>
+
+				</tr>
+
+			</tbody>
+
+
+
+		</table>
 
 </body>
 </html>

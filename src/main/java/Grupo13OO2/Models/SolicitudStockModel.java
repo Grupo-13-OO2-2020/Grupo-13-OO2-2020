@@ -11,17 +11,17 @@ public class SolicitudStockModel extends PedidoModel{
 	
 	private Empleado colaborador;
 	private boolean aceptado;
-	private Local localDetinatario;
+	private Local localDestinatario;
 	
 	public SolicitudStockModel() {}
 
 	
 
-	public SolicitudStockModel(int id,Date fecha, Producto producto, int cantidad, Empleado vendedor, Cliente cliente, boolean facturado,Empleado colaborador, boolean aceptado, Local localDetinatario) {
+	public SolicitudStockModel(int id,Date fecha, Producto producto, int cantidad, Empleado vendedor, Cliente cliente, boolean facturado,Empleado colaborador, boolean aceptado, Local localDestinatario) {
 		super(id,fecha,producto,cantidad,vendedor, cliente,facturado);
 		this.colaborador = colaborador;
 		this.aceptado = aceptado;
-		this.localDetinatario = localDetinatario;
+		this.localDestinatario = localDestinatario;
 	}
 
 
@@ -42,12 +42,12 @@ public class SolicitudStockModel extends PedidoModel{
 		this.aceptado = aceptado;
 	}
 
-	public Local getLocalDetinatario() {
-		return localDetinatario;
+	public Local getLocalDestinatario() {
+		return localDestinatario;
 	}
 
-	public void setLocalDetinatario(Local localDetinatario) {
-		this.localDetinatario = localDetinatario;
+	public void setLocalDestinatario(Local localDestinatario) {
+		this.localDestinatario = localDestinatario;
 	}
 	
 	

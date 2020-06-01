@@ -13,6 +13,7 @@ import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.Models.ProductoModel;
+import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.converters.LoteConverter;
 import Grupo13OO2.converters.ProductoConverter;

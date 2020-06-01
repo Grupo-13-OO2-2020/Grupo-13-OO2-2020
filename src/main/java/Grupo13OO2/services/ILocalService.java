@@ -15,4 +15,6 @@ public interface ILocalService {
 	
 	public String delete(int id);
 
+	public List<SolicitudStockModel> getSolicitudesStock(LocalModel localModel);
+
 }

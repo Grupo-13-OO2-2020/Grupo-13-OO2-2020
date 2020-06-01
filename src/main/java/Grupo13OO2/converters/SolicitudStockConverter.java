@@ -12,7 +12,7 @@ public class SolicitudStockConverter {
 		return new SolicitudStockModel(solicitudStock.getId(), solicitudStock.getFecha(),solicitudStock.getProducto(),
 				solicitudStock.getCantidad(),solicitudStock.getVendedor(),solicitudStock.getCliente(),
 				solicitudStock.isFacturado(),solicitudStock.getColaborador(),solicitudStock.isAceptado(),
-				solicitudStock.getLocalDetinatario());
+				solicitudStock.getLocalDestinatario());
 		
 	}
 	
@@ -20,7 +20,7 @@ public class SolicitudStockConverter {
 		return new SolicitudStock(solicitudStock.getId(), solicitudStock.getFecha(),solicitudStock.getProducto(),
 				solicitudStock.getCantidad(),solicitudStock.getVendedor(),solicitudStock.getCliente(),
 				solicitudStock.isFacturado(),solicitudStock.getColaborador(),solicitudStock.isAceptado(),
-				solicitudStock.getLocalDetinatario());
+				solicitudStock.getLocalDestinatario());
 	}
 	
 

@@ -59,12 +59,12 @@ public class SolicitudStock extends Pedido{
 		this.aceptado = aceptado;
 	}
 
-	public Local getLocalDetinatario() {
+	public Local getLocalDestinatario() {
 		return localDestinatario;
 	}
 
-	public void setLocalDetinatario(Local localDetinatario) {
-		this.localDestinatario = localDetinatario;
+	public void setLocalDestinatario(Local localDestinatario) {
+		this.localDestinatario = localDestinatario;
 	}
 	
 	

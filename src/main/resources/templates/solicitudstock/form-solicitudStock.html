@@ -54,27 +54,30 @@
 					</div>
 
 					<div class="form-group">
-						<label>Facturado</label> <input th:field="*{facturado}" type="text" class="form-control" placeholder="Facturado" />
+						<div class="custom-control custom-checkbox">
+							<input th:field="*{facturado}" type="checkbox" class="custom-control-input" id="defaultUnchecked">
+							<label class="custom-control-label" for="defaultUnchecked">Facturado</label>
+						</div>
 					</div>
 
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label>Colaborador</label> <select class="form-control"
 						placeholder="Colaborador" th:field="*{colaborador}">
 						<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
 							th:text="${empleado.nombre}"></option>
 						</select>
-					</div>
+					</div> -->
 					
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<div class="custom-control custom-checkbox">
 							<input th:field="*{aceptado}" type="checkbox" class="custom-control-input" id="defaultUnchecked">
 							<label class="custom-control-label" for="defaultUnchecked">Aceptado</label>
 						</div>
-					</div>
+					</div> -->
 					
 					<div class="form-group">
-						<label>Local</label> <select class="form-control"
-						placeholder="Local" th:field="*{localDetinatario}">
+						<label>Local Destinatorio</label> <select class="form-control"
+						placeholder="Local" th:field="*{localDestinatario}">
 						<option th:each="local : ${locales}" th:value="${local.id}"
 							th:text="${local.direccion}"></option>
 						</select>
