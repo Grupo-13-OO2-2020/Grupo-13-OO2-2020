@@ -4,23 +4,19 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import Grupo13OO2.Entities.Cliente;
-import Grupo13OO2.Entities.Empleado;
-import Grupo13OO2.Entities.Producto;
-
 public class PedidoModel {
 	private int id;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
-	protected Producto producto;
+	protected ProductoModel producto;
 	protected int cantidad;
-	protected Empleado vendedor;
-	protected Cliente cliente;
+	protected EmpleadoModel vendedor;
+	protected ClienteModel cliente;
 	protected boolean facturado;
 	
 	public PedidoModel() {}
 
-	public PedidoModel(int id,Date fecha, Producto producto, int cantidad, Empleado vendedor, Cliente cliente, boolean facturado) {
+	public PedidoModel(int id,Date fecha, ProductoModel producto, int cantidad, EmpleadoModel vendedor, ClienteModel cliente, boolean facturado) {
 		super();
 		this.id=id;
 		this.fecha = fecha;
@@ -49,11 +45,11 @@ public class PedidoModel {
 		this.fecha = fecha;
 	}
 
-	public Producto getProducto() {
+	public ProductoModel getProducto() {
 		return producto;
 	}
 
-	public void setProducto(Producto producto) {
+	public void setProducto(ProductoModel producto) {
 		this.producto = producto;
 	}
 
@@ -65,19 +61,19 @@ public class PedidoModel {
 		this.cantidad = cantidad;
 	}
 
-	public Empleado getVendedor() {
+	public EmpleadoModel getVendedor() {
 		return vendedor;
 	}
 
-	public void setVendedor(Empleado vendedor) {
+	public void setVendedor(EmpleadoModel vendedor) {
 		this.vendedor = vendedor;
 	}
 
-	public Cliente getCliente() {
+	public ClienteModel getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setCliente(ClienteModel cliente) {
 		this.cliente = cliente;
 	}
 

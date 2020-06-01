@@ -107,7 +107,7 @@ public class LoteService implements ILoteService {
 				valido=true;
 			}
 		}return valido;
-		}
+	}
 
 	@Override
 	public boolean consumirLote(RemitoModel remito) {

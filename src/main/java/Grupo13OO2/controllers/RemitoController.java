@@ -71,25 +71,21 @@ public class RemitoController {
 
     @PostMapping("/save")
     public RedirectView create(@ModelAttribute("remito") RemitoModel remitoModel) {
-<<<<<<< HEAD
-    	 if(loteService.validarStockInterno(remitoModel.getProducto().getCodigoProducto(),remitoModel.getCantidad())) {
-    		 remitoService.insertOrUpdate(remitoModel);
-    		 loteService.consumirLote(remitoModel);
-    		 return new RedirectView("/remitos");
-    		 
-    	 }else
-    		 
-    	 {
-    		 
-    		 return ViewRouteHelper.REMITO_FORM;
-    	 }
-        
-=======
-    	
         remitoService.insertOrUpdate(remitoModel);
-        
         return new RedirectView("/remitos");
->>>>>>> master
+
+    	//  if(loteService.validarStockInterno(remitoModel.getProducto().getCodigoProducto(),remitoModel.getCantidad())) {
+    	// 	 remitoService.insertOrUpdate(remitoModel);
+    	// 	 loteService.consumirLote(remitoModel);
+    	// 	 return new RedirectView("/remitos");
+    		 
+    	//  }else
+    		 
+    	//  {
+    		 
+    	// 	 return new RedirectView("/new/{id}");
+    	//  }
+        
     }
 
     @GetMapping("/editar/{id}")

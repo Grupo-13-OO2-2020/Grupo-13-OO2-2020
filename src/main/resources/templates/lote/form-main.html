@@ -35,7 +35,7 @@
 						<select class="form-control"placeholder="Producto" th:field="*{producto.id}">
 						<option th:each="producto : ${productos}" th:value="${producto.id}"
 							th:text="${producto.descripcion}+${producto.talle}"></option>
-					</select>		
+						</select>		
 					</div>
 					
 					<div style="display: none">
