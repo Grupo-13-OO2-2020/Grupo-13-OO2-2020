@@ -4,6 +4,8 @@ import java.util.List;
 
 import Grupo13OO2.Entities.SolicitudStock;
 import Grupo13OO2.Models.SolicitudStockModel;
+import Grupo13OO2.Models.EmpleadoModel;
+import Grupo13OO2.Models.LocalModel;
 public interface ISolicitudStockService {
 	
 	public List<SolicitudStock> getAll();
@@ -14,4 +16,5 @@ public interface ISolicitudStockService {
 	
 	public String delete(int id);
 
+	public void aceptarSolcitudStock(SolicitudStockModel solicitudStockModel,EmpleadoModel empleado,LocalModel local);
 }

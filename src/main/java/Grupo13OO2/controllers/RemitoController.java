@@ -1,5 +1,7 @@
 package Grupo13OO2.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import Grupo13OO2.Entities.Lote;
 import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IClienteService;
@@ -19,7 +22,7 @@ import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.IProductoService;
 import Grupo13OO2.services.IRemitoService;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import Grupo13OO2.services.ILoteService;
 @Controller
 @RequestMapping("remitos")
 public class RemitoController {
@@ -43,6 +46,10 @@ public class RemitoController {
     @Autowired
     @Qualifier("clienteService")
     private IClienteService clienteService;
+    
+    @Autowired
+    @Qualifier("loteService")
+    private ILoteService loteService;
 
     @GetMapping("")
     public ModelAndView index(){
@@ -64,10 +71,25 @@ public class RemitoController {
 
     @PostMapping("/save")
     public RedirectView create(@ModelAttribute("remito") RemitoModel remitoModel) {
+<<<<<<< HEAD
+    	 if(loteService.validarStockInterno(remitoModel.getProducto().getCodigoProducto(),remitoModel.getCantidad())) {
+    		 remitoService.insertOrUpdate(remitoModel);
+    		 loteService.consumirLote(remitoModel);
+    		 return new RedirectView("/remitos");
+    		 
+    	 }else
+    		 
+    	 {
+    		 
+    		 return ViewRouteHelper.REMITO_FORM;
+    	 }
+        
+=======
     	
         remitoService.insertOrUpdate(remitoModel);
         
         return new RedirectView("/remitos");
+>>>>>>> master
     }
 
     @GetMapping("/editar/{id}")
@@ -86,4 +108,12 @@ public class RemitoController {
 		remitoService.delete(id);
 		return new RedirectView("/remitos");
 	}
+	
+	    
+        
+           
+
+        
+    
+
 }
