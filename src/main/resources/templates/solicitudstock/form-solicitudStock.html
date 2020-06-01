@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <title>SolicitudStock</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous" />
 </head>
 <body style="background:#DBDBDB">
 
@@ -15,7 +18,8 @@
 					<h3>Modulo SolicitudStock</h3>
 					<div class="card-body"></div>
 					<div class="form-group" style="display: none">
-						<label>ID</label> <input th:field="*{id}" type="text" class="form-control" />
+						<label>ID</label> <input th:field="*{id}" type="text"
+							class="form-control" />
 					</div>
 
 					<div class="form-group">
@@ -65,7 +69,9 @@
 						placeholder="Colaborador" th:field="*{colaborador}">
 						<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
 							th:text="${empleado.nombre}"></option>
+>>>>>>> origin
 						</select>
+<<<<<<< HEAD
 					</div> -->
 					
 					<!-- <div class="form-group">
@@ -88,7 +94,7 @@
 					</div>
 				</div>
 			</form>
-			
+
 		</div>
 
 
