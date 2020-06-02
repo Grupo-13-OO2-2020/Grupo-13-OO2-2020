@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import Grupo13OO2.Entities.Remito;
+import Grupo13OO2.Entities.Empleado;
 import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.converters.RemitoConverter;
 import Grupo13OO2.repositories.IRemitoRepository;
@@ -24,6 +25,14 @@ public class RemitoService implements IRemitoService {
     @Qualifier("remitoConverter")
     private RemitoConverter remitoConverter;
 
+	@Autowired
+	@Qualifier("empleadoService")
+	private EmpleadoService empleadoService; 
+
+	@Autowired
+	@Qualifier("clienteService")
+	private ClienteService clienteService; 
+	
 	@Override
 	public List<Remito> getAll() {
 		return remitoRepository.findAll();
@@ -31,7 +40,10 @@ public class RemitoService implements IRemitoService {
 
 	@Override
 	public RemitoModel insertOrUpdate(RemitoModel remitoModel) {
-		Remito remito=remitoRepository.save(remitoConverter.modelToEntity(remitoModel));
+		remitoModel.setVendedor(empleadoService.ListarId(remitoModel.getVendedor().getId()));
+
+		Remito remito = remitoRepository.save(remitoConverter.modelToEntity(remitoModel));
+
 		return remitoConverter.entityToModel(remito);
 	}
 

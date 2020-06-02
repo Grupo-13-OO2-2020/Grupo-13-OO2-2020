@@ -41,7 +41,7 @@
 					<div>
 						<label>Vendedor</label> 
 						<select class="form-control"placeholder="Vendedor" th:field="*{vendedor.id}">
-						<option th:each="vendedor : ${empleados}" th:value="${vendedor.id}"
+						<option th:each="vendedor : ${local.empleados}" th:value="${vendedor.id}"
 							th:text="${vendedor.nombre}"></option>
 						</select>		
 					</div>

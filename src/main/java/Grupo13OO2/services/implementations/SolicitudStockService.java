@@ -22,7 +22,11 @@ public class SolicitudStockService implements ISolicitudStockService {
 
     @Autowired
     @Qualifier("solicitudStockConverter")
-    private SolicitudStockConverter solicitudStockConverter;
+	private SolicitudStockConverter solicitudStockConverter;
+	
+	@Autowired
+	@Qualifier("empleadoService")
+	private EmpleadoService empleadoService; 
 
 	@Override
 	public List<SolicitudStock> getAll() {
@@ -32,7 +36,11 @@ public class SolicitudStockService implements ISolicitudStockService {
 
 	@Override
 	public SolicitudStockModel insertOrUpdate(SolicitudStockModel solicitudStockModel) {
+		solicitudStockModel.setVendedor(empleadoService.ListarId(solicitudStockModel.getVendedor().getId()));
+		solicitudStockModel.setColaborador(empleadoService.ListarId(solicitudStockModel.getVendedor().getId()));
+
 		SolicitudStock solicitudStock=solicitudStockRepository.save(solicitudStockConverter.modelToEntity(solicitudStockModel));
+		
 		return solicitudStockConverter.entityToModel(solicitudStock);
 	}
 

@@ -41,9 +41,7 @@ public class ClienteService implements IClienteService{
 
     @Override
 	public ClienteModel ListarId(int id) {
-        
-        Optional<Cliente> cliente = clienteRepository.findById(id);
    
-		return clienteConverter.entityToModel(cliente.get());
+		return clienteConverter.entityToModel(clienteRepository.findById(id));
 	}
 }

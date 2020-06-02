@@ -64,7 +64,7 @@ public class RemitoController {
 		mAV.addObject("local", localService.findById(id));
         mAV.addObject("remito", new RemitoModel());
         mAV.addObject("productos", productoService.getAll());
-//      mAV.addObject("empleados", empleadoService.getAll());
+        mAV.addObject("empleados", empleadoService.getAll());
         mAV.addObject("clientes", clienteService.getAll());
         return mAV;
     }
@@ -93,6 +93,7 @@ public class RemitoController {
 		
         ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_FORM); 
         mAV.addObject("remito", remitoService.ListarId(id));
+        mAV.addObject("productos", productoService.getAll());
         mAV.addObject("productos", productoService.getAll());
         mAV.addObject("empleados", empleadoService.getAll());
         mAV.addObject("clientes", clienteService.getAll());
