@@ -61,6 +61,7 @@ public class RemitoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_INDEX_LOCAL);
 		mAV.addObject("remitos", localService.getRemitos(localService.findById(id)));
 		mAV.addObject("local", localService.findById(id));
+<<<<<<< HEAD
 		return mAV;
 	}
 
@@ -104,6 +105,46 @@ public class RemitoController {
 		mAV.addObject("productos", productoService.getAll());
 		mAV.addObject("empleados", empleadoService.getAll());
 		mAV.addObject("clientes", clienteService.getAll());
+=======
+        mAV.addObject("remito", new RemitoModel());
+        mAV.addObject("productos", productoService.getAll());
+//      mAV.addObject("empleados", empleadoService.getAll());
+        mAV.addObject("clientes", clienteService.getAll());
+        return mAV;
+    }
+
+    /*@PostMapping("/save")
+    public RedirectView create(@ModelAttribute("remito") RemitoModel remitoModel) {
+
+    	 if(loteService.validarStockInterno(remitoModel.getProducto().getCodigoProducto(),remitoModel.getCantidad())) {
+    		 remitoService.insertOrUpdate(remitoModel);
+    		 loteService.consumirLote(remitoModel);
+    		 return new RedirectView("/remitos");
+    		 
+    	 }else
+    		 
+    	 {
+    		 
+    		 return ViewRouteHelper.REMITO_FORM;
+    	 }
+        
+
+    	
+        remitoService.insertOrUpdate(remitoModel);
+        
+        return new RedirectView("/remitos");
+
+    }*/
+
+    @GetMapping("/editar/{id}")
+	public ModelAndView get(@PathVariable("id") int id)  {
+		
+        ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_FORM); 
+        mAV.addObject("remito", remitoService.ListarId(id));
+        mAV.addObject("productos", productoService.getAll());
+        mAV.addObject("empleados", empleadoService.getAll());
+        mAV.addObject("clientes", clienteService.getAll());
+>>>>>>> 25e12ba... pequeños cambios de vistas distancias y otros
 		return mAV;
 	}
 

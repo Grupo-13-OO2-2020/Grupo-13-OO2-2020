@@ -1,19 +1,29 @@
 package Grupo13OO2.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+<<<<<<< HEAD
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 
+=======
+
+import Grupo13OO2.Entities.Cliente;
+>>>>>>> 25e12ba... pequeños cambios de vistas distancias y otros
 import Grupo13OO2.Models.ClienteModel;
+import Grupo13OO2.Models.PersonaModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IClienteService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
+<<<<<<< HEAD
 	@Autowired
 	@Qualifier("clienteService")
 	private IClienteService clienteService;
@@ -50,6 +61,47 @@ public class ClienteController {
 	}
 
 	@GetMapping("/editar/{id}")
+=======
+    @Autowired
+    @Qualifier("clienteService")
+    private IClienteService clienteService;
+
+    
+    @GetMapping("")
+    public ModelAndView index(){
+        ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_INDEX); 
+        mAV.addObject("clientes", clienteService.getAll());
+        return mAV;
+    }
+    
+    @GetMapping("/new")
+    public ModelAndView create() {
+        ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM); 
+        mAV.addObject("cliente", new ClienteModel());
+        return mAV;
+    }
+
+//    @PostMapping("/save")
+//    public RedirectView create(@ModelAttribute("cliente") ClienteModel clienteModel) {
+//        clienteService.insertOrUpdate(clienteModel);
+//        return new RedirectView("/clientes");
+//    }
+    
+    @PostMapping("/save")
+    public String create(@Valid @ModelAttribute("cliente") ClienteModel clienteModel, BindingResult result) {
+    	
+    	if (result.hasErrors()) {
+			return ViewRouteHelper.CLIENTE_FORM;
+		}
+    	
+        clienteService.insertOrUpdate(clienteModel);
+        return "redirect:/clientes";
+    }
+    
+  
+    
+    @GetMapping("/editar/{id}")
+>>>>>>> 25e12ba... pequeños cambios de vistas distancias y otros
 	public ModelAndView get(@PathVariable("id") int id) {
 
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM);

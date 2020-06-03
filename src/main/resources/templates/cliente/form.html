@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>Formulario Cliente</title>
+<meta charset="ISO-8859-1">
+<title>Cliente</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
 </head>
 <body style="background:#DBDBDB">
 
+
 	<div class="container mt-4">
 		<div class="col-sm-6" >
-			<form action="#" th:action="@{/clientes/save}" th:object=${cliente} method="POST">
+			<form th:action="@{/clientes/save}" th:object=${cliente} method="POST">
 				<div class="card text-center border-info mb-3">
 					<div class="card-header"></div>
 					<h3>Modulo Cliente</h3>
 					<div class="card-body"></div>
+					
 					<div class="form-group" style="display: none">
 						<label>ID</label> <input th:field="*{id}" type="text" class="form-control" />
 					</div>

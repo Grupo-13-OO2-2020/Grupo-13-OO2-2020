@@ -89,4 +89,51 @@ public class LoteService implements ILoteService {
 		return "el lote ha sido eliminado";
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public boolean validarStockInterno(int codigoProducto, int cantidad) {
+		boolean valido=false;
+		int cantid=0;
+		for(Lote lote : getAll()) {
+			if(lote.getProducto().getCodigoProducto()==codigoProducto) {
+				cantid=cantid+lote.getCantidadExistente();
+			}
+			if(cantidad>cantid) {
+				valido=false;
+			}else
+			{
+				valido=true;
+			}
+		}return valido;
+		}
+
+	/*@Override
+	public boolean consumirLote(RemitoModel remito) {
+    	boolean consumo=false;
+		int aux=remito.getCantidad();
+		while(aux>0) {
+			
+			if(remito.getVendedor().getLocal().getLotes().iterator().next().getProducto().getCodigoProducto()
+					==remito.getProducto().getCodigoProducto()) {
+				
+				if(remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente()-aux>=0) {
+					remito.getVendedor().getLocal().getLotes().iterator().next().setCantidadExistente(remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente()-aux);
+					aux=0;
+					this.insertOrUpdate(remito.getVendedor().getLocal().getLotes().iterator().next());
+					
+				}else {
+					aux=aux-remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente();
+					remito.getVendedor().getLocal().getLotes().iterator().next().setCantidadExistente(0);
+					this.insertOrUpdate(remito.getVendedor().getLocal().getLotes().iterator().next());
+				}
+				
+				
+			}
+		}
+		consumo=true;
+		return consumo;
+    }*/
+
+>>>>>>> 25e12ba... pequeños cambios de vistas distancias y otros
 }
