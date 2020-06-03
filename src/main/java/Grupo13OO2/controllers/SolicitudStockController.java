@@ -1,5 +1,7 @@
 package Grupo13OO2.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Models.SolicitudStockModel;
+import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IClienteService;
 import Grupo13OO2.services.IEmpleadoService;
@@ -50,6 +54,12 @@ public class SolicitudStockController {
         mAV.addObject("solicitudesStock", solicitudStockService.getAll());
         return mAV;
     }
+    @GetMapping("{id}")
+    public ModelAndView local(@PathVariable("id") int id){
+        ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_INDEX_LOCAL); 
+        mAV.addObject("solicitudes", localService.getSolicitudesStock(localService.findById(id)));
+        return mAV;
+    }
 
     @GetMapping("/new/{id}")
     public ModelAndView create(@PathVariable("id") int id) {
@@ -71,12 +81,13 @@ public class SolicitudStockController {
     @GetMapping("/editar/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
 		
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_FORM); 
-        mAV.addObject("solicitudStock", solicitudStockService.ListarId(id));
+        ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_FORM_LOCAL); 
+        SolicitudStockModel solicitudStockModel = solicitudStockService.ListarId(id);
+        mAV.addObject("solicitudStock", solicitudStockModel);
         mAV.addObject("productos", productoService.getAll());
-        mAV.addObject("empleados", empleadoService.getAll());
         mAV.addObject("clientes", clienteService.getAll());
         mAV.addObject("locales", localService.getAll());
+        mAV.addObject("local", localService.findById(solicitudStockModel.getVendedor().getLocal().getId()));
 		return mAV;
 	}
     

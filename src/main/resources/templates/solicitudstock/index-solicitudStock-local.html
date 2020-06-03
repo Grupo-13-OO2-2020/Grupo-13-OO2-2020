@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>SolicitudStock</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+</head>
+<body style="background-color:#D5D5D5;">
+	<div th:replace="nav :: nav"></div>
+
+	<div class="container mt-4">
+	<!-- <a th:href="@{/solicitudesStock/new}" class="btn btn-primary">Agregar SolicitudStock</a> -->
+    <table class="table" >
+        <thead>
+            <tr style="text-align:center;">
+                <th>ID</th>
+                <th>FECHA</th>
+                <th>PRODUCTO</th>
+                <th>CANTIDAD</th>
+                <th>VENDEDOR</th>
+                <th>CLIENTE</th>
+                <th>FACTURADO</th>
+                <th>COLABORADOR</th>
+                <th>ACEPTADO</th>
+                <th>LOCAL</th>
+                <th></th>
+                <th></th>
+            </tr>
+        <tbody>
+            <tr th:each="solicitudStock:${solicitudes}" style="text-align:center;">
+
+                <td th:text="${solicitudStock.id}"></td>
+                <td th:text="${solicitudStock.fecha}"></td>
+                <td th:text="${solicitudStock.producto.descripcion}"></td>
+                <td th:text="${solicitudStock.cantidad}"></td>
+                <td th:text="${solicitudStock.vendedor.nombre}"></td>
+                <td th:text="${solicitudStock.cliente.nombre}"></td>
+                <td th:text="${solicitudStock.facturado}"></td>
+                <td th:if="${solicitudStock.aceptado}" th:text="${solicitudStock.colaborador.nombre}"></td>
+                <td th:unless="${solicitudStock.aceptado}" ></td>
+                <td th:if="${solicitudStock.aceptado}" th:text="${solicitudStock.aceptado}"></td>
+                <td th:unless="${solicitudStock.aceptado}" ></td>
+                <td th:text="${solicitudStock.localDestinatario.direccion}"></td>
+                <td>
+                    <a th:href="@{/solicitudesStock/editar/{id}(id=*{solicitudStock.id})}" class="btn btn-warning">Acetar</a>
+                </td>
+            </tr>
+
+        </tbody>
+
+
+
+    </table>
+
+
+
+
+	</div>
+
+
+
+</body>
+</html>

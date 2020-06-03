@@ -13,8 +13,9 @@
 
 <div class="container mt-4">
 	<a th:href="@{/lotes/new/{id}(id=${local.id})}" class="btn btn-primary">Agregar lote</a>
-	<a th:href="@{/solicitudesStock/new/{id}(id=${local.id})}" class="btn btn-primary">Solicitud Stock</a>
-	<a th:href="@{/remitos/new/{id}(id=${local.id})}" class="btn btn-primary">Remito</a>
+	<a th:href="@{/solicitudesStock/new/{id}(id=${local.id})}" class="btn btn-primary">Agregar Solicitud Stock</a>
+	<a th:href="@{/solicitudesStock/{id}(id=${local.id})}" class="btn btn-primary">Ver Solicitud Stock</a>
+	<a th:href="@{/remitos/new/{id}(id=${local.id})}" class="btn btn-primary">Agregar Remito</a>
 	
 		<table class="table" >
 			<thead>
@@ -48,7 +49,7 @@
 
 
 	</div>
-	<table class="table" >
+	<!-- <table class="table" >
 			<thead>
 				<tr style="text-align:center;">
 					<th>ID</th>
@@ -79,14 +80,16 @@
 					<td th:if="${solicitudStock.aceptado}" th:text="${solicitudStock.aceptado}"></td>
 					<td th:unless="${solicitudStock.aceptado}" ></td>
 					<td th:text="${solicitudStock.localDestinatario.direccion}"></td>
-
+					<td>
+						<a th:href="@{/solicitudesStock/editar/{id}(id=*{solicitudStock.id})}" class="btn btn-warning">Editar</a>
+					</td>
 				</tr>
 
 			</tbody>
 
 
 
-		</table>
+		</table> -->
 
 </body>
 </html>

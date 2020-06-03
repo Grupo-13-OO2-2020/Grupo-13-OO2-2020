@@ -28,6 +28,10 @@ public class SolicitudStockService implements ISolicitudStockService {
 	@Qualifier("empleadoService")
 	private EmpleadoService empleadoService; 
 
+	@Autowired
+	@Qualifier("localService")
+	private LocalService localService; 
+
 	@Override
 	public List<SolicitudStock> getAll() {
 		
@@ -37,6 +41,7 @@ public class SolicitudStockService implements ISolicitudStockService {
 	@Override
 	public SolicitudStockModel insertOrUpdate(SolicitudStockModel solicitudStockModel) {
 		solicitudStockModel.setVendedor(empleadoService.ListarId(solicitudStockModel.getVendedor().getId()));
+		solicitudStockModel.setLocalDestinatario(localService.findById(solicitudStockModel.getLocalDestinatario().getId()));
 		solicitudStockModel.setColaborador(empleadoService.ListarId(solicitudStockModel.getVendedor().getId()));
 
 		SolicitudStock solicitudStock=solicitudStockRepository.save(solicitudStockConverter.modelToEntity(solicitudStockModel));

@@ -9,7 +9,6 @@
 	<div th:replace="nav :: nav"></div>
 
 	<div class="container mt-4">
-	<a th:href="@{/solicitudesStock/new}" class="btn btn-primary">Agregar SolicitudStock</a>
 		<table class="table" >
 			<thead>
 				<tr style="text-align:center;">
@@ -38,12 +37,8 @@
 					<td th:text="${solicitudStock.facturado}"></td>
 					<td th:if="${solicitudStock.aceptado}" th:text="${solicitudStock.colaborador.nombre}"></td>
 					<td th:unless="${solicitudStock.aceptado}" ></td>
-					<td th:if="${solicitudStock.aceptado}" th:text="${solicitudStock.aceptado}"></td>
-					<td th:unless="${solicitudStock.aceptado}" ></td>
+					<td th:text="${solicitudStock.aceptado}"></td>
 					<td th:text="${solicitudStock.localDestinatario.direccion}"></td>
-					<td>
-						<a th:href="@{solicitudesStock/editar/} + ${solicitudStock.id}" class="btn btn-warning">Editar</a>
-					</td>
 					<td>
 						<a th:href ="@{solicitudesStock/eliminar/} + ${solicitudStock.id}" class="btn btn-danger">Eliminar</a>
 					</td>

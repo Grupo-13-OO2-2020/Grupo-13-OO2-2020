@@ -14,6 +14,8 @@ public class ViewRouteHelper {
     public final static String LOTE_FORM = "lote/form";
     public final static String LOTE_FORM_MAIN = "lote/form-main";
     public final static String PEDIDO_FORM = "pedido/form-pedido";
+    
+    public final static String SOLICITUDSTOCK_FORM_LOCAL = "solicitudstock/form-solicitudStock-local";
     public final static String SOLICITUDSTOCK_FORM = "solicitudstock/form-solicitudStock";
     public final static String REMITO_FORM = "remito/form-remito";
 
@@ -27,5 +29,6 @@ public class ViewRouteHelper {
     public final static String LOCAL_INDEX = "local/index-local";
     public final static String PEDIDO_INDEX = "pedido/index-pedido";
     public final static String SOLICITUDSTOCK_INDEX = "solicitudstock/index-solicitudStock";
+    public final static String SOLICITUDSTOCK_INDEX_LOCAL = "solicitudstock/index-solicitudStock-local";
     public final static String REMITO_INDEX = "remito/index-remito";
 }
