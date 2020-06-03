@@ -42,7 +42,7 @@
                 <td th:unless="${solicitudStock.aceptado}" ></td>
                 <td th:text="${solicitudStock.localDestinatario.direccion}"></td>
                 <td>
-                    <a th:href="@{/solicitudesStock/editar/{id}(id=*{solicitudStock.id})}" class="btn btn-warning">Acetar</a>
+                    <a th:href="@{/solicitudesStock/editar/{id}(id=*{solicitudStock.id})}" class="btn btn-warning">Aceptar</a>
                 </td>
             </tr>
 

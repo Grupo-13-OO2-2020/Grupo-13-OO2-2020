@@ -32,8 +32,14 @@
 
 					<td th:text="${lote.numeroDeLote}"></td>
 					<td th:text="${lote.cantidadRecibida}"></td>
+					<td th:text="${lote.fechaIngreso}"></td>
+					<td th:text="${lote.cantidadExistente}"></td>
+					<td th:text="${lote.producto.codigoProducto}"></td>
+					<td th:text="${lote.producto.talle}"></td>
 					<td>
 					<a th:href="@{lotes/editar/{id}(id=${lote.id})} " class="btn btn-warning">Editar</a>
+					</td>
+					<td>
 					<a th:href="@{lotes/eliminar/{id}(id=${lote.id})} " class="btn btn-danger" onclick="alert('El local fue eliminado con exito!')" >Eliminar</a>
 					</td>
 
@@ -49,47 +55,6 @@
 
 
 	</div>
-	<!-- <table class="table" >
-			<thead>
-				<tr style="text-align:center;">
-					<th>ID</th>
-					<th>FECHA</th>
-					<th>PRODUCTO</th>
-					<th>CANTIDAD</th>
-					<th>VENDEDOR</th>
-					<th>CLIENTE</th>
-					<th>FACTURADO</th>
-					<th>COLABORADOR</th>
-					<th>ACEPTADO</th>
-					<th>LOCAL</th>
-					<th></th>
-					<th></th>
-				</tr>
-			<tbody>
-				<tr th:each="solicitudStock:${solicitudes}" style="text-align:center;">
-
-					<td th:text="${solicitudStock.id}"></td>
-					<td th:text="${solicitudStock.fecha}"></td>
-					<td th:text="${solicitudStock.producto.descripcion}"></td>
-					<td th:text="${solicitudStock.cantidad}"></td>
-					<td th:text="${solicitudStock.vendedor.nombre}"></td>
-					<td th:text="${solicitudStock.cliente.nombre}"></td>
-					<td th:text="${solicitudStock.facturado}"></td>
-					<td th:if="${solicitudStock.aceptado}" th:text="${solicitudStock.colaborador.nombre}"></td>
-					<td th:unless="${solicitudStock.aceptado}" ></td>
-					<td th:if="${solicitudStock.aceptado}" th:text="${solicitudStock.aceptado}"></td>
-					<td th:unless="${solicitudStock.aceptado}" ></td>
-					<td th:text="${solicitudStock.localDestinatario.direccion}"></td>
-					<td>
-						<a th:href="@{/solicitudesStock/editar/{id}(id=*{solicitudStock.id})}" class="btn btn-warning">Editar</a>
-					</td>
-				</tr>
-
-			</tbody>
-
-
-
-		</table> -->
 
 </body>
 </html>
