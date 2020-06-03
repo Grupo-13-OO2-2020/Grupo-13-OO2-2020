@@ -1,7 +1,10 @@
 package Grupo13OO2.services.implementations;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,22 +25,21 @@ import Grupo13OO2.repositories.ILoteRepository;
 import Grupo13OO2.repositories.IProductoRepository;
 import Grupo13OO2.services.ILoteService;
 
-
 @Service("loteService")
 public class LoteService implements ILoteService {
 
 	@Autowired
 	@Qualifier("loteRepository")
 	private ILoteRepository loteRepository;
-	
+
 	@Autowired
 	@Qualifier("loteConverter")
 	private LoteConverter loteConverter;
-	
+
 	@Autowired
 	@Qualifier("productoService")
 	private ProductoService productoService;
-	
+
 	@Autowired
 	@Qualifier("productoRepository")
 	private IProductoRepository productoRepository;
@@ -45,20 +47,18 @@ public class LoteService implements ILoteService {
 	@Autowired
 	@Qualifier("productoConverter")
 	private ProductoConverter productoConverter;
-	
+
 	@Autowired
 	@Qualifier("localService")
-	private LocalService localService; 
+	private LocalService localService;
 
 	@Autowired
 	@Qualifier("localRepository")
 	private ILocalRepository localRepository;
-	
+
 	@Autowired
 	@Qualifier("localConverter")
 	private LocalConverter localConverter;
-
-	
 
 	@Override
 	public List<Lote> getAll() {
@@ -71,7 +71,7 @@ public class LoteService implements ILoteService {
 		Local local = localRepository.findById(loteModel.getLocal().getId());
 		LocalModel localModel = localConverter.entityToModel(local);
 		loteModel.setLocal(localModel);
-		
+
 		Lote lote = loteRepository.save(loteConverter.modelToEntity(loteModel));
 
 		lote.getLocal().getLotes().add(lote);
@@ -91,49 +91,5 @@ public class LoteService implements ILoteService {
 		loteRepository.deleteById(id);
 		return "el lote ha sido eliminado";
 	}
-
-	@Override
-	public boolean validarStockInterno(int codigoProducto, int cantidad) {
-		boolean valido=false;
-		int cantid=0;
-		for(Lote lote : getAll()) {
-			if(lote.getProducto().getCodigoProducto()==codigoProducto) {
-				cantid=cantid+lote.getCantidadExistente();
-			}
-			if(cantidad>cantid) {
-				valido=false;
-			}else
-			{
-				valido=true;
-			}
-		}return valido;
-	}
-
-	@Override
-	public boolean consumirLote(RemitoModel remito) {
-    	boolean consumo=false;
-		int aux=remito.getCantidad();
-		while(aux>0) {
-			
-			if(remito.getVendedor().getLocal().getLotes().iterator().next().getProducto().getCodigoProducto()
-					==remito.getProducto().getCodigoProducto()) {
-				
-				if(remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente()-aux>=0) {
-					remito.getVendedor().getLocal().getLotes().iterator().next().setCantidadExistente(remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente()-aux);
-					aux=0;
-					this.insertOrUpdate(remito.getVendedor().getLocal().getLotes().iterator().next());
-					
-				}else {
-					aux=aux-remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente();
-					remito.getVendedor().getLocal().getLotes().iterator().next().setCantidadExistente(0);
-					this.insertOrUpdate(remito.getVendedor().getLocal().getLotes().iterator().next());
-				}
-				
-				
-			}
-		}
-		consumo=true;
-		return consumo;
-    }
 
 }
