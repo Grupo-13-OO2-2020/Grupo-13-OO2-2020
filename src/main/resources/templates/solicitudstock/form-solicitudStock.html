@@ -28,19 +28,19 @@
 
 					<div>
 						<label>Producto</label> 
-						<select class="form-control"placeholder="Producto" th:field="*{producto.id}">
+						<select id="producto-select" class="form-control"placeholder="Producto" th:field="*{producto.id}">
 						<option th:each="producto : ${productos}" th:value="${producto.id}"
 							th:text="${producto.descripcion}+${producto.talle}"></option>
 						</select>		
 					</div>
 
 					<div class="form-group">
-						<label>Cantidad</label> <input th:field="*{cantidad}" type="number" class="form-control" />
+						<label>Cantidad</label> <input id="cantidad-select" th:field="*{cantidad}" type="number" class="form-control" />
 					</div>
 
 					<div>
 						<label>Vendedor</label> 
-						<select class="form-control"placeholder="Vendedor" th:field="*{vendedor.id}">
+						<select id="vendedor-select"class="form-control"placeholder="Vendedor" th:field="*{vendedor.id}">
 						<option th:each="vendedor : ${local.empleados}" th:value="${vendedor.id}"
 							th:text="${vendedor.nombre}"></option>
 						</select>		
@@ -61,9 +61,10 @@
 					</div>
 					<div>
 						<label>Local Destinatario</label> 
-						<select class="form-control"placeholder="Local" th:field="*{localDestinatario.id}">
-						<option th:each="localDestinatario : ${locales}" th:value="${localDestinatario.id}"
-							th:text="${localDestinatario.direccion}"></option>
+
+						<a id="bot" class="btn btn-primary"  role="button">Buscar Local</a>
+
+						<select id="select1" class="form-control"placeholder="Local" th:field="*{localDestinatario.id}">
 						</select>		
 					</div>
 
@@ -77,8 +78,38 @@
 
 
 	</div>
+	<script src="/vendor/jquery/jquery.min.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript">
+		$('#bot').click(function(){
+			var producto = $('#producto-select option:selected').val();
+				console.log(producto);
+				var vendedor = $('#vendedor-select option:selected').val();
+				console.log(vendedor);
+				var cantidad = $('#cantidad-select').val();
+				console.log(cantidad);
+			$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+				method: "GET",
+				url: "/solicitudesStock/localesDestinatarios/",
+				data: { idProducto: producto, idVendedor : vendedor , cantidad : cantidad}
+			})
+			.done(function (result) {
+				//idProducto: producto, idVendedor : vendedor , 
+				var content = result;
+				$.each(content, function(i, item) {
+					$('#select1').append($('<option>', { 
+									value: item.id,
+									text : item.direccion 
+								}));
+				});
+				console.log(content);
 
-
+			})
+			.fail(function() {
+				alert("error");
+			});
+		});
+	</script>
 
 </body>
 </html>

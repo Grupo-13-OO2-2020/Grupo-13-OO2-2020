@@ -18,6 +18,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 
@@ -37,6 +39,7 @@ public class Lote {
 	@OneToOne
     @JoinColumn(name="producto_id")
 	private Producto producto;
+	@JsonManagedReference
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Local local;
 	

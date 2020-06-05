@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="local")
 public class Local {
@@ -29,9 +31,10 @@ public class Local {
 	private float longitud;
 	private int numeroTelefono;
 	
+	@JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="local")
 	private Set<Empleado> empleados;
-	
+	@JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="local")
 	private Set<Lote> lotes;
 	

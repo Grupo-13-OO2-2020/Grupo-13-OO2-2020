@@ -86,7 +86,11 @@ public class LocalModel {
 		this.lotes = lotes;
 	}
 	
-	public double distanciaCoord(double lat1, double lng1, double lat2, double lng2) {
+	public double getDistanciaCoord(LocalModel local,LocalModel localDestino) {
+		double lat1 = local.getLatitud();
+		double lng1 = local.getLongitud();
+		double lat2 = localDestino.getLatitud();
+		double lng2 = localDestino.getLongitud();
 		double radioTierra = 6371; //en kilómetros
 		double dLat = Math.toRadians(lat2 - lat1);
 		double dLng = Math.toRadians(lng2 - lng1);
@@ -96,7 +100,7 @@ public class LocalModel {
 		+ Math.pow(sindLng, 2) * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
 		double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));
 		return radioTierra * va2;
-		}
+	}
 	
 
 }

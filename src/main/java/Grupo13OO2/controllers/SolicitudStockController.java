@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import Grupo13OO2.Entities.Local;
+import Grupo13OO2.Entities.Producto;
+import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.helpers.ViewRouteHelper;
@@ -95,5 +98,11 @@ public class SolicitudStockController {
 	public RedirectView delete(Model model, @PathVariable int id) {
 		solicitudStockService.delete(id);
 		return new RedirectView("/solicitudesStock");	
+    }
+    
+    @GetMapping("/localesDestinatarios")
+	public  @ResponseBody List<LocalModel> localesDestinatarios(int idProducto, int idVendedor, int cantidad) {
+        List<LocalModel> locales =  solicitudStockService.getLocalesCercanos(idProducto, idVendedor, cantidad);
+		return locales;	
 	}
 }

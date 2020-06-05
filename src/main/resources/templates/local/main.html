@@ -17,39 +17,40 @@
 	<a th:href="@{/solicitudesStock/{id}(id=${local.id})}" class="btn btn-primary">Ver Solicitud Stock</a>
 	<a th:href="@{/remitos/new/{id}(id=${local.id})}" class="btn btn-primary">Agregar Remito</a>
 	
-		<table class="table" >
-			<thead>
-				<tr>
-					<th>NUMERO DE LOTE</th>
-					<th>CANTIDAD INICIAL</th>
-					<th>FECHA DE INGRESO</th>
-					<th>CANTIDAD EXISTENTE</th>
-					<th>CODIGO_PRODUCTO</th>
-					<th>TALLE</th>
-				</tr>
-			<tbody>
-				<tr th:each="lote:${local.lotes}">
+	<table class="table" >
+		<thead>
+			<tr style="text-align:center;">
+				<th>NUMERO DE LOTE</th>
+				<th>CANTIDAD INICIAL</th>
+				<th>FECHA DE INGRESO</th>
+				<th>CANTIDAD EXISTENTE</th>
+				<th>CODIGO PRODUCTO</th>
+				<th>TALLE</th>
+			</tr>
+		<tbody>
+			<tr th:each="lote:${local.lotes}" style="text-align:center;">
 
-					<td th:text="${lote.numeroDeLote}"></td>
-					<td th:text="${lote.cantidadRecibida}"></td>
-					<td th:text="${lote.fechaIngreso}"></td>
-					<td th:text="${lote.cantidadExistente}"></td>
-					<td th:text="${lote.producto.codigoProducto}"></td>
-					<td th:text="${lote.producto.talle}"></td>
-					<td>
-					<a th:href="@{lotes/editar/{id}(id=${lote.id})} " class="btn btn-warning">Editar</a>
-					</td>
-					<td>
-					<a th:href="@{lotes/eliminar/{id}(id=${lote.id})} " class="btn btn-danger" onclick="alert('El local fue eliminado con exito!')" >Eliminar</a>
-					</td>
+				<td th:text="${lote.numeroDeLote}"></td>
+				<td th:text="${lote.cantidadRecibida}"></td>
+				<td th:text="${lote.fechaIngreso}"></td>
+				<td th:text="${lote.cantidadExistente}"></td>
+				<td th:text="${lote.producto.codigoProducto}"></td>
+				<td th:text="${lote.producto.talle}"></td>
+				<td>
+				<a th:href="@{lotes/editar/{id}(id=${lote.id})} " class="btn btn-warning">Editar</a>
+				</td>
+				<td>
+				<a th:href="@{lotes/eliminar/{id}(id=${lote.id})} " class="btn btn-danger" onclick="alert('El local fue eliminado con exito!')" >Eliminar</a>
+				</td>
+				
+				
+			</tr>
 
-				</tr>
-
-			</tbody>
+		</tbody>
 
 
 
-		</table>
+	</table>
 
 
 

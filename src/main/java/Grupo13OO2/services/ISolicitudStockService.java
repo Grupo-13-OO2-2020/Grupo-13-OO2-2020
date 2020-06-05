@@ -16,5 +16,8 @@ public interface ISolicitudStockService {
 	
 	public String delete(int id);
 
+	public List<LocalModel> getLocalesCercanos(int idProducto, int idVendedor, int cantidad);
+
+
 	// public void aceptarSolcitudStock(SolicitudStockModel solicitudStockModel,EmpleadoModel empleado,LocalModel local);
 }

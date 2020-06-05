@@ -2,11 +2,14 @@ package Grupo13OO2.Models;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class LoteModel {
 	
 	private int id;
 	private int numeroDeLote;
 	private int cantidadRecibida;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaIngreso;
 	private ProductoModel producto;
 	private int cantidadExistente;
