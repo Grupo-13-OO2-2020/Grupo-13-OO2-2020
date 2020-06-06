@@ -59,11 +59,12 @@ insert into remito(id,forma_de_pago) values (3,"Efectivo");
 insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (18,0,'2020-04-11',5,2,4);
 insert into remito(id,forma_de_pago) values (4,"Credito");
 
--- insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (10,0,'2020-05-15',6,3,1);
--- insert into solicitud_stock(aceptado,id,colaborador_id,local_id) values (0,5,null,2);
--- insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (5,0,'2020-05-15',6,4,2);
--- insert into solicitud_stock(aceptado,id,local_id) values (0,6,1);
--- insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (15,0,'2020-05-25',6,4,3);
--- insert into solicitud_stock(aceptado,id,local_id) values (0,7,4);
--- insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (9,0,'2020-05-07',8,1,4);
--- insert into solicitud_stock(aceptado,id,local_id) values (0,8,3);
+ insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (10,0,'2020-05-15',6,3,1);
+ insert into solicitud_stock(aceptado,id,colaborador_id,local_id) values (0,5,null,2);
+ insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (5,0,'2020-05-15',6,4,2);
+ insert into solicitud_stock(aceptado,id,local_id) values (0,6,1);
+
+ insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (15,0,'2020-05-25',6,4,3);
+ insert into solicitud_stock(aceptado,id,local_id) values (0,7,4);
+ insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (9,0,'2020-05-07',8,1,4);
+ insert into solicitud_stock(aceptado,id,local_id) values (0,8,3);
