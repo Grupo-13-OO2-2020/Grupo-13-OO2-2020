@@ -22,11 +22,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 @PrimaryKeyJoinColumn(referencedColumnName = "id")
 @Table(name="solicitudStock")
 public class SolicitudStock extends Pedido{
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "colaborador_id", referencedColumnName = "id")
 	private Empleado colaborador;
 	private boolean aceptado;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "local_id", referencedColumnName = "id")
 	private Local localDestinatario;
 	
@@ -59,12 +59,12 @@ public class SolicitudStock extends Pedido{
 		this.aceptado = aceptado;
 	}
 
-	public Local getLocalDetinatario() {
+	public Local getLocalDestinatario() {
 		return localDestinatario;
 	}
 
-	public void setLocalDetinatario(Local localDetinatario) {
-		this.localDestinatario = localDetinatario;
+	public void setLocalDestinatario(Local localDestinatario) {
+		this.localDestinatario = localDestinatario;
 	}
 	
 	

@@ -27,15 +27,15 @@ public class Pedido {
 	private int id;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "producto_id", referencedColumnName = "id")
+	@OneToOne
+	@JoinColumn(name = "producto_id")
 	protected Producto producto;
 	protected int cantidad;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "vendedor_id", referencedColumnName = "id")
+	@OneToOne
+	@JoinColumn(name = "vendedor_id")
 	protected Empleado vendedor;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cliente_id", referencedColumnName = "id")
+	@OneToOne
+	@JoinColumn(name = "cliente_id")
 	protected Cliente cliente;
 	protected boolean facturado;
 	

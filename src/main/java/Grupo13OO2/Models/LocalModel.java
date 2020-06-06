@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
-import Grupo13OO2.Entities.Empleado;
+
 
 public class LocalModel {
 	
@@ -26,24 +26,23 @@ public class LocalModel {
 	private float longitud;
 	@NotNull(message="es obligatorio indicar telefono")
 	private int numeroTelefono;
-	@NotNull(message="Empleado es obligatorio")
-	private Empleado empleado;
+	
+	
 	@OneToMany
-    private Set<Empleado> empleados;
+    private Set<EmpleadoModel> empleados;
 	@OneToMany
 	private Set<LoteModel> lotes;
 	 
 	public LocalModel() {}
 
-	public LocalModel(int id, String direccion, float latitud, float longitud, int numeroTelefono, Empleado empleado
-			, Set<Empleado> empleados, Set<LoteModel> lotes) {
+	public LocalModel(int id, String direccion, float latitud, float longitud, int numeroTelefono
+			, Set<EmpleadoModel> empleados, Set<LoteModel> lotes) {
 		super();
 		setId(id);
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.numeroTelefono = numeroTelefono;
-		this.empleado = empleado;
 		this.empleados = empleados;
 		this.lotes = lotes;
 	}
@@ -88,19 +87,11 @@ public class LocalModel {
 		this.numeroTelefono = numeroTelefono;
 	}
 
-	public Empleado getEmpleado() {
-		return empleado;
-	}
-
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
-	}
-
-	public Set<Empleado> getEmpleados() {
+	public Set<EmpleadoModel> getEmpleados() {
 		return empleados;
 	}
 
-	public void setEmpleados(Set<Empleado> empleados) {
+	public void setEmpleados(Set<EmpleadoModel> empleados) {
 		this.empleados = empleados;
 	}
 

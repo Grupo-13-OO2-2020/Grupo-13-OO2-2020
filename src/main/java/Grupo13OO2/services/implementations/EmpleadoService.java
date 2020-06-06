@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import Grupo13OO2.Entities.Empleado;
+import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Models.EmpleadoModel;
+import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.converters.EmpleadoConverter;
+import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.repositories.IEmpleadoRepository;
+import Grupo13OO2.repositories.ILocalRepository;
 import Grupo13OO2.services.IEmpleadoService;
 
 
@@ -23,6 +27,18 @@ public class EmpleadoService implements IEmpleadoService {
     @Qualifier("empleadoConverter")
     private EmpleadoConverter empleadoConverter;
 
+    @Autowired
+	@Qualifier("localService")
+	private LocalService localService; 
+
+	@Autowired
+	@Qualifier("localRepository")
+	private ILocalRepository localRepository;
+	
+	@Autowired
+	@Qualifier("localConverter")
+    private LocalConverter localConverter;
+    
     @Override
     public List<Empleado> getAll(){
         return empleadoRepository.findAll();
@@ -30,7 +46,15 @@ public class EmpleadoService implements IEmpleadoService {
 
     @Override
     public EmpleadoModel insertOrUpdate(EmpleadoModel empleadoModel){
+        Local local = localRepository.findById(empleadoModel.getLocal().getId());
+		LocalModel localModel = localConverter.entityToModel(local);
+        empleadoModel.setLocal(localModel);
+
         Empleado empleado = empleadoRepository.save(empleadoConverter.modelToEntity(empleadoModel));
+
+        empleado.getLocal().getEmpleados().add(empleado);
+        localService.insertOrUpdate(localConverter.entityToModel(empleado.getLocal()));
+
         return empleadoConverter.entityToModel(empleado);
     }
     
@@ -42,10 +66,7 @@ public class EmpleadoService implements IEmpleadoService {
 
     @Override
 	public EmpleadoModel ListarId(int id) {
-        
-        Optional<Empleado> empleado = empleadoRepository.findById(id);
-        
 
-		return empleadoConverter.entityToModel(empleado.get());
+		return empleadoConverter.entityToModel( empleadoRepository.findById(id));
 	}
 }

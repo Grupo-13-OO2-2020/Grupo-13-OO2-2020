@@ -50,12 +50,27 @@
 						<label>Sueldo</label> <input th:field="*{sueldo}" type="text" class="form-control" placeholder="Sueldo"/>
 						<small class="form-text text-danger" th:if="${#fields.hasErrors('sueldo')}" th:errors="*{sueldo}"></small>
 					</div>
+
+					<div class="form-group">
+						<div class="custom-control custom-checkbox">
+							<input th:field="*{gerente}" type="checkbox" class="custom-control-input" id="defaultUnchecked">
+							<label class="custom-control-label" for="defaultUnchecked">Gerente</label>
+						</div>
+					</div>
 					<div>
+
 						<label>Local</label> <select class="form-control"
 						placeholder="Local" th:field="*{local}">
 						<option th:each="local : ${locales}" th:value="${local.id}"
 							th:text="${local.direccion}"></option></select>
 							<small class="form-text text-danger" th:if="${#fields.hasErrors('local')}" th:errors="*{local}"></small>
+
+						<label>Local</label> 
+						<select class="form-control"placeholder="Local" th:field="*{local.id}">
+						<option th:each="locals : ${locales}" th:value="${locals.id}"
+								th:text="${locals.direccion}"></option>
+					</select>		
+
 					</div>
 					
 					<div class="card-footer">

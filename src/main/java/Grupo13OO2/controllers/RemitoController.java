@@ -1,6 +1,6 @@
 package Grupo13OO2.controllers;
 
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import Grupo13OO2.Entities.Lote;
+
 import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IClienteService;
@@ -21,85 +21,86 @@ import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.IProductoService;
 import Grupo13OO2.services.IRemitoService;
+
+
 import org.springframework.web.bind.annotation.PostMapping;
 import Grupo13OO2.services.ILoteService;
+
 @Controller
 @RequestMapping("remitos")
 public class RemitoController {
-  	@Autowired
+	@Autowired
 	@Qualifier("localService")
 	private ILocalService localService;
 
-	
 	@Autowired
-    @Qualifier("remitoService")
-    private IRemitoService remitoService;
+	@Qualifier("remitoService")
+	private IRemitoService remitoService;
 
-    @Autowired
-    @Qualifier("productoService")
-    private IProductoService productoService;
+	@Autowired
+	@Qualifier("productoService")
+	private IProductoService productoService;
 
-    @Autowired
-    @Qualifier("empleadoService")
-    private IEmpleadoService empleadoService;
+	@Autowired
+	@Qualifier("empleadoService")
+	private IEmpleadoService empleadoService;
 
-    @Autowired
-    @Qualifier("clienteService")
-    private IClienteService clienteService;
-    
-    @Autowired
-    @Qualifier("loteService")
-    private ILoteService loteService;
+	@Autowired
+	@Qualifier("clienteService")
+	private IClienteService clienteService;
 
-    @GetMapping("")
-    public ModelAndView index(){
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_INDEX); 
-        mAV.addObject("remitos", remitoService.getAll());
-        return mAV;
-    }
+	@Autowired
+	@Qualifier("loteService")
+	private ILoteService loteService;
 
-    @GetMapping("/new/{id}")
-    public ModelAndView create(@PathVariable("id") int id) {
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_FORM);
+	@GetMapping("")
+	public ModelAndView index() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_INDEX);
+		mAV.addObject("remitos", remitoService.getAll());
+		return mAV;
+	}
+
+	@GetMapping("/new/{id}")
+	public ModelAndView create(@PathVariable("id") int id) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_FORM);
 		mAV.addObject("local", localService.findById(id));
-        mAV.addObject("remito", new RemitoModel());
-        mAV.addObject("productos", productoService.getAll());
-//      mAV.addObject("empleados", empleadoService.getAll());
-        mAV.addObject("clientes", clienteService.getAll());
-        return mAV;
-    }
+		mAV.addObject("remito", new RemitoModel());
+		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("empleados", empleadoService.getAll());
+		mAV.addObject("clientes", clienteService.getAll());
+		return mAV;
+	}
 
-    @PostMapping("/save")
-    public RedirectView create(@ModelAttribute("remito") RemitoModel remitoModel) {
-<<<<<<< HEAD
-    	 if(loteService.validarStockInterno(remitoModel.getProducto().getCodigoProducto(),remitoModel.getCantidad())) {
-    		 remitoService.insertOrUpdate(remitoModel);
-    		 loteService.consumirLote(remitoModel);
-    		 return new RedirectView("/remitos");
-    		 
-    	 }else
-    		 
-    	 {
-    		 
-    		 return ViewRouteHelper.REMITO_FORM;
-    	 }
-        
-=======
-    	
-        remitoService.insertOrUpdate(remitoModel);
-        
-        return new RedirectView("/remitos");
->>>>>>> master
-    }
+	@PostMapping("/save")
+	public RedirectView create(@ModelAttribute("remito") RemitoModel remitoModel) {
+		remitoModel.setVendedor(empleadoService.ListarId(remitoModel.getVendedor().getId()));
+		remitoModel.setProducto(productoService.ListarId(remitoModel.getProducto().getId()));
 
-    @GetMapping("/editar/{id}")
-	public ModelAndView get(@PathVariable("id") int id)  {
-		
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_FORM); 
-        mAV.addObject("remito", remitoService.ListarId(id));
-        mAV.addObject("productos", productoService.getAll());
-        mAV.addObject("empleados", empleadoService.getAll());
-        mAV.addObject("clientes", clienteService.getAll());
+
+		if (localService.validarStockLocal(remitoModel.getProducto().getCodigoProducto(), remitoModel.getCantidad(),
+				remitoModel.getVendedor().getLocal().getId())) {
+			remitoService.insertOrUpdate(remitoModel);
+			localService.consumirLote(remitoModel);
+			return new RedirectView("/remitos");
+    		 
+		} else
+   		 
+		{
+    		 
+			return new RedirectView("/remitos");
+		}
+
+	}
+
+	@GetMapping("/editar/{id}")
+	public ModelAndView get(@PathVariable("id") int id) {
+
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_FORM);
+		mAV.addObject("remito", remitoService.ListarId(id));
+		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("empleados", empleadoService.getAll());
+		mAV.addObject("clientes", clienteService.getAll());
 		return mAV;
 	}
 
@@ -108,12 +109,5 @@ public class RemitoController {
 		remitoService.delete(id);
 		return new RedirectView("/remitos");
 	}
-	
-	    
-        
-           
-
-        
-    
 
 }

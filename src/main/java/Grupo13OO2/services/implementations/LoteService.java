@@ -1,7 +1,10 @@
 package Grupo13OO2.services.implementations;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +16,7 @@ import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.Models.ProductoModel;
+import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.converters.LoteConverter;
 import Grupo13OO2.converters.ProductoConverter;
@@ -21,22 +25,21 @@ import Grupo13OO2.repositories.ILoteRepository;
 import Grupo13OO2.repositories.IProductoRepository;
 import Grupo13OO2.services.ILoteService;
 
-
 @Service("loteService")
 public class LoteService implements ILoteService {
 
 	@Autowired
 	@Qualifier("loteRepository")
 	private ILoteRepository loteRepository;
-	
+
 	@Autowired
 	@Qualifier("loteConverter")
 	private LoteConverter loteConverter;
-	
+
 	@Autowired
 	@Qualifier("productoService")
 	private ProductoService productoService;
-	
+
 	@Autowired
 	@Qualifier("productoRepository")
 	private IProductoRepository productoRepository;
@@ -44,20 +47,18 @@ public class LoteService implements ILoteService {
 	@Autowired
 	@Qualifier("productoConverter")
 	private ProductoConverter productoConverter;
-	
+
 	@Autowired
 	@Qualifier("localService")
-	private LocalService localService; 
+	private LocalService localService;
 
 	@Autowired
 	@Qualifier("localRepository")
 	private ILocalRepository localRepository;
-	
+
 	@Autowired
 	@Qualifier("localConverter")
 	private LocalConverter localConverter;
-
-	
 
 	@Override
 	public List<Lote> getAll() {
@@ -70,7 +71,7 @@ public class LoteService implements ILoteService {
 		Local local = localRepository.findById(loteModel.getLocal().getId());
 		LocalModel localModel = localConverter.entityToModel(local);
 		loteModel.setLocal(localModel);
-		
+
 		Lote lote = loteRepository.save(loteConverter.modelToEntity(loteModel));
 
 		lote.getLocal().getLotes().add(lote);
@@ -91,8 +92,9 @@ public class LoteService implements ILoteService {
 		return "el lote ha sido eliminado";
 	}
 
+
 	@Override
-	public boolean validarStockInterno(int codigoProducto, int cantidad) {
+	public boolean validarStockInterno(int codigoProducto, int cantidad){
 		boolean valido=false;
 		int cantid=0;
 		for(Lote lote : getAll()) {
@@ -109,5 +111,6 @@ public class LoteService implements ILoteService {
 		}
 
 	
+
 
 }

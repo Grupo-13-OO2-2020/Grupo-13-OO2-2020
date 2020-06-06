@@ -32,7 +32,7 @@
 					<div class="form-group">
 						<label>Latitud</label> <input th:field="*{latitud}" type="text"
 							class="form-control"  placeholder="Latitud"/>
-							<small class="form-text text-danger" th:if="${#fields.hasErrors('latiitud')}" th:errors="*{latitud}"></small>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('latitud')}" th:errors="*{latitud}"></small>
 					</div>
 					<div class="form-group">
 						<label>Longitud</label> <input th:field="*{longitud}" type="text"
@@ -44,12 +44,20 @@
 							type="text" class="form-control" placeholder="Numero de telefono"/>
 							<small class="form-text text-danger" th:if="${#fields.hasErrors('numeroTelefono')}" th:errors="*{numeroTelefono}"></small>
 					</div>
+
 					<div>
+
 						<label>Gerente</label> <select class="form-control"
 						placeholder="Local" th:field="*{empleado}">
 						<option th:each="empleado : *{empleados}" th:value="${empleado.id}"
 							th:text="${empleado.nombre}"></option></select>
 							<small class="form-text text-danger" th:if="${#fields.hasErrors('empleado')}" th:errors="*{empleado}"></small>
+
+					<label>Gerente</label> 
+						<div th:each="empleado : *{empleados}" th:if="${empleado.gerente}" >
+							<div th:text="${empleado.nombre}"></div>
+						</div>
+
 					</div>
 					
 					<div class="card-footer">

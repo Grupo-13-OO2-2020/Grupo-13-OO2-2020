@@ -1,4 +1,7 @@
 package Grupo13OO2.converters;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 
@@ -7,20 +10,34 @@ import Grupo13OO2.Models.SolicitudStockModel;
 
 @Component("solicitudStockConverter")
 public class SolicitudStockConverter {
-	
+	@Autowired
+	@Qualifier("productoConverter")
+	private ProductoConverter productoConverter;
+
+	@Autowired
+	@Qualifier("empleadoConverter")
+	private EmpleadoConverter empleadoConverter;
+
+	@Autowired
+	@Qualifier("clienteConverter")
+	private ClienteConverter clienteConverter;
+	@Autowired
+	@Qualifier("localConverter")
+	private LocalConverter localConverter;
+
 	public SolicitudStockModel entityToModel(SolicitudStock solicitudStock) {
-		return new SolicitudStockModel(solicitudStock.getId(), solicitudStock.getFecha(),solicitudStock.getProducto(),
-				solicitudStock.getCantidad(),solicitudStock.getVendedor(),solicitudStock.getCliente(),
-				solicitudStock.isFacturado(),solicitudStock.getColaborador(),solicitudStock.isAceptado(),
-				solicitudStock.getLocalDetinatario());
+		return new SolicitudStockModel(solicitudStock.getId(), solicitudStock.getFecha(),productoConverter.entityToModel(solicitudStock.getProducto()),
+				solicitudStock.getCantidad(),empleadoConverter.entityToModel(solicitudStock.getVendedor()),clienteConverter.entityToModel(solicitudStock.getCliente()),
+				solicitudStock.isFacturado(),empleadoConverter.entityToModel(solicitudStock.getColaborador()),solicitudStock.isAceptado(),
+				localConverter.entityToModel(solicitudStock.getLocalDestinatario()));
 		
 	}
 	
 	public SolicitudStock modelToEntity(SolicitudStockModel solicitudStock) {
-		return new SolicitudStock(solicitudStock.getId(), solicitudStock.getFecha(),solicitudStock.getProducto(),
-				solicitudStock.getCantidad(),solicitudStock.getVendedor(),solicitudStock.getCliente(),
-				solicitudStock.isFacturado(),solicitudStock.getColaborador(),solicitudStock.isAceptado(),
-				solicitudStock.getLocalDetinatario());
+		return new SolicitudStock(solicitudStock.getId(), solicitudStock.getFecha(),productoConverter.modelToEntity(solicitudStock.getProducto()),
+				solicitudStock.getCantidad(),empleadoConverter.modelToEntity(solicitudStock.getVendedor()),clienteConverter.modelToEntity(solicitudStock.getCliente()),
+				solicitudStock.isFacturado(),empleadoConverter.modelToEntity(solicitudStock.getColaborador()),solicitudStock.isAceptado(),
+				localConverter.modelToEntity(solicitudStock.getLocalDestinatario()));
 	}
 	
 

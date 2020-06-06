@@ -13,8 +13,10 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 import Grupo13OO2.Entities.Local;
 @Valid
+
 public class EmpleadoModel extends PersonaModel{
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern = "HH:mm")
@@ -29,22 +31,32 @@ public class EmpleadoModel extends PersonaModel{
 	@Valid
     @DecimalMin("1") 
 	private double sueldo;
+	private boolean gerente;
 	@ManyToOne
-	private Local local;
-	@OneToOne(mappedBy = "empleado")
-	private Local localGerente;
+	private LocalModel local;
 
 	public EmpleadoModel() {}
 
 	public EmpleadoModel(int id, String nombre, int dni, String apellido, Date fechaNacimiento,
-			Date  horarioEntrada,Date  horarioSalida, String tipoEmpleado, double sueldo, Local local, Local localGerente) {
+			Date  horarioEntrada,Date  horarioSalida, String tipoEmpleado, double sueldo, boolean gerente) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
 		this.horarioSalida = horarioSalida;
 		this.tipoEmpleado = tipoEmpleado;
 		this.sueldo = sueldo;
+		this.gerente = gerente;
+	}
+
+	public EmpleadoModel(int id, String nombre, int dni, String apellido, Date fechaNacimiento,
+			Date  horarioEntrada,Date  horarioSalida, String tipoEmpleado, double sueldo, boolean gerente, LocalModel local) {
+		super(id, nombre, dni, apellido, fechaNacimiento);
+		this.horarioEntrada = horarioEntrada;
+		this.horarioSalida = horarioSalida;
+		this.tipoEmpleado = tipoEmpleado;
+		this.sueldo = sueldo;
+		this.gerente = gerente;
 		this.local = local;
-		this.localGerente = localGerente;
+		
 	}
 
 	public Date getHorarioEntrada() {
@@ -79,30 +91,20 @@ public class EmpleadoModel extends PersonaModel{
 		this.sueldo = sueldo;
 	}
 
-	public Local getlocalGerente() {
-		return localGerente;
+	public boolean isGerente() {
+		return gerente;
 	}
 
-	public void setlocalGerente(Local local) {
-		this.localGerente = local;
+	public void setGerente(boolean gerente) {
+		this.gerente = gerente;
 	}
-
-	public Local getLocal() {
+	public LocalModel getLocal() {
 		return local;
 	}
 
-	public void setLocal(Local local) {
+	public void setLocal(LocalModel local) {
 		this.local = local;
 	}
-
-	public Local getLocalGerente() {
-		return localGerente;
-	}
-
-	public void setLocalGerente(Local localGerente) {
-		this.localGerente = localGerente;
-	}
-
 	
 
 }

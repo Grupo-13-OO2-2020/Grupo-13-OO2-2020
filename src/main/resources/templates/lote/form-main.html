@@ -38,8 +38,12 @@
 						<select class="form-control"placeholder="Producto" th:field="*{producto.id}">
 						<option th:each="producto : ${productos}" th:value="${producto.id}"
 							th:text="${producto.descripcion}+${producto.talle}"></option>
+
 					</select>		
 					<small class="form-text text-danger" th:if="${#fields.hasErrors('producto.id')}" th:errors="*{producto.id}"></small>
+
+						</select>		
+
 					</div>
 					
 					<div style="display: none">

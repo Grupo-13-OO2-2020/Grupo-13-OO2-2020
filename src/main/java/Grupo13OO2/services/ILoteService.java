@@ -17,10 +17,12 @@ public interface ILoteService {
 	
 	public String delete(int id);
 	
+
 	
 	public boolean validarStockInterno(int codigoProducto, int cantidad);
 	
 	
+
 
 	
 }

@@ -85,15 +85,6 @@ public class LoteController {
 			loteService.delete(id);
 			return new RedirectView("/lotes");
 		}
-	    @PostMapping("/validar")
-	    public String guardar(@Valid Lote lote,@PathVariable("cantidad") int cantidad) {
-	        
-	        
-	        loteService.validarStockInterno(lote.getProducto().getCodigoProducto(), cantidad);
-        
-
-	        return "/lotes" ;
-	    }
 	
 	
 	

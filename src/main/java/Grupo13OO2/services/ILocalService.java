@@ -15,4 +15,13 @@ public interface ILocalService {
 	
 	public String delete(int id);
 
+	public List<SolicitudStockModel> getSolicitudesStock(LocalModel localModel);
+	
+	public boolean validarStockLocal(int codigoProducto, int cantidad, int idLocal);
+	
+	
+	
+	public boolean consumirLote(RemitoModel remito);
+
+
 }

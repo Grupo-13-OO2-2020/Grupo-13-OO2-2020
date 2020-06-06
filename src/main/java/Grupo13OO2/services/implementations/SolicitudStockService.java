@@ -22,7 +22,15 @@ public class SolicitudStockService implements ISolicitudStockService {
 
     @Autowired
     @Qualifier("solicitudStockConverter")
-    private SolicitudStockConverter solicitudStockConverter;
+	private SolicitudStockConverter solicitudStockConverter;
+	
+	@Autowired
+	@Qualifier("empleadoService")
+	private EmpleadoService empleadoService; 
+
+	@Autowired
+	@Qualifier("localService")
+	private LocalService localService; 
 
 	@Override
 	public List<SolicitudStock> getAll() {
@@ -32,14 +40,18 @@ public class SolicitudStockService implements ISolicitudStockService {
 
 	@Override
 	public SolicitudStockModel insertOrUpdate(SolicitudStockModel solicitudStockModel) {
+		solicitudStockModel.setVendedor(empleadoService.ListarId(solicitudStockModel.getVendedor().getId()));
+		solicitudStockModel.setLocalDestinatario(localService.findById(solicitudStockModel.getLocalDestinatario().getId()));
+		solicitudStockModel.setColaborador(empleadoService.ListarId(solicitudStockModel.getVendedor().getId()));
+
 		SolicitudStock solicitudStock=solicitudStockRepository.save(solicitudStockConverter.modelToEntity(solicitudStockModel));
+		
 		return solicitudStockConverter.entityToModel(solicitudStock);
 	}
 
 	@Override
 	public SolicitudStockModel ListarId(int id) {
-		Optional<SolicitudStock> solicitudStock=solicitudStockRepository.findById(id);
-		return solicitudStockConverter.entityToModel(solicitudStock.get());
+		return solicitudStockConverter.entityToModel(solicitudStockRepository.findById(id));
 	}
 
 	@Override
@@ -48,11 +60,11 @@ public class SolicitudStockService implements ISolicitudStockService {
 		return "solictud cancelada"+ id;
 	}
 
-	@Override
-	public void aceptarSolcitudStock(SolicitudStockModel solicitudStockModel,EmpleadoModel empleado,LocalModel local) {
-		solicitudStockModel.setColaborador(local.getEmpleado());
-		solicitudStockModel.setAceptado(true);
-	//	destinatario.consumoLote(solicitud.getProducto(), solicitud.getCantidad());
-	}
+	// @Override
+	// public void aceptarSolcitudStock(SolicitudStockModel solicitudStockModel,EmpleadoModel empleado,LocalModel local) {
+	// 	solicitudStockModel.setColaborador(local.getEmpleado());
+	// 	solicitudStockModel.setAceptado(true);
+	// //	destinatario.consumoLote(solicitud.getProducto(), solicitud.getCantidad());
+	// }
 
 }
