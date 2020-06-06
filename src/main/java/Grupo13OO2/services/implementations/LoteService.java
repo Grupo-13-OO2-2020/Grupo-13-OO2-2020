@@ -92,4 +92,25 @@ public class LoteService implements ILoteService {
 		return "el lote ha sido eliminado";
 	}
 
+
+	@Override
+	public boolean validarStockInterno(int codigoProducto, int cantidad){
+		boolean valido=false;
+		int cantid=0;
+		for(Lote lote : getAll()) {
+			if(lote.getProducto().getCodigoProducto()==codigoProducto) {
+				cantid=cantid+lote.getCantidadExistente();
+			}
+			if(cantidad>cantid) {
+				valido=false;
+			}else
+			{
+				valido=true;
+			}
+		}return valido;
+		}
+
+	
+
+
 }

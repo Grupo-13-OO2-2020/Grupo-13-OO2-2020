@@ -1,15 +1,22 @@
 package Grupo13OO2.Models;
 
 import java.util.Date;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Min;
 public class LoteModel {
 	
 	private int id;
+	@Min(value = 1, message = "numero lote no puede ser 0") 
 	private int numeroDeLote;
+	@Min(value = 1, message = "cantidad no puede ser 0")
 	private int cantidadRecibida;
+	@NotNull(message="es obligatorio indicar fecha")
 	private Date fechaIngreso;
+	@NotNull(message="es obligatorio indicar producto")
 	private ProductoModel producto;
+	@Min(value = 1, message = "cantidad no puede ser 0")
 	private int cantidadExistente;
+	@NotNull(message="es obligatorio indicar local")
 	private LocalModel local;
 	
 	

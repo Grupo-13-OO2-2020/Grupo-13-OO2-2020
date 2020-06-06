@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IEmpleadoService;
@@ -45,9 +46,13 @@ public class EmpleadoController {
     }
 
     @PostMapping("/save")
-    public RedirectView create(@ModelAttribute("empleado") EmpleadoModel empleadoModel) {
+    public String create(@Valid @ModelAttribute("empleado") EmpleadoModel empleadoModel,BindingResult result) {
+    	if (result.hasErrors()) {
+			return ViewRouteHelper.EMPLEADO_FORM;
+
+		}
     	empleadoService.insertOrUpdate(empleadoModel);
-        return new RedirectView("/empleados");
+        return "redirect:/empleados";
     }
     
     @GetMapping("/editar/{id}")

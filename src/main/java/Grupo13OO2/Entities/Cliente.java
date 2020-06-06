@@ -25,7 +25,7 @@ public class Cliente extends Persona {
 		this.email = email;
 		this.numero = numero;
 		this.cuil = cuil;
-		this.cuil = cuit;
+		this.cuit = cuit;
 	}
 
 	public String getEmail() {

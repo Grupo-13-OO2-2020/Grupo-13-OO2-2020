@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LocalesModels;
 import Grupo13OO2.Models.LoteModel;
@@ -60,10 +61,14 @@ public class LocalController {
 	    }
 
 	    @PostMapping("/save")
-	    public RedirectView create(@ModelAttribute("local") LocalModel localModel) {
+	    public String create(@Valid @ModelAttribute("local") LocalModel localModel,BindingResult result) {
+	    	if (result.hasErrors()) {
+				return ViewRouteHelper.LOCAL_FORM;
+
+			}
 	    	localService.insertOrUpdate(localModel);
 	    	
-	        return new RedirectView("/locales");
+	        return "/locales";
 	    }
 	    @GetMapping("/editar/{id}")
 		public ModelAndView get(@PathVariable("id") int id) {

@@ -1,15 +1,26 @@
 package Grupo13OO2.Models;
 
 import java.util.Date;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+@Valid
 public class PersonaModel {
+	
     private int id;
+	@NotEmpty(message="es obligatorio indicar nombre")
 	private String nombre;
+	@Min(value = 1, message = "el dni no puede ser 0")
 	private int dni;
+	@NotEmpty(message="es obligatorio indicar apellido")
 	private String apellido;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message="es obligatorio indicar fecha")
 	private Date fechaNacimiento;
 	
 	

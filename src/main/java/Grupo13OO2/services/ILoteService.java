@@ -19,4 +19,10 @@ public interface ILoteService {
 	
 
 	
+	public boolean validarStockInterno(int codigoProducto, int cantidad);
+	
+	
+
+
+	
 }
