@@ -24,63 +24,63 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("pedidos")
 public class PedidoController {
-	
+
 	@Autowired
-    @Qualifier("pedidoService")
-    private IPedidoService pedidoService;
+	@Qualifier("pedidoService")
+	private IPedidoService pedidoService;
 
-    @Autowired
-    @Qualifier("productoService")
-    private IProductoService productoService;
+	@Autowired
+	@Qualifier("productoService")
+	private IProductoService productoService;
 
-    @Autowired
-    @Qualifier("empleadoService")
-    private IEmpleadoService empleadoService;
+	@Autowired
+	@Qualifier("empleadoService")
+	private IEmpleadoService empleadoService;
 
-    @Autowired
-    @Qualifier("clienteService")
-    private IClienteService clienteService;
+	@Autowired
+	@Qualifier("clienteService")
+	private IClienteService clienteService;
 
-    @GetMapping("")
-    public ModelAndView index(){
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.PEDIDO_INDEX); 
-        mAV.addObject("pedidos", pedidoService.getAll());
-        return mAV;
-    }
-    
-    @GetMapping("/new")
-    public ModelAndView create() {
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.PEDIDO_FORM); 
-        mAV.addObject("pedido", new PedidoModel());
-        mAV.addObject("productos", productoService.getAll());
-        mAV.addObject("empleados", empleadoService.getAll());
-        mAV.addObject("clientes", clienteService.getAll());
-        return mAV;
-    }
-    
-    @PostMapping("/save")
-    public String create(@Valid @ModelAttribute("pedido") PedidoModel pedidoModel,BindingResult result) {
-    	if (result.hasErrors()) {
+	@GetMapping("")
+	public ModelAndView index() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PEDIDO_INDEX);
+		mAV.addObject("pedidos", pedidoService.getAll());
+		return mAV;
+	}
+
+	@GetMapping("/new")
+	public ModelAndView create() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PEDIDO_FORM);
+		mAV.addObject("pedido", new PedidoModel());
+		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("empleados", empleadoService.getAll());
+		mAV.addObject("clientes", clienteService.getAll());
+		return mAV;
+	}
+
+	@PostMapping("/save")
+	public String create(@Valid @ModelAttribute("pedido") PedidoModel pedidoModel, BindingResult result) {
+		if (result.hasErrors()) {
 			return ViewRouteHelper.PEDIDO_FORM;
 
 		}
-    	pedidoService.insertOrUpdate(pedidoModel);
-        return "/pedidos";
-    }
-    
-    @GetMapping("/editar/{id}")
+		pedidoService.insertOrUpdate(pedidoModel);
+		return "/pedidos";
+	}
+
+	@GetMapping("/editar/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
-		
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.PEDIDO_FORM); 
-        mAV.addObject("pedido", pedidoService.ListarId(id));
-        mAV.addObject("productos", productoService.getAll());
-        mAV.addObject("empleados", empleadoService.getAll());
-        mAV.addObject("clientes", clienteService.getAll());
+
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PEDIDO_FORM);
+		mAV.addObject("pedido", pedidoService.ListarId(id));
+		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("empleados", empleadoService.getAll());
+		mAV.addObject("clientes", clienteService.getAll());
 		return mAV;
-    }
-    
-    @GetMapping("/eliminar/{id}")
-	public RedirectView delete (Model model,@PathVariable("id") int id) {
+	}
+
+	@GetMapping("/eliminar/{id}")
+	public RedirectView delete(Model model, @PathVariable("id") int id) {
 		pedidoService.delete(id);
 		return new RedirectView("/pedidos");
 	}

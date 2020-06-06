@@ -42,7 +42,7 @@ public class ProductoController {
 	}
 
 	@PostMapping("/save")
-	public String save( @Valid @ModelAttribute("producto")ProductoModel productoModel, BindingResult result) {
+	public String save(@Valid @ModelAttribute("producto") ProductoModel productoModel, BindingResult result) {
 		if (result.hasErrors()) {
 			return ViewRouteHelper.PRODUCTO_FORM;
 

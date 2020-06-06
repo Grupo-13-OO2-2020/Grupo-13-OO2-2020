@@ -1,6 +1,6 @@
 spring:
     datasource:
-        url: jdbc:mysql://localhost:3306/db_ejemplo?serverTimezone=UTC
+        url: jdbc:mysql://localhost:3306/Grupo_13_BDD_OO2_2020?serverTimezone=UTC
         username: root
         password: test
         driver-class-name: com.mysql.cj.jdbc.Driver

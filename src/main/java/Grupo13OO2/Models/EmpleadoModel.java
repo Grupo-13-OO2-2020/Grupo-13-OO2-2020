@@ -3,40 +3,37 @@ package Grupo13OO2.Models;
 import java.util.Date;
 import javax.validation.Valid;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 
-import Grupo13OO2.Entities.Local;
 @Valid
 
-public class EmpleadoModel extends PersonaModel{
+public class EmpleadoModel extends PersonaModel {
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date horarioEntrada;
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern = "HH:mm")
-	private Date  horarioSalida;
-	@NotEmpty(message="Es obligatorio el tipo de empleado")
+	private Date horarioSalida;
+	@NotEmpty(message = "Es obligatorio el tipo de empleado")
 	private String tipoEmpleado;
 	@Valid
-    @DecimalMin("1") 
+	@DecimalMin("1")
 	private double sueldo;
 	private boolean gerente;
 	@ManyToOne
 	private LocalModel local;
 
-	public EmpleadoModel() {}
+	public EmpleadoModel() {
+	}
 
-	public EmpleadoModel(int id, String nombre, int dni, String apellido, Date fechaNacimiento,
-			Date  horarioEntrada,Date  horarioSalida, String tipoEmpleado, double sueldo, boolean gerente) {
+	public EmpleadoModel(int id, String nombre, int dni, String apellido, Date fechaNacimiento, Date horarioEntrada,
+			Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
 		this.horarioSalida = horarioSalida;
@@ -45,8 +42,8 @@ public class EmpleadoModel extends PersonaModel{
 		this.gerente = gerente;
 	}
 
-	public EmpleadoModel(int id, String nombre, int dni, String apellido, Date fechaNacimiento,
-			Date  horarioEntrada,Date  horarioSalida, String tipoEmpleado, double sueldo, boolean gerente, LocalModel local) {
+	public EmpleadoModel(int id, String nombre, int dni, String apellido, Date fechaNacimiento, Date horarioEntrada,
+			Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente, LocalModel local) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
 		this.horarioSalida = horarioSalida;
@@ -54,7 +51,7 @@ public class EmpleadoModel extends PersonaModel{
 		this.sueldo = sueldo;
 		this.gerente = gerente;
 		this.local = local;
-		
+
 	}
 
 	public Date getHorarioEntrada() {
@@ -65,11 +62,11 @@ public class EmpleadoModel extends PersonaModel{
 		this.horarioEntrada = horarioEntrada;
 	}
 
-	public Date  getHorarioSalida() {
+	public Date getHorarioSalida() {
 		return horarioSalida;
 	}
 
-	public void setHorarioSalida(Date  horarioSalida) {
+	public void setHorarioSalida(Date horarioSalida) {
 		this.horarioSalida = horarioSalida;
 	}
 
@@ -96,6 +93,7 @@ public class EmpleadoModel extends PersonaModel{
 	public void setGerente(boolean gerente) {
 		this.gerente = gerente;
 	}
+
 	public LocalModel getLocal() {
 		return local;
 	}
@@ -103,6 +101,5 @@ public class EmpleadoModel extends PersonaModel{
 	public void setLocal(LocalModel local) {
 		this.local = local;
 	}
-	
 
 }

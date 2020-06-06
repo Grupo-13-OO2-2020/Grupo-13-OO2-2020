@@ -1,5 +1,5 @@
 
-USE `db_ejemplo`;
+USE `Grupo_13_BDD_OO2_2020`;
 
 insert into local values (1,"Murature",50.0218, 79.5265,11112222);
 insert into local values (2,"Mentruyt",-49.4505, 153.2949,22223333);

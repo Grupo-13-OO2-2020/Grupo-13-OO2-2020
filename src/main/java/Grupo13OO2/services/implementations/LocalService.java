@@ -127,13 +127,13 @@ public class LocalService implements ILocalService {
 			}
 		}
 
-
 		if (aux <= 0) {
 			valido = true;
 		}
 
 		return valido;
 	}
+
 	@Override
 	public boolean consumirLoteSolicitud(SolicitudStockModel solicitudStockModel) {
 		LocalModel local = this.findById(solicitudStockModel.getLocalDestinatario().getId());
@@ -166,6 +166,7 @@ public class LocalService implements ILocalService {
 		consumo = true;
 		return consumo;
 	}
+
 	@Override
 	public boolean consumirLote(RemitoModel remito) {
 		LocalModel local = this.findById(remito.getVendedor().getLocal().getId());

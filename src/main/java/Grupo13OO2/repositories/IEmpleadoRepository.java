@@ -7,5 +7,5 @@ import Grupo13OO2.Entities.Empleado;
 
 @Repository("empleadoRepository")
 public interface IEmpleadoRepository extends JpaRepository<Empleado, Integer> {
-    public abstract Empleado findById(int id);
+	public abstract Empleado findById(int id);
 }

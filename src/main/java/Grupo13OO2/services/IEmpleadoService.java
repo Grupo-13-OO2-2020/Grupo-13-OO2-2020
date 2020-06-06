@@ -6,11 +6,11 @@ import Grupo13OO2.Entities.Empleado;
 import Grupo13OO2.Models.EmpleadoModel;
 
 public interface IEmpleadoService {
-    public List<Empleado> getAll();
-    
-    public EmpleadoModel insertOrUpdate(EmpleadoModel empleadoModel);
+	public List<Empleado> getAll();
 
-    public EmpleadoModel ListarId(int id);
+	public EmpleadoModel insertOrUpdate(EmpleadoModel empleadoModel);
+
+	public EmpleadoModel ListarId(int id);
 
 	public String delete(int id);
 }

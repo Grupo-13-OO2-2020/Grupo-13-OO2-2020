@@ -1,7 +1,6 @@
 package Grupo13OO2.services.implementations;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,56 +16,55 @@ import Grupo13OO2.repositories.IEmpleadoRepository;
 import Grupo13OO2.repositories.ILocalRepository;
 import Grupo13OO2.services.IEmpleadoService;
 
-
 @Service("empleadoService")
 public class EmpleadoService implements IEmpleadoService {
-    @Autowired
-    private IEmpleadoRepository empleadoRepository;
+	@Autowired
+	private IEmpleadoRepository empleadoRepository;
 
-    @Autowired
-    @Qualifier("empleadoConverter")
-    private EmpleadoConverter empleadoConverter;
+	@Autowired
+	@Qualifier("empleadoConverter")
+	private EmpleadoConverter empleadoConverter;
 
-    @Autowired
+	@Autowired
 	@Qualifier("localService")
-	private LocalService localService; 
+	private LocalService localService;
 
 	@Autowired
 	@Qualifier("localRepository")
 	private ILocalRepository localRepository;
-	
+
 	@Autowired
 	@Qualifier("localConverter")
-    private LocalConverter localConverter;
-    
-    @Override
-    public List<Empleado> getAll(){
-        return empleadoRepository.findAll();
-    }
+	private LocalConverter localConverter;
 
-    @Override
-    public EmpleadoModel insertOrUpdate(EmpleadoModel empleadoModel){
-        Local local = localRepository.findById(empleadoModel.getLocal().getId());
+	@Override
+	public List<Empleado> getAll() {
+		return empleadoRepository.findAll();
+	}
+
+	@Override
+	public EmpleadoModel insertOrUpdate(EmpleadoModel empleadoModel) {
+		Local local = localRepository.findById(empleadoModel.getLocal().getId());
 		LocalModel localModel = localConverter.entityToModel(local);
-        empleadoModel.setLocal(localModel);
+		empleadoModel.setLocal(localModel);
 
-        Empleado empleado = empleadoRepository.save(empleadoConverter.modelToEntity(empleadoModel));
+		Empleado empleado = empleadoRepository.save(empleadoConverter.modelToEntity(empleadoModel));
 
-        empleado.getLocal().getEmpleados().add(empleado);
-        localService.insertOrUpdate(localConverter.entityToModel(empleado.getLocal()));
+		empleado.getLocal().getEmpleados().add(empleado);
+		localService.insertOrUpdate(localConverter.entityToModel(empleado.getLocal()));
 
-        return empleadoConverter.entityToModel(empleado);
-    }
-    
-    @Override
-    public String delete(int id){
-        empleadoRepository.deleteById(id);
-        return "Cliente borrada" + id;
-    }
+		return empleadoConverter.entityToModel(empleado);
+	}
 
-    @Override
+	@Override
+	public String delete(int id) {
+		empleadoRepository.deleteById(id);
+		return "Cliente borrada" + id;
+	}
+
+	@Override
 	public EmpleadoModel ListarId(int id) {
 
-		return empleadoConverter.entityToModel( empleadoRepository.findById(id));
+		return empleadoConverter.entityToModel(empleadoRepository.findById(id));
 	}
 }
