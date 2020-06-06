@@ -1,13 +1,21 @@
 package Grupo13OO2.Models;
 
 import java.util.Date;
-
+import javax.validation.Valid;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+
+import Grupo13OO2.Entities.Local;
+@Valid
 
 public class EmpleadoModel extends PersonaModel{
 	@Temporal(TemporalType.TIME)
@@ -16,7 +24,10 @@ public class EmpleadoModel extends PersonaModel{
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date  horarioSalida;
+	@NotEmpty(message="Es obligatorio el tipo de empleado")
 	private String tipoEmpleado;
+	@Valid
+    @DecimalMin("1") 
 	private double sueldo;
 	private boolean gerente;
 	@ManyToOne

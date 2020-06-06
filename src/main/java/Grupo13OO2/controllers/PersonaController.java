@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 import Grupo13OO2.Models.PersonaModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IPersonaService;
@@ -38,8 +39,12 @@ public class PersonaController {
     }
 
     @PostMapping("/personas/save")
-    public String save(@ModelAttribute("persona") PersonaModel personaModel) {
-        personaService.insertOrUpdate(personaModel);
+    public String save(@Valid @ModelAttribute("persona") PersonaModel personaModel,BindingResult result) {
+    	if (result.hasErrors()) {
+			return ViewRouteHelper.PERSONA_FORM;
+
+		}
+    	personaService.insertOrUpdate(personaModel);
         return "redirect:/personas";
     }
 

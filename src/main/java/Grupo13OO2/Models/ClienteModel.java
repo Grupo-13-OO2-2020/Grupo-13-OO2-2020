@@ -2,11 +2,22 @@ package Grupo13OO2.Models;
 
 import java.util.Date;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+import javax.validation.Valid;
+@Valid
 public class ClienteModel extends PersonaModel{
 
+	@NotEmpty(message="El email es obligatorio")
 	private String email;
-	private int numero;	
+	@Min(value = 1, message = "el numero no puede ser 0")
+	private int numero;
+	//@Size(min=1,max=11,message="El cuil es obligatorio")
+	@NotNull(message="El numero es obligatorio")
 	private long cuil;
+	//@Size(min=1,max=11,message="El cuit es obligatorio")
 	private long cuit;
     
     public ClienteModel() {}
@@ -17,7 +28,7 @@ public class ClienteModel extends PersonaModel{
 	this.email = email;
 	this.numero = numero;
 	this.cuil=cuil;
-	this.cuil=cuit;
+	this.cuit=cuit;
 }
 
 	public String getEmail() {

@@ -32,9 +32,11 @@
 					<div th:each="empleado : ${local.empleados}" th:if="${empleado.gerente}" >
 						<td th:text="${empleado.nombre}"></td>
 					</div>
-					<div th:each="empleado : ${local.empleados}" th:unless="${empleado.gerente}" >
+
+					<!-- <div th:each="empleado : ${local.empleados}" th:unless="${empleado.gerente}" >
 						<td ></td>
-					</div>
+					</div> -->
+					
 					<td>
 						<a th:href="@{/locales/main/{id}(id=${local.id})}" class="btn btn-dark">Ingresar</a>
 					</td>

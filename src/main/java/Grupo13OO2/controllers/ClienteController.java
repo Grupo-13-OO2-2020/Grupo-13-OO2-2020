@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 import Grupo13OO2.Models.ClienteModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
@@ -41,9 +42,13 @@ public class ClienteController {
     }
 
     @PostMapping("/save")
-    public RedirectView create(@ModelAttribute("cliente") ClienteModel clienteModel) {
-        clienteService.insertOrUpdate(clienteModel);
-        return new RedirectView("/clientes");
+    public String create(@Valid @ModelAttribute("cliente") ClienteModel clienteModel,BindingResult result) {
+    	if (result.hasErrors()) {
+			return ViewRouteHelper.CLIENTE_FORM;
+
+		}
+    	clienteService.insertOrUpdate(clienteModel);
+        return "redirect:/clientes";
     }
     @GetMapping("/editar/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {

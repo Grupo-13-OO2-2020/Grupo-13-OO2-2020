@@ -3,14 +3,31 @@ package Grupo13OO2.Models;
 import java.util.Set;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+
+
 
 public class LocalModel {
 	
 	private int id;
+	@NotEmpty(message="es obligatorio indicar email")
 	private String direccion;
+	@NotNull(message="Latitud es obligatorio")
+	@Max(value = 99999, message = "latitud no puede ser 0")
+	@Min(value = 1, message = "latitud suero max")
 	private float latitud;
+	@NotNull(message="Longitud es obligatorio")
+	@Max(value = 99999, message = "longitud no puede ser 0")
+	@Min(value = 1, message = "longitud suero max")
 	private float longitud;
+	@NotNull(message="es obligatorio indicar telefono")
 	private int numeroTelefono;
+	
+	
 	@OneToMany
     private Set<EmpleadoModel> empleados;
 	@OneToMany
