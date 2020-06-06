@@ -15,7 +15,7 @@ public class Cliente extends Persona {
 	private int numero;
 	private long cuil;
 	private long cuit;
-	
+
 	public Cliente() {
 	}
 
@@ -59,6 +59,5 @@ public class Cliente extends Persona {
 	public void setCuit(long cuit) {
 		this.cuit = cuit;
 	}
-
 
 }

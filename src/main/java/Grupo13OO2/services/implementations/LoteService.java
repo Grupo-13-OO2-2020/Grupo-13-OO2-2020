@@ -1,22 +1,13 @@
 package Grupo13OO2.services.implementations;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
 import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Entities.Lote;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
-import Grupo13OO2.Models.RemitoModel;
-import Grupo13OO2.Models.ProductoModel;
-import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.converters.LoteConverter;
 import Grupo13OO2.converters.ProductoConverter;
@@ -77,10 +68,10 @@ public class LoteService implements ILoteService {
 
 		lote.getLocal().getLotes().add(lote);
 
-		if(lote.getCantidadExistente() == 0){
+		if (lote.getCantidadExistente() == 0) {
 			lote.setCantidadExistente(lote.getCantidadRecibida());
 		}
-		
+
 		localService.insertOrUpdate(localConverter.entityToModel(lote.getLocal()));
 
 		return loteConverter.entityToModel(lote);

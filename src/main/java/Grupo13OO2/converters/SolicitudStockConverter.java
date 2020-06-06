@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-
 import Grupo13OO2.Entities.SolicitudStock;
 import Grupo13OO2.Models.SolicitudStockModel;
 
@@ -27,35 +26,41 @@ public class SolicitudStockConverter {
 
 	public SolicitudStockModel entityToModel(SolicitudStock solicitudStock) {
 		SolicitudStockModel sM;
-		if(solicitudStock.getColaborador()!=null) {
-			sM= new SolicitudStockModel(solicitudStock.getId(), solicitudStock.getFecha(),productoConverter.entityToModel(solicitudStock.getProducto()),
-				solicitudStock.getCantidad(),empleadoConverter.entityToModel(solicitudStock.getVendedor()),clienteConverter.entityToModel(solicitudStock.getCliente()),
-				solicitudStock.isFacturado(),empleadoConverter.entityToModel(solicitudStock.getColaborador()),solicitudStock.isAceptado(),
-				localConverter.entityToModel(solicitudStock.getLocalDestinatario()));}
-		else {
-			 sM= new SolicitudStockModel(solicitudStock.getId(), solicitudStock.getFecha(),productoConverter.entityToModel(solicitudStock.getProducto()),
-					solicitudStock.getCantidad(),empleadoConverter.entityToModel(solicitudStock.getVendedor()),clienteConverter.entityToModel(solicitudStock.getCliente()),
-					solicitudStock.isFacturado(),null,false,
+		if (solicitudStock.getColaborador() != null) {
+			sM = new SolicitudStockModel(solicitudStock.getId(), solicitudStock.getFecha(),
+					productoConverter.entityToModel(solicitudStock.getProducto()), solicitudStock.getCantidad(),
+					empleadoConverter.entityToModel(solicitudStock.getVendedor()),
+					clienteConverter.entityToModel(solicitudStock.getCliente()), solicitudStock.isFacturado(),
+					empleadoConverter.entityToModel(solicitudStock.getColaborador()), solicitudStock.isAceptado(),
 					localConverter.entityToModel(solicitudStock.getLocalDestinatario()));
+		} else {
+			sM = new SolicitudStockModel(solicitudStock.getId(), solicitudStock.getFecha(),
+					productoConverter.entityToModel(solicitudStock.getProducto()), solicitudStock.getCantidad(),
+					empleadoConverter.entityToModel(solicitudStock.getVendedor()),
+					clienteConverter.entityToModel(solicitudStock.getCliente()), solicitudStock.isFacturado(), null,
+					false, localConverter.entityToModel(solicitudStock.getLocalDestinatario()));
 		}
 		return sM;
 	}
-	
+
 	public SolicitudStock modelToEntity(SolicitudStockModel solicitudStock) {
 		SolicitudStock s;
-		if(solicitudStock.getColaborador()!=null) {
-		s= new SolicitudStock(solicitudStock.getId(), solicitudStock.getFecha(),productoConverter.modelToEntity(solicitudStock.getProducto()),
-				solicitudStock.getCantidad(),empleadoConverter.modelToEntity(solicitudStock.getVendedor()),clienteConverter.modelToEntity(solicitudStock.getCliente()),
-				solicitudStock.isFacturado(),empleadoConverter.modelToEntity(solicitudStock.getColaborador()),solicitudStock.isAceptado(),
-				localConverter.modelToEntity(solicitudStock.getLocalDestinatario()));}
-		else {
-			s= new SolicitudStock(solicitudStock.getId(), solicitudStock.getFecha(),productoConverter.modelToEntity(solicitudStock.getProducto()),
-					solicitudStock.getCantidad(),empleadoConverter.modelToEntity(solicitudStock.getVendedor()),clienteConverter.modelToEntity(solicitudStock.getCliente()),
-					solicitudStock.isFacturado(),null,false,
-					localConverter.modelToEntity(solicitudStock.getLocalDestinatario()));}
-				
-			
-		
-	return s;}
+		if (solicitudStock.getColaborador() != null) {
+			s = new SolicitudStock(solicitudStock.getId(), solicitudStock.getFecha(),
+					productoConverter.modelToEntity(solicitudStock.getProducto()), solicitudStock.getCantidad(),
+					empleadoConverter.modelToEntity(solicitudStock.getVendedor()),
+					clienteConverter.modelToEntity(solicitudStock.getCliente()), solicitudStock.isFacturado(),
+					empleadoConverter.modelToEntity(solicitudStock.getColaborador()), solicitudStock.isAceptado(),
+					localConverter.modelToEntity(solicitudStock.getLocalDestinatario()));
+		} else {
+			s = new SolicitudStock(solicitudStock.getId(), solicitudStock.getFecha(),
+					productoConverter.modelToEntity(solicitudStock.getProducto()), solicitudStock.getCantidad(),
+					empleadoConverter.modelToEntity(solicitudStock.getVendedor()),
+					clienteConverter.modelToEntity(solicitudStock.getCliente()), solicitudStock.isFacturado(), null,
+					false, localConverter.modelToEntity(solicitudStock.getLocalDestinatario()));
+		}
+
+		return s;
+	}
 
 }
