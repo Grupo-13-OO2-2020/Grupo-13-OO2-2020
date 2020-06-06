@@ -108,31 +108,6 @@ public class LoteService implements ILoteService {
 		}return valido;
 		}
 
-	@Override
-	public boolean consumirLote(RemitoModel remito) {
-    	boolean consumo=false;
-		int aux=remito.getCantidad();
-		while(aux>0) {
-			
-			if(remito.getVendedor().getLocal().getLotes().iterator().next().getProducto().getCodigoProducto()
-					==remito.getProducto().getCodigoProducto()) {
-				
-				if(remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente()-aux>=0) {
-					remito.getVendedor().getLocal().getLotes().iterator().next().setCantidadExistente(remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente()-aux);
-					aux=0;
-					this.insertOrUpdate(remito.getVendedor().getLocal().getLotes().iterator().next());
-					
-				}else {
-					aux=aux-remito.getVendedor().getLocal().getLotes().iterator().next().getCantidadExistente();
-					remito.getVendedor().getLocal().getLotes().iterator().next().setCantidadExistente(0);
-					this.insertOrUpdate(remito.getVendedor().getLocal().getLotes().iterator().next());
-				}
-				
-				
-			}
-		}
-		consumo=true;
-		return consumo;
-    }
+	
 
 }

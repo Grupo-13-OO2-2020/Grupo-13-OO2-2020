@@ -1,6 +1,6 @@
 
 USE `db_ejemplo`;
-
+/*
 insert into local values (1,"Murature",50.0218, 79.5265,11112222,null);
 insert into local values (2,"Mentruyt",-49.4505, 153.2949,22223333,null);
 insert into local values (3,"Boedo",-50.0955, 147.9932,33334444,null);
@@ -34,4 +34,4 @@ insert into cliente (cuil, cuit, email, numero, id) values (444444444444,4444444
 insert into producto(descripcion,precio_unitario,codigo_producto,talle) values ("Remera",200,7791,38);
 insert into producto(descripcion,precio_unitario,codigo_producto,talle) values ("Pantalon",400,7792,38);
 insert into producto(descripcion,precio_unitario,codigo_producto,talle) values ("Zapatilla",600,7793,42);
-insert into producto(descripcion,precio_unitario,codigo_producto,talle) values ("Ojotas",150,7794,40);
+insert into producto(descripcion,precio_unitario,codigo_producto,talle) values ("Ojotas",150,7794,40);*/

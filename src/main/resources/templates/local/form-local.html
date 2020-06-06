@@ -27,26 +27,31 @@
 					<div class="form-group">
 						<label>Direccion</label> <input th:field="*{direccion}"
 							type="text" class="form-control" placeholder="Direccion" />
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></small>
 					</div>
 					<div class="form-group">
 						<label>Latitud</label> <input th:field="*{latitud}" type="text"
 							class="form-control"  placeholder="Latitud"/>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('latiitud')}" th:errors="*{latitud}"></small>
 					</div>
 					<div class="form-group">
 						<label>Longitud</label> <input th:field="*{longitud}" type="text"
 							class="form-control" placeholder="Longitud"/>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('longitud')}" th:errors="*{longitud}"></small>
 					</div>
 					<div class="form-group">
 						<label>Numero de Telefono</label> <input th:field="*{numeroTelefono}"
 							type="text" class="form-control" placeholder="Numero de telefono"/>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('numeroTelefono')}" th:errors="*{numeroTelefono}"></small>
 					</div>
 					<div>
 						<label>Gerente</label> <select class="form-control"
 						placeholder="Local" th:field="*{empleado}">
 						<option th:each="empleado : *{empleados}" th:value="${empleado.id}"
-							th:text="${empleado.nombre}"></option>
+							th:text="${empleado.nombre}"></option></select>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('empleado')}" th:errors="*{empleado}"></small>
 					</div>
-					</select>
+					
 					<div class="card-footer">
 						<input type="submit" style="background:#74C1F4" value="Guardar"
 							class="btn btn-succes" />

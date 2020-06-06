@@ -20,7 +20,7 @@ public interface ILoteService {
 	
 	public boolean validarStockInterno(int codigoProducto, int cantidad);
 	
-	public boolean consumirLote(RemitoModel remito);
+	
 
 	
 }
