@@ -48,7 +48,6 @@ public class LocalController {
 	    public ModelAndView main(@PathVariable("id") int id){
 	        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_MAIN); 
 			mAV.addObject("local", localService.findById(id));
-			mAV.addObject("solicitudes", localService.getSolicitudesStock(localService.findById(id)));
 	        return mAV;
 	    }
 	
