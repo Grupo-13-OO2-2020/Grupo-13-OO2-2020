@@ -44,6 +44,12 @@ public class LoteController {
 		mAV.addObject("lotes", loteService.getAll());
 		return mAV;
 	}
+	@GetMapping("{id}")
+    public ModelAndView local(@PathVariable("id") int id){
+        ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_INDEX_LOCAL); 
+        mAV.addObject("lotes", localService.findById(id).getLotes());
+        return mAV;
+	}
 	
 	 @GetMapping("/new/{id}")
 	    public ModelAndView create(@PathVariable("id") int id) {

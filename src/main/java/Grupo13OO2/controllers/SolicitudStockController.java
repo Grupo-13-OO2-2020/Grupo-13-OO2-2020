@@ -19,6 +19,7 @@ import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.converters.LocalConverter;
+import Grupo13OO2.converters.SolicitudStockConverter;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IClienteService;
 import Grupo13OO2.services.IEmpleadoService;
@@ -30,7 +31,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/solicitudesStock")
 public class SolicitudStockController {
-	
+	@Autowired
+	@Qualifier("solicitudStockConverter")
+    private SolicitudStockConverter solicitudStockConverter;
+    
 	@Autowired
     @Qualifier("solicitudStockService")
     private ISolicitudStockService solicitudStockService;
@@ -77,7 +81,11 @@ public class SolicitudStockController {
 
     @PostMapping("/save")
     public RedirectView create(@ModelAttribute("solicitudStock") SolicitudStockModel solicitudStockModel) {
-    	solicitudStockService.insertOrUpdate(solicitudStockModel);
+        
+        solicitudStockService.insertOrUpdate(solicitudStockModel);
+        if(solicitudStockModel.isAceptado()){
+            localService.consumirLoteSolicitud(solicitudStockModel);
+        }
         return new RedirectView("/solicitudesStock");
     }
 

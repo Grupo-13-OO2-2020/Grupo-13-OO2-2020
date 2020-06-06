@@ -69,12 +69,15 @@ public class LoteService implements ILoteService {
 	public LoteModel insertOrUpdate(LoteModel loteModel) {
 
 		Local local = localRepository.findById(loteModel.getLocal().getId());
+
 		LocalModel localModel = localConverter.entityToModel(local);
 		loteModel.setLocal(localModel);
 
 		Lote lote = loteRepository.save(loteConverter.modelToEntity(loteModel));
 
 		lote.getLocal().getLotes().add(lote);
+
+
 		localService.insertOrUpdate(localConverter.entityToModel(lote.getLocal()));
 
 		return loteConverter.entityToModel(lote);
