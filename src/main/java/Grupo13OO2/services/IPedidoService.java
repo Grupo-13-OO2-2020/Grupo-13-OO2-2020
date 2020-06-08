@@ -11,7 +11,7 @@ public interface IPedidoService {
 
 	public PedidoModel insertOrUpdate(PedidoModel pedidoModel);
 
-	public PedidoModel ListarId(int id);
+	public PedidoModel findByIdPedido(int id);
 
 	public String delete(int id);
 

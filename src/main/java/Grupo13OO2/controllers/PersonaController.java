@@ -35,7 +35,7 @@ public class PersonaController {
 		return mAV;
 	}
 
-<<<<<<< HEAD
+
 	@GetMapping("/personas/new")
 	public ModelAndView create(@ModelAttribute("persona") PersonaModel personaModel) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_FORM);
@@ -52,28 +52,7 @@ public class PersonaController {
 		return "redirect:/personas";
 	}
 
-	@GetMapping("/personas/editar/{id}")
-	public ModelAndView ModelAndView(@ModelAttribute("persona") PersonaModel personaModel, @PathVariable int id) {
 
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_FORM);
-		PersonaModel persona = personaService.ListarId(id);
-		mAV.addObject("persona", persona);
-=======
-//    @PostMapping("/personas/save")
-//    public String save( @Valid @ModelAttribute("persona") PersonaModel personaModel, BindingResult result) {
-//    	if (result.hasErrors()) {
-//			return ViewRouteHelper.PERSONA_FORM;
-//
-//		}
-//    	
-//        personaService.insertOrUpdate(personaModel);
-//        return "redirect:/personas";
-
-    @PostMapping("/personas/save")
-    public String save(@ModelAttribute("persona") PersonaModel personaModel) {
-        personaService.insertOrUpdate(personaModel);
-        return "redirect:/personas";
-    }
 
     @GetMapping("/personas/editar/{id}")
 	public ModelAndView ModelAndView( @ModelAttribute("persona") PersonaModel personaModel, @PathVariable int id) {
@@ -81,7 +60,7 @@ public class PersonaController {
         ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_FORM); 
         PersonaModel persona = personaService.ListarId(id);
         mAV.addObject("persona", persona);
->>>>>>> 25e12ba... pequeños cambios de vistas distancias y otros
+
 		return mAV;
 	}
 

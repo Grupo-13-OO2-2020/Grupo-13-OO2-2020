@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Productos mas Vendidos</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+</head>
+
+<body style="background-color:#F0F0F0;">
+
+<div th:replace="nav :: nav"></div>
+    <h1></h1>
+    <h2></h2>
+    <div class="container-fluid">
+    
+        </div>
+        
+        <table class="table" >
+            <thead>
+				<tr style="text-align:center;">
+                    <th>Nombre producto</th>
+                    <th>Ventas por producto</th>
+                </tr>
+            <tbody>
+                <tr th:each="cpvendido : ${prodmasVendido}">
+                    <td><span th:text="${cpvendido.nombreProductoVendido}" /></td>
+                    <td><span th:text="${cpvendido.cantidadProductosVendidos}" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+
+</body>
+
+</html>

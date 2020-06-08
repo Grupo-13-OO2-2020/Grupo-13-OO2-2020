@@ -14,13 +14,10 @@ public interface ILoteService {
 	public LoteModel ListarId(int id);
 
 	public String delete(int id);
-<<<<<<< HEAD
-=======
-	
-	
+
 	public boolean validarStockInterno(int codigoProducto, int cantidad);
 	
 	//public boolean consumirLote(RemitoModel remito);
->>>>>>> 25e12ba... pequeños cambios de vistas distancias y otros
+
 
 }

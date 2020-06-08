@@ -12,9 +12,9 @@ public class SolicitudStockModel extends PedidoModel {
 	}
 
 	public SolicitudStockModel(int id, Date fecha, ProductoModel producto, int cantidad, EmpleadoModel vendedor,
-			ClienteModel cliente, boolean facturado, EmpleadoModel colaborador, boolean aceptado,
+			ClienteModel cliente, boolean aprobado, EmpleadoModel colaborador, boolean aceptado,
 			LocalModel localDestinatario) {
-		super(id, fecha, producto, cantidad, vendedor, cliente, facturado);
+		super(id, fecha, producto, cantidad, vendedor, cliente, aprobado);
 		this.colaborador = colaborador;
 		this.aceptado = aceptado;
 		this.localDestinatario = localDestinatario;

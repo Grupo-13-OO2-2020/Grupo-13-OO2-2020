@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/solicitudesStock")
 public class SolicitudStockController {
 	@Autowired
-<<<<<<< HEAD
 	@Qualifier("solicitudStockConverter")
 	private SolicitudStockConverter solicitudStockConverter;
 
@@ -89,54 +88,8 @@ public class SolicitudStockController {
 		return new RedirectView("/solicitudesStock");
 	}
 
-	@GetMapping("/editar/{id}")
-=======
-    @Qualifier("solicitudStockService")
-    private ISolicitudStockService solicitudStockService;
-
-    @Autowired
-    @Qualifier("productoService")
-    private IProductoService productoService;
-
-    @Autowired
-    @Qualifier("empleadoService")
-    private IEmpleadoService empleadoService;
-
-    @Autowired
-    @Qualifier("clienteService")
-    private IClienteService clienteService;
-
-    @Autowired
-    @Qualifier("localService")
-    private ILocalService localService;
-
-    @GetMapping("")
-    public ModelAndView index(){
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_INDEX); 
-        mAV.addObject("solicitudesStock", solicitudStockService.getAll());
-        return mAV;
-    }
-
-    @GetMapping("/new/{id}")
-    public ModelAndView create(@PathVariable("id") int id) {
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_FORM);
-		//mAV.addObject("local", localService.ListarId(id));
-        mAV.addObject("solicitudStock", new SolicitudStockModel());
-        mAV.addObject("productos", productoService.getAll());
-        mAV.addObject("empleados", empleadoService.getAll());
-        mAV.addObject("clientes", clienteService.getAll());
-        mAV.addObject("locales", localService.getAll());
-        return mAV;
-    }
-
-    @PostMapping("/save")
-    public RedirectView create(@ModelAttribute("solicitudStock") SolicitudStockModel solicitudStockModel) {
-    	solicitudStockService.insertOrUpdate(solicitudStockModel);
-        return new RedirectView("/solicitudesStock");
-    }
 
     @GetMapping("/editar/{id}")
->>>>>>> 25e12ba... pequeños cambios de vistas distancias y otros
 	public ModelAndView get(@PathVariable("id") int id) {
 
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_FORM_LOCAL);

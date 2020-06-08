@@ -1,6 +1,6 @@
 
 USE `Grupo_13_BDD_OO2_2020`;
-/*
+
 insert into local values (1,"Murature",50.0218, 79.5265,11112222);
 insert into local values (2,"Mentruyt",-49.4505, 153.2949,22223333);
 insert into local values (3,"Boedo",-50.0955, 147.9932,33334444);
@@ -50,23 +50,23 @@ insert into lote(id,cantidad_existente, cantidad_recibida, fecha_ingreso, numero
 insert into lote(id,cantidad_existente, cantidad_recibida, fecha_ingreso, numero_de_lote, local_id, producto_id) values (15,25,25,'2020-04-01',137,4,3);
 insert into lote(id,cantidad_existente, cantidad_recibida, fecha_ingreso, numero_de_lote, local_id, producto_id) values (16,200,200,'2020-03-01',138,4,4);
 
-insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (20,0,'2020-06-01',5,1,1);
+insert into pedido(cantidad,aprobado,fecha,cliente_id,producto_id,vendedor_id) values (20,0,'2020-06-01',5,1,1);
 insert into remito(id,forma_de_pago) values (1,"Efectivo");
-insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (30,0,'2020-06-01',7,3,2);
+insert into pedido(cantidad,aprobado,fecha,cliente_id,producto_id,vendedor_id) values (30,0,'2020-06-01',7,3,2);
 insert into remito(id,forma_de_pago) values (2,"Credito");
-insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (20,0,'2020-04-01',7,1,3);
+insert into pedido(cantidad,aprobado,fecha,cliente_id,producto_id,vendedor_id) values (20,0,'2020-04-01',7,1,3);
 insert into remito(id,forma_de_pago) values (3,"Efectivo");
-insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (18,0,'2020-04-11',5,2,4);
+insert into pedido(cantidad,aprobado,fecha,cliente_id,producto_id,vendedor_id) values (18,0,'2020-04-11',5,2,4);
 insert into remito(id,forma_de_pago) values (4,"Credito");
 
- insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (10,0,'2020-05-15',6,3,1);
+ insert into pedido(cantidad,aprobado,fecha,cliente_id,producto_id,vendedor_id) values (10,0,'2020-05-15',6,3,1);
  insert into solicitud_stock(aceptado,id,colaborador_id,local_id) values (0,5,null,2);
- insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (5,0,'2020-05-15',6,4,2);
+ insert into pedido(cantidad,aprobado,fecha,cliente_id,producto_id,vendedor_id) values (5,0,'2020-05-15',6,4,2);
  insert into solicitud_stock(aceptado,id,local_id) values (0,6,1);
 
- insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (15,0,'2020-05-25',6,4,3);
+ insert into pedido(cantidad,aprobado,fecha,cliente_id,producto_id,vendedor_id) values (15,0,'2020-05-25',6,4,3);
  insert into solicitud_stock(aceptado,id,local_id) values (0,7,4);
- insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (9,0,'2020-05-07',8,1,4);
+ insert into pedido(cantidad,aprobado,fecha,cliente_id,producto_id,vendedor_id) values (9,0,'2020-05-07',8,1,4);
  insert into solicitud_stock(aceptado,id,local_id) values (0,8,3);
 
-*/
+

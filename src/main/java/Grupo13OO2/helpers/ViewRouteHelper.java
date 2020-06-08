@@ -34,4 +34,5 @@ public class ViewRouteHelper {
     public final static String SOLICITUDSTOCK_INDEX_LOCAL = "solicitudstock/index-solicitudStock-local";
     public final static String REMITO_INDEX = "remito/index-remito";
     public final static String REMITO_INDEX_LOCAL = "remito/index-remito-local";
+    public final static String MASVENDIDO_INDEX = "productomasvendido/index";
 }

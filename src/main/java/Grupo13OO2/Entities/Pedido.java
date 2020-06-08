@@ -2,6 +2,8 @@ package Grupo13OO2.Entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,16 +13,18 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import Grupo13OO2.Entities.*;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "pedido")
+@Inheritance( strategy = InheritanceType.JOINED)
+@Table(name="pedido")
 public class Pedido {
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
@@ -34,13 +38,14 @@ public class Pedido {
 	@OneToOne
 	@JoinColumn(name = "cliente_id")
 	protected Cliente cliente;
-	protected boolean facturado;
-
-	public Pedido() {
-	}
+	@Column(name = "aprobado")
+	protected boolean aprobado;
+	
+	
+	public Pedido() {}
 
 	public Pedido(int id, Date fecha, Producto producto, int cantidad, Empleado vendedor, Cliente cliente,
-			boolean facturado) {
+			boolean aprobado) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -48,7 +53,7 @@ public class Pedido {
 		this.cantidad = cantidad;
 		this.vendedor = vendedor;
 		this.cliente = cliente;
-		this.facturado = facturado;
+		this.aprobado = aprobado;
 	}
 
 	public int getId() {
@@ -99,11 +104,11 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public boolean isFacturado() {
-		return facturado;
+	public boolean isAprobado() {
+		return aprobado;
 	}
 
-	public void setFacturado(boolean facturado) {
-		this.facturado = facturado;
+	public void setAprobado(boolean aprobado) {
+		this.aprobado = aprobado;
 	}
 }

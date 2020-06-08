@@ -17,11 +17,7 @@ public class PersonaModel {
 	private int id;
 	@NotEmpty(message = "es obligatorio indicar nombre")
 	private String nombre;
-<<<<<<< HEAD
 	@Min(value = 1, message = "el dni no puede ser 0")
-=======
-	@Size(min = 2, max = 9)
->>>>>>> 25e12ba... pequeños cambios de vistas distancias y otros
 	private int dni;
 	@NotEmpty(message = "es obligatorio indicar apellido")
 	private String apellido;

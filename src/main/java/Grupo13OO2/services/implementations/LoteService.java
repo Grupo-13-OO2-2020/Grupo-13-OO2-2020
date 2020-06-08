@@ -89,8 +89,6 @@ public class LoteService implements ILoteService {
 		return "el lote ha sido eliminado";
 	}
 
-<<<<<<< HEAD
-=======
 	@Override
 	public boolean validarStockInterno(int codigoProducto, int cantidad) {
 		boolean valido=false;
@@ -135,5 +133,4 @@ public class LoteService implements ILoteService {
 		return consumo;
     }*/
 
->>>>>>> 25e12ba... pequeños cambios de vistas distancias y otros
 }

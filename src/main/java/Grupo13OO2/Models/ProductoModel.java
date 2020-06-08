@@ -16,13 +16,9 @@ public class ProductoModel {
 	private double precioUnitario;
 	@Min(value = 1, message = "el codigo no puede ser 0")
 	private int codigoProducto;
-<<<<<<< HEAD
-	@NotEmpty
-	@Pattern(regexp = "[0-9]+", message = "El talle solo puede tener  números")
-=======
     @NotEmpty
     @Pattern(regexp = "[0-9]+", message="El talle solo puede tener números")
->>>>>>> 25e12ba... pequeños cambios de vistas distancias y otros
+
 	private String talle;
 
 	public ProductoModel() {

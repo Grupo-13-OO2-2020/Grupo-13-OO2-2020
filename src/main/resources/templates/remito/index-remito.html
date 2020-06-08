@@ -18,7 +18,7 @@
 					<th>CANTIDAD</th>
 					<th>VENDEDOR</th>
 					<th>CLIENTE</th>
-					<th>FACTURADO</th>
+					<th>APROBADO</th>
 					<th>FORMA DE PAGO</th>
 					<th></th>
 				</tr>
@@ -31,7 +31,7 @@
 					<td th:text="${remito.cantidad}"></td>
 					<td th:text="${remito.vendedor.nombre}"></td>
 					<td th:text="${remito.cliente.nombre}"></td>
-					<td th:text="${remito.facturado}"></td>
+					<td th:text="${remito.aprobado}"></td>
 					<td th:text="${remito.formaDePago}"></td>
 					<td>
 						<a th:href="@{remitos/editar/} + ${remito.id}" class="btn btn-warning">Editar</a>
