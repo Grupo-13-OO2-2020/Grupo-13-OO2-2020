@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.Set;
+
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import Grupo13OO2.Models.EmpleadoModel;
@@ -36,6 +39,24 @@ public class EmpleadoController {
 		mAV.addObject("empleados", empleadoService.getAll());
 		return mAV;
 	}
+
+	@GetMapping("/sueldo/{id}")
+	public ModelAndView sueldo(@PathVariable("id") int id) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX_LOCAL);
+		mAV.addObject("empleados", localService.calcularSueldos(id));
+		mAV.addObject("locales", localService.findById(id));
+		return mAV;
+	}
+
+	
+	@GetMapping("{id}")
+	public ModelAndView local(@PathVariable("id") int id) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX_LOCAL);
+		mAV.addObject("empleados", localService.findById(id).getEmpleados());
+		mAV.addObject("locales", localService.findById(id));
+		return mAV;
+	}
+
 
 	@GetMapping("/new")
 	public ModelAndView create() {
