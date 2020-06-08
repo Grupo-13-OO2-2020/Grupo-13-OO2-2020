@@ -19,6 +19,9 @@ public class ViewRouteHelper {
     public final static String SOLICITUDSTOCK_FORM = "solicitudstock/form-solicitudStock";
     public final static String REMITO_FORM = "remito/form-remito";
 
+    //USER
+  	public final static String USER_LOGIN = "user/login";
+  	public final static String USER_LOGOUT = "user/logout";
     
     //Redirects
     public final static String LOTE_INDEX = "lote/index";//aca esta la lista

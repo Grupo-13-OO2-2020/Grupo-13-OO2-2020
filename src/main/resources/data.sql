@@ -68,3 +68,8 @@ insert into remito(id,forma_de_pago) values (4,"Credito");
  insert into solicitud_stock(aceptado,id,local_id) values (0,7,4);
  insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (9,0,'2020-05-07',8,1,4);
  insert into solicitud_stock(aceptado,id,local_id) values (0,8,3);
+
+/*insert into user(id,createdat,enabled,password,updatedat,username) values (1,'2020-06-01',true,"user",'2020-06-01',"user");
+
+insert into user_role(id,createdat,role,updatedat,user_id) values(1,'2020-06-01',"role_user",'2020-06-01',1);*/
+

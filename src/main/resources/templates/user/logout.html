@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Inicio</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous" />
+
+<style>
+.jumbotron {
+	padding: 13rem 1rem;
+	margin-bottom: 2rem;
+	border-radius: 0.1rem;
+	background: #000064;
+	background: -webkit-linear-gradient(to right, #1BADD8, #00003E);
+	background: linear-gradient(to right, #1BADD8, #00003E);
+}
+
+.hd1 {
+	color: #fff;
+}
+</style>
+
+</head>
+<body style="text-align: center;">
+  <!-- Page Content -->
+	    <div class="container">
+	      <div class="jumbotron">
+	      	<h1 class="display-5 alert alert-info">Logout Successfully.</h1>
+	        <h1 class="display-5">Login</h1>
+	        <form th:action="@{/loginprocess}" method="post">
+		      	<input type="text" name="username" id="username" placeholder="Username" />
+		      	<input type="password" name="password" id="password" placeholder="Password" />
+		      	<input type="submit" />
+	      	</form>
+	      </div>
+	    </div>
+</body>
+</html>
