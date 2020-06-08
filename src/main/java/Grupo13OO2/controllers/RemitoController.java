@@ -60,6 +60,7 @@ public class RemitoController {
 	public ModelAndView local(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_INDEX_LOCAL);
 		mAV.addObject("remitos", localService.getRemitos(localService.findById(id)));
+		mAV.addObject("local", localService.findById(id));
 		return mAV;
 	}
 

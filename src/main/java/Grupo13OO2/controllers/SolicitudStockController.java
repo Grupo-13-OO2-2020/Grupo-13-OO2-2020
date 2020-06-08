@@ -63,6 +63,7 @@ public class SolicitudStockController {
 	public ModelAndView local(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_INDEX_LOCAL);
 		mAV.addObject("solicitudes", localService.getSolicitudesStock(localService.findById(id)));
+		mAV.addObject("local", localService.findById(id));
 		return mAV;
 	}
 
