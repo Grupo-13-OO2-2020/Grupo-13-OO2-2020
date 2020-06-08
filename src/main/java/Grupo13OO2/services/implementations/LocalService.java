@@ -1,9 +1,13 @@
 package Grupo13OO2.services.implementations;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Service;
 import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Entities.Remito;
 import Grupo13OO2.Entities.SolicitudStock;
+import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.Models.ProductoModel;
@@ -42,6 +47,10 @@ public class LocalService implements ILocalService {
 	@Autowired
 	@Qualifier("productoService")
 	private ProductoService productoService;
+	
+	@Autowired
+	@Qualifier("empleadoService")
+	private EmpleadoService empleadoService;
 
 	@Autowired
 	@Qualifier("remitoService")
@@ -196,6 +205,53 @@ public class LocalService implements ILocalService {
 		}
 		consumo = true;
 		return consumo;
+	}
+
+	public List<EmpleadoModel> calcularSueldos(int id) {
+		Set<EmpleadoModel> empleados = this.findById(id).getEmpleados();
+		List<EmpleadoModel> mostrarSueldos= new ArrayList<EmpleadoModel>();
+		Iterator<EmpleadoModel> itEmpleado = empleados.iterator();
+		List<RemitoModel> remitos =  this.getRemitos(this.findById(id));
+		Iterator<RemitoModel> itRemito = remitos.iterator();
+		List<SolicitudStockModel> solicitudes =  this.getSolicitudesStock(this.findById(id));
+		Iterator<SolicitudStockModel> itSolicitud = solicitudes.iterator();
+		double contadorRemitos = 0;
+		double contadorVendedor = 0;
+		double contadorColaborador = 0;
+
+		while (itEmpleado.hasNext()) {
+			EmpleadoModel e = itEmpleado.next();
+			while (itRemito.hasNext()) {
+				RemitoModel r = itRemito.next();
+				if (r.getVendedor() == e) {
+				
+					contadorRemitos = contadorRemitos + (r.getProducto().getPrecioUnitario()*5/100);
+				}
+
+			}
+			while (itSolicitud.hasNext()) {
+				SolicitudStockModel s = itSolicitud.next();
+				if (s.getVendedor() == e) {
+					contadorVendedor = contadorVendedor + (s.getProducto().getPrecioUnitario()*3/100);
+				}
+				if (s.getColaborador() == e) {
+					contadorColaborador = contadorColaborador + (s.getProducto().getPrecioUnitario()*2/100);
+				}
+
+			}
+			 // Creo los LocalDate
+	        LocalDate inicio = LocalDate.of(Calendar.YEAR, Calendar.MONTH, 1); // 1 de enero 2019
+	        LocalDate fin = LocalDate.now();// 1 de enero 2020
+	 
+	        long dias = DAYS.between(inicio, fin);
+	        double basicoPorDia= 1000;
+	        double sueldoBasico=dias*basicoPorDia;
+			double sueldo= sueldoBasico+contadorColaborador+contadorVendedor+contadorRemitos;
+			e.setSueldo((double)Math.round(sueldo));
+			mostrarSueldos.add(e);
+		}
+
+		return mostrarSueldos;
 	}
 
 }

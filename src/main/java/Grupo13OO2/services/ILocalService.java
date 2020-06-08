@@ -1,6 +1,7 @@
 package Grupo13OO2.services;
 
 import java.util.List;
+import java.util.Set;
 
 import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Models.*;
@@ -24,5 +25,7 @@ public interface ILocalService {
 	public boolean consumirLoteSolicitud(SolicitudStockModel solicitudStockModelo);
 
 	public boolean consumirLote(RemitoModel remito);
+	
+	public List<EmpleadoModel> calcularSueldos(int id);
 
 }
