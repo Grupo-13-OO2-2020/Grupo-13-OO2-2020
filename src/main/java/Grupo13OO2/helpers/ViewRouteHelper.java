@@ -25,7 +25,7 @@ public class ViewRouteHelper {
     public final static String LOTE_INDEX_LOCAL = "lote/index-lote-local";//aca esta la lista
     public final static String PRODUCTO_INDEX = "producto/index";//aca esta la lista
     public final static String PERSONA_INDEX = "index-persona";//aca esta la lista
-    public final static String CLIENTE_INDEX = "cliente/index-cliente";//aca esta la lista
+    public final static String CLIENTE_INDEX = "cliente/index";//aca esta la lista
     public final static String EMPLEADO_INDEX = "empleado/index-empleado";//aca esta la lista
     public final static String EMPLEADO_INDEX_LOCAL = "empleado/index-empleado-local";//aca esta la lista
     public final static String LOCAL_INDEX = "local/index-local";
