@@ -69,9 +69,7 @@ public class LoteService implements ILoteService {
 
 		lote.getLocal().getLotes().add(lote);
 
-		if (lote.getCantidadExistente() == 0) {
-			lote.setCantidadExistente(lote.getCantidadRecibida());
-		}
+		
 
 		localService.insertOrUpdate(localConverter.entityToModel(lote.getLocal()));
 
