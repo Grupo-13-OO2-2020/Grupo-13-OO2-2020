@@ -9,12 +9,11 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "producto")
 public class Producto {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String descripcion;
 	private double precioUnitario;
