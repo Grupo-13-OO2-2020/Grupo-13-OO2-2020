@@ -8,6 +8,7 @@ import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Entities.Lote;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
+import Grupo13OO2.Models.ProductoModel;
 import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.converters.LoteConverter;
 import Grupo13OO2.converters.ProductoConverter;
@@ -60,10 +61,10 @@ public class LoteService implements ILoteService {
 	public LoteModel insertOrUpdate(LoteModel loteModel) {
 
 		Local local = localRepository.findById(loteModel.getLocal().getId());
-
+		ProductoModel producto= productoConverter.entityToModel(productoRepository.findById(loteModel.getProducto().getId()));
 		LocalModel localModel = localConverter.entityToModel(local);
 		loteModel.setLocal(localModel);
-
+		loteModel.setProducto(producto);
 		Lote lote = loteRepository.save(loteConverter.modelToEntity(loteModel));
 
 		lote.getLocal().getLotes().add(lote);

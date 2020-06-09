@@ -20,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Pedido {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
