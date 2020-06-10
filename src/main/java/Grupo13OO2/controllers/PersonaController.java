@@ -16,55 +16,51 @@ import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IPersonaService;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 @Controller
 @RequestMapping
 public class PersonaController {
-    @Autowired
-    @Qualifier("personaService")
-    private IPersonaService personaService;
+	@Autowired
+	@Qualifier("personaService")
+	private IPersonaService personaService;
 
-    @GetMapping("/personas")
-    public ModelAndView index(){
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_INDEX); 
-        mAV.addObject("personas", personaService.getAll());
-        mAV.addObject("persona", new PersonaModel());
-        return mAV;
-    }
-    
-    @GetMapping("/personas/new")
-    public ModelAndView create(@ModelAttribute("persona") PersonaModel personaModel) {
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_FORM); 
-        return mAV;
-    }
+	@GetMapping("/personas")
+	public ModelAndView index() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_INDEX);
+		mAV.addObject("personas", personaService.getAll());
+		mAV.addObject("persona", new PersonaModel());
+		return mAV;
+	}
 
-    @PostMapping("/personas/save")
-    public String save(@Valid @ModelAttribute("persona") PersonaModel personaModel,BindingResult result) {
-    	if (result.hasErrors()) {
+	@GetMapping("/personas/new")
+	public ModelAndView create(@ModelAttribute("persona") PersonaModel personaModel) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_FORM);
+		return mAV;
+	}
+
+	@PostMapping("/personas/save")
+	public String save(@Valid @ModelAttribute("persona") PersonaModel personaModel, BindingResult result) {
+		if (result.hasErrors()) {
 			return ViewRouteHelper.PERSONA_FORM;
 
 		}
-    	personaService.insertOrUpdate(personaModel);
-        return "redirect:/personas";
-    }
+		personaService.insertOrUpdate(personaModel);
+		return "redirect:/personas";
+	}
 
+	@GetMapping("/personas/editar/{id}")
+	public ModelAndView ModelAndView(@ModelAttribute("persona") PersonaModel personaModel, @PathVariable int id) {
 
-
-    @GetMapping("/personas/editar/{id}")
-	public ModelAndView ModelAndView( @ModelAttribute("persona") PersonaModel personaModel, @PathVariable int id) {
-		
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_FORM); 
-        PersonaModel persona = personaService.ListarId(id);
-        mAV.addObject("persona", persona);
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_FORM);
+		PersonaModel persona = personaService.ListarId(id);
+		mAV.addObject("persona", persona);
 		return mAV;
 	}
-	
+
 	@GetMapping("/personas/eliminar/{id}")
 	public String delete(Model model, @PathVariable int id) {
 		personaService.delete(id);
 		return "redirect:/personas";
-		
-		
+
 	}
 
 }

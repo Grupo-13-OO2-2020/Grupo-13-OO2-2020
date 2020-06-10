@@ -1,22 +1,14 @@
 package Grupo13OO2.services.implementations;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
 import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Entities.Lote;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
-import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.Models.ProductoModel;
-import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.converters.LoteConverter;
 import Grupo13OO2.converters.ProductoConverter;
@@ -69,12 +61,16 @@ public class LoteService implements ILoteService {
 	public LoteModel insertOrUpdate(LoteModel loteModel) {
 
 		Local local = localRepository.findById(loteModel.getLocal().getId());
+		ProductoModel producto= productoConverter.entityToModel(productoRepository.findById(loteModel.getProducto().getId()));
 		LocalModel localModel = localConverter.entityToModel(local);
 		loteModel.setLocal(localModel);
-
+		loteModel.setProducto(producto);
 		Lote lote = loteRepository.save(loteConverter.modelToEntity(loteModel));
 
 		lote.getLocal().getLotes().add(lote);
+
+		
+
 		localService.insertOrUpdate(localConverter.entityToModel(lote.getLocal()));
 
 		return loteConverter.entityToModel(lote);
@@ -91,26 +87,5 @@ public class LoteService implements ILoteService {
 		loteRepository.deleteById(id);
 		return "el lote ha sido eliminado";
 	}
-
-
-	@Override
-	public boolean validarStockInterno(int codigoProducto, int cantidad){
-		boolean valido=false;
-		int cantid=0;
-		for(Lote lote : getAll()) {
-			if(lote.getProducto().getCodigoProducto()==codigoProducto) {
-				cantid=cantid+lote.getCantidadExistente();
-			}
-			if(cantidad>cantid) {
-				valido=false;
-			}else
-			{
-				valido=true;
-			}
-		}return valido;
-		}
-
-	
-
 
 }

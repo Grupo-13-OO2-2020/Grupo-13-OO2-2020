@@ -36,11 +36,9 @@
 					</div>
 					<div class="form-group">
 						<label>Horario de Entrada</label> <input th:field="*{{horarioEntrada}}" type="time" class="form-control" />
-						<small class="form-text text-danger" th:if="${#fields.hasErrors('horarioEntrada')}" th:errors="*{horarioEntrada}"></small>
 					</div>
 					<div class="form-group">
 						<label>Horario de Salida</label> <input th:field="*{{horarioSalida}}" type="time" class="form-control" />
-						<small class="form-text text-danger" th:if="${#fields.hasErrors('horaSalida')}" th:errors="*{horaSalida}"></small>
 					</div>
 					<div class="form-group">
 						<label>Tipo Empleado</label> <input th:field="*{tipoEmpleado}" type="text" class="form-control" placeholder="Tipo de empleado"/>
@@ -57,20 +55,14 @@
 							<label class="custom-control-label" for="defaultUnchecked">Gerente</label>
 						</div>
 					</div>
+
 					<div>
-
-						<label>Local</label> <select class="form-control"
-						placeholder="Local" th:field="*{local}">
-						<option th:each="local : ${locales}" th:value="${local.id}"
-							th:text="${local.direccion}"></option></select>
-							<small class="form-text text-danger" th:if="${#fields.hasErrors('local')}" th:errors="*{local}"></small>
-
 						<label>Local</label> 
 						<select class="form-control"placeholder="Local" th:field="*{local.id}">
 						<option th:each="locals : ${locales}" th:value="${locals.id}"
 								th:text="${locals.direccion}"></option>
 					</select>		
-
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('local')}" th:errors="*{local}"></small>
 					</div>
 					
 					<div class="card-footer">

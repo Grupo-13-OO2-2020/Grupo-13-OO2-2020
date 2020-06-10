@@ -1,22 +1,28 @@
 package Grupo13OO2.services.implementations;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import Grupo13OO2.Entities.Local;
+import Grupo13OO2.Entities.Remito;
 import Grupo13OO2.Entities.SolicitudStock;
+import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
+import Grupo13OO2.Models.ProductoModel;
 import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.converters.LoteConverter;
+import Grupo13OO2.converters.RemitoConverter;
 import Grupo13OO2.converters.SolicitudStockConverter;
 import Grupo13OO2.repositories.ILocalRepository;
 import Grupo13OO2.services.ILocalService;
@@ -35,6 +41,22 @@ public class LocalService implements ILocalService {
 	@Autowired
 	@Qualifier("loteConverter")
 	private LoteConverter loteConverter;
+
+	@Autowired
+	@Qualifier("productoService")
+	private ProductoService productoService;
+
+	@Autowired
+	@Qualifier("empleadoService")
+	private EmpleadoService empleadoService;
+
+	@Autowired
+	@Qualifier("remitoService")
+	private RemitoService remitoService;
+
+	@Autowired
+	@Qualifier("remitoConverter")
+	private RemitoConverter remitoConverter;
 
 	@Autowired
 	@Qualifier("solicitudStockService")
@@ -86,6 +108,19 @@ public class LocalService implements ILocalService {
 	}
 
 	@Override
+	public List<RemitoModel> getRemitos(LocalModel localModel) {
+		List<RemitoModel> remitosM = new ArrayList<RemitoModel>();
+
+		for (Remito remito : remitoService.getAll()) {
+			if (remito.getVendedor().getLocal().getId() == localModel.getId()) {
+				remitosM.add(remitoConverter.entityToModel(remito));
+			}
+		}
+
+		return remitosM;
+	}
+
+	@Override
 	public boolean validarStockLocal(int codigoProducto, int cantidad, int idLocal) {
 		LocalModel local = this.findById(idLocal);
 		boolean valido = false;
@@ -99,7 +134,6 @@ public class LocalService implements ILocalService {
 			}
 		}
 
-
 		if (aux <= 0) {
 			valido = true;
 		}
@@ -107,6 +141,40 @@ public class LocalService implements ILocalService {
 		return valido;
 	}
 
+	@Override
+	public boolean consumirLoteSolicitud(SolicitudStockModel solicitudStockModel) {
+		LocalModel local = this.findById(solicitudStockModel.getLocalDestinatario().getId());
+		boolean consumo = false;
+		int aux = solicitudStockModel.getCantidad();
+		Set<LoteModel> lotes = local.getLotes();
+		ProductoModel producto = productoService.ListarId(solicitudStockModel.getProducto().getId());
+		Iterator<LoteModel> it = lotes.iterator();
+
+		while (aux > 0) {
+			LoteModel l = it.next();
+
+			if (l.getProducto().getCodigoProducto() == producto.getCodigoProducto()) {
+
+				if (l.getCantidadExistente() - aux >= 0) {
+					l.setCantidadExistente(l.getCantidadExistente() - aux);
+					aux = 0;
+					l.setLocal(solicitudStockModel.getLocalDestinatario());
+					loteService.insertOrUpdate(l);
+
+				} else {
+					aux = aux - l.getCantidadExistente();
+					l.setCantidadExistente(0);
+					l.setLocal(solicitudStockModel.getLocalDestinatario());
+					loteService.insertOrUpdate(l);
+				}
+
+			}
+		}
+		consumo = true;
+		return consumo;
+	}
+
+	@Override
 	public boolean consumirLote(RemitoModel remito) {
 		LocalModel local = this.findById(remito.getVendedor().getLocal().getId());
 		boolean consumo = false;
@@ -135,6 +203,59 @@ public class LocalService implements ILocalService {
 		}
 		consumo = true;
 		return consumo;
+	}
+
+	public List<EmpleadoModel> calcularSueldos(int id) {
+		Set<EmpleadoModel> empleados = this.findById(id).getEmpleados();
+		List<EmpleadoModel> mostrarSueldos = new ArrayList<EmpleadoModel>();
+		Iterator<EmpleadoModel> itEmpleado = empleados.iterator();
+		List<RemitoModel> remitos = this.getRemitos(this.findById(id));
+		Iterator<RemitoModel> itRemito = remitos.iterator();
+		List<SolicitudStockModel> solicitudes = this.getSolicitudesStock(this.findById(id));
+		Iterator<SolicitudStockModel> itSolicitud = solicitudes.iterator();
+
+		while (itEmpleado.hasNext()) {
+			EmpleadoModel e = itEmpleado.next();
+			double contadorRemitos = 0;
+			double contadorVendedor = 0;
+			double contadorColaborador = 0;
+
+			while (itRemito.hasNext()) {
+				RemitoModel r = itRemito.next();
+				if (r.getVendedor().getDni() == e.getDni()) {
+
+					contadorRemitos = contadorRemitos
+							+ ((r.getProducto().getPrecioUnitario() * r.getCantidad()) * 5 / 100);
+				}
+
+			}
+			while (itSolicitud.hasNext()) {
+				SolicitudStockModel s = itSolicitud.next();
+				if (s.getVendedor().getDni() == e.getDni()) {
+					contadorVendedor = contadorVendedor
+							+ ((s.getProducto().getPrecioUnitario() * s.getCantidad()) * 3 / 100);
+				}
+				if (s.getColaborador() != null) {
+					if (s.getColaborador().getDni() == e.getDni()) {
+						contadorColaborador = contadorColaborador
+								+ ((s.getProducto().getPrecioUnitario() * s.getCantidad()) * 2 / 100);
+					}
+				}
+
+			}
+			LocalDate fin = LocalDate.now();
+			LocalDate inicio = fin.withDayOfMonth(1);
+
+			long dias = DAYS.between(inicio, fin) + 1;
+			double basicoPorDia = 1000;
+			double sueldoBasico = dias * basicoPorDia;
+			double sueldo = sueldoBasico + contadorColaborador + contadorVendedor + contadorRemitos;
+			e.setSueldo((double) Math.round(sueldo));
+			mostrarSueldos.add(e);
+
+		}
+
+		return mostrarSueldos;
 	}
 
 }

@@ -13,7 +13,7 @@ public class PersonaConverter {
 	}
 
 	public Persona modelToEntity(PersonaModel persona) {
-		return new Persona(persona.getId(), persona.getNombre(), persona.getDni(), persona.getApellido(), 
+		return new Persona(persona.getId(), persona.getNombre(), persona.getDni(), persona.getApellido(),
 				persona.getFechaNacimiento());
 	}
 }

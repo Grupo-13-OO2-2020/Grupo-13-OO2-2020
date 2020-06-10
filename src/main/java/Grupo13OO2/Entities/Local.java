@@ -2,24 +2,23 @@ package Grupo13OO2.Entities;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-@Table(name="local")
+@Table(name = "local")
 public class Local {
-	
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "direccion")
 	private String direccion;
@@ -28,17 +27,19 @@ public class Local {
 	@Column(name = "longitud")
 	private float longitud;
 	private int numeroTelefono;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="local")
-	private Set<Empleado> empleados;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="local")
-	private Set<Lote> lotes;
-	
-	public Local() {}
 
-	public Local(int id, String direccion, float latitud, float longitud, int numeroTelefono
-			, Set<Empleado> empleados, Set<Lote> lotes) {
+	@JsonBackReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "local")
+	private Set<Empleado> empleados;
+	@JsonBackReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "local")
+	private Set<Lote> lotes;
+
+	public Local() {
+	}
+
+	public Local(int id, String direccion, float latitud, float longitud, int numeroTelefono, Set<Empleado> empleados,
+			Set<Lote> lotes) {
 		super();
 		this.id = id;
 		this.direccion = direccion;
@@ -104,12 +105,5 @@ public class Local {
 	public void setLotes(Set<Lote> lotes) {
 		this.lotes = lotes;
 	}
-
-	
-	
-	
-	
-	
-	
 
 }

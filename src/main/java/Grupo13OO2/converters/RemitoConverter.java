@@ -19,19 +19,17 @@ public class RemitoConverter {
 	@Autowired
 	@Qualifier("clienteConverter")
 	private ClienteConverter clienteConverter;
-	
+
 	public RemitoModel entityToModel(Remito remito) {
-		return new RemitoModel(remito.getId(), remito.getFecha(), productoConverter.entityToModel(remito.getProducto()) ,
-				remito.getCantidad(),empleadoConverter.entityToModel(remito.getVendedor()),clienteConverter.entityToModel(remito.getCliente()),
-				remito.isFacturado(),remito.getFormaDePago());
+		return new RemitoModel(remito.getId(), remito.getFecha(), productoConverter.entityToModel(remito.getProducto()),
+				remito.getCantidad(), empleadoConverter.entityToModel(remito.getVendedor()),
+				clienteConverter.entityToModel(remito.getCliente()), remito.isFacturado(), remito.getFormaDePago());
 	}
-	
+
 	public Remito modelToEntity(RemitoModel remito) {
-		return new Remito(remito.getId(), remito.getFecha(),productoConverter.modelToEntity(remito.getProducto()),
-				remito.getCantidad(),empleadoConverter.modelToEntity(remito.getVendedor()),clienteConverter.modelToEntity(remito.getCliente()),
-				remito.isFacturado(),remito.getFormaDePago());
+		return new Remito(remito.getId(), remito.getFecha(), productoConverter.modelToEntity(remito.getProducto()),
+				remito.getCantidad(), empleadoConverter.modelToEntity(remito.getVendedor()),
+				clienteConverter.modelToEntity(remito.getCliente()), remito.isFacturado(), remito.getFormaDePago());
 	}
-	
-	
 
 }

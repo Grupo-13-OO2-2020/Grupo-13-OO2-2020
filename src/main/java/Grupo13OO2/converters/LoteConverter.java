@@ -1,8 +1,5 @@
 package Grupo13OO2.converters;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -34,13 +31,13 @@ public class LoteConverter {
 
 	}
 
-	//Sin local
+	// Sin local
 	public LoteModel entityToModelSetLote(Lote objeto) {
 		return new LoteModel(objeto.getId(), objeto.getNumeroDeLote(), objeto.getCantidadRecibida(),
-		productoConverter.entityToModel(objeto.getProducto()), objeto.getCantidadExistente());
+				productoConverter.entityToModel(objeto.getProducto()), objeto.getCantidadExistente());
 	}
-	
-	//Sin local
+
+	// Sin local
 	public Lote modelToEntitySetLote(LoteModel model) {
 		return new Lote(model.getId(), model.getNumeroDeLote(), model.getCantidadRecibida(),
 				productoConverter.modelToEntity(model.getProducto()), model.getCantidadExistente());

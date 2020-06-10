@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import Grupo13OO2.Entities.Persona;
 
-public interface IPersonaRepository extends JpaRepository <Persona,Integer> {
+public interface IPersonaRepository extends JpaRepository<Persona, Integer> {
 }
