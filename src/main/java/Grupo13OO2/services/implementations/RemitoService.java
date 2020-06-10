@@ -40,7 +40,8 @@ public class RemitoService implements IRemitoService {
 	public RemitoModel insertOrUpdate(RemitoModel remitoModel) {
 		remitoModel.setVendedor(empleadoService.ListarId(remitoModel.getVendedor().getId()));
 
-		Remito remito = remitoRepository.save(remitoConverter.modelToEntity(remitoModel));
+		Remito remito = remitoConverter.modelToEntity(remitoModel);
+		remitoRepository.save(remito);
 
 		return remitoConverter.entityToModel(remito);
 	}

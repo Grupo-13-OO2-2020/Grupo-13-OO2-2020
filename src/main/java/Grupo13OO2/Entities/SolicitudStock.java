@@ -15,7 +15,7 @@ import Grupo13OO2.Entities.Local;
 @PrimaryKeyJoinColumn(referencedColumnName = "id")
 @Table(name = "solicitudStock")
 public class SolicitudStock extends Pedido {
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne
 	@JoinColumn(name = "colaborador_id", referencedColumnName = "id")
 	private Empleado colaborador;
 	private boolean aceptado;

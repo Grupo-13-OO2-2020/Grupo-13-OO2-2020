@@ -55,11 +55,10 @@ public class SolicitudStockService implements ISolicitudStockService {
 		solicitudStockModel.setVendedor(empleadoService.ListarId(solicitudStockModel.getVendedor().getId()));
 		solicitudStockModel
 				.setLocalDestinatario(localService.findById(solicitudStockModel.getLocalDestinatario().getId()));
-		solicitudStockModel.setColaborador(empleadoService.ListarId(solicitudStockModel.getVendedor().getId()));
+		solicitudStockModel.setColaborador(empleadoService.ListarId(solicitudStockModel.getColaborador().getId()));
 
-		SolicitudStock solicitudStock = solicitudStockRepository
-				.save(solicitudStockConverter.modelToEntity(solicitudStockModel));
-
+		SolicitudStock solicitudStock = solicitudStockRepository.save(solicitudStockConverter.modelToEntity(solicitudStockModel));
+		int i = 0;
 		return solicitudStockConverter.entityToModel(solicitudStock);
 	}
 
