@@ -1,5 +1,3 @@
-
-
 USE `Grupo_13_BDD_OO2_2020`;
 
 insert into local  ( id,direccion, latitud, longitud, numero_telefono) values (1,"Murature",50.0218, 79.5265,11112222);
@@ -7,28 +5,26 @@ insert into local ( id,direccion, latitud, longitud, numero_telefono) values (2,
 insert into local ( id,direccion, latitud, longitud, numero_telefono) values (3,"Boedo",-50.0955, 147.9932,33334444);
 insert into local ( id,direccion, latitud, longitud, numero_telefono) values (4,"Laprida",25.5277, 30.8653,44445555);
 
-
 insert into persona( id,apellido, dni, fecha_nacimiento, nombre) values (1,"Martinez", 222222,'2000-11-05',"Marcos");
 insert into empleado values ( 0,'12:00:00','20:00:00', 25000, "Vendedor",1,1);
-insert into persona( id,apellido, dni, fecha_nacimiento, nombre) values (2,"Lopez", 44444,'1998-10-11',"Martin");
+insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Lopez", 44444,'1998-10-11',"Martin");
 insert into empleado  values ( 0,'12:00:00','20:00:00', 15000, "Vendedor",2,2);
-insert into persona( id,apellido, dni, fecha_nacimiento, nombre) values (3,"Gonzalez", 11111,'1997-12-06',"Joaquin");
+insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Gonzalez", 11111,'1997-12-06',"Joaquin");
 insert into empleado  values ( 0,'12:00:00','20:00:00', 18000, "Encargado",3,3);
-insert into persona( id,apellido, dni, fecha_nacimiento, nombre) values  (4,"Garcia", 333333,'1996-11-08',"Jesus");
+insert into persona( apellido, dni, fecha_nacimiento, nombre) values  ("Garcia", 333333,'1996-11-08',"Jesus");
 insert into empleado values ( 0,'12:00:00','20:00:00', 15000, "Repositor",4,4);
 
-insert into persona( id,apellido, dni, fecha_nacimiento, nombre) values (5,"Aguirre", 88888,'2000-11-05',"Franco");
+insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Aguirre", 88888,'2000-11-05',"Franco");
 insert into cliente (cuil, cuit, email, numero, id) values (111111111111,111111111111, "franco@mail", 155845095,5);
-insert into persona( id,apellido, dni, fecha_nacimiento, nombre) values (6,"Lopez", 44444,'1998-10-11',"Martin");
+insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Lopez", 44444,'1998-10-11',"Martin");
 insert into cliente (cuil, cuit, email, numero, id) values (222222222222,222222222222, "Martin@mail", 155845095,6);
-insert into persona( id,apellido, dni, fecha_nacimiento, nombre) values (7,"Gonzalez", 11112,'1997-12-06',"Esteban");
+insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Gonzalez", 11112,'1997-12-06',"Esteban");
 insert into cliente (cuil, cuit, email, numero, id) values (333333333333,333333333333, "Esteban@mail", 155845095,7);
-insert into persona( id,apellido, dni, fecha_nacimiento, nombre) values (8,"Espinoza", 333331,'1996-11-08',"Juan");
+insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Espinoza", 333331,'1996-11-08',"Juan");
 insert into cliente (cuil, cuit, email, numero, id) values (444444444444,444444444444, "Juan@mail", 155845095,8);
 
 
 insert into producto(id,descripcion,precio_unitario,codigo_producto,talle) values (1,"Remera",200,7791,38);
-
 insert into producto(descripcion,precio_unitario,codigo_producto,talle) values ("Pantalon",400,7792,38);
 insert into producto(descripcion,precio_unitario,codigo_producto,talle) values ("Zapatilla",600,7793,42);
 insert into producto(descripcion,precio_unitario,codigo_producto,talle) values ("Ojotas",150,7794,40);
@@ -62,19 +58,12 @@ insert into remito(id,forma_de_pago) values (3,"Efectivo");
 insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (18,0,'2020-04-11',5,2,4);
 insert into remito(id,forma_de_pago) values (4,"Credito");
 
-
- insert into pedido(id,cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (1,20,0,'2020-06-01',5,1,1);
- insert into remito(id,forma_de_pago) values (1,"Efectivo");
- insert into pedido(id,cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (2,30,0,'2020-06-01',7,3,2);
- insert into remito(id,forma_de_pago) values (2,"Credito");
- insert into pedido(id,cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (3,20,0,'2020-04-01',7,1,3);
- insert into remito(id,forma_de_pago) values (3,"Efectivo");
- insert into pedido(id,cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (4,18,0,'2020-04-11',5,2,4);
- insert into remito(id,forma_de_pago) values (4,"Credito");
-
+ insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (10,0,'2020-05-15',6,3,1);
+ insert into solicitud_stock(aceptado,id,colaborador_id,local_id) values (0,5,null,2);
+ insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (5,0,'2020-05-15',6,4,2);
+ insert into solicitud_stock(aceptado,id,local_id) values (0,6,1);
 
  insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (15,0,'2020-05-25',6,4,3);
  insert into solicitud_stock(aceptado,id,local_id) values (0,7,4);
  insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (9,0,'2020-05-07',8,1,4);
  insert into solicitud_stock(aceptado,id,local_id) values (0,8,3);
-

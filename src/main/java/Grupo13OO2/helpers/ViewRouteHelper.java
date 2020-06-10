@@ -4,7 +4,7 @@ public class ViewRouteHelper {
     public final static String INDEX = "index";
     //Vistas
     public final static String PERSONA_FORM = "form-persona";
-    public final static String CLIENTE_FORM = "cliente/form-cliente";
+    public final static String CLIENTE_FORM = "cliente/client-update";
     public final static String EMPLEADO_FORM = "empleado/form-empleado";
     public final static String LOCAL_FORM = "local/form-local";
     public final static String LOCAL_MAIN = "local/main";
