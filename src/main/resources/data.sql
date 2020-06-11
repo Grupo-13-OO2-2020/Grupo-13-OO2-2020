@@ -1,4 +1,3 @@
-
 USE `Grupo_13_BDD_OO2_2020`;
 
 insert into local  ( id,direccion, latitud, longitud, numero_telefono) values (1,"Murature",50.0218, 79.5265,11112222);

@@ -1,8 +1,6 @@
 package Grupo13OO2.Entities;
 
 import javax.persistence.Entity;
-import javax.persistence.InheritanceType;
-import javax.persistence.Inheritance;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
