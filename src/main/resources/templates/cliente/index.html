@@ -50,71 +50,8 @@
 						<small class="roboto-condensed-light">User_role</small>
 					</figcaption>
 				</figure>
-				<div class="full-box nav-lateral-bar"></div>
-				<nav class="full-box nav-lateral-menu">
-					<ul>
-						<li><a href="home.html"><i class="fab fa-dashcube fa-fw"></i>
-								&nbsp; Dashboard</a></li>
-
-						<li><a href="#" class="nav-btn-submenu"><i
-								class="fas fa-users fa-fw"></i> &nbsp; Clientes <i
-								class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li><a href="/clientes/new"><i
-										class="fas fa-plus fa-fw"></i> &nbsp; Agregar Cliente</a></li>
-								<li><a href="/clientes"><i
-										class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de
-										clientes</a></li>
-								<li><a href="clientes"><i class="fas fa-search fa-fw"></i>
-										&nbsp; Buscar cliente</a></li>
-							</ul></li>
-
-						<li><a href="#" class="nav-btn-submenu"><i
-								class="fas fa-pallet fa-fw"></i> &nbsp; Productos <i
-								class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li><a href="/productos/new"><i
-										class="fas fa-plus fa-fw"></i> &nbsp; Agregar producto</a></li>
-								<li><a href="/productos"><i
-										class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de
-										productos</a></li>
-								<li><a href="/productos"><i class="fas fa-search fa-fw"></i>
-										&nbsp; Buscar producto</a></li>
-							</ul></li>
-
-						<li><a href="#" class="nav-btn-submenu"><i
-								class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Locales <i
-								class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li><a href="/locales/new"><i class="fas fa-plus fa-fw"></i>
-										&nbsp; Agregar Local</a></li>
-								<li><a href="/locales"><i
-										class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de
-										Locales</a></li>
-								<li><a href="/locales"><i
-										class="fas fa-search-dollar fa-fw"></i> &nbsp; Buscar Locales</a>
-								</li>
-
-							</ul></li>
-
-						<li><a href="#" class="nav-btn-submenu"><i
-								class="fas  fa-user-secret fa-fw"></i> &nbsp; Empleados <i
-								class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li><a href="/empleados/new"><i
-										class="fas fa-plus fa-fw"></i> &nbsp; Nuevo Empleado</a></li>
-								<li><a href="/empleados"><i
-										class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de
-										empleados</a></li>
-								<li><a href="/empleados"><i class="fas fa-search fa-fw"></i>
-										&nbsp; Buscar empleado</a></li>
-							</ul></li>
-
-						<li><a href="company.html"><i
-								class="fas fa-store-alt fa-fw"></i> &nbsp; Empresa</a></li>
-					</ul>
-				</nav>
-				</div>
+				<div class="full-box nav-lateral-bar" th:replace="nav :: nav"></div>
+			</div>
 		
 	</section>
 

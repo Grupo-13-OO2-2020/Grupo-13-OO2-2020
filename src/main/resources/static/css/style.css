@@ -123,6 +123,10 @@ body,html{
 .form-control-file:focus{
 	outline: none;
 }
+label.color-fuerte{
+	color: #1d1d1d;
+}
+
 .table .btn{
 	margin-bottom: 0;
 }
