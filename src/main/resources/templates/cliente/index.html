@@ -37,24 +37,23 @@
 	<!-- Main container -->
 	<main class="full-box main-container">
 		<!-- Nav lateral -->
-				<section class="full-box nav-lateral">
-<div class="full-box nav-lateral-bg show-nav-lateral"></div>
+		<section class="full-box nav-lateral">
+			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
 			<div class="full-box nav-lateral-content">
 				<figure class="full-box nav-lateral-avatar">
 					<i class="far fa-times-circle show-nav-lateral"></i>
 					<img src="./assets/avatar/Avatar.png" class="img-fluid"
 						alt="Avatar">
 					<figcaption class="roboto-medium text-center">
-						Usuario Logueado <br>
-						<small class="roboto-condensed-light">User_role</small>
+						Usuario Logueado <br> <small class="roboto-condensed-light">User_role</small>
 					</figcaption>
 				</figure>
-				<div class="full-box nav-lateral-bar">	
+				<div class="full-box nav-lateral-bar">
 
-				<nav th:replace="left_panel :: nav"></nav>
+					<nav th:replace="left_panel :: nav"></nav>
 				</div>
-					</div>
-				</section>
+			
+		</section>
 
 
 		<!-- Page content -->
@@ -74,19 +73,20 @@
 					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE
 					CLIENTES
 				</h3>
-				<p class="text-justify">Los clientes son registrados para todos los locales, una vez
-				ingresados en sistema cualquier local puede acceder a sus datos</p>
+				<p class="text-justify">Los clientes son registrados para todos
+					los locales, una vez ingresados en sistema cualquier local puede
+					acceder a sus datos</p>
 			</div>
 
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-					<li><a href="/clientes/new"><i
-							class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR CLIENTE</a></li>
+					<li><a href="/clientes/new"><i class="fas fa-plus fa-fw"></i>
+							&nbsp; AGREGAR CLIENTE</a></li>
 					<li><a class="active" href="/clientes"><i
 							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CLIENTES</a>
 					</li>
-					<li><a href="/clientes"><i
-							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR CLIENTE</a></li>
+					<li><a href="/clientes"><i class="fas fa-search fa-fw"></i>
+							&nbsp; BUSCAR CLIENTE</a></li>
 				</ul>
 			</div>
 
@@ -110,31 +110,30 @@
 							</tr>
 						</thead>
 						<tbody>
-						
-						
-					<tr tr class= text-center th:each="cliente:${clientes}">
-<!-- 					th:if="${cliente.id}<"> -->
-					<td th:text="${cliente.id}"></td>
-					<td th:text="${cliente.dni}"></td>
-					<td th:text="${cliente.nombre}"></td>
-					<td th:text="${cliente.apellido}"></td>
-					<td th:text="${cliente.fechaNacimiento}"></td>
-					<td th:text="${cliente.email}"></td>
-					<td th:text="${cliente.numero}"></td>
-					<td th:text="${cliente.cuit}"></td>
-					<td th:text="${cliente.cuil}"></td>
-					
-					<td>
-						<a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-success"> 
-						<i class="fas fa-sync-alt"></i></a></td>
-					
-					<td>
-					<a th:href ="@{/clientes/eliminar/{id}(id=${cliente.id})}" button type="button"  onclick="alert('El cliente fue eliminado con exito!')"> 
-						<i class="far fa-trash-alt"></i> </a>
-					
 
-				</tr>
-							
+
+							<tr tr class=text-center th:each="cliente:${clientes}">
+								<!-- 					th:if="${cliente.id}<"> -->
+								<td th:text="${cliente.id}"></td>
+								<td th:text="${cliente.dni}"></td>
+								<td th:text="${cliente.nombre}"></td>
+								<td th:text="${cliente.apellido}"></td>
+								<td th:text="${cliente.fechaNacimiento}"></td>
+								<td th:text="${cliente.email}"></td>
+								<td th:text="${cliente.numero}"></td>
+								<td th:text="${cliente.cuit}"></td>
+								<td th:text="${cliente.cuil}"></td>
+
+								<td><a th:href="@{/clientes/editar/{id}(id=${cliente.id})}"
+									class="btn btn-success"> <i class="fas fa-sync-alt"></i></a></td>
+
+								<td><a
+									th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}" button
+									type="button"
+									onclick="alert('El cliente fue eliminado con exito!')"> <i
+										class="far fa-trash-alt"></i>
+								</a>
+							</tr>
 					</table>
 				</div>
 				<nav aria-label="Page navigation example">
@@ -171,7 +170,11 @@
 
 	<!-- Bootstrap Material Design V4.0 -->
 	<script src="./js/bootstrap-material-design.min.js"></script>
-	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+	<script>
+		$(document).ready(function() {
+			$('body').bootstrapMaterialDesign();
+		});
+	</script>
 
 	<script src="./js/main.js"></script>
 </body>
