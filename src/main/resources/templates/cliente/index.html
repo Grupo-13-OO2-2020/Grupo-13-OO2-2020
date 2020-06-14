@@ -7,28 +7,28 @@
 <title>Lista de clientes</title>
 
 <!-- Normalize V8.0.1 -->
-<link rel="stylesheet" href="./css/normalize.css">
+<link rel="stylesheet" href="../css/normalize.css">
 
 <!-- Bootstrap V4.3 -->
-<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
 
 <!-- Bootstrap Material Design V4.0 -->
-<link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+<link rel="stylesheet" href="../css/bootstrap-material-design.min.css">
 
 <!-- Font Awesome V5.9.0 -->
-<link rel="stylesheet" href="./css/all.css">
+<link rel="stylesheet" href="../css/all.css">
 
 <!-- Sweet Alerts V8.13.0 CSS file -->
-<link rel="stylesheet" href="./css/sweetalert2.min.css">
+<link rel="stylesheet" href="../css/sweetalert2.min.css">
 
 <!-- Sweet Alert V8.13.0 JS file-->
-<script src="./js/sweetalert2.min.js"></script>
+<script src="../js/sweetalert2.min.js"></script>
 
 <!-- jQuery Custom Content Scroller V3.1.5 -->
-<link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.css">
 
 <!-- General Styles -->
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="../css/style.css">
 
 
 </head>
@@ -37,8 +37,7 @@
 	<!-- Main container -->
 	<main class="full-box main-container">
 		<!-- Nav lateral -->
-		
-			<section class="full-box nav-lateral">
+				<section class="full-box nav-lateral">
 <div class="full-box nav-lateral-bg show-nav-lateral"></div>
 			<div class="full-box nav-lateral-content">
 				<figure class="full-box nav-lateral-avatar">
@@ -111,7 +110,7 @@
 						
 						
 					<tr tr class= text-center th:each="cliente:${clientes}">
-
+<!-- 					th:if="${cliente.id}<"> -->
 					<td th:text="${cliente.id}"></td>
 					<td th:text="${cliente.dni}"></td>
 					<td th:text="${cliente.nombre}"></td>
@@ -132,85 +131,17 @@
 					
 
 				</tr>
-							<!-- <tr class="text-center">
-								<td>1</td>
-								<td>012342567</td>
-								<td>NOMBRE DEL CLIENTE</td>
-								<td>APELLIDO DEL CLIENTE</td>
-								<td>72349874</td>
-								<td><a href="client-update.html" class="btn btn-success">
-										<i class="fas fa-sync-alt"></i>
-								</a></td>
-								<td>
-									<form action="">
-										<button type="button" class="btn btn-warning">
-											<i class="far fa-trash-alt"></i>
-										</button>
-									</form>
-								</td>
-							</tr>
-							<tr class="text-center">
-								<td>2</td>
-								<td>012342567</td>
-								<td>NOMBRE DEL CLIENTE</td>
-								<td>APELLIDO DEL CLIENTE</td>
-								<td>72349874</td>
-								<td><a href="client-update.html" class="btn btn-success">
-										<i class="fas fa-sync-alt"></i>
-								</a></td>
-								<td>
-									<form action="">
-										<button type="button" class="btn btn-warning">
-											<i class="far fa-trash-alt"></i>
-										</button>
-									</form>
-								</td>
-							</tr>
-							<tr class="text-center">
-								<td>3</td>
-								<td>012342567</td>
-								<td>NOMBRE DEL CLIENTE</td>
-								<td>APELLIDO DEL CLIENTE</td>
-								<td>72349874</td>
-								<td><a href="client-update.html" class="btn btn-success">
-										<i class="fas fa-sync-alt"></i>
-								</a></td>
-								<td>
-									<form action="">
-										<button type="button" class="btn btn-warning">
-											<i class="far fa-trash-alt"></i>
-										</button>
-									</form>
-								</td>
-							</tr>
-							<tr class="text-center">
-								<td>4</td>
-								<td>012342567</td>
-								<td>NOMBRE DEL CLIENTE</td>
-								<td>APELLIDO DEL CLIENTE</td>
-								<td>72349874</td>
-								<td><a href="client-update.html" class="btn btn-success">
-										<i class="fas fa-sync-alt"></i>
-								</a></td>
-								<td>
-									<form action="">
-										<button type="button" class="btn btn-warning">
-											<i class="far fa-trash-alt"></i>
-										</button>
-									</form>
-								</td>
-							</tr>
-						</tbody> -->
+							
 					</table>
 				</div>
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
 						<li class="page-item disabled"><a class="page-link" href="#"
 							tabindex="-1">Previous</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a>
+						<li class="page-item"><a class="page-link" href="0">1</a></li>
+						<li class="page-item"><a class="page-link" href="1">2</a></li>
+						<li class="page-item"><a class="page-link" href="2">3</a></li>
+						<li class="page-item"><a class="page-link" href="+1">Next</a>
 						</li>
 					</ul>
 				</nav>

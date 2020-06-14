@@ -4,8 +4,8 @@ public class ViewRouteHelper {
     public final static String INDEX = "index";
     //Vistas
     public final static String PERSONA_FORM = "form-persona";
-    public final static String CLIENTE_FORM = "cliente/client-update";
-    public final static String EMPLEADO_FORM = "empleado/form-empleado";
+    public final static String CLIENTE_FORM = "cliente/client-new";
+    public final static String EMPLEADO_FORM = "empleado/user-new";
     public final static String LOCAL_FORM = "local/form-local";
     public final static String LOCAL_MAIN = "local/main";
     public final static String LOCAL_CALC_COORD = "local/calculacoordenadas";
@@ -26,7 +26,7 @@ public class ViewRouteHelper {
     public final static String PRODUCTO_INDEX = "producto/index";//aca esta la lista
     public final static String PERSONA_INDEX = "index-persona";//aca esta la lista
     public final static String CLIENTE_INDEX = "cliente/index";//aca esta la lista
-    public final static String EMPLEADO_INDEX = "empleado/index-empleado";//aca esta la lista
+    public final static String EMPLEADO_INDEX = "empleado/user-list";//aca esta la lista
     public final static String EMPLEADO_INDEX_LOCAL = "empleado/index-empleado-local";//aca esta la lista
     public final static String LOCAL_INDEX = "local/index-local";
     public final static String PEDIDO_INDEX = "pedido/index-pedido";
