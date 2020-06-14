@@ -1,5 +1,6 @@
 package Grupo13OO2.services.implementations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,17 @@ public class ClienteService implements IClienteService {
 	private ClienteConverter clienteConverter;
 
 	@Override
-	public List<Cliente> getAll() {
-		return clienteRepository.findAll();
+	public List<ClienteModel> getAll() {
+		List<Cliente> clientes= clienteRepository.findAll();
+		List<ClienteModel> clienteModels= new ArrayList<ClienteModel>();
+		for (Cliente cM : clientes) {
+			clienteModels.add(clienteConverter.entityToModel(cM));
+		}
+		
+		 return clienteModels;
 	}
+	
+	
 
 	@Override
 	public ClienteModel insertOrUpdate(ClienteModel clienteModel) {
