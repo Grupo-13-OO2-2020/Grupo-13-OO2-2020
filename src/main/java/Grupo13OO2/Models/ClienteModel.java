@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.validation.Valid;
 
 @Valid
@@ -14,10 +14,9 @@ public class ClienteModel extends PersonaModel {
 	private String email;
 	@Min(value = 1, message = "el numero no puede ser 0")
 	private int numero;
-	// @Size(min=1,max=11,message="El cuil es obligatorio")
-	@NotNull(message = "El numero es obligatorio")
+	//@Size(min=1,max=11,message="El cuil es obligatorio")
 	private long cuil;
-	// @Size(min=1,max=11,message="El cuit es obligatorio")
+	 //@Size(min=1,max=11,message="El cuit es obligatorio")
 	private long cuit;
 
 	public ClienteModel() {
@@ -64,13 +63,6 @@ public class ClienteModel extends PersonaModel {
 		this.cuit = cuit;
 	}
 
-//	public Local getLocal() {
-//		return local;
-//	}
-//
-//	public void setLocal(Local local) {
-//		this.local = local;
-//	}
-//	
+
 
 }

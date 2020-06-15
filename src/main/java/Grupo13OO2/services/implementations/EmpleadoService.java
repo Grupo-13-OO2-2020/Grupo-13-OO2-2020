@@ -1,9 +1,13 @@
 package Grupo13OO2.services.implementations;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import Grupo13OO2.Entities.Empleado;
@@ -38,8 +42,13 @@ public class EmpleadoService implements IEmpleadoService {
 	private LocalConverter localConverter;
 
 	@Override
-	public List<Empleado> getAll() {
-		return empleadoRepository.findAll();
+	public List<EmpleadoModel> getAll() {
+		List<Empleado> empleados=empleadoRepository.findAll();
+		List<EmpleadoModel> empleadoModels= new ArrayList<EmpleadoModel>();
+		for(Empleado e : empleados) {
+			empleadoModels.add(empleadoConverter.entityToModel(e));
+			}
+		return empleadoModels;
 	}
 
 	@Override
@@ -66,5 +75,18 @@ public class EmpleadoService implements IEmpleadoService {
 	public EmpleadoModel ListarId(int id) {
 
 		return empleadoConverter.entityToModel(empleadoRepository.findById(id));
+	}
+
+	@Override
+	public Page<EmpleadoModel> getAllPages(Pageable pageable) {
+		Page<Empleado> empleados= empleadoRepository.findAll(pageable);
+		Page<EmpleadoModel> pages= empleados.map(new Function<Empleado, EmpleadoModel>(){
+			public EmpleadoModel apply(Empleado empleado) {
+				EmpleadoModel empleadoModel = empleadoConverter.entityToModel(empleado);
+				return empleadoModel;
+			}
+		});
+		
+		return pages;
 	}
 }

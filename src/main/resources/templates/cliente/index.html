@@ -134,25 +134,11 @@
 										class="far fa-trash-alt"></i>
 								</a>
 							</tr>
+							</tbody>
 					</table>
 				</div>
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-						
-						<li class="page-item"
-							th:classappend="${prev == 0 ? 'disabled': '' }">
-							<a class="page-link" th:href="@{|/clientes/?page=${prev}|}">Anterior</a>
-							</li>
-						<li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active': '' }">
-						<a	class="page-link" th:href="@{|/clientes/?page=${page}|}"
-							th:text="${page}"></a>
-							<li class="page-item"
-							th:classappend="${current == last ? 'disabled': '' }">
-							<a class="page-link" th:href="@{|/clientes/?page=${next}|}">Proxima</a>
-							</li>	
-							
-					</ul>
-				</nav>
+						<nav th:replace="nav2 :: nav"></nav>
+
 			</div>
 
 		</section>
