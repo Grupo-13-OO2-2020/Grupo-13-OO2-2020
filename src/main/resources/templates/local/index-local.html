@@ -30,7 +30,7 @@
 					<td th:text="${local.longitud}"></td>
 					<td th:text="${local.numeroTelefono}"></td>
 					<div th:each="empleado : ${local.empleados}" th:if="${empleado.gerente}" >
-						<td th:text="${empleado.nombre}"></td>
+					<td th:text="${empleado.nombre}"></td>
 					</div>
 
 					<!-- <div th:each="empleado : ${local.empleados}" th:unless="${empleado.gerente}" >
