@@ -59,4 +59,11 @@ public class ProductoService implements IProductoService {
 		
 		return pages;
 	}
+	@Override
+	public List<Producto> listAll(String keyword){
+		if(keyword != null){
+			return productoRepository.findAll(keyword);
+		}
+		return productoRepository.findAll();
+	}
 }

@@ -1,5 +1,6 @@
 package Grupo13OO2.controllers;
 
+import java.security.Provider.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -89,5 +91,11 @@ public class ProductoController {
 
 		return ViewRouteHelper.PRODUCTO_INDEX;
 	}
-
+	
+	@RequestMapping("/search")
+	public String search(Model model, @Param("keyword") String keyword){
+		List<Producto> list = productoService.listAll(keyword);
+		model.addAttribute("list", list);
+		return "producto/search";
+	}
 }

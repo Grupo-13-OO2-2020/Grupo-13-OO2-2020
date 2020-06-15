@@ -12,4 +12,6 @@ spring:
             ddl-auto: update
         properties:
             dialect: org.hibernate.dialect.MySQL5Dialect
+            hibernate:
+                format_sql: true
         

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Lista de Productos</title>
+    <title>Buscar item</title>
 
     <!-- Normalize V8.0.1 -->
     <link rel="stylesheet" href="../css/normalize.css">
@@ -65,7 +65,7 @@
             <!-- Page header -->
             <div class="full-box page-header">
                 <h3 class="text-left">
-                    <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS
+                    <i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM
                 </h3>
                 <p class="text-justify">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum delectus eos enim numquam fugit optio accusantium, aperiam eius facere architecto facilis quibusdam asperiores veniam omnis saepe est et, quod obcaecati.
@@ -74,18 +74,60 @@
             <div class="container-fluid">
                 <ul class="full-box list-unstyled page-nav-tabs">
                     <li>
-                        <a th:href="@{/productos/new}"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a>
+                        <a href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR ITEM</a>
                     </li>
                     <li>
-                        <a class="active" href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a>
+                        <a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS</a>
                     </li>
                     <li>
-                        <a th:href="@{/productos/search}"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR PRODUCTO</a>
+                        <a class="active" href="item-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM</a>
                     </li>
                 </ul>
             </div>
             
             <!--CONTENT-->
+            <div class="container-fluid">
+                <form class="form-neon" action="">
+                    <div class="container-fluid">
+                        <div class="row justify-content-md-center">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="inputSearch" class="bmd-label-floating">¿Qué item estas buscando?</label>
+                                    <input type="text" th:value="${keyboard}" class="form-control" name="keyword" id="inputSearch" maxlength="30">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center" style="margin-top: 40px;">
+                                    <button href="" type="submit" class="btn btn-raised btn-info"><i class="fas fa-search"></i> &nbsp; BUSCAR</button>
+                                </p>
+                            </div>  
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            
+            <div class="container-fluid">
+                <form action="">
+                    <input type="hidden" name="eliminar-busqueda" value="eliminar">
+                    <div class="container-fluid">
+                        <div class="row justify-content-md-center">
+                            <div class="col-12 col-md-6">
+                                <p class="text-center" style="font-size: 20px;">
+                                    Resultados de la busqueda <strong>“Buscar”</strong>
+                                </p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center" style="margin-top: 20px;">
+                                    <button type="submit" class="btn btn-raised btn-danger"><i class="far fa-trash-alt"></i> &nbsp; ELIMINAR BÚSQUEDA</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
            <div class="container-fluid">
 				<div class="table-responsive">
 					<table class="table table-dark table-sm">
@@ -134,10 +176,8 @@
         </section>
 
 
-
-
     </main>
     
-	<div th:replace="scripts-footer.html"></div>
+    <div th:replace="scripts-footer.html"></div>
 </body>
 </html>

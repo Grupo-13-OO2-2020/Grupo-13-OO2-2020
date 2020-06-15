@@ -19,4 +19,6 @@ public interface IProductoService {
 	public String delete(int id);
 
 	public Page<ProductoModel> getAllPages(Pageable pageable);
+
+	public List<Producto> listAll(String keyword);
 }

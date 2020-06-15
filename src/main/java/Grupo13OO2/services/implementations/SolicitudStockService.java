@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import Grupo13OO2.Entities.Local;
+import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Entities.SolicitudStock;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.converters.LocalConverter;
@@ -106,4 +107,6 @@ public class SolicitudStockService implements ISolicitudStockService {
 
 		return localesStock;
 	}
+
+	
 }
