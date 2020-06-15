@@ -98,9 +98,9 @@ public class LocalService implements ILocalService {
 	public List<SolicitudStockModel> getSolicitudesStock(LocalModel localModel) {
 		List<SolicitudStockModel> solicitudesM = new ArrayList<SolicitudStockModel>();
 
-		for (SolicitudStock solicitudStock : solicitudStockService.getAll()) {
+		for (SolicitudStockModel solicitudStock : solicitudStockService.getAll()) {
 			if (solicitudStock.getLocalDestinatario().getId() == localModel.getId()) {
-				solicitudesM.add(solicitudStockConverter.entityToModel(solicitudStock));
+				solicitudesM.add(solicitudStock);
 			}
 		}
 
@@ -111,9 +111,9 @@ public class LocalService implements ILocalService {
 	public List<RemitoModel> getRemitos(LocalModel localModel) {
 		List<RemitoModel> remitosM = new ArrayList<RemitoModel>();
 
-		for (Remito remito : remitoService.getAll()) {
+		for (RemitoModel remito : remitoService.getAll()) {
 			if (remito.getVendedor().getLocal().getId() == localModel.getId()) {
-				remitosM.add(remitoConverter.entityToModel(remito));
+				remitosM.add(remito);
 			}
 		}
 

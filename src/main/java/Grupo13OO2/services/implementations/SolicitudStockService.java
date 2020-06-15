@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Entities.SolicitudStock;
@@ -45,9 +49,15 @@ public class SolicitudStockService implements ISolicitudStockService {
 	private ProductoService productoService;
 
 	@Override
-	public List<SolicitudStock> getAll() {
+	public List<SolicitudStockModel> getAll() {
 
-		return solicitudStockRepository.findAll();
+		List<SolicitudStock> solicitudes=  solicitudStockRepository.findAll();
+		List<SolicitudStockModel> solicitudModels= new ArrayList<SolicitudStockModel>();
+		for(SolicitudStock sS: solicitudes) {
+			solicitudModels.add(solicitudStockConverter.entityToModel(sS));
+		}
+		return solicitudModels;
+		
 	}
 
 	@Override
@@ -106,5 +116,18 @@ public class SolicitudStockService implements ISolicitudStockService {
 		});
 
 		return localesStock;
+	}
+
+	@Override
+	public Page<SolicitudStockModel> getAllPages(Pageable pageable) {
+		Page<SolicitudStock> solicitudes=  solicitudStockRepository.findAll(pageable);
+		Page<SolicitudStockModel> pages= solicitudes.map(new Function <SolicitudStock, SolicitudStockModel>(){
+			public SolicitudStockModel apply(SolicitudStock solicitud){
+				SolicitudStockModel sSModel= solicitudStockConverter.entityToModel(solicitud);
+			
+			return sSModel;}
+		});
+
+		return pages;
 	}
 }
