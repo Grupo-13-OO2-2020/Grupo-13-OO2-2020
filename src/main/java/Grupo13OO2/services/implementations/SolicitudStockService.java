@@ -90,9 +90,9 @@ public class SolicitudStockService implements ISolicitudStockService {
 		ProductoModel producto = productoService.ListarId(idProducto);
 		EmpleadoModel vendedor = empleadoService.ListarId(idVendedor);
 		LocalModel local = vendedor.getLocal();
-		for (Local l : localService.getAll()) {
+		for (LocalModel l : localService.getAll()) {
 			if (localService.validarStockLocal(producto.getCodigoProducto(), cantidad, l.getId())) {
-				localesStock.add(localConverter.entityToModel(l));
+				localesStock.add(l);
 			}
 		}
 		// List<LocalModel> localesCercanos = new ArrayList<LocalModel>();

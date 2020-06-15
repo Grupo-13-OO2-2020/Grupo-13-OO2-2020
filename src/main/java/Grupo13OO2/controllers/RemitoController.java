@@ -61,24 +61,24 @@ public class RemitoController {
 	@GetMapping("")
 	public ModelAndView index(@RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_INDEX);
-		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
+		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
 		PageRequest pageRequest = PageRequest.of(page, 5);
-		
-		Page<RemitoModel> pageRemito= remitoService.getAllPages(pageRequest);
-		
-		int totalPage= pageRemito.getTotalPages();
-		if(totalPage>0) {
+
+		Page<RemitoModel> pageRemito = remitoService.getAllPages(pageRequest);
+
+		int totalPage = pageRemito.getTotalPages();
+		if (totalPage > 0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-			mAV.addObject("pages",pages);
+			mAV.addObject("pages", pages);
 		}
 		mAV.addObject("remitos", pageRemito.getContent());
-		mAV.addObject("current", page+1);
-		mAV.addObject("next" ,page+2);
-		mAV.addObject("prev" ,page);
+		mAV.addObject("current", page + 1);
+		mAV.addObject("next", page + 2);
+		mAV.addObject("prev", page);
 		mAV.addObject("last", totalPage);
-		
+
 		return mAV;
-	
+
 	}
 
 	@GetMapping("{id}")
