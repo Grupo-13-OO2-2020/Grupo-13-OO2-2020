@@ -1,5 +1,6 @@
 package Grupo13OO2.Entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -23,14 +24,13 @@ public class Persona {
 	private String nombre;
 	private int dni;
 	private String apellido;
-	@DateTimeFormat(pattern = "dd-mm-yyyy")
-	private Date fechaNacimiento;
+	private LocalDate fechaNacimiento;
 
 	public Persona() {
 
 	}
 
-	public Persona(int id, String nombre, int dni, String apellido, Date fechaNacimiento) {
+	public Persona(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -71,11 +71,11 @@ public class Persona {
 		this.apellido = apellido;
 	}
 
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 }

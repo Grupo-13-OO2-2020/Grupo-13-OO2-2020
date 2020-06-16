@@ -1,5 +1,6 @@
 package Grupo13OO2.Models;
 
+import java.time.LocalDate;
 import java.util.Date;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -19,14 +20,13 @@ public class PersonaModel {
 	private int dni;
 	@NotEmpty(message = "es obligatorio indicar apellido")
 	private String apellido;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	//@NotNull(message = "es obligatorio indicar fecha")
-	private Date fechaNacimiento;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaNacimiento;
 
 	public PersonaModel() {
 	}
 
-	public PersonaModel(int id, String nombre, int dni, String apellido, Date fechaNacimiento) {
+	public PersonaModel(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -67,11 +67,11 @@ public class PersonaModel {
 		this.apellido = apellido;
 	}
 
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

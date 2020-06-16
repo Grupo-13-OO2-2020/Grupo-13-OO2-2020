@@ -1,5 +1,6 @@
 package Grupo13OO2.Entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -40,7 +41,7 @@ public class Empleado extends Persona {
 
 	}
 
-	public Empleado(int id, String nombre, int dni, String apellido, Date fechaNacimiento, Date horarioEntrada,
+	public Empleado(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento, Date horarioEntrada,
 			Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
@@ -50,7 +51,7 @@ public class Empleado extends Persona {
 		this.gerente = gerente;
 	}
 
-	public Empleado(int id, String nombre, int dni, String apellido, Date fechaNacimiento, Date horarioEntrada,
+	public Empleado(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento, Date horarioEntrada,
 			Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente, Local local) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;

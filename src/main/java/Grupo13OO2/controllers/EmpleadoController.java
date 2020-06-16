@@ -46,7 +46,7 @@ public class EmpleadoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX);
 		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
 		
-		PageRequest pageRequest = PageRequest.of(page, 5);
+		PageRequest pageRequest = PageRequest.of(page, 3);
 		
 		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPages(pageRequest);
 		

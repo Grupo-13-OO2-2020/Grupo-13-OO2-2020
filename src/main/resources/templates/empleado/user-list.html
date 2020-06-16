@@ -42,15 +42,14 @@
 			<div class="full-box nav-lateral-content">
 				<figure class="full-box nav-lateral-avatar">
 					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="./assets/avatar/Avatar.png" class="img-fluid"
+					<img src="../assets/avatar/Avatar.png" class="img-fluid"
 						alt="Avatar">
 					<figcaption class="roboto-medium text-center">
 						Carlos Alfaro <br>
 						<small class="roboto-condensed-light">Web Developer</small>
 					</figcaption>
 				</figure>
-				<div class="full-box nav-lateral-bar"></div>
-				<nav th:replace="left_panel :: nav"></nav>
+				<div class="full-box nav-lateral-bar" th:replace="nav :: nav"></div>
 			</div>
 		</section>
 
@@ -79,13 +78,13 @@
 
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-					<li><a href="user-new.html"><i class="fas fa-plus fa-fw"></i>
-							&nbsp; NUEVO USUARIO</a></li>
+					<li><a th:href="@{/empleados/new}"><i class="fas fa-plus fa-fw"></i>&nbsp; NUEVO EMPLEADO</a></li>
+
 					<li><a class="active" href="user-list.html"><i
-							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE USUARIOS</a>
+							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE EMPLEADOS</a>
 					</li>
-					<li><a href="user-search.html"><i
-							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR USUARIO</a></li>
+
+					<li><a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR EMPLEADO</a></li>
 				</ul>
 			</div>
 
@@ -96,41 +95,43 @@
 						<thead>
 							<tr class="text-center roboto-medium">
 							
-				<th>ID</th>
-					<th>DNI</th>
-					<th>NOMBRE</th>
-					<th>APELLIDO</th>
-					<th>FECHA DE NACIMIENTO</th>
-					<th>HORARIO DE ENTRADA</th>
-					<th>HORARIO DE SALIDA</th>
-					<th>TIPO EMPLEADO</th>
-					<th>SUELDO</th>
-					<th>GERENTE</th>
-					<th>LOCAL</th>
+								<th>ID</th>
+								<th>DNI</th>
+								<th>NOMBRE</th>
+								<th>APELLIDO</th>
+								<th>FECHA DE NACIMIENTO</th>
+								<th>HORARIO DE ENTRADA</th>
+								<th>HORARIO DE SALIDA</th>
+								<th>TIPO EMPLEADO</th>
+								<th>SUELDO</th>
+								<th>GERENTE</th>
+								<th>LOCAL</th>
 					
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="empleado:${empleados}" style="text-align:center;">
 
-					<td th:text="${empleado.id}"></td>
-					<td th:text="${empleado.dni}"></td>
-					<td th:text="${empleado.nombre}"></td>
-					<td th:text="${empleado.apellido}"></td>
-					<td th:text="${empleado.fechaNacimiento}"></td>
-					<td th:text="${empleado.horarioEntrada}"></td>
-					<td th:text="${empleado.horarioSalida}"></td>
-					<td th:text="${empleado.tipoEmpleado}"></td>
-					<td th:text="${empleado.sueldo}"></td>
-					<td th:text="${empleado.gerente}"></td>
-					<td th:text="${empleado.local.direccion}"></td>
+								<td th:text="${empleado.id}"></td>
+								<td th:text="${empleado.dni}"></td>
+								<td th:text="${empleado.nombre}"></td>
+								<td th:text="${empleado.apellido}"></td>
+								<td th:text="${empleado.fechaNacimiento}"></td>
+								<td th:text="${empleado.horarioEntrada}"></td>
+								<td th:text="${empleado.horarioSalida}"></td>
+								<td th:text="${empleado.tipoEmpleado}"></td>
+								<td th:text="${empleado.sueldo}"></td>
+								<td th:text="${empleado.gerente}"></td>
+								<td th:text="${empleado.local.direccion}"></td>
 					
-					<td>
-					<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
-									class="btn btn-success"> <i class="fas fa-sync-alt"></i></a></td>
+								<td>
+									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
+									class="btn btn-success"> <i class="fas fa-sync-alt"></i>
+									</a>
+								</td>
 
-								<td><a
-									th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}" button
+								<td>
+									<a th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}" button
 									type="button"
 									onclick="alert('El cliente fue eliminado con exito!')"> <i
 										class="far fa-trash-alt"></i>
@@ -139,7 +140,13 @@
 						</tbody>
 					</table>
 				</div>
-		<nav th:replace="nav2 :: nav"></nav>
+				<nav aria-label="Pagination">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" th:each="page : ${pages}">
+							<a class="page-link" th:href="@{|/empleados/?page=${page}|}" th:text="${page}"></a>
+						</li>
+					</ul>
+				</nav>
 			</div>
 
 		</section>
