@@ -32,7 +32,9 @@
 					<div th:each="empleado : ${local.empleados}" th:if="${empleado.gerente}" >
 					<td th:text="${empleado.nombre}"></td>
 					</div>
-
+	<div th:each="empleado : ${local.empleados}" th:unless="${empleado.gerente}" >
+					<td th:text="Sin asignar"></td>
+					</div>
 					<!-- <div th:each="empleado : ${local.empleados}" th:unless="${empleado.gerente}" >
 						<td ></td>
 					</div> -->

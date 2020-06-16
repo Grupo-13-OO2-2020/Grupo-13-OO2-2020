@@ -2,11 +2,14 @@ package Grupo13OO2.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
@@ -32,9 +37,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
+	
+	
 	@Autowired
 	@Qualifier("clienteService")
 	private IClienteService clienteService;
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("dd/MM/yyyy"), true));
+	}
 	
 	@GetMapping("")
 	public ModelAndView index(@RequestParam Map<String, Object> params, Model model){
@@ -59,20 +71,7 @@ public class ClienteController {
 		return mAV;
 		}
 	
-//	@GetMapping("/{page}")
-//	public ModelAndView index(@PathVariable int page) {
-//			ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_INDEX);
-//		List <ClienteModel> clientes = clienteService.getAll();
-//		List <ClienteModel> auxiliar= new ArrayList<ClienteModel>();
-//		int indice=page*5;
-//		int size=5+indice;
-//		while(indice<size&&indice<clientes.size()) {
-//			auxiliar.add(clientes.get(indice));
-//		indice++;}
-//		mAV.addObject("page",page);
-//		mAV.addObject("clientes",auxiliar );
-//		return mAV;
-//	}
+
 
 	@GetMapping("/new")
 	public ModelAndView create() {

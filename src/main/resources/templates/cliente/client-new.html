@@ -43,7 +43,7 @@
 			<div class="full-box nav-lateral-content">
 				<figure class="full-box nav-lateral-avatar">
 					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="./assets/avatar/Avatar.png" class="img-fluid"
+					<img src="../assets/avatar/Avatar.png" class="img-fluid"
 						alt="Avatar">
 					<figcaption class="roboto-medium text-center">
 						Usuario Logueado <br> <small class="roboto-condensed-light">User_role</small>
@@ -52,6 +52,7 @@
 				<div class="full-box nav-lateral-bar">
 
 					<nav th:replace="left_panel :: nav"></nav>
+				</div>
 				</div>
 		</section>
 
@@ -135,10 +136,11 @@
 								<div class="col-12 col-md-6">
 									<div class="form-group">
 										<label class="bmd-label-floating">Fecha de Nacimiento</label>
-										<input th:field="*{fechaNacimiento}" type="date"
-										max="3000-12-31"       min="1000-01-01" 
-											class="form-control" pattern="yyyy-MM-dd"
-											maxlength="8"> <small class="form-text text-danger"
+										<input th:field="*{fechaNacimiento}" type="date"  placeholder="dd-mm-yyyy"
+										max="31-12-3000"       min="01-01-1900" 
+											class="form-control" pattern="dd-mm-yyyy"
+											> 
+											<small class="form-text text-danger"
 											th:if="${#fields.hasErrors('fechaNacimiento')}"
 											th:errors="*{fechaNacimiento}"></small>
 									</div>
@@ -156,7 +158,7 @@
 									<div class="form-group">
 										<label class="bmd-label-floating">Cuil</label> <input
 											type="number" pattern="[0-9()+]{1,20}" class="form-control"
-											name="cliente.telefono" id="cliente.telefono" maxlength="20">
+											maxlength="20">
 										<small class="form-text text-danger"
 											th:if="${#fields.hasErrors('cuil')}" th:errors="*{cuil}"></small>
 									</div>
@@ -205,21 +207,21 @@
 	=            Include JavaScript files           =
 	==============================================-->
 	<!-- jQuery V3.4.1 -->
-	<script src="../js/jquery-3.4.1.min.js"></script>
+	<script src="./js/jquery-3.4.1.min.js"></script>
 
 	<!-- popper -->
-	<script src="../js/popper.min.js"></script>
+	<script src="./js/popper.min.js"></script>
 
 	<!-- Bootstrap V4.3 -->
-	<script src="../js/bootstrap.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
 
 	<!-- jQuery Custom Content Scroller V3.1.5 -->
-	<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 
 	<!-- Bootstrap Material Design V4.0 -->
-	<script src="../js/bootstrap-material-design.min.js"></script>
+	<script src="./js/bootstrap-material-design.min.js"></script>
 	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
 
-	<script src="../js/main.js"></script>
+	<script src="./js/main.js"></script>
 </body>
 </html>

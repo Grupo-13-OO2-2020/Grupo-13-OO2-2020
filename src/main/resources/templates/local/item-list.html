@@ -95,6 +95,10 @@
 					<th>LONGITUD</th>
 					<th>NUM.TELEFONO</th>
 					<th>GERENTE</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					
 							</tr>
 						</thead>
 						<tbody>
@@ -106,14 +110,24 @@
 					<td th:text="${local.longitud}"></td>
 					<td th:text="${local.numeroTelefono}"></td>
 					<div th:each="empleado : ${local.empleados}" th:if="${empleado.gerente}" >
-						<td th:text="${empleado.nombre}"></td>
+					<td th:text="${empleado.nombre}"></td>
 					</div>
-								<td><a
+	<div th:each="empleado : ${local.empleados}" th:unless="${empleado.gerente}" >
+					<th>Sin asginar </th>
+					</div>
+					
+								<td>
+								<a
 									th:href="@{/locales/eliminar/{id}(id=${local.id})}"
 									type="button" class="btn btn-warning"
 									onclick="alert('El cliente fue eliminado con exito!')"> <i
 										class="far fa-trash-alt"></i>
-								</a>
+								</a></td>
+							<td>	<a th:href="@{/locales/main/{id}(id=${local.id})}"
+									class="btn btn-success"> <i class="fas fa-store-alt fa-fw"></i></a></td>
+				<td>	<a th:href="@{/locales/editar/{id}(id=${local.id})}"
+									class="btn btn-success"> <i class="fas fa-sync-alt"></i></a></td>
+					
 							</tr>
 						</tbody>
 					</table>
