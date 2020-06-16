@@ -32,7 +32,7 @@ public class ViewRouteHelper {
     public final static String LOCAL_INDEX = "local/item-list";
     public final static String PEDIDO_INDEX = "pedido/index-pedido";
     public final static String SOLICITUDSTOCK_INDEX = "solicitudstock/item-list";
-    public final static String SOLICITUDSTOCK_INDEX_LOCAL = "solicitudstock/index-solicitudStock-local";
+    public final static String SOLICITUDSTOCK_INDEX_LOCAL = "solicitudstock/item-list-local";
     public final static String REMITO_INDEX = "remito/item-list";
-    public final static String REMITO_INDEX_LOCAL = "remito/index-remito-local";
+    public final static String REMITO_INDEX_LOCAL = "remito/item-list-local";
 }
