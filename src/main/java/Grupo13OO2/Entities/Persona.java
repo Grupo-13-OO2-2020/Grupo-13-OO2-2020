@@ -23,7 +23,7 @@ public class Persona {
 	private String nombre;
 	private int dni;
 	private String apellido;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-mm-yyyy")
 	private Date fechaNacimiento;
 
 	public Persona() {

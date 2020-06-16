@@ -1,10 +1,14 @@
 package Grupo13OO2.services.implementations;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import Grupo13OO2.Entities.Remito;
 import Grupo13OO2.Models.RemitoModel;
@@ -32,8 +36,13 @@ public class RemitoService implements IRemitoService {
 	private ClienteService clienteService;
 
 	@Override
-	public List<Remito> getAll() {
-		return remitoRepository.findAll();
+	public List<RemitoModel> getAll() {
+		List<Remito> remitos = remitoRepository.findAll();
+		List<RemitoModel> remitoModels = new ArrayList<RemitoModel>();
+		for(Remito r : remitos) {
+			remitoModels.add(remitoConverter.entityToModel(r));
+		}
+		return remitoModels;
 	}
 
 	@Override
@@ -56,6 +65,19 @@ public class RemitoService implements IRemitoService {
 	public String delete(int id) {
 		remitoRepository.deleteById(id);
 		return "solictud cancelada" + id;
+	}
+
+	@Override
+	public Page<RemitoModel> getAllPages(Pageable pageable) {
+		Page<Remito> remitos= remitoRepository.findAll(pageable);
+		Page<RemitoModel> pages= remitos.map(new Function <Remito, RemitoModel>(){
+			public RemitoModel apply(Remito remito) {
+				RemitoModel remitoModel= remitoConverter.entityToModel(remito);
+				return remitoModel;
+			}
+		});
+		
+		return pages;
 	}
 
 }

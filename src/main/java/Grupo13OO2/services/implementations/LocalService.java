@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
+
 import static java.time.temporal.ChronoUnit.DAYS;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import Grupo13OO2.Entities.Local;
@@ -71,8 +75,13 @@ public class LocalService implements ILocalService {
 	private ILoteService loteService;
 
 	@Override
-	public List<Local> getAll() {
-		return localRepository.findAll();
+	public List<LocalModel> getAll() {
+		List<Local> locales = localRepository.findAll();
+		List<LocalModel> localModels = new ArrayList<LocalModel>();
+		for (Local l : locales) {
+			localModels.add(localConverter.entityToModel(l));
+		}
+		return localModels;
 	}
 
 	@Override
@@ -98,9 +107,9 @@ public class LocalService implements ILocalService {
 	public List<SolicitudStockModel> getSolicitudesStock(LocalModel localModel) {
 		List<SolicitudStockModel> solicitudesM = new ArrayList<SolicitudStockModel>();
 
-		for (SolicitudStock solicitudStock : solicitudStockService.getAll()) {
+		for (SolicitudStockModel solicitudStock : solicitudStockService.getAll()) {
 			if (solicitudStock.getLocalDestinatario().getId() == localModel.getId()) {
-				solicitudesM.add(solicitudStockConverter.entityToModel(solicitudStock));
+				solicitudesM.add(solicitudStock);
 			}
 		}
 
@@ -111,9 +120,9 @@ public class LocalService implements ILocalService {
 	public List<RemitoModel> getRemitos(LocalModel localModel) {
 		List<RemitoModel> remitosM = new ArrayList<RemitoModel>();
 
-		for (Remito remito : remitoService.getAll()) {
+		for (RemitoModel remito : remitoService.getAll()) {
 			if (remito.getVendedor().getLocal().getId() == localModel.getId()) {
-				remitosM.add(remitoConverter.entityToModel(remito));
+				remitosM.add(remito);
 			}
 		}
 
@@ -256,6 +265,20 @@ public class LocalService implements ILocalService {
 		}
 
 		return mostrarSueldos;
+	}
+
+	@Override
+	public Page<LocalModel> getAllPages(Pageable pageable) {
+		Page<Local> locales = localRepository.findAll(pageable);
+		Page<LocalModel> pages = locales.map(new Function<Local, LocalModel>() {
+			public LocalModel apply(Local local) {
+				LocalModel localModel = localConverter.entityToModel(local);
+				return localModel;
+			}
+
+		});
+
+		return pages;
 	}
 
 }

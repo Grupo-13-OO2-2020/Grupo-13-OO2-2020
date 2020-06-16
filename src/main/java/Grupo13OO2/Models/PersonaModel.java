@@ -19,8 +19,8 @@ public class PersonaModel {
 	private int dni;
 	@NotEmpty(message = "es obligatorio indicar apellido")
 	private String apellido;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "es obligatorio indicar fecha")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	//@NotNull(message = "es obligatorio indicar fecha")
 	private Date fechaNacimiento;
 
 	public PersonaModel() {
