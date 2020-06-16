@@ -1,5 +1,5 @@
 USE `Grupo_13_BDD_OO2_2020`;
-
+/*
 insert into local  ( id,direccion, latitud, longitud, numero_telefono) values (1,"Murature",50.0218, 79.5265,11112222);
 insert into local ( id,direccion, latitud, longitud, numero_telefono) values (2,"Mentruyt",-49.4505, 153.2949,22223333);
 insert into local ( id,direccion, latitud, longitud, numero_telefono) values (3,"Boedo",-50.0955, 147.9932,33334444);
@@ -67,3 +67,5 @@ insert into remito(id,forma_de_pago) values (4,"Credito");
  insert into solicitud_stock(aceptado,id,local_id) values (0,7,4);
  insert into pedido(cantidad,facturado,fecha,cliente_id,producto_id,vendedor_id) values (9,0,'2020-05-07',8,1,4);
  insert into solicitud_stock(aceptado,id,local_id) values (0,8,3);
+
+*/
