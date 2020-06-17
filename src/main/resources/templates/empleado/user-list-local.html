@@ -82,9 +82,13 @@
 
 					<li><a class="active" href="user-list.html"><i
 							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE EMPLEADOS</a>
-					</li>
+					</li> 
 
 					<li><a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR EMPLEADO</a></li>
+
+					<li>
+						<a id="bot1" class="fas fa-clipboard-list fa-fw"  role="button" ></i> &nbsp; CALCULAR SUELDOS TOTALES</a>
+					</li>
 				</ul>
 			</div>
 
@@ -106,14 +110,12 @@
 								<th>SUELDO</th>
 								<th>GERENTE</th>
 								<th></th>
-					<th></th>
-					<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<div th:each="empleado:${empleados}" th:if="${empleado.local.id}==${local.id}">
+							<tr th:each="empleado:${empleados}" th:if="${empleado.local.id}==${local.id}">
 
-								<td th:text="${empleado.id}"></td>
+								<td id="reemplazo" th:text="${empleado.id}"></td>
 								<td th:text="${empleado.dni}"></td>
 								<td th:text="${empleado.nombre}"></td>
 								<td th:text="${empleado.apellido}"></td>
@@ -124,9 +126,11 @@
 								<td th:text="${empleado.sueldo}"></td>
 								<td th:text="${empleado.gerente}"></td>
 								
-										<td>
-						<a th:href ="@{/empleados/sueldo/{idl}(idl=${local.id})}"class="btn btn-primary">CalcularSueldos</a>
-										</td>
+								<td>
+									<span ><a id="bot" class="btn btn-primary"  role="button" >Calcular Sueldo</a></span>
+									<!-- <a th:href ="@{/empleados/sueldo/{idl}(idl=${empleado.id})}"class="btn btn-primary">CalcularSueldos</a> -->
+								</td>
+
 								<td>
 									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
 									class="btn btn-success"> <i class="fas fa-sync-alt"></i>
@@ -139,7 +143,7 @@
 									onclick="alert('El cliente fue eliminado con exito!')"> <i
 										class="far fa-trash-alt"></i>
 								</a>
-							</div>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -167,5 +171,44 @@
 
 
 		<div th:replace="scripts-footer.html"></div>
+		<script src="/vendor/jquery/jquery.min.js"></script>
+		<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript">
+			$('#bot').click(function(){//problema solo agarra al primer id, no toma a los otros no elige al seleccionado
+					$("#reemplazo").attr("id","empleado-id");
+					var empleado = $('#empleado-id').text();
+					//console.log(empleado);
+				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+					method: "GET",
+					url: "/empleados/sueldo/" + empleado
+				})
+				.done(function (result) {	
+					var content = result;
+					alert("El sueldo total del empleado es "+ content);
+				})
+				.fail(function() {
+					alert("error");
+				});
+			});
+			$('#bot1').click(function(){//problema solo agarra al primer id, no toma a los otros no elige al seleccionado
+					$("#reemplazo").attr("id","empleado-id");
+					var local = $('#empleado-id').text();
+					//console.log(empleado);
+				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+					method: "GET",
+					url: "/empleados/sueldos/" + 1
+				})
+				.done(function (result) {	
+					$.each(result, function(index, value) {
+						alert( index + ": " + value );
+					});
+					var content = result;
+					alert("El sueldo total del empleado es "+ content);
+				})
+				.fail(function() {
+					alert("error");
+				});
+			});
+		</script>
 </body>
 </html>

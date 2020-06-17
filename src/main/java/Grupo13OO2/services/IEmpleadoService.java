@@ -18,4 +18,5 @@ public interface IEmpleadoService {
 	
 	Page<EmpleadoModel> getAllPages(Pageable pageable);
 
+	public double sueldoxEmpleado(EmpleadoModel empleado);
 }

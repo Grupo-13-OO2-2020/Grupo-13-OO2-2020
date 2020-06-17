@@ -29,7 +29,9 @@ public interface ILocalService {
 
 	public boolean consumirLote(RemitoModel remito);
 	
-	public List<EmpleadoModel> calcularSueldos(int id);
+	//public List<EmpleadoModel> calcularSueldos(int id);
+
+	public List<Double> calculoSueldos(int id);
 	
 	Page<LocalModel> getAllPages(Pageable pageable);
 
