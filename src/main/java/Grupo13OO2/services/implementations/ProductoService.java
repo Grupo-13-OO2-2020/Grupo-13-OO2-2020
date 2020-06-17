@@ -1,5 +1,6 @@
 package Grupo13OO2.services.implementations;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -60,10 +61,22 @@ public class ProductoService implements IProductoService {
 		return pages;
 	}
 	@Override
-	public List<Producto> listAll(String keyword){
+	public List<ProductoModel> listAll(String keyword){
 		if(keyword != null){
-			return productoRepository.findAll(keyword);
+	List<Producto> p= productoRepository.findAll(keyword);
+	List<ProductoModel> pM= new ArrayList<ProductoModel>();
+	for(Producto prod: p) {
+		pM.add(productoConverter.entityToModel(prod));
+	}
+	return pM;
+	
 		}
-		return productoRepository.findAll();
+		
+		List<Producto> p= productoRepository.findAll(keyword);
+		List<ProductoModel> pM= new ArrayList<ProductoModel>();
+		for(Producto prod: p) {
+			pM.add(productoConverter.entityToModel(prod));
+		}
+		return pM;
 	}
 }
