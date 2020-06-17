@@ -24,12 +24,11 @@ public class PedidoModel {
 	protected ProductoModel producto;
 	protected EmpleadoModel vendedor;
 	protected ClienteModel cliente;
-	protected boolean aprobado;
 	
 	public PedidoModel() {}
 
 	public PedidoModel(int id, Date fecha, ProductoModel producto, int cantidad, EmpleadoModel vendedor,
-			ClienteModel cliente, boolean aprobado) {
+			ClienteModel cliente) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -37,7 +36,6 @@ public class PedidoModel {
 		this.cantidad = cantidad;
 		this.vendedor = vendedor;
 		this.cliente = cliente;
-		this.aprobado = aprobado;
 	}
 	
 	
@@ -90,13 +88,7 @@ public class PedidoModel {
 		this.cliente = cliente;
 	}
 
-	public boolean isAprobado() {
-		return aprobado;
-	}
-
-	public void setAprobado(boolean aprobado) {
-		this.aprobado = aprobado;
-	}
+	
 
 	
 	

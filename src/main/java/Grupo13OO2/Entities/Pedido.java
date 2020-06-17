@@ -38,14 +38,12 @@ public class Pedido {
 	@OneToOne
 	@JoinColumn(name = "cliente_id")
 	protected Cliente cliente;
-	@Column(name = "aprobado")
-	protected boolean aprobado;
+	
 	
 	
 	public Pedido() {}
 
-	public Pedido(int id, Date fecha, Producto producto, int cantidad, Empleado vendedor, Cliente cliente,
-			boolean aprobado) {
+	public Pedido(int id, Date fecha, Producto producto, int cantidad, Empleado vendedor, Cliente cliente) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -53,7 +51,6 @@ public class Pedido {
 		this.cantidad = cantidad;
 		this.vendedor = vendedor;
 		this.cliente = cliente;
-		this.aprobado = aprobado;
 	}
 
 	public int getId() {
@@ -104,11 +101,5 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public boolean isAprobado() {
-		return aprobado;
-	}
-
-	public void setAprobado(boolean aprobado) {
-		this.aprobado = aprobado;
-	}
+	
 }

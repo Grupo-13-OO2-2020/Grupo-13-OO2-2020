@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import Grupo13OO2.Entities.Local;
-import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Entities.SolicitudStock;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.converters.LocalConverter;
@@ -71,7 +69,6 @@ public class SolicitudStockService implements ISolicitudStockService {
 			solicitudStockModel.setColaborador(empleadoService.ListarId(solicitudStockModel.getColaborador().getId()));
 		}
 		SolicitudStock solicitudStock = solicitudStockRepository.save(solicitudStockConverter.modelToEntity(solicitudStockModel));
-		int i = 0;
 		return solicitudStockConverter.entityToModel(solicitudStock);
 	}
 
