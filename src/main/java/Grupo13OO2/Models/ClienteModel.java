@@ -11,7 +11,7 @@ import javax.validation.Valid;
 @Valid
 public class ClienteModel extends PersonaModel {
 
-	@NotEmpty(message = "El email es obligatorio")
+	//@NotEmpty(message = "El email es obligatorio")
 	private String email;
 	@Min(value = 1, message = "el numero no puede ser 0")
 	private int numero;

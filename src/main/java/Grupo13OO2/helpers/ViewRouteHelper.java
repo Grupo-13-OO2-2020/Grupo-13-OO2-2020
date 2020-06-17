@@ -8,7 +8,7 @@ public class ViewRouteHelper {
     public final static String CLIENTE_FORM = "cliente/client-new";
     public final static String EMPLEADO_FORM = "empleado/user-new";
     public final static String LOCAL_FORM = "local/form-local";
-    public final static String LOCAL_MAIN = "local/main";
+    public final static String LOCAL_MAIN = "local/local-home";
     public final static String LOCAL_CALC_COORD = "local/calculacoordenadas";
 
     public final static String PRODUCTO_FORM = "producto/form";
@@ -28,11 +28,12 @@ public class ViewRouteHelper {
     public final static String PERSONA_INDEX = "index-persona";//aca esta la lista
     public final static String CLIENTE_INDEX = "cliente/index";//aca esta la lista
     public final static String EMPLEADO_INDEX = "empleado/user-list";//aca esta la lista
-    public final static String EMPLEADO_INDEX_LOCAL = "empleado/index-empleado-local";//aca esta la lista
+    public final static String EMPLEADO_INDEX_LOCAL = "empleado/user-list-local";//aca esta la lista
+    public final static String EMPLEADO_SUELDO = "empleado/user-sueldo";//aca esta la lista
     public final static String LOCAL_INDEX = "local/item-list";
     public final static String PEDIDO_INDEX = "pedido/index-pedido";
     public final static String SOLICITUDSTOCK_INDEX = "solicitudstock/item-list";
-    public final static String SOLICITUDSTOCK_INDEX_LOCAL = "solicitudstock/index-solicitudStock-local";
+    public final static String SOLICITUDSTOCK_INDEX_LOCAL = "solicitudstock/item-list-local";
     public final static String REMITO_INDEX = "remito/item-list";
-    public final static String REMITO_INDEX_LOCAL = "remito/index-remito-local";
+    public final static String REMITO_INDEX_LOCAL = "remito/item-list-local";
 }

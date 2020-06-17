@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>Lista de clientes</title>
+<title>Lista usuarios</title>
 
 <!-- Normalize V8.0.1 -->
 <link rel="stylesheet" href="../css/normalize.css">
@@ -42,16 +42,16 @@
 			<div class="full-box nav-lateral-content">
 				<figure class="full-box nav-lateral-avatar">
 					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="./assets/avatar/Avatar.png" class="img-fluid"
+					<img src="../assets/avatar/Avatar.png" class="img-fluid"
 						alt="Avatar">
 					<figcaption class="roboto-medium text-center">
-						Usuario Logueado <br> <small class="roboto-condensed-light">User_role</small>
+						Carlos Alfaro <br>
+						<small class="roboto-condensed-light">Web Developer</small>
 					</figcaption>
 				</figure>
 				<div class="full-box nav-lateral-bar" th:replace="nav :: nav"></div>
 			</div>
-		
-	</section>
+		</section>
 
 		<!-- Page content -->
 		<section class="full-box page-content">
@@ -68,91 +68,98 @@
 			<div class="full-box page-header">
 				<h3 class="text-left">
 					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE
-					CLIENTES
+					USUARIOS
 				</h3>
-				<p class="text-justify">Los clientes son registrados para todos
-					los locales, una vez ingresados en sistema cualquier local puede
-					acceder a sus datos</p>
+				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit. Suscipit nostrum rerum animi natus beatae ex.
+					Culpa blanditiis tempore amet alias placeat, obcaecati quaerat
+					ullam, sunt est, odio aut veniam ratione.</p>
 			</div>
 
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-					<li><a href="/clientes/new"><i class="fas fa-plus fa-fw"></i>
-							&nbsp; AGREGAR CLIENTE</a></li>
-					<li><a class="active" href="/clientes"><i
-							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CLIENTES</a>
+					<li><a th:href="@{/empleados/new}"><i class="fas fa-plus fa-fw"></i>&nbsp; NUEVO EMPLEADO</a></li>
+
+					<li><a class="active" href="user-list.html"><i
+							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE EMPLEADOS</a>
 					</li>
-					<li><a href="/clientes"><i class="fas fa-search fa-fw"></i>
-							&nbsp; BUSCAR CLIENTE</a></li>
+
+					<li><a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR EMPLEADO</a></li>
 				</ul>
 			</div>
 
-			<!-- Content here-->
+			<!-- Content -->
 			<div class="container-fluid">
-				<div class="table-responsive" th:if="${!clientes.isEmpty()}">
-
+				<div class="table-responsive">
 					<table class="table table-dark table-sm">
 						<thead>
 							<tr class="text-center roboto-medium">
-								<th>#</th>
+							
+								<th>ID</th>
 								<th>DNI</th>
 								<th>NOMBRE</th>
 								<th>APELLIDO</th>
 								<th>FECHA DE NACIMIENTO</th>
-								<th>E-MAIL</th>
-								<th>TELEFONO</th>
-								<th>CUIT</th>
-								<th>CUIL</th>
-								<th>ACTUALIZAR</th>
-								<th>ELIMINAR</th>
+								<th>HORARIO DE ENTRADA</th>
+								<th>HORARIO DE SALIDA</th>
+								<th>TIPO EMPLEADO</th>
+								<th>SUELDO</th>
+								<th>GERENTE</th>
+								<th></th>
+					<th></th>
+					<th></th>
 							</tr>
 						</thead>
 						<tbody>
+							<div th:each="empleado:${empleados}" th:if="${empleado.local.id}==${local.id}">
 
+								<td th:text="${empleado.id}"></td>
+								<td th:text="${empleado.dni}"></td>
+								<td th:text="${empleado.nombre}"></td>
+								<td th:text="${empleado.apellido}"></td>
+								<td th:text="${empleado.fechaNacimiento}"></td>
+								<td th:text="${empleado.horarioEntrada}"></td>
+								<td th:text="${empleado.horarioSalida}"></td>
+								<td th:text="${empleado.tipoEmpleado}"></td>
+								<td th:text="${empleado.sueldo}"></td>
+								<td th:text="${empleado.gerente}"></td>
+								
+										<td>
+						<a th:href ="@{/empleados/sueldo/{idl}(idl=${local.id})}"class="btn btn-primary">CalcularSueldos</a>
+										</td>
+								<td>
+									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
+									class="btn btn-success"> <i class="fas fa-sync-alt"></i>
+									</a>
+								</td>
 
-							<tr  class=text-center th:each="cliente:${clientes}">
-								<!-- 					th:if="${cliente.id}<"> -->
-								<td th:text="${cliente.id}"></td>
-								<td th:text="${cliente.dni}"></td>
-								<td th:text="${cliente.nombre}"></td>
-								<td th:text="${cliente.apellido}"></td>
-								<td th:text="${cliente.fechaNacimiento}"></td>
-								<td th:text="${cliente.email}"></td>
-								<td th:text="${cliente.numero}"></td>
-								<td th:text="${cliente.cuit}"></td>
-								<td th:text="${cliente.cuil}"></td>
-
-								<td><a th:href="@{/clientes/editar/{id}(id=${cliente.id})}"
-									class="btn btn-success"> <i class="fas fa-sync-alt"></i></a></td>
-
-								<td><a
-									th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}" button
+								<td>
+									<a th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}" button
 									type="button"
 									onclick="alert('El cliente fue eliminado con exito!')"> <i
 										class="far fa-trash-alt"></i>
 								</a>
-							</tr>
-							</tbody>
+							</div>
+						</tbody>
 					</table>
 				</div>
-						<nav aria-label="Page navigation example">
+					<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
 						
 						<li class="page-item"
 							th:classappend="${prev == 0 ? 'disabled': '' }">
-							<a class="page-link" th:href="@{|/clientes/?page=${prev}|}">Anterior</a>
+							<a class="page-link" th:href="@{|/empleados/?page=${prev}|}">Anterior</a>
 							</li>
 						<li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active': '' }">
-						<a	class="page-link" th:href="@{|/clientes/?page=${page}|}"
+						<a	class="page-link" th:href="@{|/empleados/?page=${page}|}"
 							th:text="${page}"></a>
 							<li class="page-item"
 							th:classappend="${current == last ? 'disabled': '' }">
-							<a class="page-link" th:href="@{|/clientes/?page=${next}|}">Proxima</a>
+							<a class="page-link" th:href="@{|/empleados/?page=${next}|}">Proxima</a>
 							</li>	
 							
 					</ul>
 				</nav>
-
 			</div>
 
 		</section>

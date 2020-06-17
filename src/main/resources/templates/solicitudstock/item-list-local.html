@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>Lista de Locales</title>
+<title>Lista de items</title>
 
 <!-- Normalize V8.0.1 -->
-<link rel="stylesheet" href="./css/normalize.css">
+<link rel="stylesheet" href="/css/normalize.css">
 
 <!-- Bootstrap V4.3 -->
 <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,14 +43,15 @@
 			<div class="full-box nav-lateral-content">
 				<figure class="full-box nav-lateral-avatar">
 					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="/assets/avatar/Avatar.png" class="img-fluid"
+					<img src="./assets/avatar/Avatar.png" class="img-fluid"
 						alt="Avatar">
 					<figcaption class="roboto-medium text-center">
-					Usuario Logueado <br> <small class="roboto-condensed-light">Empleado</small>
+						Carlos Alfaro <br> <small class="roboto-condensed-light">Web
+							Developer</small>
 					</figcaption>
 				</figure>
 				<div class="full-box nav-lateral-bar"></div>
-				<nav th:replace="nav :: nav"></nav>
+				<nav th:replace="nav_local :: nav"></nav>
 		</section>
 		<section class="full-box page-content">
 			<nav class="full-box navbar-info">
@@ -64,17 +65,21 @@
 			<!-- Page header -->
 			<div class="full-box page-header">
 				<h3 class="text-left">
-					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE LOCALES
+					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS
 				</h3>
-				<p class="text-justify"></p>
+				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit. Harum delectus eos enim numquam fugit optio
+					accusantium, aperiam eius facere architecto facilis quibusdam
+					asperiores veniam omnis saepe est et, quod obcaecati.</p>
 			</div>
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-					<li><a href="/locales/new"><i class="fas fa-plus fa-fw"></i>
-							&nbsp; AGREGAR LOCAL</a></li>
-					
+					<li><a href="item-new.html"><i class="fas fa-plus fa-fw"></i>
+							&nbsp; AGREGAR ITEM</a></li>
+					<li><a class="active" href="item-list.html"><i
+							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS</a></li>
 					<li><a href="item-search.html"><i
-							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR LOCAL</a></li>
+							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM</a></li>
 				</ul>
 			</div>
 
@@ -84,46 +89,46 @@
 					<table class="table table-dark table-sm">
 						<thead>
 							<tr class="text-center roboto-medium">
-					<th>ID</th>
-					<th>DIRECCION</th>
-					<th>LATITUD</th>
-					<th>LONGITUD</th>
-					<th>NUM.TELEFONO</th>
-					<th>GERENTE</th>
-					<th></th>
-					<th></th>
-					<th></th>
-					
+								<th>ID</th>
+								<th>FECHA</th>
+								<th>PRODUCTO</th>
+								<th>CANTIDAD</th>
+								<th>VENDEDOR</th>
+								<th>CLIENTE</th>
+								<th>FACTURADO</th>
+								<th>COLABORADOR</th>
+								<th>ACEPTADO</th>
+								<th>LOCAL</th>
+								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="local:${locales}" style="text-align:center;">
+							<div th:each="solicitudStock:${solicitudesStock}"
+							th:if="${solicitudStock.vendedor.local.id}==${local.id}">
+								
 
-								<td th:text="${local.id}"></td>
-					<td th:text="${local.direccion}"></td>
-					<td th:text="${local.latitud}"></td>
-					<td th:text="${local.longitud}"></td>
-					<td th:text="${local.numeroTelefono}"></td>
-					<div th:each="empleado : ${local.empleados}" th:if="${empleado.gerente}" >
-					<td th:text="${empleado.nombre}"></td>
-					</div>
-	<div th:each="empleado : ${local.empleados}" th:unless="${empleado.gerente}" >
-					<th>Sin asginar </th>
-					</div>
-					
+								<td th:text="${solicitudStock.id}"></td>
+								<td th:text="${solicitudStock.fecha}"></td>
+								<td th:text="${solicitudStock.producto.descripcion}"></td>
+								<td th:text="${solicitudStock.cantidad}"></td>
+								<td th:text="${solicitudStock.vendedor.nombre}"></td>
+								<td th:text="${solicitudStock.cliente.nombre}"></td>
+								<td th:text="${solicitudStock.facturado}"></td>
+								<td th:if="${solicitudStock.aceptado}"
+									th:text="${solicitudStock.colaborador.nombre}"></td>
+								<td th:unless="${solicitudStock.aceptado}"></td>
+								<td th:text="${solicitudStock.aceptado}"></td>
+								<td th:text="${solicitudStock.localDestinatario.direccion}"></td>
 								<td>
-								<a
-									th:href="@{/locales/eliminar/{id}(id=${local.id})}"
-									type="button" class="btn btn-warning"
-									onclick="alert('El cliente fue eliminado con exito!')"> <i
-										class="far fa-trash-alt"></i>
-								</a></td>
-							<td>	<a th:href="@{/locales/main/{id}(id=${local.id})}"
-									class="btn btn-success"> <i class="fas fa-store-alt fa-fw"></i></a></td>
-				<td>	<a th:href="@{/locales/editar/{id}(id=${local.id})}"
-									class="btn btn-success"> <i class="fas fa-sync-alt"></i></a></td>
-					
-							</tr>
+									 <a th:href="@{/solicitudesStock/editar/{id}(id=*{solicitudStock.id})}" class="btn btn-warning"
+									 >Aceptar</a>
+                </td>
+                <td>
+                    <a th:href="@{/locales/main/{id}(id=${local.id})}" class="btn btn-warning">Volver</a>
+                </td>
+								
+							</div>
 						</tbody>
 					</table>
 				</div>

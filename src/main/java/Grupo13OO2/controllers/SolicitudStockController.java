@@ -81,12 +81,36 @@ public class SolicitudStockController {
 	}
 
 	@GetMapping("{id}")
-	public ModelAndView local(@PathVariable("id") int id) {
+	public ModelAndView local(@PathVariable("id") int id,@RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_INDEX_LOCAL);
-		mAV.addObject("solicitudes", localService.getSolicitudesStock(localService.findById(id)));
 		mAV.addObject("local", localService.findById(id));
+		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
+		PageRequest pageRequest = PageRequest.of(page, 5);
+		
+		Page<SolicitudStockModel> pageSolicitud= solicitudStockService.getAllPages(pageRequest);
+		
+		int totalPage= pageSolicitud.getTotalPages();
+		if(totalPage>0) {
+			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+			mAV.addObject("pages",pages);
+		}
+		mAV.addObject("solicitudesStock", pageSolicitud.getContent());
+		mAV.addObject("current", page+1);
+		mAV.addObject("next" ,page+2);
+		mAV.addObject("prev" ,page);
+		mAV.addObject("last", totalPage);
+				
+		
+		
 		return mAV;
 	}
+//	@GetMapping("{id}")
+//	public ModelAndView local(@PathVariable("id") int id) {
+//		ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_INDEX_LOCAL);
+//		mAV.addObject("solicitudes", localService.getSolicitudesStock(localService.findById(id)));
+//		mAV.addObject("local", localService.findById(id));
+//		return mAV;
+//	}
 
 	@GetMapping("/new/{id}")
 	public ModelAndView create(@PathVariable("id") int id) {
