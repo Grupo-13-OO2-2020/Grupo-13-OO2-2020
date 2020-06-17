@@ -42,7 +42,7 @@
             <div class="full-box nav-lateral-content">
                 <figure class="full-box nav-lateral-avatar">
                     <i class="far fa-times-circle show-nav-lateral"></i>
-                    <img src="../assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
+                    <img src="/assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
                     <figcaption class="roboto-medium text-center">
                         Carlos Alfaro <br><small class="roboto-condensed-light">Web Developer</small>
                     </figcaption>
@@ -71,31 +71,66 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum delectus eos enim numquam fugit optio accusantium, aperiam eius facere architecto facilis quibusdam asperiores veniam omnis saepe est et, quod obcaecati.
                 </p>
             </div>
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a th:href="@{/productos/new}"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a>
+                    </li>
+                    <li>
+                        <a  th:href="@{/productos/}"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Productomasvendido/}"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; PRODUCTOS MAS VENDIDOS</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/productos/search}"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR PRODUCTO</a>
+                    </li>
+                </ul>
+            </div>
             
             <!--CONTENT-->
             <div class="container-fluid">
-                <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${fecha2 != null}" th:text="'Los productos vendidos entre las fechas '+ ${fecha1} +' y '+ ${fecha2}" class="alert">
+                
+        
+                <div class="table-responsive">
+
+                    <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${fecha2 != null}" th:text="'Reporte de productos ente '+ ${fecha1} +' y '+ ${fecha2}" class="alert-dark m-2">
+                    </div>
+                    
+                    <table class="table table-dark table-sm">
+                        <thead>
+                            <tr class="text-center roboto-medium">
+                                <th>ID</th>
+                                <th>DESCRIPCION</th>
+                                <th>PRECIO UNITARIO</th>
+                                <th>TALLE</th>
+                                <th>CODIGO PRODUCTO</th>
+                                <th>ACTUALIZAR</th>
+                                <th>ELIMINAR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="producto:${productosFecha}" style="text-align:center;">
+                                <td th:text="${producto.id}"></td>
+                                <td th:text="${producto.descripcion}"></td>
+                                <td th:text="${producto.precioUnitario}"></td>
+                                <td th:text="${producto.talle}"></td>
+                                <td th:text="${producto.codigoProducto}"></td>
+                                <td>
+                                    <a th:href="@{productos/editar/} + ${producto.id}" class="btn btn-success">
+                                        <i class="fas fa-sync-alt"></i> 
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href ="@{productos/eliminar/{id}(id=${producto.id})}" class="btn btn-warning">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </td>
+            
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-        
-                <table class="table table-striped">
-                    <thead class="bg-info">
-                        <tr>
-                            <th>DESCRIPCION</th>
-                            <th>PRECIO UNITARIO</th>
-                            <th>TALLE</th>
-                            <th>CODIGO PRODUCTO</th>
-        
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="producto : ${productosFecha}">
-                            <td th:text="${producto.descripcion}"></td>
-                            <td th:text="${producto.precioUnitario}"></td>
-                            <td th:text="${producto.talle}"></td>
-                            <td th:text="${producto.codigoProducto}"></td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
 
         </section>

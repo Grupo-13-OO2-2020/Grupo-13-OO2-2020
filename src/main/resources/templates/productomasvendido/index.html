@@ -91,16 +91,14 @@
 					<table class="table table-dark table-sm">
 						<thead>
 							<tr class="text-center roboto-medium">
-						  <th>Nombre producto</th>
-                    <th>Ventas por producto</th>
+                                <th>Nombre producto</th>
+                                <th>Ventas por producto</th>
 							</tr>
 						</thead>
 						<tbody>
 							  <tr th:each="cpvendido : ${prodmasVendido}">
-                    <td><span th:text="${cpvendido.nombreProductoVendido}" /></td>
-                    <td><span th:text="${cpvendido.cantidadProductosVendidos}" /></td>
-                
-			
+                                    <td th:text="${cpvendido.nombreProductoVendido}"></td>
+                                    <td th:text="${cpvendido.cantidadProductosVendidos}"></td>
 							</tr>
 						</tbody>
 					</table>
