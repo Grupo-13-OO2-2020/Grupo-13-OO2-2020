@@ -43,7 +43,7 @@
 			<div class="full-box nav-lateral-content">
 				<figure class="full-box nav-lateral-avatar">
 					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="./assets/avatar/Avatar.png" class="img-fluid"
+					<img src="/assets/avatar/Avatar.png" class="img-fluid"
 						alt="Avatar">
 					<figcaption class="roboto-medium text-center">
 						Carlos Alfaro <br> <small class="roboto-condensed-light">Web
@@ -95,7 +95,6 @@
 								<th>CANTIDAD</th>
 								<th>VENDEDOR</th>
 								<th>CLIENTE</th>
-								<th>FACTURADO</th>
 								<th>COLABORADOR</th>
 								<th>ACEPTADO</th>
 								<th>LOCAL</th>
@@ -114,7 +113,6 @@
 								<td th:text="${solicitudStock.cantidad}"></td>
 								<td th:text="${solicitudStock.vendedor.nombre}"></td>
 								<td th:text="${solicitudStock.cliente.nombre}"></td>
-								<td th:text="${solicitudStock.facturado}"></td>
 								<td th:if="${solicitudStock.aceptado}"
 									th:text="${solicitudStock.colaborador.nombre}"></td>
 								<td th:unless="${solicitudStock.aceptado}"></td>

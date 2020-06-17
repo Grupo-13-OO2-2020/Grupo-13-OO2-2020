@@ -88,7 +88,6 @@
 								<th>CANTIDAD</th>
 								<th>VENDEDOR</th>
 								<th>CLIENTE</th>
-								<th>FACTURADO</th>
 								<th>COLABORADOR</th>
 								<th>ACEPTADO</th>
 								<th>LOCAL</th>
@@ -105,7 +104,6 @@
 								<td th:text="${solicitudStock.cantidad}"></td>
 								<td th:text="${solicitudStock.vendedor.nombre}"></td>
 								<td th:text="${solicitudStock.cliente.nombre}"></td>
-								<td th:text="${solicitudStock.facturado}"></td>
 								<td th:if="${solicitudStock.aceptado}"
 									th:text="${solicitudStock.colaborador.nombre}"></td>
 								
