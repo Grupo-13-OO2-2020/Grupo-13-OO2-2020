@@ -53,7 +53,7 @@ public class ClienteController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_INDEX);
 		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
 		
-		PageRequest pageRequest = PageRequest.of(page, 5);
+		PageRequest pageRequest = PageRequest.of(page, 1);
 		
 		Page<ClienteModel> pageCliente = clienteService.getAllPages(pageRequest);
 		

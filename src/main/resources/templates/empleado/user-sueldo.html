@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>Lista de items</title>
+<title>Lista usuarios</title>
 
 <!-- Normalize V8.0.1 -->
 <link rel="stylesheet" href="/css/normalize.css">
@@ -32,9 +32,8 @@
 
 
 </head>
-
-
 <body>
+
 	<!-- Main container -->
 	<main class="full-box main-container">
 		<!-- Nav lateral -->
@@ -46,13 +45,15 @@
 					<img src="/assets/avatar/Avatar.png" class="img-fluid"
 						alt="Avatar">
 					<figcaption class="roboto-medium text-center">
-						Usuario Logueado <br> <small class="roboto-condensed-light">Web
-							Empleado</small>
+						Carlos Alfaro <br>
+						<small class="roboto-condensed-light">Web Developer</small>
 					</figcaption>
 				</figure>
-				<div class="full-box nav-lateral-bar"></div>
-				<nav th:replace="nav_local :: nav"></nav>
+				<div class="full-box nav-lateral-bar" th:replace="nav :: nav"></div>
+			</div>
 		</section>
+
+		<!-- Page content -->
 		<section class="full-box page-content">
 			<nav class="full-box navbar-info">
 				<a href="#" class="float-left show-nav-lateral"> <i
@@ -62,81 +63,96 @@
 					class="fas fa-power-off"></i>
 				</a>
 			</nav>
+
 			<!-- Page header -->
 			<div class="full-box page-header">
 				<h3 class="text-left">
-					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS
+					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE
+					USUARIOS
 				</h3>
 				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Harum delectus eos enim numquam fugit optio
-					accusantium, aperiam eius facere architecto facilis quibusdam
-					asperiores veniam omnis saepe est et, quod obcaecati.</p>
+					adipisicing elit. Suscipit nostrum rerum animi natus beatae ex.
+					Culpa blanditiis tempore amet alias placeat, obcaecati quaerat
+					ullam, sunt est, odio aut veniam ratione.</p>
 			</div>
+
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-					<li><a href="item-new.html"><i class="fas fa-plus fa-fw"></i>
-							&nbsp; AGREGAR ITEM</a></li>
-					<li><a class="active" href="item-list.html"><i
-							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS</a></li>
-					<li><a href="item-search.html"><i
-							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM</a></li>
+					<li><a th:href="@{/empleados/new}"><i class="fas fa-plus fa-fw"></i>&nbsp; NUEVO EMPLEADO</a></li>
+
+					<li><a class="active" href="user-list.html"><i
+							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE EMPLEADOS</a>
+					</li>
+
+					<li><a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR EMPLEADO</a></li>
 				</ul>
 			</div>
 
-			<!--CONTENT-->
+			<!-- Content -->
 			<div class="container-fluid">
 				<div class="table-responsive">
 					<table class="table table-dark table-sm">
 						<thead>
 							<tr class="text-center roboto-medium">
+							
 								<th>ID</th>
-								<th>FECHA</th>
-								<th>PRODUCTO</th>
-								<th>CANTIDAD</th>
-								<th>VENDEDOR</th>
-								<th>CLIENTE</th>
-								<th>FACTURADO</th>
-								<th>FORMA DE PAGO</th>
+								<th>DNI</th>
+								<th>NOMBRE</th>
+								<th>APELLIDO</th>
+								<th>FECHA DE NACIMIENTO</th>
+								<th>HORARIO DE ENTRADA</th>
+								<th>HORARIO DE SALIDA</th>
+								<th>TIPO EMPLEADO</th>
+								<th>SUELDO</th>
+								<th>GERENTE</th>
 								<th></th>
-								<th></th>
-								<th></th>
+					<th></th>
+					<th></th>
 							</tr>
 						</thead>
 						<tbody>
+							<div th:each="empleado:${empleados}" S>
 
+								<td th:text="${empleado.id}"></td>
+								<td th:text="${empleado.dni}"></td>
+								<td th:text="${empleado.nombre}"></td>
+								<td th:text="${empleado.apellido}"></td>
+								<td th:text="${empleado.fechaNacimiento}"></td>
+								<td th:text="${empleado.horarioEntrada}"></td>
+								<td th:text="${empleado.horarioSalida}"></td>
+								<td th:text="${empleado.tipoEmpleado}"></td>
+								<td th:text="${empleado.sueldo}"></td>
+								<td th:text="${empleado.gerente}"></td>
+								
+										<td>
+						<a th:href ="@{/empleados/sueldo/{idl}(idl=${local.id})}"class="btn btn-primary">CalcularSueldos</a>
+										</td>
+								<td>
+									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
+									class="btn btn-success"> <i class="fas fa-sync-alt"></i>
+									</a>
+								</td>
 
-							<div th:each="remito:${remitos}"
-								th:if="${remito.vendedor.local.id}==${local.id}">
-								<td th:text="${remito.id}"></td>
-								<td th:text="${remito.fecha}"></td>
-								<td th:text="${remito.producto.descripcion}"></td>
-								<td th:text="${remito.cantidad}"></td>
-								<td th:text="${remito.vendedor.nombre}"></td>
-								<td th:text="${remito.cliente.nombre}"></td>
-								<td th:text="${remito.facturado}"></td>
-								<td th:text="${remito.formaDePago}"></td>
-
-
-
-								<td><a th:href="@{remitos/editar/} + ${remito.id}"
-									class="btn btn-warning">Editar</a></td>
-								<td><a th:href="@{remitos/eliminar/} + ${remito.id}"
-									class="btn btn-danger">Eliminar</a></td>
-								<td><a th:href="@{/locales/main/{id}(id=${local.id})}"
-									class="btn btn-warning">Volver</a></td>
+								<td>
+									<a th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}" button
+									type="button"
+									onclick="alert('El cliente fue eliminado con exito!')"> <i
+										class="far fa-trash-alt"></i>
+								</a>
 							</div>
-
-
 						</tbody>
 					</table>
 				</div>
-				<nav th:replace="nav2 :: nav"></nav>
+				<nav aria-label="Pagination">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" th:each="page : ${pages}">
+							<a class="page-link" th:href="@{|/empleados/?page=${page}|}" th:text="${page}"></a>
+						</li>
+					</ul>
+				</nav>
 			</div>
+
 		</section>
-
-
-
-
 	</main>
 
 
@@ -157,11 +173,7 @@
 
 	<!-- Bootstrap Material Design V4.0 -->
 	<script src="/js/bootstrap-material-design.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('body').bootstrapMaterialDesign();
-		});
-	</script>
+	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
 
 	<script src="/js/main.js"></script>
 </body>
