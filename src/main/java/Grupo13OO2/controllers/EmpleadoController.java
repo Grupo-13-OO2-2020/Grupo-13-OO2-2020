@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import java.util.stream.IntStream;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 
+import Grupo13OO2.Entities.Empleado;
 import Grupo13OO2.Models.ClienteModel;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
@@ -140,5 +142,13 @@ int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toStri
 		mAV.addObject("person", empleadoService.ListarId(id));
 		return mAV;
 	}
+	
+	 @RequestMapping("/search")
+		public String search(Model model, @Param("keyword") String keyword){
+			List<Empleado> list = empleadoService.listAll(keyword);
+			model.addAttribute("list", list);
+			return "empleado/search";
+		} 
+		  
 
 }

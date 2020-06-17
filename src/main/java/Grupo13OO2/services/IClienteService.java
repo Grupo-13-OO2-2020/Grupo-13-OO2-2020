@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import Grupo13OO2.Entities.Cliente;
 import Grupo13OO2.Models.ClienteModel;;
 
 public interface IClienteService {
@@ -17,4 +18,6 @@ public interface IClienteService {
 	public String delete(int id);
 	
 	Page<ClienteModel> getAllPages(Pageable pageable);
+	
+	public List<Cliente> listAll(String keyword);
 }

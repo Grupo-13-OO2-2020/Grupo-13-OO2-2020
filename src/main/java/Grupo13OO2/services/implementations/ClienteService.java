@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 
 import Grupo13OO2.Entities.Cliente;
+import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Models.ClienteModel;
 import Grupo13OO2.converters.ClienteConverter;
 import Grupo13OO2.repositories.IClienteRepository;
@@ -68,5 +69,13 @@ public class ClienteService implements IClienteService {
 		});
 
 		return pages;
+	}
+	
+	@Override
+	public List<Cliente> listAll(String keyword){
+		if(keyword != null){
+			return clienteRepository.findAll(keyword);
+		}
+		return clienteRepository.findAll();
 	}
 }

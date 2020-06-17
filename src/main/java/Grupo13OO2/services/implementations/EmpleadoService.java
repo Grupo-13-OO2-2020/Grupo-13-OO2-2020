@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import Grupo13OO2.Entities.Cliente;
 import Grupo13OO2.Entities.Empleado;
 import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Models.EmpleadoModel;
@@ -88,5 +89,13 @@ public class EmpleadoService implements IEmpleadoService {
 		});
 		
 		return pages;
+	}
+	
+	@Override
+	public List<Empleado> listAll(String keyword){
+		if(keyword != null){
+			return empleadoRepository.findAll(keyword);
+		}
+		return empleadoRepository.findAll();
 	}
 }

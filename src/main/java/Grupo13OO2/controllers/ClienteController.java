@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -29,6 +30,8 @@ import java.util.stream.IntStream;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 
+import Grupo13OO2.Entities.Cliente;
+import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Models.ClienteModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IClienteService;
@@ -103,5 +106,13 @@ public class ClienteController {
 		clienteService.delete(id);
 		return new RedirectView("/clientes/0");
 	}
+	
+	 @RequestMapping("/search")
+	public String search(Model model, @Param("keyword") String keyword){
+		List<Cliente> list = clienteService.listAll(keyword);
+		model.addAttribute("list", list);
+		return "cliente/search";
+	} 
+	  
 
 }
