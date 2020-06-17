@@ -99,15 +99,9 @@ public class ProductoController {
 	
 	@RequestMapping("/search")
 	public String search(Model model, @Param("keyword") String keyword){
-		List<Producto> list = productoService.listAll(keyword);
+		List<ProductoModel> list = productoService.listAll(keyword);
 		model.addAttribute("list", list);
 		return "producto/search";
 	}
 
-	// @RequestMapping("/reporte")
-	// public String vistaReporte(Model model, @Param("idLocal") Integer idLocal){
-
-	// 	//List<Producto> list = localService.productosVendidosEntreFechas(local, comienzo, fin);
-	// 	return "producto/reporte-local";
-	// }
 }

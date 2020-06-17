@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import Grupo13OO2.Entities.Local;
-import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Entities.SolicitudStock;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.converters.LocalConverter;
@@ -66,10 +64,11 @@ public class SolicitudStockService implements ISolicitudStockService {
 		solicitudStockModel.setVendedor(empleadoService.ListarId(solicitudStockModel.getVendedor().getId()));
 		solicitudStockModel
 				.setLocalDestinatario(localService.findById(solicitudStockModel.getLocalDestinatario().getId()));
-		solicitudStockModel.setColaborador(empleadoService.ListarId(solicitudStockModel.getColaborador().getId()));
-
+		
+		if (solicitudStockModel.getColaborador() != null) {
+			solicitudStockModel.setColaborador(empleadoService.ListarId(solicitudStockModel.getColaborador().getId()));
+		}
 		SolicitudStock solicitudStock = solicitudStockRepository.save(solicitudStockConverter.modelToEntity(solicitudStockModel));
-		int i = 0;
 		return solicitudStockConverter.entityToModel(solicitudStock);
 	}
 
@@ -130,4 +129,22 @@ public class SolicitudStockService implements ISolicitudStockService {
 
 		return pages;
 	}
+
+//	@Override
+//	public List<SolicitudStockModel> listAll(String keyword) {
+//		if(keyword != null){List<SolicitudStock> s= solicitudStockRepository.findAll(keyword);
+//		List<SolicitudStockModel> sS= new ArrayList<SolicitudStockModel>();
+//		for(SolicitudStock solicitud: s) {
+//			sS.add(solicitudStockConverter.entityToModel(solicitud));
+//		}
+//		return sS;
+//		}
+//		
+//		List<SolicitudStock> s= solicitudStockRepository.findAll(keyword);
+//		List<SolicitudStockModel> sS= new ArrayList<SolicitudStockModel>();
+//		for(SolicitudStock solicitud: s) {
+//			sS.add(solicitudStockConverter.entityToModel(solicitud));
+//		}
+//		return sS;
+//	}
 }

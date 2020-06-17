@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import Grupo13OO2.Models.SolicitudStockModel;
+import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Models.LocalModel;
 
 public interface ISolicitudStockService {
@@ -22,7 +23,8 @@ public interface ISolicitudStockService {
 
 	
 	Page<SolicitudStockModel> getAllPages(Pageable pageable);
-
+	
+//		public List<SolicitudStockModel> listAll(String keyword);
 	// public void aceptarSolcitudStock(SolicitudStockModel
 	// solicitudStockModel,EmpleadoModel empleado,LocalModel local);
 }
