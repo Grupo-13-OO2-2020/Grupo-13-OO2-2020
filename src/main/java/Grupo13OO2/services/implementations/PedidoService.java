@@ -44,6 +44,9 @@ public class PedidoService implements IPedidoService {
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
 
 		return pedidoConverter.entityToModel(pedido.get());
+		
+		
+		
 	}
 
 }

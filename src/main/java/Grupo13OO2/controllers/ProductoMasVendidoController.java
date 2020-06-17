@@ -36,9 +36,10 @@ public class ProductoMasVendidoController {
 	public ModelAndView index() {										
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.MASVENDIDO_INDEX);
 		List<ProductoMasVendidoModel> PMasVendido = ProdMasVend(pedidoService.getAll());
-		mAV.addObject("ProdMasVendido",PMasVendido);
+		mAV.addObject("prodmasVendido",PMasVendido);
 		return mAV;		
 	}
+	
 	
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
@@ -53,6 +54,7 @@ public class ProductoMasVendidoController {
 	public RedirectView redirect(@ModelAttribute("Productomasvendido") ProductoMasVendidoModel ProductoMasVendidoModel){
 		return new RedirectView(ViewRouteHelper.MASVENDIDO_INDEX);
 		}
+	
 	
 	
 	public List<ProductoMasVendidoModel> ProdMasVend(List<Pedido> pedidos){
