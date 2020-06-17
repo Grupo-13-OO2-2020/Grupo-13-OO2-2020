@@ -94,24 +94,23 @@
 				</a>
 				
 				
-
-				<a href="reservation-list.html" class="tile">
-					<div class="tile-tittle">REMITOS</div>
+				<a th:href="@{/remitos}" class="tile">
+					<div class="tile-tittle">Remitos</div>
 					<div class="tile-icon">
 						<i class="fas fa-file-invoice-dollar fa-fw"></i>
 						<p>10 Registrados</p>
 					</div>
 				</a>
 				
-				<a href="/solicitudesStock" class="tile">
+				<a th:href="@{/solicitudesStock}" class="tile">
 					<div class="tile-tittle">SOLICITUD EXTERNA</div>
 					<div class="tile-icon">
 						<i class="fas fa-file-invoice-dollar fa-fw"></i>
-						<p>10 Registrados</p>
+							<p>10 Registrados</p>
 					</div>
 				</a>
 
-				<a href="/empleados" class="tile">
+				<a <a th:href="@{/empleados}" class="tile">
 					<div class="tile-tittle">EMPLEADOS</div>
 					<div class="tile-icon">
 						<i class="fas fa-user-secret fa-fw"></i>
@@ -119,7 +118,7 @@
 					</div>
 				</a>
 
-				<a href="/locales" class="tile">
+				<a th:href="@{/locales}" class="tile">
 					<div class="tile-tittle">LOCALES</div>
 					<div class="tile-icon">
 						<i class="fas fa-store-alt fa-fw"></i>
@@ -134,25 +133,6 @@
 	</main>
 	
 	
-	<!--=============================================
-	=            Include JavaScript files           =
-	==============================================-->
-	<!-- jQuery V3.4.1 -->
-	<script src="../js/jquery-3.4.1.min.js" ></script>
-
-	<!-- popper -->
-	<script src="../js/popper.min.js" ></script>
-
-	<!-- Bootstrap V4.3 -->
-	<script src="../js/bootstrap.min.js" ></script>
-
-	<!-- jQuery Custom Content Scroller V3.1.5 -->
-	<script src="../js/jquery.mCustomScrollbar.concat.min.js" ></script>
-
-	<!-- Bootstrap Material Design V4.0 -->
-	<script src="../js/bootstrap-material-design.min.js" ></script>
-	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
-
-	<script src="../js/main.js" ></script>
+	<div th:replace="scripts-footer.html"></div>
 </body>
 </html>

@@ -135,7 +135,23 @@
 							</tbody>
 					</table>
 				</div>
-						<nav th:replace="nav2 :: nav"></nav>
+						<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						
+						<li class="page-item"
+							th:classappend="${prev == 0 ? 'disabled': '' }">
+							<a class="page-link" th:href="@{|/clientes/?page=${prev}|}">Anterior</a>
+							</li>
+						<li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active': '' }">
+						<a	class="page-link" th:href="@{|/clientes/?page=${page}|}"
+							th:text="${page}"></a>
+							<li class="page-item"
+							th:classappend="${current == last ? 'disabled': '' }">
+							<a class="page-link" th:href="@{|/clientes/?page=${next}|}">Proxima</a>
+							</li>	
+							
+					</ul>
+				</nav>
 
 			</div>
 
@@ -143,29 +159,6 @@
 	</main>
 
 
-	<!--=============================================
-	=            Include JavaScript files           =
-	==============================================-->
-	<!-- jQuery V3.4.1 -->
-	<script src="./js/jquery-3.4.1.min.js"></script>
-
-	<!-- popper -->
-	<script src="./js/popper.min.js"></script>
-
-	<!-- Bootstrap V4.3 -->
-	<script src="./js/bootstrap.min.js"></script>
-
-	<!-- jQuery Custom Content Scroller V3.1.5 -->
-	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
-
-	<!-- Bootstrap Material Design V4.0 -->
-	<script src="./js/bootstrap-material-design.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('body').bootstrapMaterialDesign();
-		});
-	</script>
-
-	<script src="./js/main.js"></script>
+		<div th:replace="scripts-footer.html"></div>
 </body>
 </html>

@@ -4,31 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>Lista usuarios</title>
+<title>Lista de Empleados</title>
 
 <!-- Normalize V8.0.1 -->
-<link rel="stylesheet" href="../css/normalize.css">
+<link rel="stylesheet" href="/css/normalize.css">
 
 <!-- Bootstrap V4.3 -->
-<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
 <!-- Bootstrap Material Design V4.0 -->
-<link rel="stylesheet" href="../css/bootstrap-material-design.min.css">
+<link rel="stylesheet" href="/css/bootstrap-material-design.min.css">
 
 <!-- Font Awesome V5.9.0 -->
-<link rel="stylesheet" href="../css/all.css">
+<link rel="stylesheet" href="/css/all.css">
 
 <!-- Sweet Alerts V8.13.0 CSS file -->
-<link rel="stylesheet" href="../css/sweetalert2.min.css">
+<link rel="stylesheet" href="/css/sweetalert2.min.css">
 
 <!-- Sweet Alert V8.13.0 JS file-->
-<script src="../js/sweetalert2.min.js"></script>
+<script src="/js/sweetalert2.min.js"></script>
 
 <!-- jQuery Custom Content Scroller V3.1.5 -->
-<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
 
 <!-- General Styles -->
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
 
 </head>
@@ -45,8 +45,7 @@
 					<img src="../assets/avatar/Avatar.png" class="img-fluid"
 						alt="Avatar">
 					<figcaption class="roboto-medium text-center">
-						Carlos Alfaro <br>
-						<small class="roboto-condensed-light">Web Developer</small>
+						Usuario Logueado <br> <small class="roboto-condensed-light">Empleado</small>
 					</figcaption>
 				</figure>
 				<div class="full-box nav-lateral-bar" th:replace="nav :: nav"></div>
@@ -68,23 +67,20 @@
 			<div class="full-box page-header">
 				<h3 class="text-left">
 					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE
-					USUARIOS
+					EMPLEADOS
 				</h3>
-				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Suscipit nostrum rerum animi natus beatae ex.
-					Culpa blanditiis tempore amet alias placeat, obcaecati quaerat
-					ullam, sunt est, odio aut veniam ratione.</p>
+				<p class="text-justify"></p>
 			</div>
 
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-					<li><a th:href="@{/empleados/new}"><i class="fas fa-plus fa-fw"></i>&nbsp; NUEVO EMPLEADO</a></li>
+					<li><a th:href="@{/empleados/new}"><i
+							class="fas fa-plus fa-fw"></i>&nbsp; NUEVO EMPLEADO</a></li>
 
-					<li><a class="active" href="user-list.html"><i
-							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE EMPLEADOS</a>
-					</li>
 
-					<li><a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR EMPLEADO</a></li>
+
+					<li><a href="user-search.html"><i
+							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR EMPLEADO</a></li>
 				</ul>
 			</div>
 
@@ -94,7 +90,7 @@
 					<table class="table table-dark table-sm">
 						<thead>
 							<tr class="text-center roboto-medium">
-							
+
 								<th>ID</th>
 								<th>DNI</th>
 								<th>NOMBRE</th>
@@ -106,11 +102,12 @@
 								<th>SUELDO</th>
 								<th>GERENTE</th>
 								<th>LOCAL</th>
-					
+								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="empleado:${empleados}" style="text-align:center;">
+							<tr th:each="empleado:${empleados}" style="text-align: center;">
 
 								<td th:text="${empleado.id}"></td>
 								<td th:text="${empleado.dni}"></td>
@@ -123,15 +120,14 @@
 								<td th:text="${empleado.sueldo}"></td>
 								<td th:text="${empleado.gerente}"></td>
 								<td th:text="${empleado.local.direccion}"></td>
-					
-								<td>
-									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
-									class="btn btn-success"> <i class="fas fa-sync-alt"></i>
-									</a>
-								</td>
 
-								<td>
-									<a th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}" button
+								<td><a
+									th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
+									class="btn btn-success"> <i class="fas fa-sync-alt"></i>
+								</a></td>
+
+								<td><a
+									th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}" button
 									type="button"
 									onclick="alert('El cliente fue eliminado con exito!')"> <i
 										class="far fa-trash-alt"></i>
@@ -140,11 +136,22 @@
 						</tbody>
 					</table>
 				</div>
-				<nav aria-label="Pagination">
+				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
-						<li class="page-item" th:each="page : ${pages}">
-							<a class="page-link" th:href="@{|/empleados/?page=${page}|}" th:text="${page}"></a>
+
+						<li class="page-item"
+							th:classappend="${prev == 0 ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/empleados/?page=${prev}|}">Anterior</a>
 						</li>
+						<li class="page-item" th:each="page : ${pages}"
+							th:classappend="${current == page ? 'active': '' }"><a
+							class="page-link" th:href="@{|/empleados/?page=${page}|}"
+							th:text="${page}"></a>
+						<li class="page-item"
+							th:classappend="${current == last ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/empleados/?page=${next}|}">Proxima</a>
+						</li>
+
 					</ul>
 				</nav>
 			</div>
@@ -153,25 +160,6 @@
 	</main>
 
 
-	<!--=============================================
-	=            Include JavaScript files           =
-	==============================================-->
-	<!-- jQuery V3.4.1 -->
-	<script src="../js/jquery-3.4.1.min.js"></script>
-
-	<!-- popper -->
-	<script src="../js/popper.min.js"></script>
-
-	<!-- Bootstrap V4.3 -->
-	<script src="../js/bootstrap.min.js"></script>
-
-	<!-- jQuery Custom Content Scroller V3.1.5 -->
-	<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-
-	<!-- Bootstrap Material Design V4.0 -->
-	<script src="../js/bootstrap-material-design.min.js"></script>
-	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
-
-	<script src="../js/main.js"></script>
+	<div th:replace="scripts-footer.html"></div>
 </body>
 </html>

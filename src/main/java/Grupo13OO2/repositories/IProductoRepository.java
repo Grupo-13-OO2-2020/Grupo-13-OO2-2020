@@ -14,4 +14,6 @@ public interface IProductoRepository extends JpaRepository<Producto, Integer> {
 
 	@Query("SELECT p FROM Producto p WHERE p.descripcion LIKE %?1%")
 	public List<Producto> findAll(String keyword);
+	
+	
 }

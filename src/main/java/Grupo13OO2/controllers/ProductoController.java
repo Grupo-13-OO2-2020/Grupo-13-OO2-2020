@@ -94,8 +94,9 @@ public class ProductoController {
 	
 	@RequestMapping("/search")
 	public String search(Model model, @Param("keyword") String keyword){
-		List<Producto> list = productoService.listAll(keyword);
+		List<ProductoModel> list = productoService.listAll(keyword);
 		model.addAttribute("list", list);
 		return "producto/search";
 	}
+
 }
