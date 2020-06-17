@@ -105,47 +105,36 @@
 									<label>ID</label> <input th:field="*{id}" type="text"
 										class="form-control" />
 								</div>
-								<div class="col-12 col-md-6">
+								<div class="col-12 col-md-2">
 									<div class="form-group">
-										<label class="bmd-label-floating">DNI</label> <input
-											th:field="*{dni}" type="number" pattern="[0-9-]{1,27}"
-											class="form-control" maxlength="8"> <small
-											class="form-text text-danger"
-											th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
-									</div>
-								</div>
-								<div class="col-12 col-md-6">
-									<div class="form-group">
-										<label class="bmd-label-floating">Nombre</label> <input
-											th:field="*{nombre}" type="text" class="form-control"
-											pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" maxlength="40">
-										<small class="form-text text-danger"
-											th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+										<label class="bmd-label-floating">DNI</label> 
+										<input th:field="*{dni}" type="number" pattern="[0-9-]{1,27}" class="form-control" maxlength="8"> 
+										<small class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
 									</div>
 								</div>
 								<div class="col-12 col-md-4">
 									<div class="form-group">
-										<label class="bmd-label-floating">Apellido</label> <input
-											th:field="*{apellido}" type="text" class="form-control"
-											pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" maxlength="40">
-										<small class="form-text text-danger"
-											th:if="${#fields.hasErrors('apellido')}"
-											th:errors="*{apellido}"></small>
+										<label class="bmd-label-floating">Nombre</label> 
+										<input th:field="*{nombre}" type="text" class="form-control" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" maxlength="40">
+										<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
 									</div>
 								</div>
-								<div class="col-12 col-md-6">
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+										<label class="bmd-label-floating">Apellido</label> 
+										<input th:field="*{apellido}" type="text" class="form-control" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" maxlength="40">
+										<small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
+									</div>
+								</div>
+								<div class="col-12 col-md-2">
 									<div class="form-group">
 										<label class="bmd-label-floating">Fecha de Nacimiento</label>
-										<input th:field="*{fechaNacimiento}" type="date"  placeholder="dd-mm-yyyy"
-										max="31-12-3000"       min="01-01-1900" 
-											class="form-control" pattern="dd-mm-yyyy"
-											> 
-											<small class="form-text text-danger"
-											th:if="${#fields.hasErrors('fechaNacimiento')}"
-											th:errors="*{fechaNacimiento}"></small>
+										<input th:field="*{fechaNacimiento}" type="date"  placeholder="dd-mm-yyyy" max="31-12-3000" min="01-01-1900" 
+											class="form-control" pattern="dd-mm-yyyy"> 
+											<small class="form-text text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></small>
 									</div>
 								</div>
-								<div class="col-12 col-md-4">
+								<div class="col-12 col-md-3">
 									<div class="form-group">
 										<label class="bmd-label-floating">Teléfono</label> <input
 											th:field="*{numero}" type="number" class="form-control"
@@ -154,16 +143,16 @@
 											th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}"></small>
 									</div>
 								</div>
-								<div class="col-12 col-md-4">
+								<div class="col-12 col-md-2">
 									<div class="form-group">
-										<label class="bmd-label-floating">Cuil</label> <input
+										<label class="bmd-label-floating">Cuil</label> <input th:field="*{cuil}"
 											type="number" pattern="[0-9()+]{1,20}" class="form-control"
 											maxlength="20">
 										<small class="form-text text-danger"
 											th:if="${#fields.hasErrors('cuil')}" th:errors="*{cuil}"></small>
 									</div>
 								</div>
-								<div class="col-12 col-md-4">
+								<div class="col-12 col-md-2">
 									<div class="form-group">
 										<label class="bmd-label-floating">Cuit</label> <input
 											th:field="*{cuit}" type="number" class="form-control"
@@ -174,9 +163,9 @@
 								</div>
 								<div class="col-12 col-md-4">
 									<div class="form-group">
-										<label class="bmd-label-floating">Correo Electronico</label> <input
-											input th:field="*{cuil}" type="Email" class="form-control"
-											pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#- ]{1,150}" maxlength="<50">
+										<label class="bmd-label-floating">Correo Electronico</label> 
+										<input th:field="*{email}" type="Email" class="form-control"
+											pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#- ]{1,150}" maxlength="50">
 										<small class="form-text text-danger"
 											th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
 									</div>
