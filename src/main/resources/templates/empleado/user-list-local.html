@@ -87,7 +87,35 @@
 					<li><a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR EMPLEADO</a></li>
 
 					<li>
-						<a id="bot1" class="fas fa-clipboard-list fa-fw"  role="button" ></i> &nbsp; CALCULAR SUELDOS TOTALES</a>
+						<div>
+							<!-- Button trigger modal -->
+								<button id="bot1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+									Calcular Sueldo Total
+								</button>
+								
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Sueldo total por empleado</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+			
+											<div th:each="empleado:${empleados}" class="modal-body">
+												<div id="cambio"></div>
+											</div>
+			
+											<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-primary">Save changes</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 					</li>
 				</ul>
 			</div>
@@ -109,11 +137,10 @@
 								<th>TIPO EMPLEADO</th>
 								<th>SUELDO</th>
 								<th>GERENTE</th>
-								<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="empleado:${empleados}" th:if="${empleado.local.id}==${local.id}">
+							<tr th:each="empleado:${empleados}">
 
 								<td id="reemplazo" th:text="${empleado.id}"></td>
 								<td th:text="${empleado.dni}"></td>
@@ -125,11 +152,6 @@
 								<td th:text="${empleado.tipoEmpleado}"></td>
 								<td th:text="${empleado.sueldo}"></td>
 								<td th:text="${empleado.gerente}"></td>
-								
-								<td>
-									<span ><a id="bot" class="btn btn-primary"  role="button" >Calcular Sueldo</a></span>
-									<!-- <a th:href ="@{/empleados/sueldo/{idl}(idl=${empleado.id})}"class="btn btn-primary">CalcularSueldos</a> -->
-								</td>
 
 								<td>
 									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
@@ -147,23 +169,6 @@
 						</tbody>
 					</table>
 				</div>
-					<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-						
-						<li class="page-item"
-							th:classappend="${prev == 0 ? 'disabled': '' }">
-							<a class="page-link" th:href="@{|/empleados/?page=${prev}|}">Anterior</a>
-							</li>
-						<li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active': '' }">
-						<a	class="page-link" th:href="@{|/empleados/?page=${page}|}"
-							th:text="${page}"></a>
-							<li class="page-item"
-							th:classappend="${current == last ? 'disabled': '' }">
-							<a class="page-link" th:href="@{|/empleados/?page=${next}|}">Proxima</a>
-							</li>	
-							
-					</ul>
-				</nav>
 			</div>
 
 		</section>
@@ -174,36 +179,22 @@
 		<script src="/vendor/jquery/jquery.min.js"></script>
 		<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script type="text/javascript">
-			$('#bot').click(function(){//problema solo agarra al primer id, no toma a los otros no elige al seleccionado
-					$("#reemplazo").attr("id","empleado-id");
-					var empleado = $('#empleado-id').text();
-					//console.log(empleado);
-				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
-					method: "GET",
-					url: "/empleados/sueldo/" + empleado
-				})
-				.done(function (result) {	
-					var content = result;
-					alert("El sueldo total del empleado es "+ content);
-				})
-				.fail(function() {
-					alert("error");
-				});
-			});
+			
 			$('#bot1').click(function(){//problema solo agarra al primer id, no toma a los otros no elige al seleccionado
 					$("#reemplazo").attr("id","empleado-id");
-					var local = $('#empleado-id').text();
-					//console.log(empleado);
+					var localId =  [[${local.id}]];
+
 				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
 					method: "GET",
-					url: "/empleados/sueldos/" + 1
+					url: "/empleados/sueldos/" + localId
 				})
 				.done(function (result) {	
-					$.each(result, function(index, value) {
-						alert( index + ": " + value );
-					});
 					var content = result;
-					alert("El sueldo total del empleado es "+ content);
+					$.each(content, function(index, value) {
+
+						$('#cambio').replaceWith('<div> Empleado =' + value.nombre + '---- Sueldo =' + value.sueldo + '</div>');
+					});
+					console.log(content);
 				})
 				.fail(function() {
 					alert("error");

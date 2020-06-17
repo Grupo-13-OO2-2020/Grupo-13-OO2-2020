@@ -28,6 +28,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Models.ProductoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.IProductoService;
 
 @Controller
@@ -37,6 +38,10 @@ public class ProductoController {
 	@Autowired
 	@Qualifier("productoService")
 	private IProductoService productoService;
+
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
 
 	// @GetMapping("")
 	// public ModelAndView index() {
@@ -98,4 +103,11 @@ public class ProductoController {
 		model.addAttribute("list", list);
 		return "producto/search";
 	}
+
+	// @RequestMapping("/reporte")
+	// public String vistaReporte(Model model, @Param("idLocal") Integer idLocal){
+
+	// 	//List<Producto> list = localService.productosVendidosEntreFechas(local, comienzo, fin);
+	// 	return "producto/reporte-local";
+	// }
 }

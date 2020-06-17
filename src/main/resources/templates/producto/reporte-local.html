@@ -65,75 +65,39 @@
             <!-- Page header -->
             <div class="full-box page-header">
                 <h3 class="text-left">
-                    <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS
+                    <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; REPORTE DE PROUCTOS
                 </h3>
                 <p class="text-justify">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum delectus eos enim numquam fugit optio accusantium, aperiam eius facere architecto facilis quibusdam asperiores veniam omnis saepe est et, quod obcaecati.
                 </p>
             </div>
-            <div class="container-fluid">
-                <ul class="full-box list-unstyled page-nav-tabs">
-                    <li>
-                        <a th:href="@{/productos/new}"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a>
-                    </li>
-                    <li>
-                        <a class="active" href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/productos/search}"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR PRODUCTO</a>
-                    </li>
-                    <li>
-                        <a href="/pedido/reporte-local" class="btn btn-info">Productos vendidos entre fechas</a>
-                    </li>
-                </ul>
-            </div>
             
             <!--CONTENT-->
-           <div class="container-fluid">
-				<div class="table-responsive">
-					<table class="table table-dark table-sm">
-						<thead>
-							<tr class="text-center roboto-medium">
-								<th>ID</th>
-                                <th>DESCRIPCION</th>
-                                <th>PRECIO UNITARIO</th>
-                                <th>TALLE</th>
-                                <th>CODIGO PRODUCTO</th>
-								<th>ACTUALIZAR</th>
-								<th>ELIMINAR</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="producto:${list}" style="text-align:center;">
+            <div class="container-fluid">
+                <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${fecha2 != null}" th:text="'Los productos vendidos entre las fechas '+ ${fecha1} +' y '+ ${fecha2}" class="alert">
+                </div>
+        
+                <table class="table table-striped">
+                    <thead class="bg-info">
+                        <tr>
+                            <th>DESCRIPCION</th>
+                            <th>PRECIO UNITARIO</th>
+                            <th>TALLE</th>
+                            <th>CODIGO PRODUCTO</th>
+        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="producto : ${productosFecha}">
+                            <td th:text="${producto.descripcion}"></td>
+                            <td th:text="${producto.precioUnitario}"></td>
+                            <td th:text="${producto.talle}"></td>
+                            <td th:text="${producto.codigoProducto}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-								<td th:text="${producto.id}"></td>
-								<td th:text="${producto.descripcion}"></td>
-								<td th:text="${producto.precioUnitario}"></td>
-								<td th:text="${producto.talle}"></td>
-								<td th:text="${producto.codigoProducto}"></td>
-								<td>
-                                    <a th:href="@{productos/editar/} + ${producto.id}" class="btn btn-success">
-                                        <i class="fas fa-sync-alt"></i> 
-                                    </a>
-								</td>
-								<td>
-									<a th:href ="@{productos/eliminar/{id}(id=${producto.id})}" class="btn btn-warning">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
-                                </td>
-			
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<nav aria-label="Pagination">
-					<ul class="pagination justify-content-center">
-						<li class="page-item" th:each="page : ${pages}">
-							<a class="page-link" th:href="@{|/productos/?page=${page}|}" th:text="${page}"></a>
-						</li>
-					</ul>
-				</nav>
-			</div>
         </section>
 
 

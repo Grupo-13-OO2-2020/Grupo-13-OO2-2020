@@ -66,7 +66,7 @@ public class EmpleadoController {
 	}
 
 	@GetMapping("/sueldos/{id}")
-	public @ResponseBody List<Double> sueldos(@PathVariable("id") int id) {
+	public @ResponseBody List<EmpleadoModel> sueldos(@PathVariable("id") int id) {
 		return localService.calculoSueldos(id);
 	}
 
@@ -77,25 +77,10 @@ public class EmpleadoController {
 
 	
 	@GetMapping("{id}")
-	public ModelAndView local(@PathVariable("id") int id,@RequestParam Map<String, Object> params, Model model) {
+	public ModelAndView local(@PathVariable("id") int id, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX_LOCAL);
 		mAV.addObject("local", localService.findById(id));
-int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
-		
-		PageRequest pageRequest = PageRequest.of(page, 3);
-		
-		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPages(pageRequest);
-		
-		int totalPage= pageEmpleado.getTotalPages();
-		if(totalPage>0) {
-			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-			mAV.addObject("pages",pages);
-		}
-		mAV.addObject("empleados", pageEmpleado.getContent());
-		mAV.addObject("current", page+1);
-		mAV.addObject("next" ,page+2);
-		mAV.addObject("prev" ,page);
-		mAV.addObject("last", totalPage);
+		mAV.addObject("empleados", localService.findById(id).getEmpleados());
 		
 		return mAV;
 		

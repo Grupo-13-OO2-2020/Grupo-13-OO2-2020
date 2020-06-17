@@ -2,6 +2,8 @@ package Grupo13OO2.services.implementations;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -282,15 +284,39 @@ public class LocalService implements ILocalService {
 	}
 
 	@Override
-	public List<Double> calculoSueldos(int id) {
+	public List<EmpleadoModel> calculoSueldos(int id) {
 		List<EmpleadoModel>	empleados = new ArrayList<EmpleadoModel>();
 		empleados.addAll(findById(id).getEmpleados());
 		List<Double> sueldosTotales = new ArrayList<Double>();
 
 		for (EmpleadoModel e : empleados) {
-			sueldosTotales.add(empleadoService.sueldoxEmpleado(e));
+			e.setSueldo(empleadoService.sueldoxEmpleado(e));
 		}
-		return sueldosTotales;
+		return empleados;
 	}
+	
+	@Override
+	public Set<ProductoModel> productosVendidosEntreFechas(LocalModel local, Date comienzo, Date fin) {
 
+		List<RemitoModel> remitos = getRemitos(local);
+		List<SolicitudStockModel> solicitudes = getSolicitudesStock(local);
+
+		Set<ProductoModel> productoList = new HashSet<ProductoModel>();
+
+		for(RemitoModel r : remitos){
+			if(r.getFecha().before(fin) && r.getFecha().after(comienzo) ) {
+					productoList.add(r.getProducto());
+			}
+		}
+
+		for (SolicitudStockModel s : solicitudes) {
+			if(s.getFecha().before(fin) && s.getFecha().after(comienzo) && (s.isAceptado() == true) ) {
+					productoList.add(s.getProducto());
+				
+			}
+		}
+
+		return productoList;
+
+	}
 }
