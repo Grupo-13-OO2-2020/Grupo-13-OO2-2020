@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>Lista de items</title>
+<title>Lista de Locales</title>
 
 <!-- Normalize V8.0.1 -->
 <link rel="stylesheet" href="./css/normalize.css">
@@ -43,15 +43,14 @@
 			<div class="full-box nav-lateral-content">
 				<figure class="full-box nav-lateral-avatar">
 					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="./assets/avatar/Avatar.png" class="img-fluid"
+					<img src="/assets/avatar/Avatar.png" class="img-fluid"
 						alt="Avatar">
 					<figcaption class="roboto-medium text-center">
-						Carlos Alfaro <br> <small class="roboto-condensed-light">Web
-							Developer</small>
+					Usuario Logueado <br> <small class="roboto-condensed-light">Empleado</small>
 					</figcaption>
 				</figure>
 				<div class="full-box nav-lateral-bar"></div>
-				<nav th:replace="left_panel :: nav"></nav>
+				<nav th:replace="nav :: nav"></nav>
 		</section>
 		<section class="full-box page-content">
 			<nav class="full-box navbar-info">
@@ -65,21 +64,17 @@
 			<!-- Page header -->
 			<div class="full-box page-header">
 				<h3 class="text-left">
-					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS
+					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE LOCALES
 				</h3>
-				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Harum delectus eos enim numquam fugit optio
-					accusantium, aperiam eius facere architecto facilis quibusdam
-					asperiores veniam omnis saepe est et, quod obcaecati.</p>
+				<p class="text-justify"></p>
 			</div>
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-					<li><a href="item-new.html"><i class="fas fa-plus fa-fw"></i>
-							&nbsp; AGREGAR ITEM</a></li>
-					<li><a class="active" href="item-list.html"><i
-							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS</a></li>
+					<li><a href="/locales/new"><i class="fas fa-plus fa-fw"></i>
+							&nbsp; AGREGAR LOCAL</a></li>
+					
 					<li><a href="item-search.html"><i
-							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM</a></li>
+							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR LOCAL</a></li>
 				</ul>
 			</div>
 
@@ -89,7 +84,7 @@
 					<table class="table table-dark table-sm">
 						<thead>
 							<tr class="text-center roboto-medium">
-								<th>ID</th>
+					<th>ID</th>
 					<th>DIRECCION</th>
 					<th>LATITUD</th>
 					<th>LONGITUD</th>

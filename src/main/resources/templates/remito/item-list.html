@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>Lista de items</title>
+<title>Remitos</title>
 
 <!-- Normalize V8.0.1 -->
 <link rel="stylesheet" href="/css/normalize.css">
@@ -46,8 +46,8 @@
 					<img src="./assets/avatar/Avatar.png" class="img-fluid"
 						alt="Avatar">
 					<figcaption class="roboto-medium text-center">
-						Carlos Alfaro <br> <small class="roboto-condensed-light">Web
-							Developer</small>
+						Usuario Logueado <br> <small class="roboto-condensed-light">
+							Empleado</small>
 					</figcaption>
 				</figure>
 				<div class="full-box nav-lateral-bar"></div>
@@ -65,21 +65,15 @@
 			<!-- Page header -->
 			<div class="full-box page-header">
 				<h3 class="text-left">
-					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS
+					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; REMITOS
 				</h3>
-				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Harum delectus eos enim numquam fugit optio
-					accusantium, aperiam eius facere architecto facilis quibusdam
-					asperiores veniam omnis saepe est et, quod obcaecati.</p>
+				<p class="text-justify"></p>
 			</div>
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-					<li><a href="item-new.html"><i class="fas fa-plus fa-fw"></i>
-							&nbsp; AGREGAR ITEM</a></li>
-					<li><a class="active" href="item-list.html"><i
-							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS</a></li>
+					
 					<li><a href="item-search.html"><i
-							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM</a></li>
+							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR REMITO</a></li>
 				</ul>
 			</div>
 
@@ -97,6 +91,7 @@
 								<th>CLIENTE</th>
 								<th>FACTURADO</th>
 								<th>FORMA DE PAGO</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -121,7 +116,23 @@
 						</tbody>
 					</table>
 				</div>
-				<nav th:replace="nav2 :: nav"></nav>
+			<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						
+						<li class="page-item"
+							th:classappend="${prev == 0 ? 'disabled': '' }">
+							<a class="page-link" th:href="@{|/remitos/?page=${prev}|}">Anterior</a>
+							</li>
+						<li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active': '' }">
+						<a	class="page-link" th:href="@{|/remitos/?page=${page}|}"
+							th:text="${page}"></a>
+							<li class="page-item"
+							th:classappend="${current == last ? 'disabled': '' }">
+							<a class="page-link" th:href="@{|/remitos/?page=${next}|}">Proxima</a>
+							</li>	
+							
+					</ul>
+				</nav>
 			</div>
 		</section>
 
