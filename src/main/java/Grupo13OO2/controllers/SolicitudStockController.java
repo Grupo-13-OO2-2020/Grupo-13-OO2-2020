@@ -1,19 +1,27 @@
 package Grupo13OO2.controllers;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import Grupo13OO2.Entities.SolicitudStock;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.converters.SolicitudStockConverter;
@@ -53,19 +61,58 @@ public class SolicitudStockController {
 	private ILocalService localService;
 
 	@GetMapping("")
-	public ModelAndView index() {
+	public ModelAndView index(@RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_INDEX);
-		mAV.addObject("solicitudesStock", solicitudStockService.getAll());
+		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
+		PageRequest pageRequest = PageRequest.of(page, 5);
+		
+		Page<SolicitudStockModel> pageSolicitud= solicitudStockService.getAllPages(pageRequest);
+		
+		int totalPage= pageSolicitud.getTotalPages();
+		if(totalPage>0) {
+			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+			mAV.addObject("pages",pages);
+		}
+		mAV.addObject("solicitudesStock", pageSolicitud.getContent());
+		mAV.addObject("current", page+1);
+		mAV.addObject("next" ,page+2);
+		mAV.addObject("prev" ,page);
+		mAV.addObject("last", totalPage);
+		
 		return mAV;
 	}
 
 	@GetMapping("{id}")
-	public ModelAndView local(@PathVariable("id") int id) {
+	public ModelAndView local(@PathVariable("id") int id,@RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_INDEX_LOCAL);
-		mAV.addObject("solicitudes", localService.getSolicitudesStock(localService.findById(id)));
 		mAV.addObject("local", localService.findById(id));
+		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
+		PageRequest pageRequest = PageRequest.of(page, 5);
+		
+		Page<SolicitudStockModel> pageSolicitud= solicitudStockService.getAllPages(pageRequest);
+		
+		int totalPage= pageSolicitud.getTotalPages();
+		if(totalPage>0) {
+			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+			mAV.addObject("pages",pages);
+		}
+		mAV.addObject("solicitudesStock", pageSolicitud.getContent());
+		mAV.addObject("current", page+1);
+		mAV.addObject("next" ,page+2);
+		mAV.addObject("prev" ,page);
+		mAV.addObject("last", totalPage);
+				
+		
+		
 		return mAV;
 	}
+//	@GetMapping("{id}")
+//	public ModelAndView local(@PathVariable("id") int id) {
+//		ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_INDEX_LOCAL);
+//		mAV.addObject("solicitudes", localService.getSolicitudesStock(localService.findById(id)));
+//		mAV.addObject("local", localService.findById(id));
+//		return mAV;
+//	}
 
 	@GetMapping("/new/{id}")
 	public ModelAndView create(@PathVariable("id") int id) {
@@ -112,4 +159,10 @@ public class SolicitudStockController {
 		List<LocalModel> locales = solicitudStockService.getLocalesCercanos(idProducto, idVendedor, cantidad);
 		return locales;
 	}
+//	@RequestMapping("/search")
+//	public String search(Model model, @Param("keyword") String keyword){
+//		List<SolicitudStockModel> list = solicitudStockService.listAll(keyword);
+//		model.addAttribute("list", list);
+//		return "producto/search";
+//	}
 }

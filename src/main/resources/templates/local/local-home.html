@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Local</title>
+
+
+<!-- Normalize V8.0.1 -->
+<link rel="stylesheet" href="/css/normalize.css">
+
+<!-- Bootstrap V4.3 -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+<!-- Bootstrap Material Design V4.0 -->
+<link rel="stylesheet" href="/css/bootstrap-material-design.min.css">
+
+<!-- Font Awesome V5.9.0 -->
+<link rel="stylesheet" href="/css/all.css">
+
+<!-- Sweet Alerts V8.13.0 CSS file -->
+<link rel="stylesheet" href="/css/sweetalert2.min.css">
+
+<!-- Sweet Alert V8.13.0 JS file-->
+<script src="/js/sweetalert2.min.js"></script>
+
+<!-- jQuery Custom Content Scroller V3.1.5 -->
+<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+
+<!-- General Styles -->
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+	<!-- Main container -->
+	<main class="full-box main-container">
+		<!-- Nav lateral -->
+		<section class="full-box nav-lateral">
+			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
+			<div class="full-box nav-lateral-content">
+				<figure class="full-box nav-lateral-avatar">
+					<i class="far fa-times-circle show-nav-lateral"></i>
+					<img src="/assets/avatar/Avatar.png" class="img-fluid"
+						alt="Avatar">
+					<figcaption class="roboto-medium text-center">
+						Usuario Logueado<br>
+						<small class="roboto-condensed-light">Web Developer</small>
+					</figcaption>
+				</figure>
+				<div class="full-box nav-lateral-bar" th:replace="nav_local :: nav"></div>
+			</div>
+		</section>
+
+		<!-- Page content -->
+		<section class="full-box page-content">
+			<nav class="full-box navbar-info">
+				<a href="#" class="float-left show-nav-lateral"> <i
+					class="fas fa-exchange-alt"></i>
+				</a> <a href="user-update.html"> <i class="fas fa-user-cog"></i>
+				</a> <a href="#" class="btn-exit-system"> <i
+					class="fas fa-power-off"></i>
+				</a>
+			</nav>
+
+			<!-- Page header -->
+			<div class="full-box page-header">
+				<h3 class="text-left">
+					<i class="fab fa-dashcube fa-fw"></i> &nbsp; Bienvenido
+				</h3>
+				<p class="text-justify"> Aqui encontrara las categorias discriminadas por el local,
+				esta vista debera sera la principal si se loguea un vendedor, ya que solo podra acceder a la informacion
+				del local en el cual trabaja.</p>
+			</div>
+
+			<!-- Content -->
+			<div class="full-box tile-container">
+
+				 <a th:href="@{/lotes/{id}(id=${local.id})}" class="tile">
+					<div class="tile-tittle">Lotes</div>
+					<div class="tile-icon">
+						<i class="fas fa-pallet fa-fw"></i>
+						<p>9 Registrados</p>
+					</div>
+				</a> 
+
+				<a th:href="@{/remitos/{id}(id=${local.id})}" class="tile">
+					<div class="tile-tittle">Remitos</div>
+					<div class="tile-icon">
+						<i class="fas fa-file-invoice-dollar fa-fw"></i>
+						<p>10 Registrados</p>
+					</div>
+				</a>
+
+				<a th:href="@{/solicitudesStock/{id}(id=${local.id})}" class="tile">
+					<div class="tile-tittle">Solicitudes Externas</div>
+					<div class="tile-icon">
+						<i class="fas fa-file-invoice-dollar fa-fw"></i>
+						<p>10 Registrados</p>
+					</div>
+				</a> 
+				
+				<a th:href="@{/empleados/{id}(id=${local.id})}" class="tile">
+					<div class="tile-tittle">Empleados</div>
+					<div class="tile-icon">
+						<i class="fas fa-user-secret fa-fw"></i>
+						<p>50 Registrados</p>
+					</div>
+				</a> 
+				<div>
+					<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+							Reporte productos vendidos
+						</button>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle">Seleccionar entre fechas</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								</div>
+
+								<div class="modal-body">
+									<form th:action="@{/locales/reporte/{id}(id=${local.id})}" class="formulario" novalidate method="Post">
+
+										<div class="text-center">
+											<h2>Productos vendidos entre fechas</h2>
+										</div>
+
+										<div class="form-group">
+											<strong>Fecha 1</strong>
+											<input name="fecha1" class="form-control form-control-sm" type="date" required />
+											<div class="invalid-feedback">
+												Debe ingresar la fecha minima
+											</div>
+										</div>
+										<div class="form-group">
+											<strong>Fecha 2</strong>
+											<input name="fecha2" class="form-control form-control-sm" type="date" required />
+											<div class="invalid-feedback">
+												Debe ingresar la fecha maxima
+											</div>
+										</div>
+										<div class="text-center">
+											<input class="btn btn-primary button" type="submit" />
+										</div>
+									</form>
+								</div>
+
+								<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Save changes</button>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+			</div>
+
+
+		</section>
+	</main>
+		<div th:replace="scripts-footer.html"></div>
+</body>
+</html>

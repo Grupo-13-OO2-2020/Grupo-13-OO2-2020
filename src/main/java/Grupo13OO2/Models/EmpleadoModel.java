@@ -1,5 +1,6 @@
 package Grupo13OO2.Models;
 
+import java.time.LocalDate;
 import java.util.Date;
 import javax.validation.Valid;
 import javax.persistence.ManyToOne;
@@ -29,10 +30,12 @@ public class EmpleadoModel extends PersonaModel {
 	@ManyToOne
 	private LocalModel local;
 
+	private double sueldoNuevo;
+
 	public EmpleadoModel() {
 	}
 
-	public EmpleadoModel(int id, String nombre, int dni, String apellido, Date fechaNacimiento, Date horarioEntrada,
+	public EmpleadoModel(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento, Date horarioEntrada,
 			Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
@@ -42,7 +45,7 @@ public class EmpleadoModel extends PersonaModel {
 		this.gerente = gerente;
 	}
 
-	public EmpleadoModel(int id, String nombre, int dni, String apellido, Date fechaNacimiento, Date horarioEntrada,
+	public EmpleadoModel(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento, Date horarioEntrada,
 			Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente, LocalModel local) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
@@ -51,6 +54,19 @@ public class EmpleadoModel extends PersonaModel {
 		this.sueldo = sueldo;
 		this.gerente = gerente;
 		this.local = local;
+
+	}
+
+	public EmpleadoModel(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento, Date horarioEntrada,
+			Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente, LocalModel local, Double sueldoNuevo) {
+		super(id, nombre, dni, apellido, fechaNacimiento);
+		this.horarioEntrada = horarioEntrada;
+		this.horarioSalida = horarioSalida;
+		this.tipoEmpleado = tipoEmpleado;
+		this.sueldo = sueldo;
+		this.gerente = gerente;
+		this.local = local;
+		this.sueldoNuevo = sueldoNuevo;
 
 	}
 
@@ -101,5 +117,15 @@ public class EmpleadoModel extends PersonaModel {
 	public void setLocal(LocalModel local) {
 		this.local = local;
 	}
+
+	public double getSueldoNuevo() {
+		return sueldoNuevo;
+	}
+
+	public void setSueldoNuevo(double sueldoNuevo) {
+		this.sueldoNuevo = sueldoNuevo;
+	}
+
+	
 
 }

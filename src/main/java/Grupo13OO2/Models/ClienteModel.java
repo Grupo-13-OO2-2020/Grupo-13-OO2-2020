@@ -1,29 +1,29 @@
 package Grupo13OO2.Models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.validation.Valid;
 
 @Valid
 public class ClienteModel extends PersonaModel {
 
-	@NotEmpty(message = "El email es obligatorio")
+	//@NotEmpty(message = "El email es obligatorio")
 	private String email;
 	@Min(value = 1, message = "el numero no puede ser 0")
 	private int numero;
-	// @Size(min=1,max=11,message="El cuil es obligatorio")
-	@NotNull(message = "El numero es obligatorio")
+	//@Size(min=1,max=11,message="El cuil es obligatorio")
 	private long cuil;
-	// @Size(min=1,max=11,message="El cuit es obligatorio")
+	 //@Size(min=1,max=11,message="El cuit es obligatorio")
 	private long cuit;
 
 	public ClienteModel() {
 	}
 
-	public ClienteModel(int id, String nombre, int dni, String apellido, Date fechaNacimiento, String email, int numero,
+	public ClienteModel(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento, String email, int numero,
 			long cuit, long cuil) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.email = email;
@@ -64,13 +64,6 @@ public class ClienteModel extends PersonaModel {
 		this.cuit = cuit;
 	}
 
-//	public Local getLocal() {
-//		return local;
-//	}
-//
-//	public void setLocal(Local local) {
-//		this.local = local;
-//	}
-//	
+
 
 }

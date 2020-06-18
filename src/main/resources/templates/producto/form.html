@@ -1,53 +1,157 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+<html lang="es">
 <head>
-<meta charset="ISO-8859-1">
-<title>Producto</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Nuevo item</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="../css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="../css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="../css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
+
+    <!-- Sweet Alert V8.13.0 JS file-->
+    <script src="../js/sweetalert2.min.js"></script>
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.css">
+
+    <!-- General Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+
+
 </head>
-<body style="background:#DBDBDB">
 
 
-	<div class="container mt-4">
-		<div class="col-sm-6">
-			<form th:action="@{/productos/save}" th:object=${producto} method="POST">
-				<div class="card text-center border-info mb-3">
-					<div class="card-header"></div>
-					<h3>Modulo Producto</h3>
-					<div class="card-body"></div>
-					
-					<div class="form-group" style="display: none">
-						<label>ID</label> <input th:field="*{id}" type="number" class="form-control" />
-					</div>
-					<div class="form-group">
-						<label>Descripcion</label> <input th:field="*{descripcion}" type="text" class="form-control" placeholder="Descripcion"/>
-						<small class="form-text text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
-					</div>
-					<div class="form-group">
-						<label>Precio Unitario</label> <input th:field="*{precioUnitario}" type="number" class="form-control" placeholder="Precio unitario"/>
-						<small class="form-text text-danger" th:if="${#fields.hasErrors('precioUnitario')}" th:errors="*{precioUnitario}"></small>
-					</div>
-					<div class="form-group">
-						<label>Codigo de Producto</label> <input th:field="*{codigoProducto}" type="number" class="form-control" placeholder="Codigo de producto" />
-						<small class="form-text text-danger" th:if="${#fields.hasErrors('codigoProducto')}" th:errors="*{codigoProducto}"></small>
-					</div>
-					<div class="form-group">
-						<label>Talle</label> <input th:field="*{talle}" type="number" class="form-control" placeholder="Talle" />
-						<small class="form-text text-danger" th:if="${#fields.hasErrors('talle')}" th:errors="*{talle}"></small>
-					</div>
-					<div class="card-footer">
-						<input type="submit" style="background:#74C1F4" value="Guardar" class="btn btn-succes"/>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Nav lateral -->
+        <section class="full-box nav-lateral">
+            <div class="full-box nav-lateral-bg show-nav-lateral"></div>
+            <div class="full-box nav-lateral-content">
+                <figure class="full-box nav-lateral-avatar">
+                    <i class="far fa-times-circle show-nav-lateral"></i>
+                    <img src="../assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
+                    <figcaption class="roboto-medium text-center">
+                        Carlos Alfaro <br><small class="roboto-condensed-light">Web Developer</small>
+                    </figcaption>
+                </figure>
+                <div class="full-box nav-lateral-bar"></div>
+                <div class="full-box nav-lateral-bar" th:replace="nav :: nav"></div>
+            </div>
+        </section>
+        <section class="full-box page-content">
+            <nav class="full-box navbar-info">
+                <a href="#" class="float-left show-nav-lateral">
+                    <i class="fas fa-exchange-alt"></i>
+                </a>
+                <a href="user-update.html">
+                    <i class="fas fa-user-cog"></i>
+                </a>
+                <a href="#" class="btn-exit-system">
+                    <i class="fas fa-power-off"></i>
+                </a>
+            </nav>
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO
+                </h3>
+                <p class="text-justify">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque laudantium necessitatibus eius iure adipisci modi distinctio. Earum repellat iste et aut, ullam, animi similique sed soluta tempore cum quis corporis!
+                </p>
+            </div>
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a class="active" href="PRODUCTO-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/productos}" ><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a>
+                    </li>
+                    <li>
+                        <a href="PRODUCTO-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR PRODUCTO</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!--CONTENT-->
+            <div class="container-fluid">
+					<fieldset>
+						<legend><i class="far fa-plus-square"></i> &nbsp; Información del producto</legend>
+
+						<form th:action="@{/productos/save}" th:object=${producto} method="POST">
+							<div class="container-fluid">
+								<div class="row">
+
+									<div>
+										<div class="form-group" style="display: none">
+											<label class="form-group">Id</label>
+											<input th:field="*{id}" type="number" class="form-control" />
+										</div>
+									</div>
+
+									<div class="col-12 col-md-4">
+										<div class="form-group">
+											<label for="item_codigo" class="bmd-label-floating color-fuerte">Código de Producto</label>
+											<input th:field="*{codigoProducto}" type="number"  class="form-control" name="item_codigo" id="item_codigo" maxlength="45">
+										</div>
+									</div>
+									
+									<div class="col-12 col-md-8">
+										<div class="form-group">
+											<label for="item_nombre" class="bmd-label-floating color-fuerte">Descripción</label>
+											<input th:field="*{descripcion}" type="text"  class="form-control" name="item_nombre" id="item_nombre" maxlength="140">
+										</div>
+									</div>
+
+									<div class="col-12 col-md-4">
+										<div class="form-group">
+											<label for="item_stock" class="bmd-label-floating color-fuerte">Precio unitario</label>
+											<input th:field="*{precioUnitario}" type="number"  class="form-control" name="item_stock" id="item_stock" maxlength="9">
+										</div>
+									</div>
+
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+                                            <label for="item_estado" class="bmd-label-floating color-fuerte">Talle</label>
+                                            <input th:field="*{talle}" type="number"  class="form-control" name="item_talle" id="item_talle" maxlength="9">
+										</div>
+									</div>
+								</div>
+								<div class="card-footer">
+                                    <i class="far fa-save"></i>
+									<input type="submit" class="btn btn-raised btn-info btn-sm">
+								</div>
+							</div>
+						</form>
+					</fieldset>
+					<br><br><br>
+					<p class="text-center" style="margin-top: 40px;">
+						<button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
+						&nbsp; &nbsp;
+						<button type="submit" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; GUARDAR</button>
+					</p>
+			</div>
+        </section>
 
 
-					</div>
-				</div>
-			</form>
 
 
-		</div>
-
-
-	</div>
-
+    </main>
+    <div th:replace="scripts-footer.html"></div>
+    	
+	
 </body>
 </html>

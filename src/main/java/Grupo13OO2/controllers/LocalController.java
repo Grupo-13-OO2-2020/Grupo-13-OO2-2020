@@ -2,6 +2,9 @@ package Grupo13OO2.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +12,25 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
+
+import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LocalesModels;
+import Grupo13OO2.Models.ProductoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.ILoteService;
@@ -34,9 +50,25 @@ public class LocalController {
 	private ILoteService loteService;
 
 	@GetMapping("")
-	public ModelAndView index() {
+	public ModelAndView index(@RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_INDEX);
-		mAV.addObject("locales", localService.getAll());
+		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
+		
+		PageRequest pageRequest = PageRequest.of(page, 5);
+		
+		Page<LocalModel> pageLocal = localService.getAllPages(pageRequest);
+		
+		int totalPage= pageLocal.getTotalPages();
+		if(totalPage>0) {
+			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+			mAV.addObject("pages",pages);
+		}
+		mAV.addObject("locales", pageLocal.getContent());
+		mAV.addObject("current", page+1);
+		mAV.addObject("next" ,page+2);
+		mAV.addObject("prev" ,page);
+		mAV.addObject("last", totalPage);
+		
 		return mAV;
 	}
 
@@ -44,6 +76,8 @@ public class LocalController {
 	public ModelAndView main(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_MAIN);
 		mAV.addObject("local", localService.findById(id));
+		mAV.addObject("locales", localService.getAll());
+		
 		return mAV;
 	}
 
@@ -101,7 +135,6 @@ public class LocalController {
 
 	@RequestMapping(value = "/obtenerdistancia", method = RequestMethod.POST)
 	public ModelAndView sacardistancia(LocalesModels locales, Model model) {
-
 		model.addAttribute("lat1", localService.findById(locales.getPrimerLocal().getId()).getLatitud());
 		model.addAttribute("lng1", localService.findById(locales.getPrimerLocal().getId()).getLongitud());
 		model.addAttribute("dir1", localService.findById(locales.getPrimerLocal().getId()).getDireccion());
@@ -119,4 +152,22 @@ public class LocalController {
 		return mAV;
 	}
 
+
+	@RequestMapping(value = "/reporte/{id}", method = RequestMethod.POST)
+	public ModelAndView sacarprodfechas(@PathVariable("id") int id,
+			@RequestParam("fecha1") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha1,
+			@RequestParam("fecha2") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha2, Model model) {
+
+		ModelAndView mAV = new ModelAndView("producto/reporte-local");
+		LocalModel local = localService.findById(id);
+		Set<ProductoModel> listProduc = localService.productosVendidosEntreFechas(local, fecha1, fecha2);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+		mAV.addObject("fecha1", formatter.format(fecha1));
+		mAV.addObject("fecha2", formatter.format(fecha2));
+		mAV.addObject("local", local);
+		mAV.addObject("productosFecha", listProduc);
+
+		return mAV;
+	}
 }

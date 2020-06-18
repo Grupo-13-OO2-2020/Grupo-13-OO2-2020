@@ -1,14 +1,18 @@
 package Grupo13OO2.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Models.*;
 
 public interface ILocalService {
 
-	public List<Local> getAll();
+	public List<LocalModel> getAll();
 
 	public LocalModel insertOrUpdate(LocalModel localModel);
 
@@ -26,6 +30,13 @@ public interface ILocalService {
 
 	public boolean consumirLote(RemitoModel remito);
 	
-	public List<EmpleadoModel> calcularSueldos(int id);
+	//public List<EmpleadoModel> calcularSueldos(int id);
+
+	public List<EmpleadoModel> calculoSueldos(int id);
+
+	public Set<ProductoModel> productosVendidosEntreFechas(LocalModel local, Date comienzo, Date fin);
+	
+	Page<LocalModel> getAllPages(Pageable pageable);
+
 
 }

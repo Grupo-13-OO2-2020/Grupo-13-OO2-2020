@@ -1,5 +1,6 @@
 package Grupo13OO2.Entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ public class Cliente extends Persona {
 	public Cliente() {
 	}
 
-	public Cliente(int id, String nombre, int dni, String apellido, Date fechaNacimiento, String email, int numero,
+	public Cliente(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento, String email, int numero,
 			long cuit, long cuil) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.email = email;

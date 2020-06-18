@@ -1,0 +1,66 @@
+
+<nav class="full-box nav-lateral-menu">
+	<ul>
+		<li><a href="/"><i class="fab fa-dashcube fa-fw"></i>
+				&nbsp; Dashboard</a></li>
+	<li><a href="/locales"><i class="fas fa-store-alt fa-fw"></i>
+				&nbsp; Locales</a></li>
+
+		
+
+		<li><a href="#" class="nav-btn-submenu"><i
+				class="fas fa-pallet fa-fw"></i> &nbsp; Lotes <i
+				class="fas fa-chevron-down"></i></a>
+			<ul>
+
+				<li><a th:href="@{/lotes/new/{id}(id=${local.id})}"><i class="fas fa-plus fa-fw"></i>
+						&nbsp;Agregar Lote</a></li>
+				<li><a th:href="@{/lotes/{id}(id=${local.id})}"><i
+						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Lotes</a></li>
+				<li><a href="#"><i class="fas fa-search fa-fw"></i>
+						&nbsp; Buscar Lote</a></li>
+			</ul></li>
+
+		<li><a href="#" class="nav-btn-submenu"><i
+				class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Solicitud Externa <i
+				class="fas fa-chevron-down"></i></a>
+			<ul>
+			<li><a th:href="@{/solicitudesStock/new/{id}(id=${local.id})}"><i class="fas fa-plus fa-fw"></i>
+						&nbsp; Nueva Solicitud</a></li>
+				<li><a th:href="@{/solicitudesStock/{id}(id=${local.id})}"><i
+						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Solicitudes</a></li>
+				<li><a href="#"><i
+						class="fas fa-search-dollar fa-fw"></i> &nbsp; Buscar Solicitudes</a></li>
+
+			</ul></li>
+			
+			<li><a href="#" class="nav-btn-submenu"><i
+				class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Remitos <i
+				class="fas fa-chevron-down"></i></a>
+			<ul>
+			<li><a th:href="@{/remitos/new/{id}(id=${local.id})}"><i class="fas fa-plus fa-fw"></i>
+						&nbsp; Nuevo Remito</a></li>
+				<li><a th:href="@{/remitos/{id}(id=${local.id})}"><i
+						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Remitos</a></li>
+				<li><a href="#"><i
+						class="fas fa-search-dollar fa-fw"></i> &nbsp; Buscar Remitos</a></li>
+
+			</ul></li>
+
+		<li><a href="#" class="nav-btn-submenu"><i
+				class="fas  fa-user-secret fa-fw"></i> &nbsp; Empleados <i
+				class="fas fa-chevron-down"></i></a>
+			<ul>
+				<li><a href="/empleados/new"><i class="fas fa-plus fa-fw"></i>
+						&nbsp; Nuevo Empleado</a></li>
+				<li><a th:href="@{/empleados/{id}(id=${local.id})}"><i
+						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de empleados</a></li>
+				<li><a  href="#"><i class="fas fa-search fa-fw"></i>
+						&nbsp; Buscar empleado</a></li>
+			</ul></li>
+		
+		
+	</ul>
+</nav>
+
+

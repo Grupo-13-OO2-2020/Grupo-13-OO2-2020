@@ -2,18 +2,28 @@ package Grupo13OO2.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
+
+import Grupo13OO2.Models.ClienteModel;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.IEmpleadoService;
@@ -33,27 +43,49 @@ public class EmpleadoController {
 	private ILocalService localService;
 
 	@GetMapping("")
-	public ModelAndView index() {
+	public ModelAndView index(@RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX);
-		mAV.addObject("empleados", empleadoService.getAll());
+		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
+		
+		PageRequest pageRequest = PageRequest.of(page, 4);
+		
+		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPages(pageRequest);
+		
+		int totalPage= pageEmpleado.getTotalPages();
+		if(totalPage>0) {
+			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+			mAV.addObject("pages",pages);
+		}
+		mAV.addObject("empleados", pageEmpleado.getContent());
+		mAV.addObject("current", page+1);
+		mAV.addObject("next" ,page+2);
+		mAV.addObject("prev" ,page);
+		mAV.addObject("last", totalPage);
+		
 		return mAV;
 	}
 
+	@GetMapping("/sueldos/{id}")
+	public @ResponseBody List<EmpleadoModel> sueldos(@PathVariable("id") int id) {
+		return localService.calculoSueldos(id);
+	}
+
 	@GetMapping("/sueldo/{id}")
-	public ModelAndView sueldo(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX_LOCAL);
-		mAV.addObject("empleados", localService.calcularSueldos(id));
-		mAV.addObject("locales", localService.findById(id));
-		return mAV;
+	public @ResponseBody Double sueldo(@PathVariable("id") int id) {
+		return empleadoService.sueldoxEmpleado(empleadoService.ListarId(id));
 	}
 
 	
 	@GetMapping("{id}")
-	public ModelAndView local(@PathVariable("id") int id) {
+	public ModelAndView local(@PathVariable("id") int id, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX_LOCAL);
+		mAV.addObject("local", localService.findById(id));
 		mAV.addObject("empleados", localService.findById(id).getEmpleados());
-		mAV.addObject("locales", localService.findById(id));
+		
 		return mAV;
+		
+		
+	
 	}
 
 
