@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+
+import Grupo13OO2.Entities.SolicitudStock;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.converters.SolicitudStockConverter;
@@ -157,4 +160,12 @@ public class SolicitudStockController {
 		List<LocalModel> locales = solicitudStockService.getLocalesCercanos(idProducto, idVendedor, cantidad);
 		return locales;
 	}
+	
+	@RequestMapping("/search")
+	public String search(Model model, @Param("keyword") String keyword){
+		List<SolicitudStock> list = solicitudStockService.listAll(keyword);
+		model.addAttribute("list", list);
+		return "solicitudStock/search";
+	}
+
 }

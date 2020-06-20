@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import java.util.stream.IntStream;
 
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
+import Grupo13OO2.Entities.Local;
 
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LocalModel;
@@ -146,6 +148,13 @@ public class LocalController {
 				localService.findById(locales.getSegundoLocal().getId()).getLongitud());
 		model.addAttribute("distancia", Math.round(distancia * 100) / 100.00);
 		return mAV;
+	}
+	
+	@RequestMapping("/search")
+	public String search(Model model, @Param("keyword") String keyword){
+		List<Local> list = localService.listAll(keyword);
+		model.addAttribute("list", list);
+		return "local/search";
 	}
 
 }

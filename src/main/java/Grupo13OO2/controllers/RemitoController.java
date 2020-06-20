@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import Grupo13OO2.Entities.Lote;
+import Grupo13OO2.Entities.Remito;
 import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
@@ -165,5 +168,13 @@ public class RemitoController {
 		remitoService.delete(id);
 		return new RedirectView("/remitos");
 	}
+	
+	@RequestMapping("/search")
+	public String search(Model model, @Param("keyword") String keyword){
+		List<Remito> list = remitoService.listAll(keyword);
+		model.addAttribute("list", list);
+		return "remito/search";
+	}
+
 
 }

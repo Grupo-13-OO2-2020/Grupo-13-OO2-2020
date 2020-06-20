@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
 import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Entities.Remito;
 import Grupo13OO2.Entities.SolicitudStock;
@@ -279,6 +280,14 @@ public class LocalService implements ILocalService {
 		});
 
 		return pages;
+	}
+	
+	@Override
+	public List<Local> listAll(String keyword){
+		if(keyword != null){
+			return localRepository.findAll(keyword);
+		}
+		return localRepository.findAll();
 	}
 
 }

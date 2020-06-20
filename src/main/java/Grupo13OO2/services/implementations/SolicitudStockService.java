@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import Grupo13OO2.Entities.Local;
+import Grupo13OO2.Entities.Lote;
 import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Entities.SolicitudStock;
 import Grupo13OO2.Models.SolicitudStockModel;
@@ -131,5 +132,13 @@ public class SolicitudStockService implements ISolicitudStockService {
 		});
 
 		return pages;
+	}
+	
+	@Override
+	public List<SolicitudStock> listAll(String keyword){
+		if(keyword != null){
+			return solicitudStockRepository.findAll(keyword);
+		}
+		return solicitudStockRepository.findAll();
 	}
 }

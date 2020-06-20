@@ -87,5 +87,14 @@ public class LoteService implements ILoteService {
 		loteRepository.deleteById(id);
 		return "el lote ha sido eliminado";
 	}
+	
+	@Override
+	public List<Lote> listAll(String keyword){
+		if(keyword != null){
+			return loteRepository.findAll(keyword);
+		}
+		return loteRepository.findAll();
+	}
+
 
 }

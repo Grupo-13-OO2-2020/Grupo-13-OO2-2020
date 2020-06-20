@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+
 import Grupo13OO2.Entities.Pedido;
 import Grupo13OO2.Models.PedidoModel;
 import Grupo13OO2.converters.PedidoConverter;
@@ -44,6 +46,14 @@ public class PedidoService implements IPedidoService {
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
 
 		return pedidoConverter.entityToModel(pedido.get());
+	}
+	
+	@Override
+	public List<Pedido> listAll(String keyword){
+		if(keyword != null){
+			return pedidoRepository.findAll(keyword);
+		}
+		return pedidoRepository.findAll();
 	}
 
 }

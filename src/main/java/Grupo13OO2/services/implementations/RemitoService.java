@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+
 import Grupo13OO2.Entities.Remito;
 import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.converters.RemitoConverter;
@@ -78,6 +80,14 @@ public class RemitoService implements IRemitoService {
 		});
 		
 		return pages;
+	}
+	
+	@Override
+	public List<Remito> listAll(String keyword){
+		if(keyword != null){
+			return remitoRepository.findAll(keyword);
+		}
+		return remitoRepository.findAll();
 	}
 
 }

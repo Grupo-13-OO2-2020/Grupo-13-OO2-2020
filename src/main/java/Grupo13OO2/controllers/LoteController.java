@@ -1,7 +1,10 @@
 package Grupo13OO2.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+
+import Grupo13OO2.Entities.Lote;
 import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.services.ILocalService;
@@ -87,6 +93,13 @@ public class LoteController {
 	public RedirectView delete(Model model, @PathVariable("id") int id) {
 		loteService.delete(id);
 		return new RedirectView("/lotes");
+	}
+	
+	@RequestMapping("/search")
+	public String search(Model model, @Param("keyword") String keyword){
+		List<Lote> list = loteService.listAll(keyword);
+		model.addAttribute("list", list);
+		return "local/search";
 	}
 
 }
