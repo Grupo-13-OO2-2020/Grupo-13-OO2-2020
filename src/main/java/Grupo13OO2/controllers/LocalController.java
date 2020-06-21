@@ -153,7 +153,7 @@ public class LocalController {
 	}
 
 
-	@RequestMapping(value = "/sacarprodfechas/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/reporte/{id}", method = RequestMethod.POST)
 	public ModelAndView sacarprodfechas(@PathVariable("id") int id,
 			@RequestParam("fecha1") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha1,
 			@RequestParam("fecha2") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha2, Model model) {
