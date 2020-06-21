@@ -2,7 +2,7 @@ USE `Grupo_13_BDD_OO2_2020`;
 
 
  insert into user(id,createdat,enabled,password,updatedat,username) values 
-(1,"2020-03-22 00:00:01",1,"$2a$10$AMVwYQl.GTd4XPDcSqviue2xL2Hm/5MM0C.IDnK5I66npWyUO04j.","2020-03-22 00:00:01","matias");
+(1,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","matias");
 
  insert into user_role (id,createdat,role,updatedat,user_id) values 
 (1,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",1);

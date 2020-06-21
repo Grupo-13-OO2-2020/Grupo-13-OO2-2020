@@ -27,6 +27,6 @@ public class UserController {
 	
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
-		return "redirect:/index";
+		return "redirect:/";
 	}
 }
