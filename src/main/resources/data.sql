@@ -1,11 +1,32 @@
 USE `Grupo_13_BDD_OO2_2020`;
 
 
- insert into user(id,createdat,enabled,password,updatedat,username) values 
-(1,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","matias");
+ insert into user(id,createdat,enabled,password,updatedat,username,empleado_id) values 
+(1,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Marcos",1);
 
  insert into user_role (id,createdat,role,updatedat,user_id) values 
 (1,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",1);
+
+--
+ insert into user(id,createdat,enabled,password,updatedat,username,empleado_id) values 
+(2,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Martin",2);
+
+ insert into user_role (id,createdat,role,updatedat,user_id) values 
+(2,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",2);
+--
+ insert into user(id,createdat,enabled,password,updatedat,username,empleado_id) values 
+(3,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Joaquin",3);
+
+ insert into user_role (id,createdat,role,updatedat,user_id) values 
+(3,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",3);
+--
+ insert into user(id,createdat,enabled,password,updatedat,username,empleado_id) values 
+(4,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Jesus",4);
+
+ insert into user_role (id,createdat,role,updatedat,user_id) values 
+(4,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",4);
+
+
 
  insert into local  ( id,direccion, latitud, longitud, numero_telefono) values (1,"Murature",50.0218, 79.5265,11112222);
  insert into local ( id,direccion, latitud, longitud, numero_telefono) values (2,"Mentruyt",-49.4505, 153.2949,22223333);
@@ -13,13 +34,16 @@ USE `Grupo_13_BDD_OO2_2020`;
  insert into local ( id,direccion, latitud, longitud, numero_telefono) values (4,"Laprida",25.5277, 30.8653,44445555);
 
  insert into persona( id,apellido, dni, fecha_nacimiento, nombre) values (1,"Martinez", 222222,'2000-11-05',"Marcos");
- insert into empleado values ( 0,'12:00:00','20:00:00', 25000, "Vendedor",1,1);
+ insert into empleado(gerente,horario_entrada,horario_salida,sueldo,tipo_empleado,id,local_id,user_id) values ( 0,'12:00:00','20:00:00', 25000, "Vendedor",1,1,1);
  insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Lopez", 44444,'1998-10-11',"Martin");
- insert into empleado  values ( 0,'12:00:00','20:00:00', 15000, "Vendedor",2,2);
+ insert into empleado(gerente,horario_entrada,horario_salida,sueldo,tipo_empleado,id,local_id,user_id)
+  values ( 0,'12:00:00','20:00:00', 15000, "Vendedor",2,2,2);
  insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Gonzalez", 11111,'1997-12-06',"Joaquin");
- insert into empleado  values ( 0,'12:00:00','20:00:00', 18000, "Encargado",3,3);
+ insert into empleado(gerente,horario_entrada,horario_salida,sueldo,tipo_empleado,id,local_id,user_id)
+  values ( 0,'12:00:00','20:00:00', 18000, "Encargado",3,3,3);
  insert into persona( apellido, dni, fecha_nacimiento, nombre) values  ("Garcia", 333333,'1996-11-08',"Jesus");
- insert into empleado values ( 0,'12:00:00','20:00:00', 15000, "Repositor",4,4);
+ insert into empleado(gerente,horario_entrada,horario_salida,sueldo,tipo_empleado,id,local_id,user_id)
+ values ( 0,'12:00:00','20:00:00', 15000, "Repositor",4,4,4);
 
  insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Aguirre", 88888,'2000-11-05',"Franco");
  insert into cliente (cuil, cuit, email, numero, id) values (111111111111,111111111111, "franco@mail", 155845095,5);

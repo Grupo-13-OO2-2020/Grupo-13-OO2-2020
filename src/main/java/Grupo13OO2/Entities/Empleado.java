@@ -6,7 +6,9 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -36,7 +38,11 @@ public class Empleado extends Persona {
 	@JsonManagedReference
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Local local;
-
+	
+	@OneToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
+	
 	public Empleado() {
 
 	}
@@ -61,6 +67,17 @@ public class Empleado extends Persona {
 		this.gerente = gerente;
 		this.local = local;
 
+	}
+	public Empleado(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento, Date horarioEntrada,
+			Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente, Local local, User user) {
+		super(id, nombre, dni, apellido, fechaNacimiento);
+		this.horarioEntrada = horarioEntrada;
+		this.horarioSalida = horarioSalida;
+		this.tipoEmpleado = tipoEmpleado;
+		this.sueldo = sueldo;
+		this.gerente = gerente;
+		this.local = local;
+		this.user =user;
 	}
 
 	public Date getHorarioEntrada() {
@@ -109,6 +126,14 @@ public class Empleado extends Persona {
 
 	public void setLocal(Local local) {
 		this.local = local;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

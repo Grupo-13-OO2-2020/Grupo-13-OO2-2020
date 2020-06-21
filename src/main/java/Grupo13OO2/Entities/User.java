@@ -10,7 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -41,21 +44,30 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
+	@OneToOne
+	@JoinColumn(name = "empleado_id", referencedColumnName = "id")
+	private Empleado empleado;
+	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="user")
 	private Set<UserRole> userRoles = new HashSet<UserRole>();
+	
+	
 
 	public User() {}
 	
-	public User(String username, String password, boolean enabled) {
+	public User(String username, String password, boolean enabled,Empleado empleado) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
+		this.empleado= empleado;
+
 	}
 	
-	public User(String username, String password, boolean enabled, Set<UserRole> userRoles) {
+	public User(String username, String password, boolean enabled,Empleado empleado, Set<UserRole> userRoles) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
+		this.empleado= empleado;
 		this.userRoles = userRoles;
 	}
 
@@ -113,5 +125,13 @@ public class User {
 
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
+	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 }
