@@ -290,7 +290,7 @@ public class LocalService implements ILocalService {
 		List<Double> sueldosTotales = new ArrayList<Double>();
 
 		for (EmpleadoModel e : empleados) {
-			e.setSueldo(empleadoService.sueldoxEmpleado(e));
+			e.setSueldoNuevo(empleadoService.sueldoxEmpleado(e));
 		}
 		return empleados;
 	}

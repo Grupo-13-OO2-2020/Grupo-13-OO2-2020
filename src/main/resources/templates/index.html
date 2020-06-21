@@ -76,56 +76,67 @@
 			
 			<!-- Content -->
 			<div class="full-box tile-container">
+				<div class="row">
+				<div class="col-12 col-md-3">
+					<a  th:href="@{/clientes}" class="tile">
+						<div class="tile-tittle">Clientes</div>
+						<div class="tile-icon">
+							<i class="fas fa-users fa-fw"></i>
+							<p>5 Registrados</p>
+						</div>
+					</a>
 
-				<a  th:href="@{/clientes}" class="tile">
-					<div class="tile-tittle">Clientes</div>
-					<div class="tile-icon">
-						<i class="fas fa-users fa-fw"></i>
-						<p>5 Registrados</p>
-					</div>
-				</a>
-
-				<a  th:href="@{/productos/}" class="tile">
-					<div class="tile-tittle">Productos</div>
-					<div class="tile-icon">
-						<i class="fas fa-pallet fa-fw"></i>
-						<p>9 Registrados</p>
-					</div>
-				</a>
+				</div>
 				
+				<div class="col-12 col-md-3">
+					<a  th:href="@{/productos/}" class="tile">
+						<div class="tile-tittle">Productos</div>
+						<div class="tile-icon">
+							<i class="fas fa-pallet fa-fw"></i>
+							<p>9 Registrados</p>
+						</div>
+					</a>
+				</div>
 				
-				<a th:href="@{/remitos}" class="tile">
-					<div class="tile-tittle">Remitos</div>
-					<div class="tile-icon">
-						<i class="fas fa-file-invoice-dollar fa-fw"></i>
-						<p>10 Registrados</p>
-					</div>
-				</a>
-				
-				<a th:href="@{/solicitudesStock}" class="tile">
-					<div class="tile-tittle">SOLICITUD EXTERNA</div>
-					<div class="tile-icon">
-						<i class="fas fa-file-invoice-dollar fa-fw"></i>
+				<div class="col-12 col-md-3">
+					<a th:href="@{/remitos}" class="tile">
+						<div class="tile-tittle">Remitos</div>
+						<div class="tile-icon">
+							<i class="fas fa-file-invoice-dollar fa-fw"></i>
 							<p>10 Registrados</p>
-					</div>
-				</a>
+						</div>
+					</a>
+				</div>
+				<div class="col-12 col-md-3">
+					<a th:href="@{/solicitudesStock}" class="tile">
+						<div class="tile-tittle">SOLICITUD EXTERNA</div>
+						<div class="tile-icon">
+							<i class="fas fa-file-invoice-dollar fa-fw"></i>
+								<p>10 Registrados</p>
+						</div>
+					</a>
+				</div>
 
-				<a <a th:href="@{/empleados}" class="tile">
-					<div class="tile-tittle">EMPLEADOS</div>
-					<div class="tile-icon">
-						<i class="fas fa-user-secret fa-fw"></i>
-						<p>50 Registrados</p>
-					</div>
-				</a>
+				<div class="col-12 col-md-6">
+					<a th:href="@{/empleados}" class="tile">
+						<div class="tile-tittle">EMPLEADOS</div>
+						<div class="tile-icon">
+							<i class="fas fa-user-secret fa-fw"></i>
+							<p>50 Registrados</p>
+						</div>
+					</a>
+				</div>
 
-				<a th:href="@{/locales}" class="tile">
-					<div class="tile-tittle">LOCALES</div>
-					<div class="tile-icon">
-						<i class="fas fa-store-alt fa-fw"></i>
-						<p>1 Registrada</p>
-					</div>
-				</a>
-				
+				<div class="col-12 col-md-6">
+					<a th:href="@{/locales}" class="tile">
+						<div class="tile-tittle">LOCALES</div>
+						<div class="tile-icon">
+							<i class="fas fa-store-alt fa-fw"></i>
+							<p>1 Registrada</p>
+						</div>
+					</a>
+				</div>
+			</div>
 			</div>
 			
 

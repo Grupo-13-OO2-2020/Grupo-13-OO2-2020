@@ -191,8 +191,8 @@
 				.done(function (result) {	
 					var content = result;
 					$.each(content, function(index, value) {
-
-						$('#cambio').replaceWith('<div> Empleado =' + value.nombre + '---- Sueldo =' + value.sueldo + '</div>');
+						var comision = value.sueldoNuevo - value.sueldo;
+						$('#cambio').replaceWith('<div> Empleado =' +value.nombre + '---- Comision=' + comision+ '---- Sueldo Total=' + value.sueldoNuevo + '</div>');
 					});
 					console.log(content);
 				})
@@ -201,5 +201,10 @@
 				});
 			});
 		</script>
-</body>
-</html>
+</div>
+
+		</section>
+	</main>
+
+
+		<div th:replace="scripts-footer.html"></div>
