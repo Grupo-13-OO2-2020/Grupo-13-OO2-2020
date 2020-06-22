@@ -74,7 +74,7 @@
 			</div>
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-					<li><a href="item-new.html"><i class="fas fa-plus fa-fw"></i>
+					<li><a th:href="@{/remitos/new/{id}(id=${local.id})}"><i class="fas fa-plus fa-fw"></i>
 							&nbsp; AGREGAR ITEM</a></li>
 					<li><a class="active" href="item-list.html"><i
 							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS</a></li>
@@ -95,7 +95,6 @@
 								<th>CANTIDAD</th>
 								<th>VENDEDOR</th>
 								<th>CLIENTE</th>
-								<th>FACTURADO</th>
 								<th>FORMA DE PAGO</th>
 								<th></th>
 								<th></th>
@@ -113,7 +112,6 @@
 								<td th:text="${remito.cantidad}"></td>
 								<td th:text="${remito.vendedor.nombre}"></td>
 								<td th:text="${remito.cliente.nombre}"></td>
-								<td th:text="${remito.facturado}"></td>
 								<td th:text="${remito.formaDePago}"></td>
 
 

@@ -2,6 +2,8 @@ package Grupo13OO2.services.implementations;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -215,58 +217,58 @@ public class LocalService implements ILocalService {
 		return consumo;
 	}
 
-	public List<EmpleadoModel> calcularSueldos(int id) {
-		Set<EmpleadoModel> empleados = this.findById(id).getEmpleados();
-		List<EmpleadoModel> mostrarSueldos = new ArrayList<EmpleadoModel>();
-		Iterator<EmpleadoModel> itEmpleado = empleados.iterator();
-		List<RemitoModel> remitos = this.getRemitos(this.findById(id));
-		Iterator<RemitoModel> itRemito = remitos.iterator();
-		List<SolicitudStockModel> solicitudes = this.getSolicitudesStock(this.findById(id));
-		Iterator<SolicitudStockModel> itSolicitud = solicitudes.iterator();
+	// public List<EmpleadoModel> calcularSueldos(int id) {
+	// 	Set<EmpleadoModel> empleados = this.findById(id).getEmpleados();
+	// 	List<EmpleadoModel> mostrarSueldos = new ArrayList<EmpleadoModel>();
+	// 	Iterator<EmpleadoModel> itEmpleado = empleados.iterator();
+	// 	List<RemitoModel> remitos = this.getRemitos(this.findById(id));
+	// 	Iterator<RemitoModel> itRemito = remitos.iterator();
+	// 	List<SolicitudStockModel> solicitudes = this.getSolicitudesStock(this.findById(id));
+	// 	Iterator<SolicitudStockModel> itSolicitud = solicitudes.iterator();
 
-		while (itEmpleado.hasNext()) {
-			EmpleadoModel e = itEmpleado.next();
-			double contadorRemitos = 0;
-			double contadorVendedor = 0;
-			double contadorColaborador = 0;
+	// 	while (itEmpleado.hasNext()) {
+	// 		EmpleadoModel e = itEmpleado.next();
+	// 		double contadorRemitos = 0;
+	// 		double contadorVendedor = 0;
+	// 		double contadorColaborador = 0;
 
-			while (itRemito.hasNext()) {
-				RemitoModel r = itRemito.next();
-				if (r.getVendedor().getDni() == e.getDni()) {
+	// 		while (itRemito.hasNext()) {
+	// 			RemitoModel r = itRemito.next();
+	// 			if (r.getVendedor().getDni() == e.getDni()) {
 
-					contadorRemitos = contadorRemitos
-							+ ((r.getProducto().getPrecioUnitario() * r.getCantidad()) * 5 / 100);
-				}
+	// 				contadorRemitos = contadorRemitos
+	// 						+ ((r.getProducto().getPrecioUnitario() * r.getCantidad()) * 5 / 100);
+	// 			}
 
-			}
-			while (itSolicitud.hasNext()) {
-				SolicitudStockModel s = itSolicitud.next();
-				if (s.getVendedor().getDni() == e.getDni()) {
-					contadorVendedor = contadorVendedor
-							+ ((s.getProducto().getPrecioUnitario() * s.getCantidad()) * 3 / 100);
-				}
-				if (s.getColaborador() != null) {
-					if (s.getColaborador().getDni() == e.getDni()) {
-						contadorColaborador = contadorColaborador
-								+ ((s.getProducto().getPrecioUnitario() * s.getCantidad()) * 2 / 100);
-					}
-				}
+	// 		}
+	// 		while (itSolicitud.hasNext()) {
+	// 			SolicitudStockModel s = itSolicitud.next();
+	// 			if (s.getVendedor().getDni() == e.getDni()) {
+	// 				contadorVendedor = contadorVendedor
+	// 						+ ((s.getProducto().getPrecioUnitario() * s.getCantidad()) * 3 / 100);
+	// 			}
+	// 			if (s.getColaborador() != null) {
+	// 				if (s.getColaborador().getDni() == e.getDni()) {
+	// 					contadorColaborador = contadorColaborador
+	// 							+ ((s.getProducto().getPrecioUnitario() * s.getCantidad()) * 2 / 100);
+	// 				}
+	// 			}
 
-			}
-			LocalDate fin = LocalDate.now();
-			LocalDate inicio = fin.withDayOfMonth(1);
+	// 		}
+	// 		LocalDate fin = LocalDate.now();
+	// 		LocalDate inicio = fin.withDayOfMonth(1);
 
-			long dias = DAYS.between(inicio, fin) + 1;
-			double basicoPorDia = 1000;
-			double sueldoBasico = dias * basicoPorDia;
-			double sueldo = sueldoBasico + contadorColaborador + contadorVendedor + contadorRemitos;
-			e.setSueldo((double) Math.round(sueldo));
-			mostrarSueldos.add(e);
+	// 		long dias = DAYS.between(inicio, fin) + 1;
+	// 		double basicoPorDia = 1000;
+	// 		double sueldoBasico = dias * basicoPorDia;
+	// 		double sueldo = sueldoBasico + contadorColaborador + contadorVendedor + contadorRemitos;
+	// 		e.setSueldo((double) Math.round(sueldo));
+	// 		mostrarSueldos.add(e);
 
-		}
+	// 	}
 
-		return mostrarSueldos;
-	}
+	// 	return mostrarSueldos;
+	// }
 
 	@Override
 	public Page<LocalModel> getAllPages(Pageable pageable) {
@@ -290,4 +292,40 @@ public class LocalService implements ILocalService {
 		return localRepository.findAll();
 	}
 
+	@Override
+	public List<EmpleadoModel> calculoSueldos(int id) {
+		List<EmpleadoModel>	empleados = new ArrayList<EmpleadoModel>();
+		empleados.addAll(findById(id).getEmpleados());
+		List<Double> sueldosTotales = new ArrayList<Double>();
+
+		for (EmpleadoModel e : empleados) {
+			e.setSueldoNuevo(empleadoService.sueldoxEmpleado(e));
+		}
+		return empleados;
+	}
+	
+	@Override
+	public Set<ProductoModel> productosVendidosEntreFechas(LocalModel local, Date comienzo, Date fin) {
+
+		List<RemitoModel> remitos = getRemitos(local);
+		List<SolicitudStockModel> solicitudes = getSolicitudesStock(local);
+
+		Set<ProductoModel> productoList = new HashSet<ProductoModel>();
+
+		for(RemitoModel r : remitos){
+			if(r.getFecha().before(fin) && r.getFecha().after(comienzo) ) {
+					productoList.add(r.getProducto());
+			}
+		}
+
+		for (SolicitudStockModel s : solicitudes) {
+			if(s.getFecha().before(fin) && s.getFecha().after(comienzo) && (s.isAceptado() == true) ) {
+					productoList.add(s.getProducto());
+				
+			}
+		}
+
+		return productoList;
+
+	}
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -48,7 +49,7 @@ public class EmpleadoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX);
 		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
 		
-		PageRequest pageRequest = PageRequest.of(page, 1);
+		PageRequest pageRequest = PageRequest.of(page, 4);
 		
 		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPages(pageRequest);
 		
@@ -66,35 +67,22 @@ public class EmpleadoController {
 		return mAV;
 	}
 
+	@GetMapping("/sueldos/{id}")
+	public @ResponseBody List<EmpleadoModel> sueldos(@PathVariable("id") int id) {
+		return localService.calculoSueldos(id);
+	}
+
 	@GetMapping("/sueldo/{id}")
-	public ModelAndView sueldo(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_SUELDO);
-		mAV.addObject("empleados", localService.calcularSueldos(id));
-		mAV.addObject("local", localService.findById(id));
-		return mAV;
+	public @ResponseBody Double sueldo(@PathVariable("id") int id) {
+		return empleadoService.sueldoxEmpleado(empleadoService.ListarId(id));
 	}
 
 	
 	@GetMapping("{id}")
-	public ModelAndView local(@PathVariable("id") int id,@RequestParam Map<String, Object> params, Model model) {
+	public ModelAndView local(@PathVariable("id") int id, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX_LOCAL);
 		mAV.addObject("local", localService.findById(id));
-int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
-		
-		PageRequest pageRequest = PageRequest.of(page, 3);
-		
-		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPages(pageRequest);
-		
-		int totalPage= pageEmpleado.getTotalPages();
-		if(totalPage>0) {
-			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-			mAV.addObject("pages",pages);
-		}
-		mAV.addObject("empleados", pageEmpleado.getContent());
-		mAV.addObject("current", page+1);
-		mAV.addObject("next" ,page+2);
-		mAV.addObject("prev" ,page);
-		mAV.addObject("last", totalPage);
+		mAV.addObject("empleados", localService.findById(id).getEmpleados());
 		
 		return mAV;
 		

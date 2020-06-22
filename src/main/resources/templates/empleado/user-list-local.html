@@ -82,9 +82,41 @@
 
 					<li><a class="active" href="user-list.html"><i
 							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE EMPLEADOS</a>
-					</li>
+					</li> 
 
 					<li><a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR EMPLEADO</a></li>
+
+					<li>
+						<div>
+							<!-- Button trigger modal -->
+								<button id="bot1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+									Calcular Sueldo Total
+								</button>
+								
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Sueldo total por empleado</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+			
+											<div th:each="empleado:${empleados}" class="modal-body">
+												<div id="cambio"></div>
+											</div>
+			
+											<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-primary">Save changes</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					</li>
 				</ul>
 			</div>
 
@@ -105,15 +137,12 @@
 								<th>TIPO EMPLEADO</th>
 								<th>SUELDO</th>
 								<th>GERENTE</th>
-								<th></th>
-					<th></th>
-					<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<div th:each="empleado:${empleados}" th:if="${empleado.local.id}==${local.id}">
+							<tr th:each="empleado:${empleados}">
 
-								<td th:text="${empleado.id}"></td>
+								<td id="reemplazo" th:text="${empleado.id}"></td>
 								<td th:text="${empleado.dni}"></td>
 								<td th:text="${empleado.nombre}"></td>
 								<td th:text="${empleado.apellido}"></td>
@@ -123,10 +152,7 @@
 								<td th:text="${empleado.tipoEmpleado}"></td>
 								<td th:text="${empleado.sueldo}"></td>
 								<td th:text="${empleado.gerente}"></td>
-								
-										<td>
-						<a th:href ="@{/empleados/sueldo/{idl}(idl=${local.id})}"class="btn btn-primary">CalcularSueldos</a>
-										</td>
+
 								<td>
 									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
 									class="btn btn-success"> <i class="fas fa-sync-alt"></i>
@@ -139,27 +165,10 @@
 									onclick="alert('El cliente fue eliminado con exito!')"> <i
 										class="far fa-trash-alt"></i>
 								</a>
-							</div>
+							</tr>
 						</tbody>
 					</table>
 				</div>
-					<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-						
-						<li class="page-item"
-							th:classappend="${prev == 0 ? 'disabled': '' }">
-							<a class="page-link" th:href="@{|/empleados/?page=${prev}|}">Anterior</a>
-							</li>
-						<li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active': '' }">
-						<a	class="page-link" th:href="@{|/empleados/?page=${page}|}"
-							th:text="${page}"></a>
-							<li class="page-item"
-							th:classappend="${current == last ? 'disabled': '' }">
-							<a class="page-link" th:href="@{|/empleados/?page=${next}|}">Proxima</a>
-							</li>	
-							
-					</ul>
-				</nav>
 			</div>
 
 		</section>
@@ -167,5 +176,35 @@
 
 
 		<div th:replace="scripts-footer.html"></div>
-</body>
-</html>
+		<script src="/vendor/jquery/jquery.min.js"></script>
+		<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript">
+			
+			$('#bot1').click(function(){//problema solo agarra al primer id, no toma a los otros no elige al seleccionado
+					$("#reemplazo").attr("id","empleado-id");
+					var localId =  [[${local.id}]];
+
+				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+					method: "GET",
+					url: "/empleados/sueldos/" + localId
+				})
+				.done(function (result) {	
+					var content = result;
+					$.each(content, function(index, value) {
+						var comision = value.sueldoNuevo - value.sueldo;
+						$('#cambio').replaceWith('<div> Empleado =' +value.nombre + '---- Comision=' + comision+ '---- Sueldo Total=' + value.sueldoNuevo + '</div>');
+					});
+					console.log(content);
+				})
+				.fail(function() {
+					alert("error");
+				});
+			});
+		</script>
+</div>
+
+		</section>
+	</main>
+
+
+		<div th:replace="scripts-footer.html"></div>

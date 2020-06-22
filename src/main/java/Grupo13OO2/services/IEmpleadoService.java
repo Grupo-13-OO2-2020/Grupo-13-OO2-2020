@@ -21,4 +21,5 @@ public interface IEmpleadoService {
 	
 	public List<Empleado> listAll(String keyword);
 
+	public double sueldoxEmpleado(EmpleadoModel empleado);
 }

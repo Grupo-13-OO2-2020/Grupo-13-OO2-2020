@@ -27,8 +27,8 @@ public class SolicitudStock extends Pedido {
 	}
 
 	public SolicitudStock(int id, Date fecha, Producto producto, int cantidad, Empleado vendedor, Cliente cliente,
-			boolean facturado, Empleado colaborador, boolean aceptado, Local localDestinatario) {
-		super(id, fecha, producto, cantidad, vendedor, cliente, facturado);
+			 Empleado colaborador, boolean aceptado, Local localDestinatario) {
+		super(id, fecha, producto, cantidad, vendedor, cliente);
 		this.colaborador = colaborador;
 		this.aceptado = aceptado;
 		this.localDestinatario = localDestinatario;

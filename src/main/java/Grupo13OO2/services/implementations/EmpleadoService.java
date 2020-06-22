@@ -15,6 +15,8 @@ import Grupo13OO2.Entities.Empleado;
 import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LocalModel;
+import Grupo13OO2.Models.RemitoModel;
+import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.converters.EmpleadoConverter;
 import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.repositories.IEmpleadoRepository;
@@ -92,10 +94,41 @@ public class EmpleadoService implements IEmpleadoService {
 	}
 	
 	@Override
+
 	public List<Empleado> listAll(String keyword){
 		if(keyword != null){
 			return empleadoRepository.findAll(keyword);
 		}
 		return empleadoRepository.findAll();
+	}
+	public double sueldoxEmpleado(EmpleadoModel empleado){//hay q hacer q lo cuente solo en tal mes 
+		LocalModel local = ListarId(empleado.getId()).getLocal();
+		List<RemitoModel> remitos = localService.getRemitos(local);
+		List<SolicitudStockModel> solicitudes = localService.getSolicitudesStock(local);
+		double contadorRemitos = 0;
+		double contadorVendedor = 0;
+		double contadorColaborador = 0;
+
+		for(RemitoModel r : remitos){
+			if (r.getVendedor().getId() ==  empleado.getId()){
+				contadorRemitos += ((r.getProducto().getPrecioUnitario() * r.getCantidad()) * 5 / 100);
+			}
+		}
+
+		for(SolicitudStockModel s : solicitudes){
+			if (s.getVendedor().getId() == empleado.getId()) {
+				contadorVendedor += ((s.getProducto().getPrecioUnitario() * s.getCantidad()) * 3 / 100);
+			}
+			if (s.getColaborador() != null) {
+				if (s.getColaborador().getId() == empleado.getId()) {
+					contadorColaborador += ((s.getProducto().getPrecioUnitario() * s.getCantidad()) * 2 / 100);
+				}
+			}
+		}
+
+		double sueldoTotal = empleado.getSueldo() + contadorColaborador + contadorVendedor + contadorRemitos;
+
+		return sueldoTotal;
+
 	}
 }

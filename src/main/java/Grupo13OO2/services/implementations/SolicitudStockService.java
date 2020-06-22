@@ -72,7 +72,7 @@ public class SolicitudStockService implements ISolicitudStockService {
 			solicitudStockModel.setColaborador(empleadoService.ListarId(solicitudStockModel.getColaborador().getId()));
 		}
 		SolicitudStock solicitudStock = solicitudStockRepository.save(solicitudStockConverter.modelToEntity(solicitudStockModel));
-		
+
 		return solicitudStockConverter.entityToModel(solicitudStock);
 	}
 
@@ -133,6 +133,7 @@ public class SolicitudStockService implements ISolicitudStockService {
 
 		return pages;
 	}
+
 	
 	@Override
 	public List<SolicitudStock> listAll(String keyword){
@@ -141,4 +142,24 @@ public class SolicitudStockService implements ISolicitudStockService {
 		}
 		return solicitudStockRepository.findAll();
 	}
+
+
+//	@Override
+//	public List<SolicitudStockModel> listAll(String keyword) {
+//		if(keyword != null){List<SolicitudStock> s= solicitudStockRepository.findAll(keyword);
+//		List<SolicitudStockModel> sS= new ArrayList<SolicitudStockModel>();
+//		for(SolicitudStock solicitud: s) {
+//			sS.add(solicitudStockConverter.entityToModel(solicitud));
+//		}
+//		return sS;
+//		}
+//		
+//		List<SolicitudStock> s= solicitudStockRepository.findAll(keyword);
+//		List<SolicitudStockModel> sS= new ArrayList<SolicitudStockModel>();
+//		for(SolicitudStock solicitud: s) {
+//			sS.add(solicitudStockConverter.entityToModel(solicitud));
+//		}
+//		return sS;
+//	}
+
 }

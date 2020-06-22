@@ -1,5 +1,6 @@
 package Grupo13OO2.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +31,11 @@ public interface ILocalService {
 
 	public boolean consumirLote(RemitoModel remito);
 	
-	public List<EmpleadoModel> calcularSueldos(int id);
+	//public List<EmpleadoModel> calcularSueldos(int id);
+
+	public List<EmpleadoModel> calculoSueldos(int id);
+
+	public Set<ProductoModel> productosVendidosEntreFechas(LocalModel local, Date comienzo, Date fin);
 	
 	Page<LocalModel> getAllPages(Pageable pageable);
 

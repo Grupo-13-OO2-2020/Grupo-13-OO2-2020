@@ -160,6 +160,7 @@ public class SolicitudStockController {
 		List<LocalModel> locales = solicitudStockService.getLocalesCercanos(idProducto, idVendedor, cantidad);
 		return locales;
 	}
+
 	
 	@RequestMapping("/search")
 	public String search(Model model, @Param("keyword") String keyword){
@@ -167,5 +168,13 @@ public class SolicitudStockController {
 		model.addAttribute("list", list);
 		return "solicitudStock/search";
 	}
+
+
+//	@RequestMapping("/search")
+//	public String search(Model model, @Param("keyword") String keyword){
+//		List<SolicitudStockModel> list = solicitudStockService.listAll(keyword);
+//		model.addAttribute("list", list);
+//		return "producto/search";
+//	}
 
 }

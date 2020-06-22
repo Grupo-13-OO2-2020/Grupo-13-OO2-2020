@@ -28,6 +28,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Models.ProductoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.IProductoService;
 
 @Controller
@@ -37,6 +38,10 @@ public class ProductoController {
 	@Autowired
 	@Qualifier("productoService")
 	private IProductoService productoService;
+
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
 
 	// @GetMapping("")
 	// public ModelAndView index() {
@@ -94,8 +99,9 @@ public class ProductoController {
 	
 	@RequestMapping("/search")
 	public String search(Model model, @Param("keyword") String keyword){
-		List<Producto> list = productoService.listAll(keyword);
+		List<ProductoModel> list = productoService.listAll(keyword);
 		model.addAttribute("list", list);
 		return "producto/search";
 	}
+
 }

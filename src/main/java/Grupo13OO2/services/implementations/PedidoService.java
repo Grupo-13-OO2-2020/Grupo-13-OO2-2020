@@ -41,11 +41,14 @@ public class PedidoService implements IPedidoService {
 	}
 
 	@Override
-	public PedidoModel ListarId(int id) {
+	public PedidoModel findByIdPedido(int id) {
 
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
 
 		return pedidoConverter.entityToModel(pedido.get());
+		
+		
+		
 	}
 	
 	@Override

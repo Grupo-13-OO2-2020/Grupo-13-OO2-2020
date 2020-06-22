@@ -10,8 +10,8 @@ public class RemitoModel extends PedidoModel {
 	}
 
 	public RemitoModel(int id, Date fecha, ProductoModel producto, int cantidad, EmpleadoModel vendedor,
-			ClienteModel cliente, boolean facturado, String formaDePago) {
-		super(id, fecha, producto, cantidad, vendedor, cliente, facturado);
+			ClienteModel cliente, String formaDePago) {
+		super(id, fecha, producto, cantidad, vendedor, cliente);
 		this.formaDePago = formaDePago;
 	}
 

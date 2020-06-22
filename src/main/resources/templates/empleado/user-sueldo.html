@@ -106,12 +106,10 @@
 								<th>SUELDO</th>
 								<th>GERENTE</th>
 								<th></th>
-					<th></th>
-					<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<div th:each="empleado:${empleados}" S>
+							<tr th:each="empleado:${empleados}" S>
 
 								<td th:text="${empleado.id}"></td>
 								<td th:text="${empleado.dni}"></td>
@@ -139,7 +137,7 @@
 									onclick="alert('El cliente fue eliminado con exito!')"> <i
 										class="far fa-trash-alt"></i>
 								</a>
-							</div>
+							</tr>
 						</tbody>
 					</table>
 				</div>

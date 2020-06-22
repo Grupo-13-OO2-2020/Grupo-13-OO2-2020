@@ -79,7 +79,7 @@ public class PedidoController {
 	public ModelAndView get(@PathVariable("id") int id) {
 
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PEDIDO_FORM);
-		mAV.addObject("pedido", pedidoService.ListarId(id));
+		mAV.addObject("pedido", pedidoService.findByIdPedido(id));
 		mAV.addObject("productos", productoService.getAll());
 		mAV.addObject("empleados", empleadoService.getAll());
 		mAV.addObject("clientes", clienteService.getAll());

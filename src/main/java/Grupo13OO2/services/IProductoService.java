@@ -20,5 +20,5 @@ public interface IProductoService {
 
 	public Page<ProductoModel> getAllPages(Pageable pageable);
 
-	public List<Producto> listAll(String keyword);
+	public List<ProductoModel> listAll(String keyword);
 }
