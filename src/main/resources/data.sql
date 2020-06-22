@@ -1,27 +1,27 @@
 USE `Grupo_13_BDD_OO2_2020`;
+/*
 
-
- insert into user(id,createdat,enabled,password,updatedat,username,empleado_id) values 
-(1,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Marcos",1);
+ insert into user(id,createdat,enabled,password,updatedat,username) values 
+(1,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Marcos");
 
  insert into user_role (id,createdat,role,updatedat,user_id) values 
 (1,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",1);
 
 --
- insert into user(id,createdat,enabled,password,updatedat,username,empleado_id) values 
-(2,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Martin",2);
+ insert into user(id,createdat,enabled,password,updatedat,username) values 
+(2,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Martin");
 
  insert into user_role (id,createdat,role,updatedat,user_id) values 
 (2,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",2);
 --
- insert into user(id,createdat,enabled,password,updatedat,username,empleado_id) values 
-(3,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Joaquin",3);
+ insert into user(id,createdat,enabled,password,updatedat,username) values 
+(3,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Joaquin");
 
  insert into user_role (id,createdat,role,updatedat,user_id) values 
 (3,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",3);
 --
- insert into user(id,createdat,enabled,password,updatedat,username,empleado_id) values 
-(4,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Jesus",4);
+ insert into user(id,createdat,enabled,password,updatedat,username) values 
+(4,"2020-03-22 00:00:01",1,"$2a$10$qa.bWDV..8dIwyeoQ0Ti4eZT/y9RAzjtGBQ7JCV/jErZZ8bWZ3qfq","2020-03-22 00:00:01","Jesus");
 
  insert into user_role (id,createdat,role,updatedat,user_id) values 
 (4,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",4);
@@ -98,3 +98,6 @@ USE `Grupo_13_BDD_OO2_2020`;
   insert into solicitud_stock(aceptado,id,local_id) values (0,7,4);
   insert into pedido(cantidad,fecha,cliente_id,producto_id,vendedor_id) values (9,'2020-05-07',8,1,4);
   insert into solicitud_stock(aceptado,id,local_id) values (0,8,3);
+
+
+*/

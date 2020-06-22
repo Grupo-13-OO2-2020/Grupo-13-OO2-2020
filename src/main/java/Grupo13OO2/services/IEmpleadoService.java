@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import Grupo13OO2.Entities.Empleado;
 import Grupo13OO2.Models.EmpleadoModel;
 
 public interface IEmpleadoService {
@@ -13,6 +14,8 @@ public interface IEmpleadoService {
 	public EmpleadoModel insertOrUpdate(EmpleadoModel empleadoModel);
 
 	public EmpleadoModel ListarId(int id);
+	
+	public Empleado traerUser(String username);
 
 	public String delete(int id);
 	

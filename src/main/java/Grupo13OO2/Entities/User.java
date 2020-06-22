@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,8 +45,8 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@OneToOne
-	@JoinColumn(name = "empleado_id", referencedColumnName = "id")
+	 @OneToOne(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
 	private Empleado empleado;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="user")

@@ -39,8 +39,8 @@ public class Empleado extends Persona {
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Local local;
 	
-	@OneToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
 	public Empleado() {
