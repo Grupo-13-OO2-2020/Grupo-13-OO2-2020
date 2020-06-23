@@ -94,14 +94,14 @@
 									</div>
 								</div>
 
-								<div class="col-12 col-md-6">
+								<div class="col-12 col-md-3">
 									<div class="form-group">
 										<label>FECHA</label>
 										<input th:field="*{fecha}" type="date" value="2011-08-19" class="form-control" placeholder="Fecha">
 									</div>
 								</div>
                                 
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-5">
 									<div class="form-group">
 										<label>PRODUCTO</label> 
 										<select id="producto-select" class="form-control" placeholder="Producto" th:field="*{producto.id}">
@@ -111,14 +111,14 @@
 									</div>
 								</div>
                                 
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-3">
 									<div class="form-group">
 										<label>CANTIDAD</label>
 										<input id="cantidad-select" th:field="*{cantidad}" type="number"  class="form-control">
 									</div>
 								</div>
                                 
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-5">
 									<div class="form-group">
 										<label>VENDEDOR</label> 
 										<select id="vendedor-select" class="form-control" placeholder="Vendedor" th:field="*{vendedor.id}">
@@ -128,26 +128,46 @@
 									</div>
 								</div>
                                 
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-5">
 									<div class="form-group">
 										<label>CLIENTE</label> <select class="form-control" placeholder="Cliente" th:field="*{cliente.id}">
 											<option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
 										</select> 
 										<small class="form-text text-danger"th:if="${#fields.hasErrors('cliente.id')}" th:errors="*{cliente.id}"></small>
 									</div>
-								</div>
+                                </div >
 
-								<div>
-									<div class="m-3">
-										<label class="mr-5">Local Destino</label> <span><a
-											id="bot" class="btn btn-primary" style="background:#71FEFB" role="button">Buscar Locales mas cercanos y con stock</a></span>
+                                <div class="col-12 col-md-6">
+                                    <label>Local Destinatario</label> 
+                    
+                                    <select class="form-control"placeholder="Local" th:field="*{localDestinatario.id}">
+                                        
+                                    <option th:each="localDestinatario : ${locales}" th:value="${localDestinatario.id}"
+                                        th:text="${localDestinatario.direccion}"></option>
+                                    </select>	
+                            </div>
+                            
+                                <div class="col-12 col-md-6">
+                                    <label>Colaborador</label> 
+                                    <select class="form-control"placeholder="Colaborador" th:field="*{colaborador.id}">
+                                    <option th:each="colaborador : *{localDestinatario.empleados}" th:value="${colaborador.id}"
+                                        th:text="${colaborador.nombre}"></option>
+                                    </select>		
+                                </div>
 
-									</div>
+                                <div class="col-12 col-md-2">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input th:field="*{aceptado}" type="checkbox" class="custom-control-input" id="defaultUnchecked2">
+                                            <label class="custom-control-label" for="defaultUnchecked2">Aceptado</label>
+                                        </div>
+                                    </div>
+                                
 
-									<select id="select1" class="form-control" placeholder="Local"
-										th:field="*{localDestinatario.id}">
-									</select>
-								</div>
+                                </div>
+                               
+                    
+								
 
 
 							</div>
@@ -191,39 +211,6 @@
 	<script>
 		$(document).ready(function() {
 			$('body').bootstrapMaterialDesign();
-		});
-	</script>
-
-	<script src="/js/main.js"></script>
-	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript">
-		$('#bot').click(function(){
-				var producto = $('#producto-select option:selected').val();
-				console.log(producto);
-				var vendedor = $('#vendedor-select option:selected').val();
-				console.log(vendedor);
-				var cantidad = $('#cantidad-select').val();
-				console.log(cantidad);
-			$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
-				method: "GET",
-				url: "/solicitudesStock/localesDestinatarios/",
-				data: { idProducto: producto, idVendedor : vendedor , cantidad : cantidad}
-			})
-			.done(function (result) {
-				//idProducto: producto, idVendedor : vendedor , 
-				var content = result;
-				$.each(content, function(i, item) {
-					$('#select1').append($('<option>', { 
-									value: item.id,
-									text : item.direccion 
-								}));
-				});
-				console.log(content);
-
-			})
-			.fail(function() {
-				alert("error");
-			});
 		});
 	</script>
 	
