@@ -63,16 +63,14 @@
 			</div>
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-					<li><a th:href="@{/productos/new}"><i
-							class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a></li>
-					<li><a class="active" th:href="@{/productos/}"><i
-							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE
-							PRODUCTOS</a></li>
-					<li><a th:href="@{/Productomasvendido/}"><i
-							class="fas fa-clipboard-list fa-fw"></i> &nbsp; PRODUCTOS MAS
-							VENDIDOS</a></li>
-					<li><a th:href="@{/productos/search}"><i
-							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR PRODUCTO</a></li>
+				
+					<li><a th:href="@{/lotes/new/{id}(id=${local.id})}"><i
+							class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR LOTE</a></li>
+				
+								
+				
+					<li><a href="#"><i
+							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR LOTE</a></li>
 				</ul>
 			</div>
 
@@ -126,7 +124,7 @@
 					<nav aria-label="Pagination">
 						<ul class="pagination justify-content-center">
 							<li class="page-item" th:each="page : ${pages}"><a
-								class="page-link" th:href="@{|/lotes/?page=${page}|}"
+								class="page-link" th:href="@{|/lotes/${local.id}/?page=${page}|}"
 								th:text="${page}"></a></li>
 						</ul>
 					</nav>

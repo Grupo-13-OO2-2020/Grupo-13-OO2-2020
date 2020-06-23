@@ -140,7 +140,7 @@ public class LoteController {
 		// loteModel.setCantidadExistente(loteModel.getCantidadRecibida());
 		loteService.insertOrUpdate(loteModel);
 
-		return new RedirectView("/lotes");
+		return new RedirectView("/lotes/"+loteModel.getLocal().getId());
 	}
 
 	@GetMapping("/editar/{id}")
