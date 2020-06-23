@@ -1,0 +1,11 @@
+<div class="full-box nav-lateral-content">
+				<figure class="full-box nav-lateral-avatar">
+					<i class="far fa-times-circle show-nav-lateral"></i>
+					<img src="/assets/avatar/Avatar.png" class="img-fluid"
+						alt="Avatar">
+					<figcaption class="roboto-medium text-center">
+						<td th:text="${usuario}"></td>  <br> <small class="roboto-condensed-light"><td th:text="${empleado.tipoEmpleado}"</small>
+					</figcaption>
+				</figure>
+				<div class="full-box nav-lateral-bar" th:replace="nav_local :: nav"></div>
+			</div>

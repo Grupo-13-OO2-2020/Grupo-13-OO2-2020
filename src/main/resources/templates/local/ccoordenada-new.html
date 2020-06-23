@@ -136,39 +136,55 @@
                     <i class="fas fa-power-off"></i>
                 </a>
             </nav>
-
-			<div class="container-fluid">
+            
+            <div class="container-fluid">
 				<ul class="full-box list-unstyled ">
-					<li><a th:href="@{/locales/calculacoordenadas}"><i
+					<li><a th:href="@{/locales}"><i
 							class="fas fa-arrow-alt-circle-left"></i> &nbsp; VOLVER</a>
 				</ul>
-			</div>
-			<div class="card border-dark mb-3"
-					style="max-width: 45rem; margin-left: auto; margin-right: auto;">
+            
+			<form action="obtenerdistancia" class="formulario" method="Post"
+				onsubmit="return fijaCoord()">
+
+				<div id="effect" class="card border-info mb-3"
+					style="max-width: 30rem; margin-left: auto; margin-right: auto;">
 					<div class="card-header" style="text-align: center;">
 					    <h1></h1>
-						<h2>DISTANCIAS ENTRE LOCALES</h2>
+						<h2>INGRESE LOCALES</h2>
 						<h3><i class="fas fa-route"></i></h3>
 					</div>
-					<div class="card-body text-center" >
-						<p><strong><h5>Primer Local</h5></strong></p>
-                        <h1></h1>
-                        <p><h6>Ubicacion: <span th:text="${dir1}" />, Latitud: <span th:text="${lat1}" />, longitud: <span th:text="${lng1}" /></h6></p>
+					<div class="card-body text-center">
+						<label class="input-name"><h5>Primer
+								Local</h5></label> <select placeholder="PrimerLocal" name="PrimerLocal.id"
+							id="PrimerLocal" class="form-control">
+							<option th:each="local : ${locales}" th:value="${local.id}"
+								th:text="${local.direccion}"></option>
+						</select>
 					</div>
 					<div class="card-body text-center">
-						<p><strong><h5>Segundo Local</h5></strong></p>
-                        <p> <h6>Ubicacion: <span th:text="${dir2}" />, Latitud: <span th:text="${lat2}" />, longitud: <span th:text="${lng2}" /></h6></p>
+						<label class="input-name" style="text-align: center;"><h5>Segundo
+								Local</h5></label> <select placeholder="SegundoLocal" name="SegundoLocal.id"
+							id="SegundoLocal" class="form-control">
+							<option th:each="local : ${locales}" th:value="${local.id}"
+								th:text="${local.direccion}"></option>
+						</select>
 					</div>
 
-                    <div class="card-body text-center text-primary">
-                    <hr>
-						<p><strong><h3>La distancia en kilometros es:</h3></strong><h3><span th:text="${distancia}+' kms'"/></h3></p>
+					<div class="text-center">
+						<input class="btn btn-primary button" type="submit" style="background: #DFDFDF" />
 					</div>
+
 				</div>
-				
-				
-			
+			</form>
 
+			<script type="text/javascript">
+				function fijaCoord() {
+					return (document.getElementById("PrimerLocal").value == document
+							.getElementById("SegundoLocal").value) ? false
+							: true;
+				}
+			</script></main>
+    
     	
 		<div th:replace="scripts-footer.html"></div>
 		

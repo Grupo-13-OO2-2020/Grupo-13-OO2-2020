@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,10 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import Grupo13OO2.Entities.User;
+import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.ProductoMasVendidoModel;
 import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.repositories.IUserRepository;
+import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.IPedidoService;
 import Grupo13OO2.services.IRemitoService;
 import Grupo13OO2.services.ISolicitudStockService;
@@ -41,12 +47,26 @@ public class ProductoMasVendidoController {
 	@Autowired
 	@Qualifier("solicitudStockService")
 	private ISolicitudStockService solicitudStockService;
+	
+	@Autowired
+	@Qualifier("empleadoService")
+	private IEmpleadoService empleadoService;
+	
 
+	@Autowired
+	private IUserRepository userRepository;
+
+	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.MASVENDIDO_INDEX);
 		List<ProductoMasVendidoModel> PMasVendido = ProdMasVend(remitoService.getAll(),solicitudStockService.getAll());
 		mAV.addObject("prodmasVendido", PMasVendido);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -55,6 +75,11 @@ public class ProductoMasVendidoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.MASVENDIDO_INDEX);
 		List<ProductoMasVendidoModel> PdtMVendido = ProdMasVend(remitoService.getAll(),solicitudStockService.getAll());
 		mAV.addObject("prodmasVendido", PdtMVendido);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
