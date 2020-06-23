@@ -5,9 +5,6 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
-import Grupo13OO2.Entities.Cliente;
-import Grupo13OO2.Entities.Empleado;
-import Grupo13OO2.Entities.Producto;
 import javax.validation.constraints.NotNull;
 
 

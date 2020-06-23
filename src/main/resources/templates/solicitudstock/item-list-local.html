@@ -35,24 +35,16 @@
 
 
 <body>
-	<!-- Main container -->
 	<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content">
-				<figure class="full-box nav-lateral-avatar">
-					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="/assets/avatar/Avatar.png" class="img-fluid"
-						alt="Avatar">
-					<figcaption class="roboto-medium text-center">
-						Carlos Alfaro <br> <small class="roboto-condensed-light">Web
-							Developer</small>
-					</figcaption>
-				</figure>
-				<div class="full-box nav-lateral-bar"></div>
-				<nav th:replace="nav_local :: nav"></nav>
-		</section>
+			<div class="full-box nav-lateral-content"
+				 th:replace="div2 :: div"></div>
+			
+		
+	</section>
+
 		<section class="full-box page-content">
 			<nav class="full-box navbar-info">
 				<a href="#" class="float-left show-nav-lateral"> <i
@@ -67,10 +59,7 @@
 				<h3 class="text-left">
 					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS
 				</h3>
-				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Harum delectus eos enim numquam fugit optio
-					accusantium, aperiam eius facere architecto facilis quibusdam
-					asperiores veniam omnis saepe est et, quod obcaecati.</p>
+				<p class="text-justify"></p>
 			</div>
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
@@ -121,16 +110,33 @@
 								<td>
 									 <a th:href="@{/solicitudesStock/editar/{id}(id=*{solicitudStock.id})}" class="btn btn-warning"
 									 >Aceptar</a>
-                </td>
-                <td>
-                    <a th:href="@{/locales/main/{id}(id=${local.id})}" class="btn btn-warning">Volver</a>
-                </td>
+               					 </td>
+								<td>
+									<a th:href="@{/locales/main/{id}(id=${local.id})}" class="btn btn-warning">Volver</a>
+								</td>
 								
 							</div>
 						</tbody>
 					</table>
 				</div>
-						<nav th:replace="nav2 :: nav"></nav>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+
+						<li class="page-item"
+							th:classappend="${prev == 0 ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/empleados/${local.id}?page=${prev}|}">Anterior</a>
+						</li>
+						<li class="page-item" th:each="page : ${pages}"
+							th:classappend="${current == page ? 'active': '' }"><a
+							class="page-link" th:href="@{|/empleados/${local.id}?page=${page}|}"
+							th:text="${page}"></a>
+						<li class="page-item"
+							th:classappend="${current == last ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/empleados/${local.id}?page=${next}|}">Proxima</a>
+						</li>
+
+					</ul>
+				</nav>
 			</div>
 		</section>
 
