@@ -11,7 +11,7 @@ insert into empleado values ( 0,'12:00:00','20:00:00', 25000, "Vendedor",1,1);
 insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Lopez", 44444,'1998-10-11',"Martin");
 insert into empleado  values ( 0,'12:00:00','20:00:00', 15000, "Vendedor",2,2);
 insert into persona( apellido, dni, fecha_nacimiento, nombre) values ("Gonzalez", 11111,'1997-12-06',"Joaquin");
-insert into empleado  values ( 0,'12:00:00','20:00:00', 18000, "Encargado",3,3);
+insert into empleado  values ( 1,'12:00:00','20:00:00', 18000, "Encargado",3,3);
 insert into persona( apellido, dni, fecha_nacimiento, nombre) values  ("Garcia", 333333,'1996-11-08',"Jesus");
 insert into empleado values ( 0,'12:00:00','20:00:00', 15000, "Repositor",4,4);
 
@@ -85,7 +85,7 @@ insert into user_role (id,createdat,role,updatedat,user_id) values
 (3,"2020-03-22 00:00:01",1,"$2a$10$2898Kx3uUveq/fZ1wvLdL.e0cwggk.4R6dE0cNX7npYF.lrBYO9QS","2020-03-22 00:00:01","Joaquin",3);
 
  insert into user_role (id,createdat,role,updatedat,user_id) values 
-(3,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",3);
+(3,"2020-03-22 00:00:01","ROLE_ADMIN","2020-03-22 00:00:01",3);
 
  insert into user(id,createdat,enabled,password,updatedat,username,empleado_id) values 
 (4,"2020-03-22 00:00:01",1,"$2a$10$2898Kx3uUveq/fZ1wvLdL.e0cwggk.4R6dE0cNX7npYF.lrBYO9QS","2020-03-22 00:00:01","Jesus",4);

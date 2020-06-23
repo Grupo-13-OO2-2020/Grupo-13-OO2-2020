@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,8 @@ import Grupo13OO2.services.ILocalService;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@PreAuthorize("hasRole('ROLE_ADMIN')")
+
 @RequestMapping("/empleados")
 public class EmpleadoController {
 	@Autowired

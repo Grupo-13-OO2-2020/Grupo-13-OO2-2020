@@ -42,6 +42,7 @@ public class ProductoMasVendidoController {
 	@Qualifier("solicitudStockService")
 	private ISolicitudStockService solicitudStockService;
 
+	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.MASVENDIDO_INDEX);
