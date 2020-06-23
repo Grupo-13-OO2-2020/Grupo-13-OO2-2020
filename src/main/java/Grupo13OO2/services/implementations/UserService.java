@@ -46,4 +46,10 @@ public class UserService implements UserDetailsService {
 		}
 		return new ArrayList<GrantedAuthority>(grantedAuthorities);
 	}
+
+	// @Override
+	// public User ListarId(int id) {
+
+	// 	return userRepository..findById(id);
+	// }
 }

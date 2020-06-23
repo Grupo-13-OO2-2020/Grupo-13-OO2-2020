@@ -122,11 +122,4 @@ public class EmpleadoService implements IEmpleadoService {
 
 		return sueldoTotal;
 	}
-
-	@Override
-	public Empleado traerUser(String userName) {
-//	return null;
-		
-		return empleadoRepository.findByUserName(userName);
-	}
 }
