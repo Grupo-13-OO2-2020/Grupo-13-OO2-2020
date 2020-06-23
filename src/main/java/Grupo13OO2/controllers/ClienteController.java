@@ -31,9 +31,14 @@ import java.util.stream.IntStream;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 
+import Grupo13OO2.Entities.User;
 import Grupo13OO2.Models.ClienteModel;
+import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.repositories.IUserRepository;
 import Grupo13OO2.services.IClienteService;
+import Grupo13OO2.services.IEmpleadoService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -44,6 +49,13 @@ public class ClienteController {
 	@Autowired
 	@Qualifier("clienteService")
 	private IClienteService clienteService;
+	
+	@Autowired
+	@Qualifier("empleadoService")
+	private IEmpleadoService empleadoService;
+
+	@Autowired
+	private IUserRepository userRepository;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -64,7 +76,11 @@ public class ClienteController {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages",pages);
 		}
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("clientes", pageCliente.getContent());
 		mAV.addObject("current", page+1);
@@ -83,6 +99,9 @@ public class ClienteController {
 		mAV.addObject("cliente", new ClienteModel());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -103,6 +122,9 @@ public class ClienteController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("cliente", clienteService.ListarId(id));
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 

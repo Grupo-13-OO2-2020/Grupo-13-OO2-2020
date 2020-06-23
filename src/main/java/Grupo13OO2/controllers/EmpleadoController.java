@@ -26,9 +26,11 @@ import java.util.stream.IntStream;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 
+import Grupo13OO2.Entities.User;
 import Grupo13OO2.Models.ClienteModel;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.repositories.IUserRepository;
 import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.ILocalService;
 
@@ -42,6 +44,11 @@ public class EmpleadoController {
 	@Autowired
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
+	
+
+	@Autowired
+	private IUserRepository userRepository;
+	
 
 	@Autowired
 	@Qualifier("localService")
@@ -63,6 +70,9 @@ public class EmpleadoController {
 		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		mAV.addObject("empleados", pageEmpleado.getContent());
 		mAV.addObject("current", page+1);
 		mAV.addObject("next" ,page+2);
@@ -90,6 +100,9 @@ public class EmpleadoController {
 		mAV.addObject("empleados", localService.findById(id).getEmpleados());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		
 		return mAV;
 		
@@ -103,6 +116,9 @@ public class EmpleadoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_FORM);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		mAV.addObject("empleado", new EmpleadoModel());
 		mAV.addObject("locales", localService.getAll());
 		return mAV;
@@ -124,6 +140,9 @@ public class EmpleadoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_FORM);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		mAV.addObject("empleado", empleadoService.ListarId(id));
 		mAV.addObject("locales", localService.getAll());
 		return mAV;
@@ -140,6 +159,9 @@ public class EmpleadoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		mAV.addObject("person", empleadoService.ListarId(id));
 		return mAV;
 	}

@@ -29,11 +29,14 @@ import java.util.stream.IntStream;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 
+import Grupo13OO2.Entities.User;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LocalesModels;
 import Grupo13OO2.Models.ProductoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.repositories.IUserRepository;
+import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.ILoteService;
 
@@ -50,6 +53,14 @@ public class LocalController {
 	@Autowired
 	@Qualifier("loteService")
 	private ILoteService loteService;
+	
+	@Autowired
+	@Qualifier("empleadoService")
+	private IEmpleadoService empleadoService;
+	
+
+	@Autowired
+	private IUserRepository userRepository;
 
 	@GetMapping("")
 	public ModelAndView index(@RequestParam Map<String, Object> params, Model model) {
@@ -66,9 +77,15 @@ public class LocalController {
 			mAV.addObject("pages",pages);
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			mAV.addObject("usuario", auth.getName());
+			User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+			EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+			mAV.addObject("empleado", e);
 		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());	    
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		mAV.addObject("locales", pageLocal.getContent());
 		mAV.addObject("current", page+1);
 		mAV.addObject("next" ,page+2);
@@ -85,6 +102,9 @@ public class LocalController {
 		mAV.addObject("locales", localService.getAll());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 	
 		
 		return mAV;
@@ -96,6 +116,9 @@ public class LocalController {
 		mAV.addObject("local", new LocalModel());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -117,6 +140,9 @@ public class LocalController {
 		mAV.addObject("local", localService.findById(id));
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -132,6 +158,9 @@ public class LocalController {
 		mAV.addObject("locales", localService.getAll());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 
 		return mAV;
 	}
@@ -184,6 +213,9 @@ public class LocalController {
 		mAV.addObject("productosFecha", listProduc);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 
 		return mAV;
 	}

@@ -25,10 +25,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import Grupo13OO2.Entities.SolicitudStock;
+import Grupo13OO2.Entities.User;
+import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.converters.SolicitudStockConverter;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.repositories.IUserRepository;
 import Grupo13OO2.services.IClienteService;
 import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.ILocalService;
@@ -54,6 +57,12 @@ public class SolicitudStockController {
 	@Autowired
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
+	
+
+	
+
+	@Autowired
+	private IUserRepository userRepository;
 
 	@Autowired
 	@Qualifier("clienteService")
@@ -84,6 +93,9 @@ public class SolicitudStockController {
 		mAV.addObject("last", totalPage);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		
 		return mAV;
 	}
@@ -111,18 +123,15 @@ public class SolicitudStockController {
 		mAV.addObject("last", totalPage);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 				
 		
 		
 		return mAV;
 	}
-//	@GetMapping("{id}")
-//	public ModelAndView local(@PathVariable("id") int id) {
-//		ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_INDEX_LOCAL);
-//		mAV.addObject("solicitudes", localService.getSolicitudesStock(localService.findById(id)));
-//		mAV.addObject("local", localService.findById(id));
-//		return mAV;
-//	}
+
 
 	@GetMapping("/new/{id}")
 	public ModelAndView create(@PathVariable("id") int id) {
@@ -134,6 +143,9 @@ public class SolicitudStockController {
 		mAV.addObject("locales", localService.getAll());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -159,6 +171,9 @@ public class SolicitudStockController {
 		mAV.addObject("local", localService.findById(solicitudStockModel.getVendedor().getLocal().getId()));
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -173,10 +188,5 @@ public class SolicitudStockController {
 		List<LocalModel> locales = solicitudStockService.getLocalesCercanos(idProducto, idVendedor, cantidad);
 		return locales;
 	}
-//	@RequestMapping("/search")
-//	public String search(Model model, @Param("keyword") String keyword){
-//		List<SolicitudStockModel> list = solicitudStockService.listAll(keyword);
-//		model.addAttribute("list", list);
-//		return "producto/search";
-//	}
+
 }

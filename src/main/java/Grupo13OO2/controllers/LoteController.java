@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import Grupo13OO2.Entities.User;
+import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.repositories.IUserRepository;
+import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.ILoteService;
 import Grupo13OO2.services.IProductoService;
@@ -34,6 +39,16 @@ public class LoteController {
 	@Autowired
 	@Qualifier("productoService")
 	private IProductoService productoService;
+	
+
+	@Autowired
+	@Qualifier("empleadoService")
+	private IEmpleadoService empleadoService;
+	
+
+	@Autowired
+	private IUserRepository userRepository;
+
 
 	@GetMapping("")
 	public ModelAndView index() {
@@ -41,6 +56,9 @@ public class LoteController {
 		mAV.addObject("lotes", loteService.getAll());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -51,6 +69,9 @@ public class LoteController {
 		mAV.addObject("local", localService.findById(id));
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -62,6 +83,9 @@ public class LoteController {
 		mAV.addObject("productos", productoService.getAll());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -73,6 +97,9 @@ public class LoteController {
 		mAV.addObject("locales", localService.getAll());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -92,6 +119,9 @@ public class LoteController {
 		mAV.addObject("locales", localService.getAll());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 

@@ -1,5 +1,5 @@
 USE `Grupo_13_BDD_OO2_2020`;
-
+/*
 
 insert into local  ( id,direccion, latitud, longitud, numero_telefono) values (1,"Murature",50.0218, 79.5265,11112222);
 insert into local ( id,direccion, latitud, longitud, numero_telefono) values (2,"Mentruyt",-49.4505, 153.2949,22223333);
@@ -93,4 +93,4 @@ insert into user_role (id,createdat,role,updatedat,user_id) values
  insert into user_role (id,createdat,role,updatedat,user_id) values 
 (4,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",4);
 
-
+*/

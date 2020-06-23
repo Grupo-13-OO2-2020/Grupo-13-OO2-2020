@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import Grupo13OO2.Entities.User;
+import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.repositories.IUserRepository;
 import Grupo13OO2.services.IClienteService;
 import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.ILocalService;
@@ -52,6 +55,10 @@ public class RemitoController {
 	@Autowired
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
+	
+
+	@Autowired
+	private IUserRepository userRepository;
 
 	@Autowired
 	@Qualifier("clienteService")
@@ -74,6 +81,7 @@ public class RemitoController {
 		if (totalPage > 0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages", pages);
+			
 		}
 		mAV.addObject("remitos", pageRemito.getContent());
 		mAV.addObject("current", page + 1);
@@ -82,18 +90,14 @@ public class RemitoController {
 		mAV.addObject("last", totalPage);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 
 		return mAV;
 
 	}
-//
-//	@GetMapping("{id}")
-//	public ModelAndView local(@PathVariable("id") int id) {
-//		ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_INDEX_LOCAL);
-//		mAV.addObject("remitos", localService.getRemitos(localService.findById(id)));
-//		mAV.addObject("local", localService.findById(id));
-//		return mAV;
-//	}
+
 
 	@GetMapping("{id}")
 	public ModelAndView local(@PathVariable("id") int id,@RequestParam Map<String, Object> params, Model model) {
@@ -119,6 +123,9 @@ public class RemitoController {
 		mAV.addObject("last", totalPage);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 
 		
 		
@@ -137,6 +144,9 @@ public class RemitoController {
 		mAV.addObject("clientes", clienteService.getAll());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -171,6 +181,9 @@ public class RemitoController {
 		mAV.addObject("clientes", clienteService.getAll());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
