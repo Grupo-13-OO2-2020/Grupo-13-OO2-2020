@@ -11,7 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
+import Grupo13OO2.Entities.Pedido;
 import Grupo13OO2.Entities.Remito;
 import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.converters.RemitoConverter;
@@ -59,8 +59,7 @@ public class RemitoService implements IRemitoService {
 
 	@Override
 	public RemitoModel ListarId(int id) {
-		Optional<Remito> remito = remitoRepository.findById(id);
-		return remitoConverter.entityToModel(remito.get());
+		return remitoConverter.entityToModel(remitoRepository.findById(id));
 	}
 
 	@Override
@@ -87,7 +86,7 @@ public class RemitoService implements IRemitoService {
 		if(keyword != null){
 			return remitoRepository.findAll(keyword);
 		}
-		return remitoRepository.findAll();
+		return remitoRepository.findAll(keyword);
 	}
 
 }

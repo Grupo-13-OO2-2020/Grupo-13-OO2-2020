@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import Grupo13OO2.Entities.Pedido;
 import Grupo13OO2.Entities.Remito;
 import Grupo13OO2.Models.RemitoModel;
 
@@ -18,7 +19,7 @@ public interface IRemitoService {
 
 	public String delete(int id);
 	
-	Page<RemitoModel> getAllPages(Pageable pageable);
+	public Page<RemitoModel> getAllPages(Pageable pageable);
 
 	public List<Remito> listAll(String keyword);
 

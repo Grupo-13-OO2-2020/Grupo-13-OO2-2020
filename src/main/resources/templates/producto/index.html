@@ -109,12 +109,12 @@
                                     <td th:text="${producto.talle}"></td>
                                     <td th:text="${producto.codigoProducto}"></td>
                                     <td>
-                                        <a th:href="@{productos/editar/} + ${producto.id}" class="btn btn-success">
+                                        <a th:href="@{/productos/editar/} + ${producto.id}" class="btn btn-success">
                                             <i class="fas fa-sync-alt"></i> 
                                         </a>
                                     </td>
                                     <td>
-                                        <a th:href ="@{productos/eliminar/{id}(id=${producto.id})}" class="btn btn-warning">
+                                        <a th:href ="@{/productos/eliminar/{id}(id=${producto.id})}" class="btn btn-warning">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
                                     </td>

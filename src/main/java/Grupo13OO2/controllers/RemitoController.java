@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import Grupo13OO2.Entities.Lote;
+import Grupo13OO2.Entities.Pedido;
 import Grupo13OO2.Entities.Remito;
 import Grupo13OO2.Entities.User;
 import Grupo13OO2.Models.EmpleadoModel;

@@ -170,8 +170,8 @@ public class LoteController {
 	
 	@RequestMapping("/search")
 	public String search(Model model, @Param("keyword") String keyword){
-		List<Lote> list = loteService.listAll(keyword);
-		model.addAttribute("list", list);
+		//List<Lote> list = loteService.listAll(keyword);
+		//model.addAttribute("list", list);
 		return "local/search";
 	}
 

@@ -15,13 +15,7 @@ public interface ISolicitudStockRepository extends JpaRepository<SolicitudStock,
 	public abstract SolicitudStock findById(int id);
 	
 
-	@Query("select s from SolicitudStock s , Local l where s.local_id = l.id  and l.direccion LIKE %?1%")
+	@Query("select s from SolicitudStock s")
 	public List<SolicitudStock> findAll(String keyword);
-
-
-//	@Query("select s from SolicitudStock s , Local l where s.local_id = l.id  and l.direccion LIKE %?1%")
-//	public List<SolicitudStock> findAll(String keyword);
-//	
-	
 
 }

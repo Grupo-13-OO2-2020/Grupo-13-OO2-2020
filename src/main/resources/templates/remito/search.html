@@ -141,43 +141,23 @@
 								<th>CLIENTE</th>
 								<th>FACTURADO</th>
 								<th>FORMA DE PAGO</th>
-								<th>ACTUALIZAR</th>
-								<th>ELIMINAR</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="remito:${list}" style="text-align:center;">
 
-							<td th:text="${remito.id}"></td>
-							<td th:text="${remito.fecha}"></td>
-							<td th:text="${remito.producto.descripcion}"></td>
-							<td th:text="${remito.cantidad}"></td>
-							<td th:text="${remito.vendedor.nombre}"></td>
-							<td th:text="${remito.cliente.nombre}"></td>
-							<td th:text="${remito.facturado}"></td>
-							<td th:text="${remito.formaDePago}"></td>
-								<td>
-                                    <a th:href="@{remitos/editar/} + ${remito.id}" class="btn btn-success">
-                                        <i class="fas fa-sync-alt"></i> 
-                                    </a>
-								</td>
-								<td>
-									<a th:href ="@{remitos/eliminar/{id}(id=${remito.id})}" class="btn btn-warning">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
-                                </td>
+                                <td th:text="${remito.id}"></td>
+								<td th:text="${remito.fecha}"></td>
+								<td th:text="${remito.producto.descripcion}"></td>
+								<td th:text="${remito.cantidad}"></td>
+								<td th:text="${remito.vendedor.nombre}"></td>
+								<td th:text="${remito.cliente.nombre}"></td>
+								<td th:text="${remito.formaDePago}"></td>
 			
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<nav aria-label="Pagination">
-					<ul class="pagination justify-content-center">
-						<li class="page-item" th:each="page : ${pages}">
-							<a class="page-link" th:href="@{|/remitos/?page=${page}|}" th:text="${page}"></a>
-						</li>
-					</ul>
-				</nav>
 			</div>
         </section>
 
