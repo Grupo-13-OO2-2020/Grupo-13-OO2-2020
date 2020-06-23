@@ -5,7 +5,18 @@
 				&nbsp; Dashboard</a></li>
 	<li><a href="/locales"><i class="fas fa-store-alt fa-fw"></i>
 				&nbsp; Locales</a></li>
-
+	
+	<li><a href="#" class="nav-btn-submenu"><i
+				class="fas fa-users fa-fw"></i> &nbsp; Clientes <i
+				class="fas fa-chevron-down"></i></a>
+			<ul>
+				<li><a href="/clientes/new"><i class="fas fa-plus fa-fw"></i>
+						&nbsp; Agregar Cliente</a></li>
+				<li><a th:href="@{/clientes/{id}}"><i
+						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de clientes</a></li>
+				<li><a href="clientes"><i class="fas fa-search fa-fw"></i>
+						&nbsp; Buscar cliente</a></li>
+			</ul></li>
 		
 
 		<li><a href="#" class="nav-btn-submenu"><i

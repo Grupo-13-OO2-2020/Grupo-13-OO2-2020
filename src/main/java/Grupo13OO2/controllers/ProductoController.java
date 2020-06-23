@@ -76,7 +76,7 @@ public class ProductoController {
 
 		}
 		productoService.insertOrUpdate(productoModel);
-		return "redirect:/productos";
+		return "redirect:/productos/";
 
 	}
 
@@ -95,7 +95,7 @@ public class ProductoController {
 	@GetMapping("/eliminar/{id}")
 	public RedirectView delete(Model model, @PathVariable("id") int id) {
 		productoService.delete(id);
-		return new RedirectView("/productos");
+		return new RedirectView("/productos/");
 
 	}
 
