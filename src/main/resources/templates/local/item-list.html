@@ -89,44 +89,53 @@
 					<table class="table table-dark table-sm">
 						<thead>
 							<tr class="text-center roboto-medium">
-					<th>ID</th>
-					<th>DIRECCION</th>
-					<th>LATITUD</th>
-					<th>LONGITUD</th>
-					<th>NUM.TELEFONO</th>
-					<th>GERENTE</th>
-					<th></th>
-					<th></th>
-					<th></th>
-					
+								<th>ID</th>
+								<th>DIRECCION</th>
+								<th>LATITUD</th>
+								<th>LONGITUD</th>
+								<th>NUM.TELEFONO</th>
+								<th>GERENTE</th>
+								<th>INGRESAR</th>
+								<th>ELIMINAR</th>
+								<th>ACTUALIZAR</th>
 							</tr>
+
 						</thead>
 						<tbody>
-							<tr th:each="local:${locales}" style="text-align:center;">
+							<tr th:each="local:${locales}" class="text-center">
 
 								<td th:text="${local.id}"></td>
-					<td th:text="${local.direccion}"></td>
-					<td th:text="${local.latitud}"></td>
-					<td th:text="${local.longitud}"></td>
-					<td th:text="${local.numeroTelefono}"></td>
-					<div th:each="empleado : ${local.empleados}" th:if="${empleado.gerente}" >
-					<td th:text="${empleado.nombre}"></td>
-					</div>
-	<div th:each="empleado : ${local.empleados}" th:unless="${empleado.gerente}" >
-					<th>Sin asginar </th>
-					</div>
-					
+								<td th:text="${local.direccion}"></td>
+								<td th:text="${local.latitud}"></td>
+								<td th:text="${local.longitud}"></td>
+								<td th:text="${local.numeroTelefono}"></td>
+
+								<div id="gerente-id" th:each="empleado : ${local.empleados}" th:if="${empleado.gerente}" >
+									<td id="gerente-id" th:text="${empleado.nombre}"></td>
+								</div>
+
+								<!-- <div>
+									<td>Sin asignar </td>
+								</div> -->
+
 								<td>
-								<a
-									th:href="@{/locales/eliminar/{id}(id=${local.id})}"
-									type="button" class="btn btn-warning"
-									onclick="alert('El cliente fue eliminado con exito!')"> <i
-										class="far fa-trash-alt"></i>
-								</a></td>
-							<td>	<a th:href="@{/locales/main/{id}(id=${local.id})}"
-									class="btn btn-success"> <i class="fas fa-store-alt fa-fw"></i></a></td>
-				<td>	<a th:href="@{/locales/editar/{id}(id=${local.id})}"
-									class="btn btn-success"> <i class="fas fa-sync-alt"></i></a></td>
+									<a th:href="@{/locales/main/{id}(id=${local.id})}"
+									class="btn btn-success"> <i class="fas fa-store-alt fa-fw"></i></a>
+								</td>
+
+								<td>
+									<a
+										th:href="@{/locales/eliminar/{id}(id=${local.id})}"
+										type="button" class="btn btn-warning"
+										onclick="alert('El cliente fue eliminado con exito!')"> <i
+											class="far fa-trash-alt"></i>
+									</a>
+								</td>
+								
+								<td>	
+								<a th:href="@{/locales/editar/{id}(id=${local.id})}"
+									class="btn btn-success"> <i class="fas fa-sync-alt"></i></a>
+								</td>
 					
 							</tr>
 						</tbody>
@@ -145,4 +154,4 @@
 		<div th:replace="scripts-footer.html"></div>
 
 </body>
-</html>
+</html>	
