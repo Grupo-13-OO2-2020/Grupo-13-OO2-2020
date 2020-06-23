@@ -59,10 +59,7 @@
 				<h3 class="text-left">
 					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS
 				</h3>
-				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Harum delectus eos enim numquam fugit optio
-					accusantium, aperiam eius facere architecto facilis quibusdam
-					asperiores veniam omnis saepe est et, quod obcaecati.</p>
+				<p class="text-justify"></p>
 			</div>
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
@@ -122,7 +119,24 @@
 						</tbody>
 					</table>
 				</div>
-						<nav th:replace="nav2 :: nav"></nav>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+
+						<li class="page-item"
+							th:classappend="${prev == 0 ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/empleados/${local.id}?page=${prev}|}">Anterior</a>
+						</li>
+						<li class="page-item" th:each="page : ${pages}"
+							th:classappend="${current == page ? 'active': '' }"><a
+							class="page-link" th:href="@{|/empleados/${local.id}?page=${page}|}"
+							th:text="${page}"></a>
+						<li class="page-item"
+							th:classappend="${current == last ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/empleados/${local.id}?page=${next}|}">Proxima</a>
+						</li>
+
+					</ul>
+				</nav>
 			</div>
 		</section>
 
