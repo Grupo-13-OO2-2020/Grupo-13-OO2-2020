@@ -12,7 +12,7 @@ public class LoteModel {
 	private int numeroDeLote;
 //@Min(value = 1, message = "cantidad no puede ser 0")
 	private int cantidadRecibida;
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 //	@NotNull(message = "es obligatorio indicar fecha")
 	private Date fechaIngreso;
 //	@NotNull(message = "es obligatorio indicar producto")
@@ -26,7 +26,7 @@ public class LoteModel {
 	}
 
 	public LoteModel(int id, int numeroDeLote, int cantidadRecibida, ProductoModel producto, int cantidadExistente,
-			LocalModel local) {
+			LocalModel local, Date fechaIngreso) {
 
 		this.id = id;
 		this.numeroDeLote = numeroDeLote;
@@ -34,15 +34,17 @@ public class LoteModel {
 		this.producto = producto;
 		this.cantidadExistente = cantidadExistente;
 		this.local = local;
+		this.fechaIngreso= fechaIngreso;
 	}
 
-	public LoteModel(int id, int numeroDeLote, int cantidadRecibida, ProductoModel producto, int cantidadExistente) {
+	public LoteModel(int id, int numeroDeLote, int cantidadRecibida, ProductoModel producto, int cantidadExistente, Date fechaIngreso) {
 
 		this.id = id;
 		this.numeroDeLote = numeroDeLote;
 		this.cantidadRecibida = cantidadRecibida;
 		this.producto = producto;
 		this.cantidadExistente = cantidadExistente;
+		this.fechaIngreso = fechaIngreso;
 	}
 
 	public LocalModel getLocal() {
