@@ -36,22 +36,15 @@
 
 <body>
 	<!-- Main container -->
-	<main class="full-box main-container">
+		<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content">
-				<figure class="full-box nav-lateral-avatar">
-					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="/assets/avatar/Avatar.png" class="img-fluid"
-						alt="Avatar">
-					<figcaption class="roboto-medium text-center">
-					Usuario Logueado <br> <small class="roboto-condensed-light">Empleado</small>
-					</figcaption>
-				</figure>
-				<div class="full-box nav-lateral-bar"></div>
-				<nav th:replace="nav :: nav"></nav>
-		</section>
+			<div class="full-box nav-lateral-content"
+				 th:replace="div :: div"></div>
+			
+		
+	</section>
 		<section class="full-box page-content">
 			<nav class="full-box navbar-info">
 				<a href="#" class="float-left show-nav-lateral"> <i
@@ -75,6 +68,11 @@
 					
 					<li><a href="item-search.html"><i
 							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR LOCAL</a></li>
+							
+					<li><a href="/locales/calculacoordenadas"><i
+					 class="fas fa-map-marker-alt"></i> &nbsp; CALCULO DISTANCIA ENTRE LOCALES</a></li>		
+						
+					
 				</ul>
 			</div>
 
@@ -84,50 +82,76 @@
 					<table class="table table-dark table-sm">
 						<thead>
 							<tr class="text-center roboto-medium">
-					<th>ID</th>
-					<th>DIRECCION</th>
-					<th>LATITUD</th>
-					<th>LONGITUD</th>
-					<th>NUM.TELEFONO</th>
-					<th>GERENTE</th>
-					<th></th>
-					<th></th>
-					<th></th>
-					
+								<th>ID</th>
+								<th>DIRECCION</th>
+								<th>LATITUD</th>
+								<th>LONGITUD</th>
+								<th>NUM.TELEFONO</th>
+								<th>GERENTE</th>
+								<th>INGRESAR</th>
+								<th>ELIMINAR</th>
+								<th>ACTUALIZAR</th>
 							</tr>
+
 						</thead>
 						<tbody>
-							<tr th:each="local:${locales}" style="text-align:center;">
+							<tr th:each="local:${locales}" class="text-center">
 
 								<td th:text="${local.id}"></td>
-					<td th:text="${local.direccion}"></td>
-					<td th:text="${local.latitud}"></td>
-					<td th:text="${local.longitud}"></td>
-					<td th:text="${local.numeroTelefono}"></td>
-					<div th:each="empleado : ${local.empleados}" th:if="${empleado.gerente}" >
-					<td th:text="${empleado.nombre}"></td>
-					</div>
-	<div th:each="empleado : ${local.empleados}" th:unless="${empleado.gerente}" >
-					<th>Sin asginar </th>
-					</div>
-					
+								<td th:text="${local.direccion}"></td>
+								<td th:text="${local.latitud}"></td>
+								<td th:text="${local.longitud}"></td>
+								<td th:text="${local.numeroTelefono}"></td>
+
+								<div id="gerente-id" th:each="empleado : ${local.empleados}" th:if="${empleado.gerente}" >
+									<td id="gerente-id" th:text="${empleado.nombre}"></td>
+								</div>
+
+								<!-- <div>
+									<td>Sin asignar </td>
+								</div> -->
+
 								<td>
-								<a
-									th:href="@{/locales/eliminar/{id}(id=${local.id})}"
-									type="button" class="btn btn-warning"
-									onclick="alert('El cliente fue eliminado con exito!')"> <i
-										class="far fa-trash-alt"></i>
-								</a></td>
-							<td>	<a th:href="@{/locales/main/{id}(id=${local.id})}"
-									class="btn btn-success"> <i class="fas fa-store-alt fa-fw"></i></a></td>
-				<td>	<a th:href="@{/locales/editar/{id}(id=${local.id})}"
-									class="btn btn-success"> <i class="fas fa-sync-alt"></i></a></td>
+									<a th:href="@{/locales/main/{id}(id=${local.id})}"
+									class="btn btn-success"> <i class="fas fa-store-alt fa-fw"></i></a>
+								</td>
+
+								<td>
+									<a
+										th:href="@{/locales/eliminar/{id}(id=${local.id})}"
+										type="button" class="btn btn-warning"
+										onclick="alert('El cliente fue eliminado con exito!')"> <i
+											class="far fa-trash-alt"></i>
+									</a>
+								</td>
+								
+								<td>	
+								<a th:href="@{/locales/editar/{id}(id=${local.id})}"
+									class="btn btn-success"> <i class="fas fa-sync-alt"></i></a>
+								</td>
 					
 							</tr>
 						</tbody>
 					</table>
 				</div>
-						<nav th:replace="nav2 :: nav"></nav>
+						<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+
+						<li class="page-item"
+							th:classappend="${prev == 0 ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/locales/?page=${prev}|}">Anterior</a>
+						</li>
+						<li class="page-item" th:each="page : ${pages}"
+							th:classappend="${current == page ? 'active': '' }"><a
+							class="page-link" th:href="@{|/locales/?page=${page}|}"
+							th:text="${page}"></a>
+						<li class="page-item"
+							th:classappend="${current == last ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/locales/?page=${next}|}">Proxima</a>
+						</li>
+
+					</ul>
+				</nav>
 			</div>
 		</section>
 
@@ -138,5 +162,6 @@
 
 
 		<div th:replace="scripts-footer.html"></div>
+
 </body>
-</html>
+</html>	

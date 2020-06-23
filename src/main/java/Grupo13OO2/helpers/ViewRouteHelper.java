@@ -9,7 +9,7 @@ public class ViewRouteHelper {
     public final static String EMPLEADO_FORM = "empleado/user-new";
     public final static String LOCAL_FORM = "local/useflocal-new";
     public final static String LOCAL_MAIN = "local/local-home";
-    public final static String LOCAL_CALC_COORD = "local/calculacoordenadas";
+    public final static String LOCAL_CALC_COORD = "local/ccoordenada-new";
 
     public final static String PRODUCTO_FORM = "producto/form";
     public final static String LOTE_FORM = "lote/form";
@@ -37,4 +37,9 @@ public class ViewRouteHelper {
     public final static String REMITO_INDEX = "remito/item-list";
     public final static String REMITO_INDEX_LOCAL = "remito/item-list-local";
     public final static String MASVENDIDO_INDEX = "productomasvendido/index";
+   
+    
+	//USER
+	public final static String USER_LOGIN = "user/login";
+	public final static String USER_LOGOUT = "user/logout";
 }

@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,20 +28,29 @@ import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 
 import Grupo13OO2.Entities.Empleado;
+import Grupo13OO2.Entities.User;
 import Grupo13OO2.Models.ClienteModel;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.repositories.IUserRepository;
 import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.ILocalService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@PreAuthorize("hasRole('ROLE_ADMIN')")
+
 @RequestMapping("/empleados")
 public class EmpleadoController {
 	@Autowired
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
+	
+
+	@Autowired
+	private IUserRepository userRepository;
+	
 
 	@Autowired
 	@Qualifier("localService")
@@ -58,6 +70,11 @@ public class EmpleadoController {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages",pages);
 		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		mAV.addObject("empleados", pageEmpleado.getContent());
 		mAV.addObject("current", page+1);
 		mAV.addObject("next" ,page+2);
@@ -83,6 +100,11 @@ public class EmpleadoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX_LOCAL);
 		mAV.addObject("local", localService.findById(id));
 		mAV.addObject("empleados", localService.findById(id).getEmpleados());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		
 		return mAV;
 		
@@ -94,6 +116,11 @@ public class EmpleadoController {
 	@GetMapping("/new")
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_FORM);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		mAV.addObject("empleado", new EmpleadoModel());
 		mAV.addObject("locales", localService.getAll());
 		return mAV;
@@ -113,6 +140,11 @@ public class EmpleadoController {
 	public ModelAndView get(@PathVariable("id") int id) {
 
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_FORM);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		mAV.addObject("empleado", empleadoService.ListarId(id));
 		mAV.addObject("locales", localService.getAll());
 		return mAV;
@@ -127,6 +159,11 @@ public class EmpleadoController {
 	@GetMapping("/partial/{id}")
 	public ModelAndView getPartial(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		mAV.addObject("person", empleadoService.ListarId(id));
 		return mAV;
 	}

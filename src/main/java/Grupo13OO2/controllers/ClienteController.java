@@ -6,6 +6,8 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -32,9 +34,14 @@ import org.springframework.validation.BindingResult;
 
 import Grupo13OO2.Entities.Cliente;
 import Grupo13OO2.Entities.Producto;
+import Grupo13OO2.Entities.User;
 import Grupo13OO2.Models.ClienteModel;
+import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.repositories.IUserRepository;
 import Grupo13OO2.services.IClienteService;
+import Grupo13OO2.services.IEmpleadoService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -45,6 +52,13 @@ public class ClienteController {
 	@Autowired
 	@Qualifier("clienteService")
 	private IClienteService clienteService;
+	
+	@Autowired
+	@Qualifier("empleadoService")
+	private IEmpleadoService empleadoService;
+
+	@Autowired
+	private IUserRepository userRepository;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -65,6 +79,12 @@ public class ClienteController {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages",pages);
 		}
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
+		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("clientes", pageCliente.getContent());
 		mAV.addObject("current", page+1);
 		mAV.addObject("next" ,page+2);
@@ -80,6 +100,11 @@ public class ClienteController {
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM);
 		mAV.addObject("cliente", new ClienteModel());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
@@ -97,7 +122,12 @@ public class ClienteController {
 	public ModelAndView get(@PathVariable("id") int id) {
 
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("cliente", clienteService.ListarId(id));
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
