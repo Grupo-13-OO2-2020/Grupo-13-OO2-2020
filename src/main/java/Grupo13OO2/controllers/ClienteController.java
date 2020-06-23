@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -62,6 +64,8 @@ public class ClienteController {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages",pages);
 		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("clientes", pageCliente.getContent());
 		mAV.addObject("current", page+1);
 		mAV.addObject("next" ,page+2);
@@ -77,6 +81,8 @@ public class ClienteController {
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM);
 		mAV.addObject("cliente", new ClienteModel());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 
@@ -94,6 +100,8 @@ public class ClienteController {
 	public ModelAndView get(@PathVariable("id") int id) {
 
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("cliente", clienteService.ListarId(id));
 		return mAV;
 	}

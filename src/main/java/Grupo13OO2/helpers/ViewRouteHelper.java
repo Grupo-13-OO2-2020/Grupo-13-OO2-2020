@@ -37,7 +37,7 @@ public class ViewRouteHelper {
     public final static String REMITO_INDEX = "remito/item-list";
     public final static String REMITO_INDEX_LOCAL = "remito/item-list-local";
     public final static String MASVENDIDO_INDEX = "productomasvendido/index";
-    
+   
     
 	//USER
 	public final static String USER_LOGIN = "user/login";

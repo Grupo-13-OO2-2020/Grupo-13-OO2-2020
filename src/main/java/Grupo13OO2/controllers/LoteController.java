@@ -2,6 +2,8 @@ package Grupo13OO2.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +39,8 @@ public class LoteController {
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_INDEX);
 		mAV.addObject("lotes", loteService.getAll());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 
@@ -45,6 +49,8 @@ public class LoteController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_INDEX_LOCAL);
 		mAV.addObject("lotes", localService.findById(id).getLotes());
 		mAV.addObject("local", localService.findById(id));
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 
@@ -54,6 +60,8 @@ public class LoteController {
 		mAV.addObject("local", localService.findById(id));
 		mAV.addObject("lote", new LoteModel());
 		mAV.addObject("productos", productoService.getAll());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 
@@ -63,6 +71,8 @@ public class LoteController {
 		mAV.addObject("lote", new LoteModel());
 		mAV.addObject("productos", productoService.getAll());
 		mAV.addObject("locales", localService.getAll());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 
@@ -80,6 +90,8 @@ public class LoteController {
 		mAV.addObject("lote", loteService.ListarId(id));
 		mAV.addObject("productos", productoService.getAll());
 		mAV.addObject("locales", localService.getAll());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 

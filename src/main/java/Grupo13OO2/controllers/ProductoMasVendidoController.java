@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,6 +50,8 @@ public class ProductoMasVendidoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.MASVENDIDO_INDEX);
 		List<ProductoMasVendidoModel> PMasVendido = ProdMasVend(remitoService.getAll(),solicitudStockService.getAll());
 		mAV.addObject("prodmasVendido", PMasVendido);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 
@@ -56,6 +60,8 @@ public class ProductoMasVendidoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.MASVENDIDO_INDEX);
 		List<ProductoMasVendidoModel> PdtMVendido = ProdMasVend(remitoService.getAll(),solicitudStockService.getAll());
 		mAV.addObject("prodmasVendido", PdtMVendido);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 

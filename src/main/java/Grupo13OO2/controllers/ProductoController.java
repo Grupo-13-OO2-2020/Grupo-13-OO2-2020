@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -54,6 +56,8 @@ public class ProductoController {
 	@GetMapping("/new")
 	public ModelAndView create(@ModelAttribute("producto") ProductoModel productomodel) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_FORM);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 
@@ -72,6 +76,8 @@ public class ProductoController {
 	public ModelAndView get(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_FORM);
 		mAV.addObject("producto", productoService.ListarId(id));
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 
@@ -93,6 +99,8 @@ public class ProductoController {
 			model.addAttribute("pages", pages);
 		}
 		model.addAttribute("list", pageProducto.getContent());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("usuario", auth.getName());
 
 		return ViewRouteHelper.PRODUCTO_INDEX;
 	}
@@ -101,6 +109,8 @@ public class ProductoController {
 	public String search(Model model, @Param("keyword") String keyword){
 		List<ProductoModel> list = productoService.listAll(keyword);
 		model.addAttribute("list", list);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("usuario", auth.getName());
 		return "producto/search";
 	}
 

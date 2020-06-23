@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,6 +80,8 @@ public class RemitoController {
 		mAV.addObject("next", page + 2);
 		mAV.addObject("prev", page);
 		mAV.addObject("last", totalPage);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 
 		return mAV;
 
@@ -105,12 +109,16 @@ public class RemitoController {
 		if (totalPage > 0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages", pages);
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			mAV.addObject("usuario", auth.getName());
 		}
 		mAV.addObject("remitos", pageRemito.getContent());
 		mAV.addObject("current", page + 1);
 		mAV.addObject("next", page + 2);
 		mAV.addObject("prev", page);
 		mAV.addObject("last", totalPage);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 
 		
 		
@@ -127,6 +135,8 @@ public class RemitoController {
 		mAV.addObject("productos", productoService.getAll());
 		mAV.addObject("empleados", empleadoService.getAll());
 		mAV.addObject("clientes", clienteService.getAll());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 
@@ -159,6 +169,8 @@ public class RemitoController {
 		mAV.addObject("productos", productoService.getAll());
 		mAV.addObject("empleados", empleadoService.getAll());
 		mAV.addObject("clientes", clienteService.getAll());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 

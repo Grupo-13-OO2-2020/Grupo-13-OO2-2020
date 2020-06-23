@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,7 +64,11 @@ public class LocalController {
 		if(totalPage>0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages",pages);
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			mAV.addObject("usuario", auth.getName());
 		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());	    
 		mAV.addObject("locales", pageLocal.getContent());
 		mAV.addObject("current", page+1);
 		mAV.addObject("next" ,page+2);
@@ -77,6 +83,9 @@ public class LocalController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_MAIN);
 		mAV.addObject("local", localService.findById(id));
 		mAV.addObject("locales", localService.getAll());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+	
 		
 		return mAV;
 	}
@@ -85,6 +94,8 @@ public class LocalController {
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_FORM);
 		mAV.addObject("local", new LocalModel());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 
@@ -104,6 +115,8 @@ public class LocalController {
 
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_FORM);
 		mAV.addObject("local", localService.findById(id));
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		return mAV;
 	}
 
@@ -117,6 +130,8 @@ public class LocalController {
 	public ModelAndView calculacoordenadas() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_CALC_COORD);
 		mAV.addObject("locales", localService.getAll());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 
 		return mAV;
 	}
@@ -167,6 +182,8 @@ public class LocalController {
 		mAV.addObject("fecha2", formatter.format(fecha2));
 		mAV.addObject("local", local);
 		mAV.addObject("productosFecha", listProduc);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 
 		return mAV;
 	}

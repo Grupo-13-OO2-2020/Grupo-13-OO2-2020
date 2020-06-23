@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,6 +61,8 @@ public class EmpleadoController {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages",pages);
 		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("empleados", pageEmpleado.getContent());
 		mAV.addObject("current", page+1);
 		mAV.addObject("next" ,page+2);
@@ -84,6 +88,8 @@ public class EmpleadoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX_LOCAL);
 		mAV.addObject("local", localService.findById(id));
 		mAV.addObject("empleados", localService.findById(id).getEmpleados());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		
 		return mAV;
 		
@@ -95,6 +101,8 @@ public class EmpleadoController {
 	@GetMapping("/new")
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_FORM);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("empleado", new EmpleadoModel());
 		mAV.addObject("locales", localService.getAll());
 		return mAV;
@@ -114,6 +122,8 @@ public class EmpleadoController {
 	public ModelAndView get(@PathVariable("id") int id) {
 
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_FORM);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("empleado", empleadoService.ListarId(id));
 		mAV.addObject("locales", localService.getAll());
 		return mAV;
@@ -128,6 +138,8 @@ public class EmpleadoController {
 	@GetMapping("/partial/{id}")
 	public ModelAndView getPartial(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("person", empleadoService.ListarId(id));
 		return mAV;
 	}
