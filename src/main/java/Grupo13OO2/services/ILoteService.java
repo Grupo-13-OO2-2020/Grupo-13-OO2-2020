@@ -2,6 +2,8 @@ package Grupo13OO2.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import Grupo13OO2.Entities.Lote;
 import Grupo13OO2.Models.LoteModel;
@@ -16,6 +18,7 @@ public interface ILoteService {
 
 	public String delete(int id);
 	
-	public List<Lote> listAll(String keyword);
+	Page<LoteModel> getAllPages(Pageable pageable);
+
 
 }

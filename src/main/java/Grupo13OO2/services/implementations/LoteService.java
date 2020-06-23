@@ -1,14 +1,20 @@
 package Grupo13OO2.services.implementations;
 
 import java.util.List;
+import java.util.function.Function;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Entities.Lote;
+import Grupo13OO2.Entities.Remito;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
 import Grupo13OO2.Models.ProductoModel;
+import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.converters.LocalConverter;
 import Grupo13OO2.converters.LoteConverter;
 import Grupo13OO2.converters.ProductoConverter;
@@ -96,5 +102,21 @@ public class LoteService implements ILoteService {
 		return loteRepository.findAll();
 	}
 
+
+	@Override
+	public Page<LoteModel> getAllPages(Pageable pageable) {
+	
+		
+		Page<Lote> lotes= loteRepository.findAll(pageable);
+		Page<LoteModel> pages= lotes.map(new Function <Lote, LoteModel>(){
+			public LoteModel apply(Lote lote) {
+				LoteModel remitoModel= loteConverter.entityToModel(lote);
+				return remitoModel;
+			}
+		});
+		
+		return pages;
+	}
+	
 
 }

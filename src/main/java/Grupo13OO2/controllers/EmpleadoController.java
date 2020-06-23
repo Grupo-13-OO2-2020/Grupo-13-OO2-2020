@@ -59,6 +59,7 @@ public class EmpleadoController {
 	@GetMapping("")
 	public ModelAndView index(@RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX);
+		//paginacion
 		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
 		
 		PageRequest pageRequest = PageRequest.of(page, 4);
@@ -70,16 +71,18 @@ public class EmpleadoController {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages",pages);
 		}
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		mAV.addObject("usuario", auth.getName());
-		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
-		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-		mAV.addObject("empleado", e);
+
 		mAV.addObject("empleados", pageEmpleado.getContent());
 		mAV.addObject("current", page+1);
 		mAV.addObject("next" ,page+2);
 		mAV.addObject("prev" ,page);
 		mAV.addObject("last", totalPage);
+		//datos de usuario
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		
 		return mAV;
 	}
@@ -96,10 +99,31 @@ public class EmpleadoController {
 
 	
 	@GetMapping("{id}")
-	public ModelAndView local(@PathVariable("id") int id, Model model) {
+	public ModelAndView local(@PathVariable("id") int id, Model model,@RequestParam Map<String, Object> params) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX_LOCAL);
+		//agrego local
 		mAV.addObject("local", localService.findById(id));
-		mAV.addObject("empleados", localService.findById(id).getEmpleados());
+		//paginacion
+int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
+		
+		PageRequest pageRequest = PageRequest.of(page, 4);
+		
+		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPages(pageRequest);
+		
+		int totalPage= pageEmpleado.getTotalPages();
+		if(totalPage>0) {
+			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+			mAV.addObject("pages",pages);
+		}
+
+		mAV.addObject("empleados", pageEmpleado.getContent());
+		mAV.addObject("current", page+1);
+		mAV.addObject("next" ,page+2);
+		mAV.addObject("prev" ,page);
+		mAV.addObject("last", totalPage);
+		
+		//datos de usuario
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());

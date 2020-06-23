@@ -103,7 +103,8 @@
                                 
                                 <div class="col-12 col-md-6">
 									<div class="form-group">
-										<label>PRODUCTO</label> <select class="form-control" placeholder="Producto" th:field="*{producto.id}">
+										<label>PRODUCTO</label> 
+										<select id="producto-select" class="form-control" placeholder="Producto" th:field="*{producto.id}">
 											<option th:each="producto : ${productos}" th:value="${producto.id}" th:text="${producto.descripcion}+${producto.talle}"></option>
 										</select> 
 										<small class="form-text text-danger"th:if="${#fields.hasErrors('producto.id')}" th:errors="*{producto.id}"></small>
@@ -113,13 +114,14 @@
                                 <div class="col-12 col-md-6">
 									<div class="form-group">
 										<label>CANTIDAD</label>
-										<input th:field="*{cantidad}" type="number"  class="form-control">
+										<input id="cantidad-select" th:field="*{cantidad}" type="number"  class="form-control">
 									</div>
 								</div>
                                 
                                 <div class="col-12 col-md-6">
 									<div class="form-group">
-										<label>VENDEDOR</label> <select class="form-control" placeholder="Vendedor" th:field="*{vendedor.id}">
+										<label>VENDEDOR</label> 
+										<select id="vendedor-select" class="form-control" placeholder="Vendedor" th:field="*{vendedor.id}">
 											<option th:each="vendedor : ${local.empleados}" th:value="${vendedor.id}" th:text="${vendedor.nombre}"></option>
 										</select> 
 										<small class="form-text text-danger"th:if="${#fields.hasErrors('vendedor')}" th:errors="*{vendedor}"></small>
@@ -193,12 +195,10 @@
 	</script>
 
 	<script src="/js/main.js"></script>
-	
-	<script src="/vendor/jquery/jquery.min.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript">
 		$('#bot').click(function(){
-			var producto = $('#producto-select option:selected').val();
+				var producto = $('#producto-select option:selected').val();
 				console.log(producto);
 				var vendedor = $('#vendedor-select option:selected').val();
 				console.log(vendedor);

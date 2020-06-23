@@ -105,8 +105,10 @@ public class RemitoController {
 	@GetMapping("{id}")
 	public ModelAndView local(@PathVariable("id") int id,@RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.REMITO_INDEX_LOCAL);
+		//agregi al lcal
 		mAV.addObject("local", localService.findById(id));
 		
+		//paginacion
 		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
 		PageRequest pageRequest = PageRequest.of(page, 5);
 
@@ -116,14 +118,15 @@ public class RemitoController {
 		if (totalPage > 0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages", pages);
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			mAV.addObject("usuario", auth.getName());
+			
 		}
 		mAV.addObject("remitos", pageRemito.getContent());
 		mAV.addObject("current", page + 1);
 		mAV.addObject("next", page + 2);
 		mAV.addObject("prev", page);
 		mAV.addObject("last", totalPage);
+		
+		//agrego datos del usuario al panel
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());

@@ -1,95 +1,219 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
-<meta charset="UTF-8" />
-<title>SolicitudStock</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous" />
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Nuevo Solicitud de Stock</title>
+
+<!-- Normalize V8.0.1 -->
+<link rel="stylesheet" href="/css/normalize.css">
+
+<!-- Bootstrap V4.3 -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+<!-- Bootstrap Material Design V4.0 -->
+<link rel="stylesheet" href="/css/bootstrap-material-design.min.css">
+
+<!-- Font Awesome V5.9.0 -->
+<link rel="stylesheet" href="/css/all.css">
+
+<!-- Sweet Alerts V8.13.0 CSS file -->
+<link rel="stylesheet" href="/css/sweetalert2.min.css">
+
+<!-- Sweet Alert V8.13.0 JS file-->
+<script src="/js/sweetalert2.min.js"></script>
+
+<!-- jQuery Custom Content Scroller V3.1.5 -->
+<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+
+<!-- General Styles -->
+<link rel="stylesheet" href="/css/style.css">
+
+
 </head>
-<body style="background:#DBDBDB">
+<body>
 
-	<div class="container mt-4">
-		<div class="col-sm-6">
-			<form th:action="@{/solicitudesStock/save}" th:object=${solicitudStock} method="POST">
-				<div class="card text-center border-info mb-3">
-					<div class="card-header"></div>
-					<h3>Modulo SolicitudStock</h3>
-					<div class="card-body"></div>
-					<div class="form-group" style="display: none">
-						<label>ID</label> <input th:field="*{id}" type="text"
-							class="form-control" />
-					</div>
+	    <!-- Main container -->
+  <main class="full-box main-container">
+		<!-- Nav lateral -->
+		<section class="full-box nav-lateral">
+			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
+			<div class="full-box nav-lateral-content"
+				 th:replace="div :: div"></div>
+			
+		
+	</section>
 
-					<div class="form-group">
-						<label>Fecha</label> <input th:field="*{fecha}" type="date" class="form-control" placeholder="Fecha"/>
-					</div>
+		<!-- Page content -->
+		<section class="full-box page-content">
+			<nav class="full-box navbar-info">
+				<a href="#" class="float-left show-nav-lateral"> <i
+					class="fas fa-exchange-alt"></i>
+				</a> <a href="user-update.html"> <i class="fas fa-user-cog"></i>
+				</a> <a href="#" class="btn-exit-system"> <i
+					class="fas fa-power-off"></i>
+				</a>
+			</nav>
 
-					<div>
-						<label>Producto</label> 
-						<select class="form-control"placeholder="Producto" th:field="*{producto.id}">
-						<option th:each="producto : ${productos}" th:value="${producto.id}"
-							th:text="${producto.descripcion}+${producto.talle}"></option>
-						</select>		
-					</div>
+			<!-- Page header -->
+			<div class="full-box page-header">
+				<h3 class="text-left">
+					<i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR SOLICITUD DE STOCK
+				</h3>
+				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit. Suscipit nostrum rerum animi natus beatae ex.
+					Culpa blanditiis tempore amet alias placeat, obcaecati quaerat
+					ullam, sunt est, odio aut veniam ratione.</p>
+			</div>
 
-					<div class="form-group">
-						<label>Cantidad</label> <input th:field="*{cantidad}" type="number" class="form-control" />
-					</div>
-					<div>
-						<label>Vendedor</label> 
-						<select class="form-control"placeholder="Vendedor" th:field="*{vendedor.id}">
-						<option th:each="vendedor : ${local.empleados}" th:value="${vendedor.id}"
-							th:text="${vendedor.nombre}"></option>
-						</select>		
-					</div>
-					<div>
-						<label>Cliente</label> 
-						<select class="form-control"placeholder="Cliente" th:field="*{cliente.id}">
-						<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
-							th:text="${cliente.nombre}"></option>
-						</select>		
-					</div>
+			<div class="container-fluid">
+				<ul class="full-box list-unstyled page-nav-tabs">
+					<li><a class="active" href="user-new.html"><i
+							class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR SOLICITUD STOCK</a></li>
+					<li><a href="user-list.html"><i
+							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA SOLICITUD STOCK</a></li>
+					<li><a href="user-search.html"><i
+							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR SOLICITUD STOCK</a></li>
+				</ul>
+			</div>
 
-					<div>
-						<label>Colaborador</label> 
-						<select class="form-control"placeholder="Colaborador" th:field="*{colaborador.id}">
-						<option th:each="colaborador : *{localDestinatario.empleados}" th:value="${colaborador.id}"
-							th:text="${colaborador.nombre}"></option>
-						</select>		
-					</div>
+			<!-- Content -->
+			<div class="container-fluid">
+				<fieldset>
+					<legend><i class="far fa-plus-square"></i> &nbsp; Información de la Solicitud de Stock</legend>
 
-					<div class="form-group">
-						<div class="custom-control custom-checkbox">
-							<input th:field="*{aceptado}" type="checkbox" class="custom-control-input" id="defaultUnchecked2">
-							<label class="custom-control-label" for="defaultUnchecked2">Aceptado</label>
+					<form th:action="@{/solicitudesStock/save}" th:object=${solicitudStock} method="POST">
+						<div class="container-fluid">
+							<div class="row">
+
+								<div>
+									<div class="form-group" style="display: none">
+										<label class="form-group">Id</label>
+										<input th:field="*{id}" type="number" class="form-control" />
+									</div>
+								</div>
+
+								<div class="col-12 col-md-3">
+									<div class="form-group">
+										<label>FECHA</label>
+										<input th:field="*{fecha}" type="date" value="2011-08-19" class="form-control" placeholder="Fecha">
+									</div>
+								</div>
+                                
+                                <div class="col-12 col-md-5">
+									<div class="form-group">
+										<label>PRODUCTO</label> 
+										<select id="producto-select" class="form-control" placeholder="Producto" th:field="*{producto.id}">
+											<option th:each="producto : ${productos}" th:value="${producto.id}" th:text="${producto.descripcion}+${producto.talle}"></option>
+										</select> 
+										<small class="form-text text-danger"th:if="${#fields.hasErrors('producto.id')}" th:errors="*{producto.id}"></small>
+									</div>
+								</div>
+                                
+                                <div class="col-12 col-md-3">
+									<div class="form-group">
+										<label>CANTIDAD</label>
+										<input id="cantidad-select" th:field="*{cantidad}" type="number"  class="form-control">
+									</div>
+								</div>
+                                
+                                <div class="col-12 col-md-5">
+									<div class="form-group">
+										<label>VENDEDOR</label> 
+										<select id="vendedor-select" class="form-control" placeholder="Vendedor" th:field="*{vendedor.id}">
+											<option th:each="vendedor : ${local.empleados}" th:value="${vendedor.id}" th:text="${vendedor.nombre}"></option>
+										</select> 
+										<small class="form-text text-danger"th:if="${#fields.hasErrors('vendedor')}" th:errors="*{vendedor}"></small>
+									</div>
+								</div>
+                                
+                                <div class="col-12 col-md-5">
+									<div class="form-group">
+										<label>CLIENTE</label> <select class="form-control" placeholder="Cliente" th:field="*{cliente.id}">
+											<option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
+										</select> 
+										<small class="form-text text-danger"th:if="${#fields.hasErrors('cliente.id')}" th:errors="*{cliente.id}"></small>
+									</div>
+                                </div >
+
+                                <div class="col-12 col-md-6">
+                                    <label>Local Destinatario</label> 
+                    
+                                    <select class="form-control"placeholder="Local" th:field="*{localDestinatario.id}">
+                                        
+                                    <option th:each="localDestinatario : ${locales}" th:value="${localDestinatario.id}"
+                                        th:text="${localDestinatario.direccion}"></option>
+                                    </select>	
+                            </div>
+                            
+                                <div class="col-12 col-md-6">
+                                    <label>Colaborador</label> 
+                                    <select class="form-control"placeholder="Colaborador" th:field="*{colaborador.id}">
+                                    <option th:each="colaborador : *{localDestinatario.empleados}" th:value="${colaborador.id}"
+                                        th:text="${colaborador.nombre}"></option>
+                                    </select>		
+                                </div>
+
+                                <div class="col-12 col-md-2">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input th:field="*{aceptado}" type="checkbox" class="custom-control-input" id="defaultUnchecked2">
+                                            <label class="custom-control-label" for="defaultUnchecked2">Aceptado</label>
+                                        </div>
+                                    </div>
+                                
+
+                                </div>
+                               
+                    
+								
+
+
+							</div>
+							<div class="card-footer">
+								<i class="far fa-save"></i>
+								<input type="submit" class="btn btn-raised btn-info btn-sm">
+							</div>
 						</div>
-					</div>
-
-					
-					<div>
-						<label>Local Destinatario</label> 
-						
-						<select class="form-control"placeholder="Local" th:field="*{localDestinatario.id}">
-							
-						<option th:each="localDestinatario : ${locales}" th:value="${localDestinatario.id}"
-							th:text="${localDestinatario.direccion}"></option>
-						</select>		
-					</div>
-
-					<div class="card-footer">
-						<input type="submit" style="background:#74C1F4"  value="Guardar" class="btn btn-succes"/>
-					</div>
-				</div>
-			</form>
-
-		</div>
+					</form>
+				</fieldset>
+				<br><br><br>
+					<p class="text-center" style="margin-top: 40px;">
+						<button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
+						&nbsp; &nbsp;
+						<button type="submit" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; GUARDAR</button>
+					</p>
+			</div>
 
 
-	</div>
+		</section>
+	</main>
 
 
+	<!--=============================================
+	=            Include JavaScript files           =
+	==============================================-->
+	<!-- jQuery V3.4.1 -->
+	<script src="/js/jquery-3.4.1.min.js"></script>
 
+	<!-- popper -->
+	<script src="/js/popper.min.js"></script>
+
+	<!-- Bootstrap V4.3 -->
+	<script src="/js/bootstrap.min.js"></script>
+
+	<!-- jQuery Custom Content Scroller V3.1.5 -->
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- Bootstrap Material Design V4.0 -->
+	<script src="/js/bootstrap-material-design.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('body').bootstrapMaterialDesign();
+		});
+	</script>
+	
+	
 </body>
 </html>
