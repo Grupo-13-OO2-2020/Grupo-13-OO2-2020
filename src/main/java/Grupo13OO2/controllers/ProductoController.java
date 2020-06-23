@@ -61,11 +61,14 @@ public class ProductoController {
 	@GetMapping("/new")
 	public ModelAndView create(@ModelAttribute("producto") ProductoModel productomodel) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_FORM);
+		//informacion del usuario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
+
 		return mAV;
 	}
 
@@ -76,7 +79,7 @@ public class ProductoController {
 
 		}
 		productoService.insertOrUpdate(productoModel);
-		return "redirect:/productos/";
+		return "redirect:/productos/	";
 
 	}
 
@@ -89,6 +92,8 @@ public class ProductoController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
+
 		return mAV;
 	}
 
@@ -115,7 +120,7 @@ public class ProductoController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		model.addAttribute("empleado", e);
-
+		model.addAttribute("local", localService.findById(e.getLocal().getId()));
 		return ViewRouteHelper.PRODUCTO_INDEX;
 	}
 	
@@ -128,6 +133,7 @@ public class ProductoController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		model.addAttribute("empleado", e);
+		model.addAttribute("local", localService.findById(e.getLocal().getId()));
 		return "producto/search";
 	}
 

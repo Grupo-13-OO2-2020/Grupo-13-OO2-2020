@@ -69,7 +69,6 @@ public class ClienteController {
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("dd/MM/yyyy"), true));
 	}
 	//vista general
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("")
 	public ModelAndView index(@RequestParam Map<String, Object> params, Model model){
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_INDEX);
@@ -93,9 +92,55 @@ public class ClienteController {
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
 		mAV.addObject("usuario", auth.getName());
-
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 		return mAV;
 		}
+	
+	@GetMapping("/new")
+	public ModelAndView create() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM);
+		mAV.addObject("cliente", new ClienteModel());
+		
+		//agregar datos de usuario
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
+		
+		return mAV;
+	}
+
+	@PostMapping("/save")
+	public String create(@Valid @ModelAttribute("cliente") ClienteModel clienteModel, BindingResult result) {
+		if (result.hasErrors()) {
+			return ViewRouteHelper.CLIENTE_FORM;
+		}
+		return "redirect:/clientes";
+	}
+
+	@GetMapping("/editar/{id}")
+	public ModelAndView get(@PathVariable("id") int id) {
+
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM);
+		//datos de ususario
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		mAV.addObject("cliente", clienteService.ListarId(id));
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
+		return mAV;
+	}
+
+	@GetMapping("/eliminar/{id}")
+	public RedirectView deletel(Model model, @PathVariable int id) {
+		clienteService.delete(id);
+		return new RedirectView("/clientes");
+	}	
+	
 	
 //vista local
 	@GetMapping("{id}")
@@ -123,54 +168,9 @@ public class ClienteController {
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
 		mAV.addObject("usuario", auth.getName());		
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 		return mAV;
 		}
 
-
-	@GetMapping("/new")
-	public ModelAndView create() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM);
-		mAV.addObject("cliente", new ClienteModel());
-		
-		//agregar datos de usuario
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		mAV.addObject("usuario", auth.getName());
-		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
-		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-		mAV.addObject("empleado", e);
-		return mAV;
-	}
-
-	@PostMapping("/save")
-	public String create(@Valid @ModelAttribute("cliente") ClienteModel clienteModel, BindingResult result) {
-		if (result.hasErrors()) {
-			return ViewRouteHelper.CLIENTE_FORM;
-		}
-		//uso los datos del ususario para redireccionar al lugar correspondiente.
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
-		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-		clienteService.insertOrUpdate(clienteModel);
-		return "redirect:/clientes/"+e.getLocal().getId();
-	}
-
-	@GetMapping("/editar/{id}")
-	public ModelAndView get(@PathVariable("id") int id) {
-
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM);
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		mAV.addObject("usuario", auth.getName());
-		mAV.addObject("cliente", clienteService.ListarId(id));
-		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
-		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-		mAV.addObject("empleado", e);
-		return mAV;
-	}
-
-	@GetMapping("/eliminar/{id}")
-	public RedirectView delete(Model model, @PathVariable int id) {
-		clienteService.delete(id);
-		return new RedirectView("/clientes/0");
-	}
 
 }

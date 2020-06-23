@@ -15,6 +15,7 @@ public class ViewRouteHelper {
     //FORMS_LOCAL
     public final static String SOLICITUDSTOCK_FORM_LOCAL = "solicitudstock/form-solicitudStock-local";
     public final static String LOTE_FORM_MAIN = "lote/lote-new";
+    public final static String CLIENTE_FORM_LOCAL = "cliente/client-new-local";
 
     
     //INDEX

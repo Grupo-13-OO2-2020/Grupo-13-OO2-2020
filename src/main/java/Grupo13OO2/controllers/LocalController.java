@@ -82,20 +82,24 @@ public class LocalController {
 			EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 			mAV.addObject("empleado", e);
 		}
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		mAV.addObject("usuario", auth.getName());	    
-		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
-		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-		mAV.addObject("empleado", e);
 		mAV.addObject("locales", pageLocal.getContent());
 		mAV.addObject("current", page+1);
 		mAV.addObject("next" ,page+2);
 		mAV.addObject("prev" ,page);
 		mAV.addObject("last", totalPage);
 		
+		//agrego datos de ususario
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());	    
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
+		mAV.addObject("empleado", e);
+		
 		return mAV;
 	}
 
+	
 	@GetMapping("/main/{id}")
 	public ModelAndView main(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_MAIN);
