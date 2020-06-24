@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,7 @@ import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.repositories.IUserRepository;
 import Grupo13OO2.services.IClienteService;
 import Grupo13OO2.services.IEmpleadoService;
+import Grupo13OO2.services.ILocalService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -57,51 +59,56 @@ public class ClienteController {
 	@Autowired
 	private IUserRepository userRepository;
 	
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
+
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("dd/MM/yyyy"), true));
 	}
-	
+	//vista general
 	@GetMapping("")
 	public ModelAndView index(@RequestParam Map<String, Object> params, Model model){
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_INDEX);
+		//Paginacion
 		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
-		
 		PageRequest pageRequest = PageRequest.of(page, 1);
-		
 		Page<ClienteModel> pageCliente = clienteService.getAllPages(pageRequest);
-		
 		int totalPage= pageCliente.getTotalPages();
 		if(totalPage>0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages",pages);
 		}
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
-		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-		mAV.addObject("empleado", e);
-		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("clientes", pageCliente.getContent());
 		mAV.addObject("current", page+1);
 		mAV.addObject("next" ,page+2);
 		mAV.addObject("prev" ,page);
 		mAV.addObject("last", totalPage);
-		
+		//datos de ususario
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
+		mAV.addObject("usuario", auth.getName());
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 		return mAV;
 		}
 	
-
-
 	@GetMapping("/new")
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM);
 		mAV.addObject("cliente", new ClienteModel());
+		
+		//agregar datos de usuario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
+		
 		return mAV;
 	}
 
@@ -109,29 +116,61 @@ public class ClienteController {
 	public String create(@Valid @ModelAttribute("cliente") ClienteModel clienteModel, BindingResult result) {
 		if (result.hasErrors()) {
 			return ViewRouteHelper.CLIENTE_FORM;
-
 		}
-		clienteService.insertOrUpdate(clienteModel);
-		return "redirect:/clientes/0";
+		return "redirect:/clientes";
 	}
 
 	@GetMapping("/editar/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
 
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_FORM);
+		//datos de ususario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		mAV.addObject("cliente", clienteService.ListarId(id));
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 		return mAV;
 	}
 
 	@GetMapping("/eliminar/{id}")
-	public RedirectView delete(Model model, @PathVariable int id) {
+	public RedirectView deletel(Model model, @PathVariable int id) {
 		clienteService.delete(id);
-		return new RedirectView("/clientes/0");
-	}
+		return new RedirectView("/clientes");
+	}	
+	
+	
+//vista local
+	@GetMapping("{id}")
+	public ModelAndView index(@PathVariable("id") int id,@RequestParam Map<String, Object> params, Model model){
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.CLIENTE_INDEX);
+		//agrego local
+		mAV.addObject("local", localService.findById(id));
+		//paginacion
+		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
+		PageRequest pageRequest = PageRequest.of(page, 1);
+		Page<ClienteModel> pageCliente = clienteService.getAllPages(pageRequest);
+		int totalPage= pageCliente.getTotalPages();
+		if(totalPage>0) {
+			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+			mAV.addObject("pages",pages);
+		}
+		mAV.addObject("clientes", pageCliente.getContent());
+		mAV.addObject("current", page+1);
+		mAV.addObject("next" ,page+2);
+		mAV.addObject("prev" ,page);
+		mAV.addObject("last", totalPage);
+		//datos de ususario
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
+		mAV.addObject("usuario", auth.getName());		
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
+		return mAV;
+		}
+
 
 }
