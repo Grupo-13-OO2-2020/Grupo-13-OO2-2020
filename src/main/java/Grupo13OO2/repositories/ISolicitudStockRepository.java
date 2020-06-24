@@ -15,7 +15,7 @@ public interface ISolicitudStockRepository extends JpaRepository<SolicitudStock,
 	public abstract SolicitudStock findById(int id);
 	
 
-	@Query("select s from SolicitudStock s")
+	@Query(nativeQuery= true, value=  "select * from SolicitudStock s inner join Pedido p on s.id=p.id inner join Empleado e on p.vendedor_id=e.id inner join Local l on e.local_id=l.id inner join Empleado n on s.colaborador_id=n.id inner join Local m on s.local_di=m.id where l.direccion LIKE %?1%")
 	public List<SolicitudStock> findAll(String keyword);
 
 }

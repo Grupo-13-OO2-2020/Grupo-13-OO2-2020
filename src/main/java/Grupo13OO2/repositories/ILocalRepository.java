@@ -13,6 +13,6 @@ import Grupo13OO2.Entities.Local;
 public interface ILocalRepository extends JpaRepository<Local, Integer> {
 	public abstract Local findById(int id);
 	
-	@Query("SELECT l FROM Local l WHERE l.direccion LIKE %?1%")
+	@Query(nativeQuery= true, value="select * from Local l where l.direccion LIKE %?1%")
 	public List<Local> findAll(String keyword);
 }

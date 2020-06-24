@@ -13,6 +13,6 @@ import Grupo13OO2.Entities.Empleado;
 public interface IEmpleadoRepository extends JpaRepository<Empleado, Integer> {
 	public abstract Empleado findById(int id);
 	
-	@Query("SELECT e FROM Empleado e WHERE e.apellido LIKE %?1%")
+	@Query(nativeQuery= true, value="select * from Empleado e inner join Persona p on p.id=e.id where p.apellido LIKE %?1%")
 	public List<Empleado> findAll(String keyword);
 }
