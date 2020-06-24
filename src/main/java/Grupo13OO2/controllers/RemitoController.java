@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import Grupo13OO2.Entities.User;
@@ -157,7 +158,7 @@ public class RemitoController {
 	}
 
 	@PostMapping("/save")
-	public RedirectView create(@ModelAttribute("remito") RemitoModel remitoModel) {
+	public RedirectView create(@ModelAttribute("remito") RemitoModel remitoModel,RedirectAttributes redirect) {
 		remitoModel.setVendedor(empleadoService.ListarId(remitoModel.getVendedor().getId()));
 		remitoModel.setProducto(productoService.ListarId(remitoModel.getProducto().getId()));
 
@@ -165,13 +166,24 @@ public class RemitoController {
 				remitoModel.getVendedor().getLocal().getId())) {
 			remitoService.insertOrUpdate(remitoModel);
 			localService.consumirLote(remitoModel);
-			return new RedirectView("/remitos");
+			
+			//ususarios
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+			EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+			int id= e.getLocal().getId();
+			return new RedirectView(ViewRouteHelper.REMITO+id);
 
 		} else
 
 		{
-
-			return new RedirectView("/remitos");
+			//ususarios
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+			EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+			int id= e.getLocal().getId();
+			redirect.addFlashAttribute("popUp", "error");
+			return new RedirectView(ViewRouteHelper.REMITO+id);
 		}
 
 	}
