@@ -4,25 +4,49 @@
 		<meta charset="utf-8" />
 		<title>UNLa</title>
 		<!-- Bootstrap core CSS -->
-		<div th:replace="header.html"></div>
+
+		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="/css/nuevo.css" rel="stylesheet" />
+
 	</head>
 	<body>
 	    <!-- Page Content -->
-	    <div class="container">
-	      <div class="jumbotron">
-	        <h1 class="display-5">Login</h1>
-	        <form th:action="@{/loginprocess}" method="post">
-		      	<input type="text" name="username" id="username" placeholder="Username" />
-		      	<input type="password" name="password" id="password" placeholder="Password" />
-		      	<input type="submit" />
-	      	</form>
-	      	<div th:if="${error != null}" class="alert alert-danger">
-		    	Invalid username or password.
+<!-- 	    <div class="container"> -->
+<!-- 	      <div class="jumbotron"> -->
+<!-- 	        <h1 class="display-5">Login</h1> -->
+<!-- 	        <form th:action="@{/loginprocess}" method="post"> -->
+<!-- 		      	<input type="text" name="username" id="username" placeholder="Username" /> -->
+<!-- 		      	<input type="password" name="password" id="password" placeholder="Password" /> -->
+<!-- 		      	<input type="submit" /> -->
+<!-- 	      	</form> -->
+<!-- 	      	<div th:if="${error != null}" class="alert alert-danger"> -->
+<!-- 		    	Invalid username or password. -->
+<!-- 		    </div> -->
+<!-- 	      </div> -->
+<!-- 	    </div> -->
+
+	<div class="login">
+		<h1>Login</h1>
+		<form th:action="@{/loginprocess}" method="post">
+			<input type="text" name="username" id="username" placeholder="Username" required="required" /> 
+			<input type="password" name="password" id="password" placeholder="Password" required="required" />
+			<button type="submit" class="btn btn-primary btn-block btn-large">Log In.</button>
+		</form>
+		<div th:if="${error != null}" class="alert alert-danger" style="text-align:center">
+		    	Usuario o contraseña invalido.
 		    </div>
-	      </div>
-	    </div>
-	    <!-- Bootstrap core JavaScript -->
-	    <script src="/vendor/jquery/jquery.min.js"></script>
-	    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		
+	</div>
 	</body>
+<div>
+
+	<footer class="footer" style="text-align: center; margin-top: 44%;">
+		<a target="blank"
+			href="https://github.com/Grupo-13-OO2-2020/TP-Cuatrimestral/" style="color:#67a8dc">Grupo13_OO2</a>
+			<h6 style="color:#FFFFFF">Integrantes: Elian Gonzalez, Matias Arebalo, Roberto Gomez, Diego Prociuk.</h6>
+	</footer>
+
+</div>
+
 </html>
+
