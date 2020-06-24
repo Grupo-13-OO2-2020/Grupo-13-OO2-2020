@@ -6,7 +6,48 @@
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <title>Lista de Locales</title>
 
-<div th:replace="header.html"></div>
+
+
+
+
+
+<!-- Normalize V8.0.1 -->
+<link rel="stylesheet" href="./css/normalize.css">
+
+<!-- Bootstrap V4.3 -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+<!-- Bootstrap Material Design V4.0 -->
+<link rel="stylesheet" href="/css/bootstrap-material-design.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" integrity="sha256-xykLhwtLN4WyS7cpam2yiUOwr709tvF3N/r7+gOMxJw=" crossorigin="anonymous" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha256-xykLhwtLN4WyS7cpam2yiUOwr709tvF3N/r7+gOMxJw=" crossorigin="anonymous" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+
+
+<!-- Font Awesome V5.9.0 -->
+<link rel="stylesheet" href="/css/all.css">
+
+<!-- Sweet Alerts V8.13.0 CSS file -->
+<link rel="stylesheet" href="/css/sweetalert2.min.css">
+
+<!-- Sweet Alert V8.13.0 JS file-->
+<script src="/js/sweetalert2.min.js"></script>
+
+<!-- jQuery Custom Content Scroller V3.1.5 -->
+<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+
+<!-- General Styles -->
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
 </head>
 
 
@@ -16,20 +57,19 @@
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-					<div th:if="!${empleado.gerente}" >
-			<div class="full-box nav-lateral-content"
-				 th:replace="div2 :: div"></div>
-			 </div>
-			<div th:if="${empleado.gerente}" >
 			<div class="full-box nav-lateral-content"
 				 th:replace="div :: div"></div>
-			 </div>
 			
 		
 	</section>
-	
-			<section class="full-box page-content">
-			<nav th:replace="nav_user :: nav">			
+		<section class="full-box page-content">
+			<nav class="full-box navbar-info">
+				<a href="#" class="float-left show-nav-lateral"> <i
+					class="fas fa-exchange-alt"></i>
+				</a> <a href="user-update.html"> <i class="fas fa-user-cog"></i>
+				</a> <a href="#" class="btn-exit-system"> <i
+					class="fas fa-power-off"></i>
+				</a>
 			</nav>
 			<!-- Page header -->
 			<div class="full-box page-header">
@@ -74,31 +114,28 @@
 						<tbody>
 							<tr th:each="local:${locales}" class="text-center">
 
-								<td th:text="${local.id}"></td>
+								<td id="local-id" th:text="${local.id}"></td>
 								<td th:text="${local.direccion}"></td>
 								<td th:text="${local.latitud}"></td>
 								<td th:text="${local.longitud}"></td>
 								<td th:text="${local.numeroTelefono}"></td>
 
-								<div id="gerente-id" th:each="empleado : ${local.empleados}" th:if="${empleado.gerente}" >
-									<td id="gerente-id" th:text="${empleado.nombre}"></td>
-								</div>
-								
-								<div id="gerente-id" th:each="empleado : ${local.empleados}" th:if="!${empleado.gerente}" >
-									<td >Sin asignar </td>
+								<div id="gerente-id" th:each="empleado : ${local.empleados}"  >
+									<td th:if="${empleado.gerente}" id="gerente-id" th:text="${empleado.nombre}"></td>
+									<td th:unless="${empleado.gerente}">Sin asignar </td>
 								</div>
 
-								<!-- <div>
-									<td>Sin asignar </td>
-								</div> -->
-
-								<td>
+								<td th:if="${empleado.local.id}==${local.id}">
 									<a th:href="@{/locales/main/{id}(id=${local.id})}"
 									class="btn btn-success"> <i class="fas fa-store-alt fa-fw"></i></a>
 								</td>
+								
+								<td th:if="${empleado.local.id}!=${local.id}">
+									<button id="alerta" class="btn btn-alert alerta" > <i class="fas fa-store-alt fa-fw"></i></button>
+								</td>
 
 								<td>
-									<a
+									<a 
 										th:href="@{/locales/eliminar/{id}(id=${local.id})}"
 										type="button" class="btn btn-warning"
 										onclick="alert('El cliente fue eliminado con exito!')"> <i
@@ -143,6 +180,16 @@
 
 
 		<div th:replace="scripts-footer.html"></div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+		
+		<script >
+			$('.alerta').click(function(){
+				toastr.error('Usted no pertenece al local que quiere ingresar.');
+			});
+			
+			
+		</script>
 </body>
 </html>	
