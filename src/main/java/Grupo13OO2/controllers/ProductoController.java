@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Entities.User;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.ProductoModel;
@@ -104,13 +105,15 @@ public class ProductoController {
 
 	@GetMapping("/eliminar/{id}")
 	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect){
-		if (productoRepository.findIfExist(id)!=null){
+		List<Producto> p= productoRepository.findIfExist(id);
+		if (p.isEmpty()){
+			productoService.delete(id);
 			
-			redirect.addFlashAttribute("popUp", "error");
-			return new RedirectView(ViewRouteHelper.PRODUCTO);
+				return new RedirectView(ViewRouteHelper.PRODUCTO);
 
 		}else
-			productoService.delete(id);
+			redirect.addFlashAttribute("popUp", "error");
+		
 		return new RedirectView(ViewRouteHelper.PRODUCTO);
 		
 	

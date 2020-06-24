@@ -59,8 +59,8 @@
 
       <script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/
-       var all =  /*[[ ${popUp} ]]*/;
-
+       var all =  /*[[ ${popUp} ]]*/
+	console.log(all)
     /*]]>*/
     
     if(all!=null){
@@ -109,7 +109,7 @@
                                     <td>
                                         <a th:href ="@{eliminar/{id}(id=${producto.id})}" class="btn btn-warning">
                                             <i class="far fa-trash-alt"></i>
-                                        </a>s
+                                        </a>
                                     </td>
   
                                 

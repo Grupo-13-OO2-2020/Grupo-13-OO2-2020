@@ -15,7 +15,7 @@ public interface IProductoRepository extends JpaRepository<Producto, Integer> {
 	@Query("SELECT p FROM Producto p WHERE p.descripcion LIKE %?1%")
 	public List<Producto> findAll(String keyword);
 	
-	@Query(nativeQuery=true,value=" Select * from producto p inner join lote l on p.id=l.producto_id inner join pedido pe on pe.producto_id=p.id where l.id=(:id) or pe.id=(:id)")
+	@Query(nativeQuery=true,value=" Select * from producto p inner join lote l on p.id=l.producto_id inner join pedido pe on pe.producto_id=p.id where l.producto_id=(:id) or pe.producto_id=(:id)")
 	public List<Producto> findIfExist(int id);
 	
 }
