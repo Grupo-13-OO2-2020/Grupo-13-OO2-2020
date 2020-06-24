@@ -1,6 +1,5 @@
 package Grupo13OO2.controllers;
 
-import java.security.Provider.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,13 +24,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Entities.User;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.ProductoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
+import Grupo13OO2.repositories.IProductoRepository;
 import Grupo13OO2.repositories.IUserRepository;
 import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.ILocalService;
@@ -56,16 +56,24 @@ public class ProductoController {
 
 	@Autowired
 	private IUserRepository userRepository;
+	
+
+	@Autowired
+	private IProductoRepository productoRepository;
+
 
 
 	@GetMapping("/new")
 	public ModelAndView create(@ModelAttribute("producto") ProductoModel productomodel) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_FORM);
+		//informacion del usuario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
+
 		return mAV;
 	}
 
@@ -76,7 +84,7 @@ public class ProductoController {
 
 		}
 		productoService.insertOrUpdate(productoModel);
-		return "redirect:/productos";
+		return "redirect:/productos/";
 
 	}
 
@@ -89,14 +97,23 @@ public class ProductoController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
+
 		return mAV;
 	}
 
 	@GetMapping("/eliminar/{id}")
-	public RedirectView delete(Model model, @PathVariable("id") int id) {
-		productoService.delete(id);
-		return new RedirectView("/productos");
+	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect){
+		if (productoRepository.findIfExist(id)!=null){
+			
+			redirect.addFlashAttribute("popUp", "error");
+			return new RedirectView(ViewRouteHelper.PRODUCTO);
 
+		}else
+			productoService.delete(id);
+		return new RedirectView(ViewRouteHelper.PRODUCTO);
+		
+	
 	}
 
 	@GetMapping(value = "/")
@@ -115,7 +132,7 @@ public class ProductoController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		model.addAttribute("empleado", e);
-
+		model.addAttribute("local", localService.findById(e.getLocal().getId()));
 		return ViewRouteHelper.PRODUCTO_INDEX;
 	}
 	
@@ -128,7 +145,10 @@ public class ProductoController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		model.addAttribute("empleado", e);
+		model.addAttribute("local", localService.findById(e.getLocal().getId()));
 		return "producto/search";
 	}
+	
+	
 
 }

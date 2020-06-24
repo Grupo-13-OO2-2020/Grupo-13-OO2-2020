@@ -80,4 +80,16 @@ public class RemitoService implements IRemitoService {
 		return pages;
 	}
 
+	@Override
+	public List<RemitoModel> listAll(String keyword) {
+		List<RemitoModel> models= new ArrayList<RemitoModel>();
+		List<Remito> remitos=	remitoRepository.findAll(keyword);
+		for(Remito r: remitos) {
+			models.add(remitoConverter.entityToModel(r));
+			
+		}
+		
+		return models;
+	}
+
 }

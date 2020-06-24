@@ -18,6 +18,7 @@ public interface IRemitoService {
 	public String delete(int id);
 	
 	Page<RemitoModel> getAllPages(Pageable pageable);
-
+	
+	public List<RemitoModel> listAll(String keyword);
 
 }
