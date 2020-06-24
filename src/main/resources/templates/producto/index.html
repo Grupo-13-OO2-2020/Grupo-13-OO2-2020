@@ -63,7 +63,27 @@
                     </li>
                 </ul>
             </div>
-            
+   
+
+      <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+       var all =  /*[[ ${popUp} ]]*/;
+
+    /*]]>*/
+    
+    if(all!=null){
+    	    	alert("este producto tiene lotes o remitos no se puede eliminar");
+
+    }
+</script>
+
+                 
+       
+                 
+  
+
+
+  
             <!--CONTENT-->
            <div class="container-fluid">
 				 <!--CONTENT-->
@@ -90,15 +110,17 @@
                                     <td th:text="${producto.talle}"></td>
                                     <td th:text="${producto.codigoProducto}"></td>
                                     <td>
-                                        <a th:href="@{productos/editar/} + ${producto.id}" class="btn btn-success">
+                                        <a th:href="@{/productos/editar/} + ${producto.id}" class="btn btn-success">
                                             <i class="fas fa-sync-alt"></i> 
                                         </a>
                                     </td>
                                     <td>
-                                        <a th:href ="@{productos/eliminar/{id}(id=${producto.id})}" class="btn btn-warning">
+                                        <a th:href ="@{eliminar/{id}(id=${producto.id})}" class="btn btn-warning">
                                             <i class="far fa-trash-alt"></i>
-                                        </a>
+                                        </a>s
                                     </td>
+  
+                                
                 
                                 </tr>
                             </tbody>
@@ -120,5 +142,10 @@
     </main>
     
 	<div th:replace="scripts-footer.html"></div>
+	
+		         
+	
+	
+	
 </body>
 </html>

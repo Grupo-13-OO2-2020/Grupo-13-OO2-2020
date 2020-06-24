@@ -37,6 +37,7 @@ public class ViewRouteHelper {
     public final static String REMITO_INDEX_LOCAL = "remito/item-list-local";
     
     //Redirects
+	public final static String PRODUCTO="/productos/";
 
         
 	//USER
