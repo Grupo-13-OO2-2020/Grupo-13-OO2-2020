@@ -59,27 +59,20 @@
                     <i class="fas fa-power-off"></i>
                 </a>
             </nav>
+            <div class="container-fluid">
+				<ul class="full-box list-unstyled ">
+					<li><a th:href="@{/productos/}"><i
+							class="fas fa-arrow-alt-circle-left"></i> &nbsp; VOLVER</a>
+				</ul>
+           
             <!-- Page header -->
-            <div class="full-box page-header">
-                <h3 class="text-left">
-                    <i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO
+            <div class="full-box page-header" >
+                <h3 class="text-center">
+                    <i class="fas fa-plus-square"></i> &nbsp; AGREGAR PRODUCTO
                 </h3>
                 <p class="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque laudantium necessitatibus eius iure adipisci modi distinctio. Earum repellat iste et aut, ullam, animi similique sed soluta tempore cum quis corporis!
+                  
                 </p>
-            </div>
-            <div class="container-fluid">
-                <ul class="full-box list-unstyled page-nav-tabs">
-                    <li>
-                        <a class="active" href="PRODUCTO-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/productos}" ><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a>
-                    </li>
-                    <li>
-                        <a href="PRODUCTO-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR PRODUCTO</a>
-                    </li>
-                </ul>
             </div>
             
             <!--CONTENT-->
@@ -130,15 +123,17 @@
                                     <i class="far fa-save"></i>
 									<input type="submit" class="btn btn-raised btn-info btn-sm">
 								</div>
-							</div>
-						</form>
-					</fieldset>
-					<br><br><br>
-					<p class="text-center" style="margin-top: 40px;">
+								
+								<p class="text-center" style="margin-top: 40px;">
 						<button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
 						&nbsp; &nbsp;
 						<button type="submit" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; GUARDAR</button>
 					</p>
+								
+							</div>
+						</form>
+					</fieldset>
+					<br><br><br>
 			</div>
         </section>
 
