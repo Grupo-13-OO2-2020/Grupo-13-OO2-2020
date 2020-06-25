@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Lista de Lotes</title>
+<div th:replace="header.html"></div>
+</head>
+
+
+<body>
+<body>
+
+	<main class="full-box main-container">
+		<!-- Nav lateral -->
+		<section class="full-box nav-lateral">
+			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
+			<div class="full-box nav-lateral-content" th:replace="div :: div"></div>
+
+
+		</section>
+		<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav">			
+			</nav>
+			<!-- Page header -->
+	<div class="full-box page-header">
+				<h3 class="text-left">
+					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE LOTES
+				</h3>
+				<p class="text-justify"></p>
+			</div>
+			<div class="container-fluid">
+				<ul class="full-box list-unstyled page-nav-tabs">
+				
+					
+				
+					<li><a  th:href="@{/lotes/}"><i
+							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE
+							LOTES</a></li>
+				
+				
+					<li><a href="#"><i
+							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR LOTE</a></li>
+				</ul>
+			</div>
+			<!--CONTENT-->
+			<div class="container-fluid">
+				<!--CONTENT-->
+				<div class="container-fluid">
+					<div class="table-responsive">
+						<table class="table table-dark table-sm">
+							<thead>
+								<tr class="text-center roboto-medium">
+									<th>NUMERO DE LOTE</th>
+									<th>CANTIDAD INICIAL</th>
+									<th>FECHA DE INGRESO</th>
+									<th>CANTIDAD EXISTENTE</th>
+									<th>CODIGO PRODUCTO</th>
+									<th>TALLE</th>
+									<th>LOCAL</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="lote:${lotes}">
+
+									<td th:text="${lote.numeroDeLote}"></td>
+									<td th:text="${lote.cantidadRecibida}"></td>
+									<td th:text="${lote.fechaIngreso}"></td>
+									<td th:text="${lote.cantidadExistente}"></td>
+									<td th:text="${lote.producto.codigoProducto}"></td>
+									<td th:text="${lote.producto.talle}"></td>
+									<td th:text="${lote.local.direccion}"></td>									
+									<td><a th:href="@{/lotes/editar/{id}(id=${lote.id})} + ${lote.id}"
+										class="btn btn-success"> <i class="fas fa-sync-alt"></i>
+									</a></td>
+									
+									
+								<td>
+									<a
+										th:href="@{/lotes/eliminar/{id}(id=${lote.id})}"
+										type="button" class="btn btn-warning"
+										onclick="alert('El cliente fue eliminado con exito!')"> <i
+											class="far fa-trash-alt"></i>
+									</a>
+								</td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<nav aria-label="Pagination">
+						<ul class="pagination justify-content-center">
+							<li class="page-item" th:each="page : ${pages}"><a
+								class="page-link" th:href="@{|/lotes/?page=${page}|}"
+								th:text="${page}"></a></li>
+						</ul>
+					</nav>
+				</div>
+		</section>
+
+
+
+
+	</main>
+
+	<div th:replace="scripts-footer.html"></div>
+</body>
+</html>

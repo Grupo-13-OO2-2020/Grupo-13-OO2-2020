@@ -5,7 +5,29 @@
 				&nbsp; Dashboard</a></li>
 	<li><a href="/locales"><i class="fas fa-store-alt fa-fw"></i>
 				&nbsp; Locales</a></li>
-
+	
+	<li><a href="#" class="nav-btn-submenu"><i
+				class="fas fa-users fa-fw"></i> &nbsp; Clientes <i
+				class="fas fa-chevron-down"></i></a>
+			<ul>
+				<li><a href="/clientes/newl"><i class="fas fa-plus fa-fw"></i>
+						&nbsp; Agregar Cliente</a></li>
+				<li><a th:href="@{/clientes}"><i
+						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de clientes</a></li>
+				<li><a href="clientes"><i class="fas fa-search fa-fw"></i>
+						&nbsp; Buscar cliente</a></li>
+			</ul></li>
+	<li><a href="#" class="nav-btn-submenu"><i
+				class="fas fa-pallet fa-fw"></i> &nbsp; Productos <i
+				class="fas fa-chevron-down"></i></a>
+			<ul>
+				<li><a href="/productos/new"><i class="fas fa-plus fa-fw"></i>
+						&nbsp; Agregar producto</a></li>
+				<li><a href="/productos/"><i
+						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de productos</a></li>
+				<li><a href="/productos/search"><i class="fas fa-search fa-fw"></i>
+						&nbsp; Buscar producto</a></li>
+			</ul></li>		
 		
 
 		<li><a href="#" class="nav-btn-submenu"><i
@@ -42,7 +64,7 @@
 						&nbsp; Nuevo Remito</a></li>
 				<li><a th:href="@{/remitos/{id}(id=${local.id})}"><i
 						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Remitos</a></li>
-				<li><a href="#"><i
+				<li><a th:href="@{/remitos/search}"><i
 						class="fas fa-search-dollar fa-fw"></i> &nbsp; Buscar Remitos</a></li>
 
 			</ul></li>

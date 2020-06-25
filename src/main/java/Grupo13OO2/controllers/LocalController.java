@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -81,20 +82,24 @@ public class LocalController {
 			EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 			mAV.addObject("empleado", e);
 		}
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		mAV.addObject("usuario", auth.getName());	    
-		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
-		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-		mAV.addObject("empleado", e);
 		mAV.addObject("locales", pageLocal.getContent());
 		mAV.addObject("current", page+1);
 		mAV.addObject("next" ,page+2);
 		mAV.addObject("prev" ,page);
 		mAV.addObject("last", totalPage);
 		
+		//agrego datos de ususario
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());	    
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
+		mAV.addObject("empleado", e);
+		
 		return mAV;
 	}
 
+	
 	@GetMapping("/main/{id}")
 	public ModelAndView main(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_MAIN);
@@ -109,7 +114,7 @@ public class LocalController {
 		
 		return mAV;
 	}
-
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/new")
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_FORM);
@@ -132,7 +137,7 @@ public class LocalController {
 
 		return ViewRouteHelper.LOCAL_INDEX;
 	}
-
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/editar/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
 
@@ -145,7 +150,7 @@ public class LocalController {
 		mAV.addObject("empleado", e);
 		return mAV;
 	}
-
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/eliminar/{id}")
 	public RedirectView delete(Model model, @PathVariable("id") int id) {
 		localService.delete(id);
