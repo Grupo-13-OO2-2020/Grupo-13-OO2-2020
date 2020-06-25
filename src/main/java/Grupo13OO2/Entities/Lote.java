@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "lote")
@@ -29,6 +30,7 @@ public class Lote {
 	private int numeroDeLote;
 	private int cantidadRecibida;
 	@Column(name = "fechaIngreso")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@CreationTimestamp
 	private Date fechaIngreso;
 	@OneToOne
@@ -43,22 +45,22 @@ public class Lote {
 	public Lote() {
 	}
 
-	public Lote(int id, int numeroDeLote, int cantidadRecibida, Producto producto, int cantidadExistente, Local local) {
+	public Lote(int id, int numeroDeLote, int cantidadRecibida, Producto producto, int cantidadExistente, Local local, Date fechaIngreso) {
 		setId(id);
 		this.numeroDeLote = numeroDeLote;
 		this.cantidadRecibida = cantidadRecibida;
 		this.producto = producto;
 		this.cantidadExistente = cantidadExistente;
 		this.local = local;
-	}
+		this.fechaIngreso=fechaIngreso;	}
 
-	public Lote(int id, int numeroDeLote, int cantidadRecibida, Producto producto, int cantidadExistente) {
+	public Lote(int id, int numeroDeLote, int cantidadRecibida, Producto producto, int cantidadExistente,Date fechaIngreso) {
 		setId(id);
 		this.numeroDeLote = numeroDeLote;
 		this.cantidadRecibida = cantidadRecibida;
 		this.producto = producto;
 		this.cantidadExistente = cantidadExistente;
-	}
+	 	this.fechaIngreso =fechaIngreso;}
 
 	public int getId() {
 		return id;

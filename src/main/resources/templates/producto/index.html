@@ -5,70 +5,38 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Lista de Productos</title>
 
-    <!-- Normalize V8.0.1 -->
-    <link rel="stylesheet" href="/css/normalize.css">
-
-    <!-- Bootstrap V4.3 -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <!-- Bootstrap Material Design V4.0 -->
-    <link rel="stylesheet" href="/css/bootstrap-material-design.min.css">
-
-    <!-- Font Awesome V5.9.0 -->
-    <link rel="stylesheet" href="/css/all.css">
-
-    <!-- Sweet Alerts V8.13.0 CSS file -->
-    <link rel="stylesheet" href="/css/sweetalert2.min.css">
-
-    <!-- Sweet Alert V8.13.0 JS file-->
-    <script src="/js/sweetalert2.min.js"></script>
-
-    <!-- jQuery Custom Content Scroller V3.1.5 -->
-    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
-
-    <!-- General Styles -->
-    <link rel="stylesheet" href="/css/style.css">
-
+ <div th:replace="header.html"></div>
 
 </head>
 
 
 <body>
-    <!-- Main container -->
-    <main class="full-box main-container">
-        <!-- Nav lateral -->
-        <section class="full-box nav-lateral">
-            <div class="full-box nav-lateral-bg show-nav-lateral"></div>
-            <div class="full-box nav-lateral-content">
-                <figure class="full-box nav-lateral-avatar">
-                    <i class="far fa-times-circle show-nav-lateral"></i>
-                    <img src="../assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
-                    <figcaption class="roboto-medium text-center">
-                        Carlos Alfaro <br><small class="roboto-condensed-light">Web Developer</small>
-                    </figcaption>
-                </figure>
-                <div class="full-box nav-lateral-bar" th:replace="nav :: nav"></div>
-            </div>
-        </section>
-        <section class="full-box page-content">
-            <nav class="full-box navbar-info">
-                <a href="#" class="float-left show-nav-lateral">
-                    <i class="fas fa-exchange-alt"></i>
-                </a>
-                <a href="user-update.html">
-                    <i class="fas fa-user-cog"></i>
-                </a>
-                <a href="#" class="btn-exit-system">
-                    <i class="fas fa-power-off"></i>
-                </a>
-            </nav>
+ <body>
+	
+		<main class="full-box main-container">
+		<!-- Nav lateral -->
+		<section class="full-box nav-lateral">
+			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
+					<div th:if="!${empleado.gerente}" >
+			<div class="full-box nav-lateral-content"
+				 th:replace="div2 :: div"></div>
+			 </div>
+			<div th:if="${empleado.gerente}" >
+			<div class="full-box nav-lateral-content"
+				 th:replace="div :: div"></div>
+			 </div>
+			 
+			 
+	</section>
+       	<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav">			
+			</nav>
             <!-- Page header -->
             <div class="full-box page-header">
                 <h3 class="text-left">
                     <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS
                 </h3>
                 <p class="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum delectus eos enim numquam fugit optio accusantium, aperiam eius facere architecto facilis quibusdam asperiores veniam omnis saepe est et, quod obcaecati.
                 </p>
             </div>
             <div class="container-fluid">
@@ -80,14 +48,34 @@
                         <a class="active" th:href="@{/productos/}"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a>
                     </li>
                     <li>
-                        <a th:href="@{/Productomasvendido/}"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; PRODUCTOS MAS VENDIDOS</a>
+                        <a th:href="@{/Productomasvendido/}"><i class="fas fa-cart-plus"></i> &nbsp; PRODUCTOS MAS VENDIDOS</a>
                     </li>
                     <li>
                         <a th:href="@{/productos/search}"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR PRODUCTO</a>
                     </li>
                 </ul>
             </div>
-            
+   
+
+      <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+       var all =  /*[[ ${popUp} ]]*/
+	console.log(all)
+    /*]]>*/
+    
+    if(all!=null){
+    	    	alert("este producto tiene lotes o remitos no se puede eliminar");
+
+    }
+</script>
+
+                 
+       
+                 
+  
+
+
+  
             <!--CONTENT-->
            <div class="container-fluid">
 				 <!--CONTENT-->
@@ -114,15 +102,17 @@
                                     <td th:text="${producto.talle}"></td>
                                     <td th:text="${producto.codigoProducto}"></td>
                                     <td>
-                                        <a th:href="@{productos/editar/} + ${producto.id}" class="btn btn-success">
+                                        <a th:href="@{/productos/editar/} + ${producto.id}" class="btn btn-success">
                                             <i class="fas fa-sync-alt"></i> 
                                         </a>
                                     </td>
                                     <td>
-                                        <a th:href ="@{productos/eliminar/{id}(id=${producto.id})}" class="btn btn-warning">
+                                        <a th:href ="@{eliminar/{id}(id=${producto.id})}" class="btn btn-warning">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
                                     </td>
+  
+                                
                 
                                 </tr>
                             </tbody>
@@ -143,6 +133,12 @@
 
     </main>
     
+    
 	<div th:replace="scripts-footer.html"></div>
+	
+		         
+	
+	
+	
 </body>
 </html>
