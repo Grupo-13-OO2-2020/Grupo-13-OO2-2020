@@ -92,5 +92,5 @@ insert into user_role (id,createdat,role,updatedat,user_id) values
 
  insert into user_role (id,createdat,role,updatedat,user_id) values 
 (4,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",4);
-*/
 
+*/
