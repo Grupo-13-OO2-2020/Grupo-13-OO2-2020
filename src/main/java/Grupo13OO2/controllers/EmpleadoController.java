@@ -40,7 +40,6 @@ import Grupo13OO2.services.ILocalService;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 
 @RequestMapping("/empleados")
 public class EmpleadoController {
@@ -146,7 +145,7 @@ int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toStri
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
-		mAV.addObject("empleado", new EmpleadoModel());
+		mAV.addObject("empleadoNew", new EmpleadoModel());
 		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}

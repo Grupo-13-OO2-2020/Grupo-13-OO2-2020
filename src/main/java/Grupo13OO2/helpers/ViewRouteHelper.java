@@ -32,7 +32,6 @@ public class ViewRouteHelper {
     public final static String LOCAL_MAIN = "local/local-home";
     public final static String LOTE_INDEX_LOCAL = "lote/item-list-local";//aca esta la lista
     public final static String EMPLEADO_INDEX_LOCAL = "empleado/user-list-local";//aca esta la lista
-    public final static String EMPLEADO_SUELDO = "empleado/user-sueldo";//aca esta la lista
     public final static String SOLICITUDSTOCK_INDEX_LOCAL = "solicitudstock/item-list-local";
     public final static String REMITO_INDEX_LOCAL = "remito/item-list-local";
     
