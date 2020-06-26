@@ -1,10 +1,10 @@
 
 <nav class="full-box nav-lateral-menu">
 	<ul>
-		<li><a href="/"><i class="fab fa-dashcube fa-fw"></i>
-				&nbsp; Dashboard</a></li>
-	<li><a href="/locales"><i class="fas fa-store-alt fa-fw"></i>
-				&nbsp; Locales</a></li>
+		<li><a href="/locales"><i class="fab fa-dashcube fa-fw"></i>
+				&nbsp; Listado Locales</a></li>
+	<li><a th:href="@{/locales/main/{id}(id=${empleado.local.id})}"><i class="fas fa-store-alt fa-fw"></i>
+				&nbsp; Local</a></li>
 	
 	<li><a href="#" class="nav-btn-submenu"><i
 				class="fas fa-users fa-fw"></i> &nbsp; Clientes <i
