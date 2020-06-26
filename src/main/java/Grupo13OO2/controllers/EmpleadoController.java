@@ -27,6 +27,8 @@ import java.util.stream.IntStream;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 
+import Grupo13OO2.Entities.Empleado;
+import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Entities.User;
 import Grupo13OO2.Models.ClienteModel;
 import Grupo13OO2.Models.EmpleadoModel;
@@ -183,7 +185,8 @@ int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toStri
 			redirect.addFlashAttribute("popUp", "error");
 			return new RedirectView("/empleados");
 	}
-
+	
+	
 	@GetMapping("/partial/{id}")
 	public ModelAndView getPartial(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX);
