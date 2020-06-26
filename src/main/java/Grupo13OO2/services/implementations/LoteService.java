@@ -109,5 +109,12 @@ public class LoteService implements ILoteService {
 		return pages;
 	}
 	
+	public boolean findDependency(int id){
+		LoteModel l = ListarId(id);
+		if((l.getCantidadExistente() == l.getCantidadRecibida()) || (l.getCantidadExistente() == 0)){
+			return true;
+		} 
 
+		return false;
+	}
 }

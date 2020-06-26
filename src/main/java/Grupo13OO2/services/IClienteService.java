@@ -17,4 +17,6 @@ public interface IClienteService {
 	public String delete(int id);
 	
 	Page<ClienteModel> getAllPages(Pageable pageable);
+
+	public List<ClienteModel> findDependency(int id);
 }

@@ -176,9 +176,15 @@ int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toStri
 	}
 
 	@GetMapping("/eliminar/{id}")
-	public RedirectView delete(Model model, @PathVariable int id) {
-		empleadoService.delete(id);
-		return new RedirectView("/empleados");
+
+	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect){
+
+		if (!empleadoService.findDependency(id)){
+			empleadoService.delete(id);
+			return new RedirectView("/empleados");
+		}else
+			redirect.addFlashAttribute("popUp", "error");
+			return new RedirectView("/empleados");
 	}
 
 	

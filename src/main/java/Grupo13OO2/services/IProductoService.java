@@ -21,4 +21,6 @@ public interface IProductoService {
 	public Page<ProductoModel> getAllPages(Pageable pageable);
 
 	public List<ProductoModel> listAll(String keyword);
+
+	public List<ProductoModel> findDependency(int id);
 }

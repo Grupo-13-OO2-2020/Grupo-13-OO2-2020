@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.text.SimpleDateFormat;
@@ -135,14 +136,18 @@ public class ClienteController {
 		mAV.addObject("empleado", e);
 		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 		return mAV;
-	}
-
-	@GetMapping("/eliminar/{id}")
-	public RedirectView deletel(Model model, @PathVariable int id) {
-		clienteService.delete(id);
-		return new RedirectView("/clientes");
 	}	
 	
+	@GetMapping("/eliminar/{id}")
+	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect){
+		List<ClienteModel> p= clienteService.findDependency(id);
+		if (p.isEmpty()){
+			clienteService.delete(id);
+			return new RedirectView("/clientes");
+		}else
+			redirect.addFlashAttribute("popUp", "error");
+			return new RedirectView("/clientes");
+	}
 	
 //vista local
 	@GetMapping("{id}")

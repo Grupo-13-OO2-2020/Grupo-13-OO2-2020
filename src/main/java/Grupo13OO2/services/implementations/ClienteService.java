@@ -69,4 +69,16 @@ public class ClienteService implements IClienteService {
 
 		return pages;
 	}
+
+	@Override
+	public List<ClienteModel> findDependency(int id){
+		List<Cliente> clientes= clienteRepository.findIfExist(id);
+		List<ClienteModel> pM= new ArrayList<ClienteModel>();
+
+		for(Cliente p : clientes) {
+			pM.add(clienteConverter.entityToModel(p));
+		}
+
+		return pM;
+	}
 }
