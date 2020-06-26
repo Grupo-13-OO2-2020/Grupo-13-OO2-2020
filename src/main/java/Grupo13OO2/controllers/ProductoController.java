@@ -128,8 +128,15 @@ public class ProductoController {
 		if(totalPage > 0){
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			model.addAttribute("pages", pages);
-		}
+		
+				}
+		model.addAttribute("locales", pageProducto.getContent());
+		model.addAttribute("current", page+1);
+		model.addAttribute("next" ,page+2);
+		model.addAttribute("prev" ,page);
+		model.addAttribute("last", totalPage);
 		model.addAttribute("list", pageProducto.getContent());
+		//datos de ususario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		model.addAttribute("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
