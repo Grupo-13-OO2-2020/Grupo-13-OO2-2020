@@ -112,8 +112,8 @@
 								<th>SUELDO</th>
 								<th>GERENTE</th>
 								<th>LOCAL</th>
-								<th></th>
-								<th></th>
+								<th>ACTUALIZAR</th>
+								<th>ELIMINAR</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -131,6 +131,27 @@
 								<td th:text="${empleado.gerente}"></td>
 								<td th:text="${empleado.local.direccion}"></td>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+								<td><a
+									th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
+									class="btn btn-success"> <i class="fas fa-sync-alt"></i>
+								</a></td>
+										
+								<td ><a 
+									th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}" button
+									type="button"
+									onclick="alert('El cliente fue eliminado con exito!')"> <i
+										class="far fa-trash-alt"></i>
+								</a>
+								</td>
+								
+								
+								
+								
+=======
+=======
+>>>>>>> 0563a43704c39a1454a0f79eead16777d922c08b
 								<td>
 									<a th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}"
 									 type="button" class="btn btn-warning"> 
@@ -143,6 +164,11 @@
 										 <i class="fas fa-sync-alt"></i>
 									</a>
 								</td>
+<<<<<<< HEAD
+>>>>>>> 8caed7c75bc8ae3485cd48a053b9aaf502124e71
+=======
+
+>>>>>>> 0563a43704c39a1454a0f79eead16777d922c08b
 							</tr>
 						</tbody>
 					</table>

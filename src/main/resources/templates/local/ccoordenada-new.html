@@ -14,7 +14,7 @@
 
 <body align='center'>
     		<!-- Main container -->
-	main class="full-box main-container">
+	<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
@@ -32,7 +32,7 @@
 							class="fas fa-arrow-alt-circle-left"></i> &nbsp; VOLVER</a>
 				</ul>
             
-			<form action="obtenerdistancia" class="formulario" method="Post"
+			<form th:action="@{/locales/obtenerdistancia}" class="formulario" method="Post"
 				onsubmit="return fijaCoord()">
 
 				<div  class="card border-info mb-3"

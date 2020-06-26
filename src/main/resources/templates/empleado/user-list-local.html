@@ -78,8 +78,9 @@
 								<th>SUELDO</th>
 								<th id="comision1-id"></th>
 								<th id="sueldo1-id"></th>
-								<th>ACTUALIZAR</th>
 								<th>ELIMINAR</th>
+<!-- 							<th>ACTUALIZAR</th> -->
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -98,12 +99,11 @@
 								<td th:text="${empleado.sueldo}"></td>
 								<td id="comision2-id"></td>
 								<td id="sueldo2-id"></td>
-								<td>
-									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-success"> 
-										<i class="fas fa-sync-alt"></i>
-									</a>
-								</td>
-
+<!-- 								<td> -->
+<!-- 									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-success">  -->
+<!-- 										<i class="fas fa-sync-alt"></i> -->
+<!-- 									</a> -->
+<!-- 								</td> -->
 								<td>
 									<a th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}" button
 									type="button" onclick="alert('El cliente fue eliminado con exito!')"> 
