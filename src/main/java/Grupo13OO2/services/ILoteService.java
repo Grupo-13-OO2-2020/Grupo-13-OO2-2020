@@ -20,5 +20,5 @@ public interface ILoteService {
 	
 	Page<LoteModel> getAllPages(Pageable pageable);
 
-
+	public boolean findDependency(int id);
 }
