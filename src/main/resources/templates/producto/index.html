@@ -142,16 +142,27 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-				<nav aria-label="Pagination">
+                        </div>
+						<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
-						<li class="page-item" th:each="page : ${pages}">
-							<a class="page-link" th:href="@{|/productos/?page=${page}|}" th:text="${page}"></a>
+
+						<li class="page-item"
+							th:classappend="${prev == 0 ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/productos/?page=${prev}|}">Anterior</a>
 						</li>
+						<li class="page-item" th:each="page : ${pages}"
+							th:classappend="${current == page ? 'active': '' }"><a
+							class="page-link" th:href="@{|/productos/?page=${page}|}"
+							th:text="${page}"></a>
+						<li class="page-item"
+							th:classappend="${current == last ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/productos/?page=${next}|}">Proxima</a>
+						</li>
+
 					</ul>
 				</nav>
 			</div>
-        </section>
+
 
 
 
