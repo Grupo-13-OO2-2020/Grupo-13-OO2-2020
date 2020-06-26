@@ -76,11 +76,7 @@ public class LocalController {
 		if(totalPage>0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			mAV.addObject("pages",pages);
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			mAV.addObject("usuario", auth.getName());
-			User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
-			EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-			mAV.addObject("empleado", e);
+						
 		}
 		mAV.addObject("locales", pageLocal.getContent());
 		mAV.addObject("current", page+1);
@@ -135,7 +131,8 @@ public class LocalController {
 		}
 		localService.insertOrUpdate(localModel);
 
-		return ViewRouteHelper.LOCAL_INDEX;
+		
+				return "redirect:/locales/";
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/editar/{id}")
