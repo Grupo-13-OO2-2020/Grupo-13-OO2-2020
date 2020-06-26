@@ -176,6 +176,10 @@ int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toStri
 	}
 
 	@GetMapping("/eliminar/{id}")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0563a43704c39a1454a0f79eead16777d922c08b
 	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect){
 
 		if (!empleadoService.findDependency(id)){
