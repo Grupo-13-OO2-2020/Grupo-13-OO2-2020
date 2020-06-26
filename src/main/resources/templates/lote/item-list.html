@@ -101,6 +101,7 @@
 									<th>CANTIDAD INICIAL</th>
 									<th>FECHA DE INGRESO</th>
 									<th>CANTIDAD EXISTENTE</th>
+									<th>DESCRIPCION PRODUCTO</th>
 									<th>CODIGO PRODUCTO</th>
 									<th>TALLE</th>
 									<th>LOCAL</th>
@@ -115,6 +116,7 @@
 									<td th:text="${lote.cantidadRecibida}"></td>
 									<td th:text="${lote.fechaIngreso}"></td>
 									<td th:text="${lote.cantidadExistente}"></td>
+									<td th:text="${lote.producto.descripcion}"></td>
 									<td th:text="${lote.producto.codigoProducto}"></td>
 									<td th:text="${lote.producto.talle}"></td>
 									<td th:text="${lote.local.direccion}"></td>									
