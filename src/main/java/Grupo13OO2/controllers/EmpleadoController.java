@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
@@ -173,9 +174,14 @@ int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toStri
 	}
 
 	@GetMapping("/eliminar/{id}")
-	public RedirectView delete(Model model, @PathVariable("id") int id) {
-		empleadoService.delete(id);
-		return new RedirectView("/empleados");
+	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect){
+
+		if (!empleadoService.findDependency(id)){
+			empleadoService.delete(id);
+			return new RedirectView("/empleados");
+		}else
+			redirect.addFlashAttribute("popUp", "error");
+			return new RedirectView("/empleados");
 	}
 
 	@GetMapping("/partial/{id}")
