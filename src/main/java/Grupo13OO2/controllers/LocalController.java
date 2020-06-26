@@ -131,7 +131,8 @@ public class LocalController {
 		}
 		localService.insertOrUpdate(localModel);
 
-		return ViewRouteHelper.LOCAL_INDEX;
+		
+				return "redirect:/locales/";
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/editar/{id}")

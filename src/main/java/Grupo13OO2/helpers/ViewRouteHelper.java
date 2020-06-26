@@ -6,7 +6,7 @@ public class ViewRouteHelper {
     //FORMS
     public final static String CLIENTE_FORM = "cliente/client-new";
     public final static String EMPLEADO_FORM = "empleado/user-new";
-    public final static String LOCAL_FORM = "local/useflocal-new";
+    public final static String LOCAL_FORM = "local/item-new";
     public final static String PRODUCTO_FORM = "producto/form";
     public final static String SOLICITUDSTOCK_FORM = "solicitudstock/solstock-new";
     public final static String REMITO_FORM = "remito/usef-new";
