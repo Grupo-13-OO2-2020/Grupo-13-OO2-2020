@@ -105,18 +105,14 @@ public class ProductoController {
 
 	@GetMapping("/eliminar/{id}")
 	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect){
-		List<Producto> p= productoRepository.findIfExist(id);
+		List<ProductoModel> p= productoService.findDependency(id);
 		if (p.isEmpty()){
 			productoService.delete(id);
-			
-				return new RedirectView(ViewRouteHelper.PRODUCTO);
-
+			return new RedirectView(ViewRouteHelper.PRODUCTO);
 		}else
+			
 			redirect.addFlashAttribute("popUp", "error");
-		
-		return new RedirectView(ViewRouteHelper.PRODUCTO);
-		
-	
+			return new RedirectView(ViewRouteHelper.PRODUCTO);
 	}
 
 	@GetMapping(value = "/")

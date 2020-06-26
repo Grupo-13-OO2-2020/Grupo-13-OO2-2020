@@ -122,4 +122,37 @@ public class EmpleadoService implements IEmpleadoService {
 
 		return sueldoTotal;
 	}
+
+	@Override
+	public boolean findDependency(int id){
+		EmpleadoModel e = ListarId(id);
+		if(empleadoRemitos(e) || empleadoSolicitudes(e)){
+			return true;
+		}
+		return false;
+	}
+
+	private boolean empleadoRemitos(EmpleadoModel e ){
+		List<RemitoModel> remitos = localService.getRemitos(e.getLocal());
+		if(remitos !=null){
+			for (RemitoModel r : remitos) {
+				if(r.getVendedor() == e){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean empleadoSolicitudes(EmpleadoModel e ){
+		List<SolicitudStockModel> solicitudes = localService.getSolicitudesStock(e.getLocal());
+		if(solicitudes !=null){
+			for (SolicitudStockModel r : solicitudes) {
+				if(r.getVendedor() == e || r.getColaborador() == e){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
