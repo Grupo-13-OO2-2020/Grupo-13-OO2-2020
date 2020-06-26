@@ -79,4 +79,17 @@ public class ProductoService implements IProductoService {
 		}
 		return pM;
 	}
+
+	@Override
+	public List<ProductoModel> findDependency(int id){
+
+		List<Producto> productos= productoRepository.findIfExist(id);
+		List<ProductoModel> pM= new ArrayList<ProductoModel>();
+
+		for(Producto p : productos) {
+			pM.add(productoConverter.entityToModel(p));
+		}
+
+		return pM;
+	}
 }
