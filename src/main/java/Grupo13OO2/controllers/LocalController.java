@@ -189,12 +189,17 @@ public class LocalController {
 		model.addAttribute("lng2", localService.findById(locales.getSegundoLocal().getId()).getLongitud());
 		model.addAttribute("dir2", localService.findById(locales.getSegundoLocal().getId()).getDireccion());
 
-		ModelAndView mAV = new ModelAndView("local/dameDistancia");
+		ModelAndView mAV = new ModelAndView("/local/damedistancia");
 		double distancia = distanciaCoord(localService.findById(locales.getPrimerLocal().getId()).getLatitud(),
 				localService.findById(locales.getPrimerLocal().getId()).getLongitud(),
 				localService.findById(locales.getSegundoLocal().getId()).getLatitud(),
 				localService.findById(locales.getSegundoLocal().getId()).getLongitud());
 		model.addAttribute("distancia", Math.round(distancia * 100) / 100.00);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
 		return mAV;
 	}
 
