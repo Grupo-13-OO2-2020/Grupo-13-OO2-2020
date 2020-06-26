@@ -8,4 +8,6 @@ import Grupo13OO2.Entities.Lote;
 @Repository("loteRepository")
 public interface ILoteRepository extends JpaRepository<Lote, Integer> {
 	public abstract Lote findById(int id);
+	
+	
 }
