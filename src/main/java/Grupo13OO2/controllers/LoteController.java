@@ -134,14 +134,12 @@ public class LoteController {
 		return mAV;
 	}
 
-	
-
 	@PostMapping("/save")
 	public RedirectView create(@ModelAttribute("lote") LoteModel loteModel) {
 		// loteModel.setCantidadExistente(loteModel.getCantidadRecibida());
 		loteService.insertOrUpdate(loteModel);
 
-		return new RedirectView("/lotes/"+loteModel.getLocal().getId());
+		return new RedirectView("/lotes/" + loteModel.getLocal().getId());
 	}
 
 	@GetMapping("/editar/{id}")
@@ -159,14 +157,19 @@ public class LoteController {
 	}
 
 	@GetMapping("/eliminar/{id}")
-	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect){
-
-		if (loteService.findDependency(id)){
+	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect) {
+//datos de ususario
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		
+		
+		if (loteService.findDependency(id)) {
 			loteService.delete(id);
-			return new RedirectView("/lotes");
-		}else
+			return new RedirectView("/lotes/"+e.getLocal().getId());
+		} else
 			redirect.addFlashAttribute("popUp", "error");
-			return new RedirectView("/lotes");
+		return new RedirectView("/lotes/"+e.getLocal().getId());
 	}
 
 }

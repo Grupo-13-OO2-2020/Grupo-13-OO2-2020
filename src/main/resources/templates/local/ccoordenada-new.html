@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Coordenadas entre locales</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Coordenadas entre locales</title>
 
 <div th:replace="header.html"></div>
 
@@ -13,43 +14,45 @@
 
 
 <body>
-    		<!-- Main container -->
+	<!-- Main container -->
 	<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			
+
 			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
-				 th:include="div :: div"></div>
-			
-			<div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
-				 th:include="div2 :: div"></div>
-			
-		
-	</section>
+				th:include="div :: div"></div>
+
+			<div th:unless="${empleado.gerente}"
+				class="full-box nav-lateral-content" th:include="div2 :: div"></div>
+
+
+		</section>
 
 		<!-- Page content -->
-            
-            <div class="container-fluid">
-				<ul class="full-box list-unstyled ">
-					<li><a th:href="@{/locales}"><i
-							class="fas fa-arrow-alt-circle-left"></i> &nbsp; VOLVER</a>
-				</ul>
-            
-			<form th:action="@{/locales/obtenerdistancia}" class="formulario" method="Post"
-				onsubmit="return fijaCoord()">
 
-				<div  class="card border-info mb-3"
+		<div class="container-fluid">
+			<ul class="full-box list-unstyled ">
+				<li><a th:href="@{/locales}"><i
+						class="fas fa-arrow-alt-circle-left"></i> &nbsp; VOLVER</a>
+			</ul>
+
+			<form th:action="@{/locales/obtenerdistancia}" class="formulario"
+				method="Post" onsubmit="return fijaCoord()">
+
+				<div class="card border-info mb-3"
 					style="max-width: 30rem; margin-left: auto; margin-right: auto;">
 					<div class="card-header" style="text-align: center;">
-					    <h1></h1>
+						<h1></h1>
 						<h2>INGRESE LOCALES</h2>
-						<h3><i class="fas fa-route"></i></h3>
+						<h3>
+							<i class="fas fa-route"></i>
+						</h3>
 					</div>
 					<div class="card-body text-center">
-						<label class="input-name"><h5>Primer
-								Local</h5></label> <select placeholder="PrimerLocal" name="PrimerLocal.id"
-							id="PrimerLocal" class="form-control">
+						<label class="input-name"><h5>Primer Local</h5></label> <select
+							placeholder="PrimerLocal" name="PrimerLocal.id" id="PrimerLocal"
+							class="form-control">
 							<option th:each="local : ${locales}" th:value="${local.id}"
 								th:text="${local.direccion}"></option>
 						</select>
@@ -64,7 +67,8 @@
 					</div>
 
 					<div class="text-center">
-						<input class="btn btn-primary button" type="submit" style="background: #DFDFDF" />
+						<input class="btn btn-primary button" type="submit"
+							style="background: #DFDFDF" />
 					</div>
 
 				</div>
@@ -76,10 +80,11 @@
 							.getElementById("SegundoLocal").value) ? false
 							: true;
 				}
-			</script></main>
-    
-    	
-		<div th:replace="scripts-footer.html"></div>
-		
+			</script>
+	</main>
+
+
+	<div th:replace="scripts-footer.html"></div>
+
 </body>
 </html>

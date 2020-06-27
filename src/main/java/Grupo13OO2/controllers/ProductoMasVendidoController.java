@@ -28,9 +28,11 @@ import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.repositories.IUserRepository;
 import Grupo13OO2.services.IEmpleadoService;
+import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.IPedidoService;
 import Grupo13OO2.services.IRemitoService;
 import Grupo13OO2.services.ISolicitudStockService;
+import Grupo13OO2.services.implementations.LocalService;
 
 @Controller
 @RequestMapping("/Productomasvendido")
@@ -39,7 +41,7 @@ public class ProductoMasVendidoController {
 	@Autowired
 	@Qualifier("pedidoService")
 	private IPedidoService pedidoService;
-	
+
 	@Autowired
 	@Qualifier("remitoService")
 	private IRemitoService remitoService;
@@ -47,33 +49,36 @@ public class ProductoMasVendidoController {
 	@Autowired
 	@Qualifier("solicitudStockService")
 	private ISolicitudStockService solicitudStockService;
-	
+
 	@Autowired
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
-	
+
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
 
 	@Autowired
 	private IUserRepository userRepository;
 
-	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.MASVENDIDO_INDEX);
-		List<ProductoMasVendidoModel> PMasVendido = ProdMasVend(remitoService.getAll(),solicitudStockService.getAll());
+		List<ProductoMasVendidoModel> PMasVendido = ProdMasVend(remitoService.getAll(), solicitudStockService.getAll());
 		mAV.addObject("prodmasVendido", PMasVendido);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 		return mAV;
 	}
 
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.MASVENDIDO_INDEX);
-		List<ProductoMasVendidoModel> PdtMVendido = ProdMasVend(remitoService.getAll(),solicitudStockService.getAll());
+		List<ProductoMasVendidoModel> PdtMVendido = ProdMasVend(remitoService.getAll(), solicitudStockService.getAll());
 		mAV.addObject("prodmasVendido", PdtMVendido);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());

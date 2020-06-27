@@ -17,7 +17,7 @@ public class Remito extends Pedido {
 	}
 
 	public Remito(int id, Date fecha, Producto producto, int cantidad, Empleado vendedor, Cliente cliente,
-			 String formaDePago) {
+			String formaDePago) {
 		super(id, fecha, producto, cantidad, vendedor, cliente);
 		this.formaDePago = formaDePago;
 	}

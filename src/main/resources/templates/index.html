@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<title>Home</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Home</title>
 
 <div th:replace="header.html"></div>
 
@@ -11,105 +12,104 @@
 
 </head>
 <body>
-	
-		<main class="full-box main-container">
+
+	<main class="full-box main-container">
 		<!-- Nav lateral -->
-	<section class="full-box nav-lateral">
+		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
 
 			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
-				 th:include="div :: div"></div>
-			
-			<div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
-				 th:include="div2 :: div"></div>
-	</section>
+				th:include="div :: div"></div>
+
+			<div th:unless="${empleado.gerente}"
+				class="full-box nav-lateral-content" th:include="div2 :: div"></div>
+		</section>
 
 		<!-- Page content -->
-			<section class="full-box page-content">
-			<nav th:replace="nav_user :: nav">			
-			</nav>>
+		<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav"></nav>
+			>
 
 
 			<!-- Page header -->
 			<div class="full-box page-header">
 				<h3 class="text-left">
-					<i class="fab fa-dashcube fa-fw"></i> &nbsp; Sistema de Gestion de Stock
+					<i class="fab fa-dashcube fa-fw"></i> &nbsp; Sistema de Gestion de
+					Stock
 				</h3>
-				<p class="text-justify">
-					Bienvenido para operar desde un local dirijase a la lista de locales e ingrese en el que desee.
-				</p>
+				<p class="text-justify">Bienvenido!.</p>
 			</div>
-			
+
 			<!-- Content -->
 			<div class="full-box tile-container">
 				<div class="row">
-				<div class="col-12 col-md-3">
-					<a  th:href="@{/clientes}" class="tile">
-						<div class="tile-tittle">Clientes</div>
-						<div class="tile-icon">
-							<i class="fas fa-users fa-fw"></i>
-							<p>5 Registrados</p>
-						</div>
-					</a>
+					<div class="col-12 col-md-3">
+						<a th:href="@{/clientes}" class="tile">
+							<div class="tile-tittle">Clientes</div>
+							<div class="tile-icon">
+								<i class="fas fa-users fa-fw"></i>
+								<p></p>
+							</div>
+						</a>
 
-				</div>
-				
-				<div class="col-12 col-md-3">
-					<a  th:href="@{/productos/}" class="tile">
-						<div class="tile-tittle">Productos</div>
-						<div class="tile-icon">
-							<i class="fas fa-pallet fa-fw"></i>
-							<p>9 Registrados</p>
-						</div>
-					</a>
-				</div>
-				
-				<div class="col-12 col-md-3">
-					<a th:href="@{/remitos}" class="tile">
-						<div class="tile-tittle">Remitos</div>
-						<div class="tile-icon">
-							<i class="fas fa-file-invoice-dollar fa-fw"></i>
-							<p>10 Registrados</p>
-						</div>
-					</a>
-				</div>
-				<div class="col-12 col-md-3">
-					<a th:href="@{/solicitudesStock}" class="tile">
-						<div class="tile-tittle">SOLICITUD EXTERNA</div>
-						<div class="tile-icon">
-							<i class="fas fa-file-invoice-dollar fa-fw"></i>
-								<p>10 Registrados</p>
-						</div>
-					</a>
-				</div>
+					</div>
 
-				<div class="col-12 col-md-6">
-					<a th:href="@{/empleados}" class="tile">
-						<div class="tile-tittle">EMPLEADOS</div>
-						<div class="tile-icon">
-							<i class="fas fa-user-secret fa-fw"></i>
-							<p>50 Registrados</p>
-						</div>
-					</a>
-				</div>
+					<div class="col-12 col-md-3">
+						<a th:href="@{/productos/}" class="tile">
+							<div class="tile-tittle">Productos</div>
+							<div class="tile-icon">
+								<i class="fas fa-pallet fa-fw"></i>
+								<p></p>
+							</div>
+						</a>
+					</div>
 
-				<div class="col-12 col-md-6">
-					<a th:href="@{/locales}" class="tile">
-						<div class="tile-tittle">LOCALES</div>
-						<div class="tile-icon">
-							<i class="fas fa-store-alt fa-fw"></i>
-							<p>1 Registrada</p>
-						</div>
-					</a>
+					<div class="col-12 col-md-3">
+						<a th:href="@{/remitos}" class="tile">
+							<div class="tile-tittle">Remitos</div>
+							<div class="tile-icon">
+								<i class="fas fa-file-invoice-dollar fa-fw"></i>
+								<p></p>
+							</div>
+						</a>
+					</div>
+					<div class="col-12 col-md-3">
+						<a th:href="@{/solicitudesStock}" class="tile">
+							<div class="tile-tittle">SOLICITUD EXTERNA</div>
+							<div class="tile-icon">
+								<i class="fas fa-file-invoice-dollar fa-fw"></i>
+								<p></p>
+							</div>
+						</a>
+					</div>
+
+					<div class="col-12 col-md-6">
+						<a th:href="@{/empleados}" class="tile">
+							<div class="tile-tittle">EMPLEADOS</div>
+							<div class="tile-icon">
+								<i class="fas fa-user-secret fa-fw"></i>
+								<p></p>
+							</div>
+						</a>
+					</div>
+
+					<div class="col-12 col-md-6">
+						<a th:href="@{/locales}" class="tile">
+							<div class="tile-tittle">LOCALES</div>
+							<div class="tile-icon">
+								<i class="fas fa-store-alt fa-fw"></i>
+								<p></p>
+							</div>
+						</a>
+					</div>
 				</div>
 			</div>
-			</div>
-			
+
 
 		</section>
 	</main>
-	
-	
+
+
 	<div th:replace="scripts-footer.html"></div>
 </body>
 </html>

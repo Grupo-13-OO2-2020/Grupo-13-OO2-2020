@@ -48,45 +48,47 @@ public class ProductoService implements IProductoService {
 
 		return productoConverter.entityToModel(productoRepository.findById(id));
 	}
+
 	@Override
 	public Page<ProductoModel> getAllPages(Pageable pageable) {
 		Page<Producto> productos = productoRepository.findAll(pageable);
-		Page<ProductoModel> pages = productos.map(new Function<Producto, ProductoModel>(){
+		Page<ProductoModel> pages = productos.map(new Function<Producto, ProductoModel>() {
 			public ProductoModel apply(Producto producto) {
-		        ProductoModel model =  productoConverter.entityToModel(producto);
-		        return model;
-		        }
-			});
-		
+				ProductoModel model = productoConverter.entityToModel(producto);
+				return model;
+			}
+		});
+
 		return pages;
 	}
+
 	@Override
-	public List<ProductoModel> listAll(String keyword){
-		if(keyword != null){
-	List<Producto> p= productoRepository.findAll(keyword);
-	List<ProductoModel> pM= new ArrayList<ProductoModel>();
-	for(Producto prod: p) {
-		pM.add(productoConverter.entityToModel(prod));
-	}
-	return pM;
-	
+	public List<ProductoModel> listAll(String keyword) {
+		if (keyword != null) {
+			List<Producto> p = productoRepository.findAll(keyword);
+			List<ProductoModel> pM = new ArrayList<ProductoModel>();
+			for (Producto prod : p) {
+				pM.add(productoConverter.entityToModel(prod));
+			}
+			return pM;
+
 		}
-		
-		List<Producto> p= productoRepository.findAll(keyword);
-		List<ProductoModel> pM= new ArrayList<ProductoModel>();
-		for(Producto prod: p) {
+
+		List<Producto> p = productoRepository.findAll(keyword);
+		List<ProductoModel> pM = new ArrayList<ProductoModel>();
+		for (Producto prod : p) {
 			pM.add(productoConverter.entityToModel(prod));
 		}
 		return pM;
 	}
 
 	@Override
-	public List<ProductoModel> findDependency(int id){
+	public List<ProductoModel> findDependency(int id) {
 
-		List<Producto> productos= productoRepository.findIfExist(id);
-		List<ProductoModel> pM= new ArrayList<ProductoModel>();
+		List<Producto> productos = productoRepository.findIfExist(id);
+		List<ProductoModel> pM = new ArrayList<ProductoModel>();
 
-		for(Producto p : productos) {
+		for (Producto p : productos) {
 			pM.add(productoConverter.entityToModel(p));
 		}
 

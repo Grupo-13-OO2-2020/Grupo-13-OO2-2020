@@ -11,7 +11,6 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Valid
 
 public class EmpleadoModel extends PersonaModel {
@@ -35,8 +34,8 @@ public class EmpleadoModel extends PersonaModel {
 	public EmpleadoModel() {
 	}
 
-	public EmpleadoModel(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento, Date horarioEntrada,
-			Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente) {
+	public EmpleadoModel(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento,
+			Date horarioEntrada, Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
 		this.horarioSalida = horarioSalida;
@@ -45,8 +44,9 @@ public class EmpleadoModel extends PersonaModel {
 		this.gerente = gerente;
 	}
 
-	public EmpleadoModel(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento, Date horarioEntrada,
-			Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente, LocalModel local) {
+	public EmpleadoModel(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento,
+			Date horarioEntrada, Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente,
+			LocalModel local) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
 		this.horarioSalida = horarioSalida;
@@ -57,8 +57,9 @@ public class EmpleadoModel extends PersonaModel {
 
 	}
 
-	public EmpleadoModel(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento, Date horarioEntrada,
-			Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente, LocalModel local, Double sueldoNuevo) {
+	public EmpleadoModel(int id, String nombre, int dni, String apellido, LocalDate fechaNacimiento,
+			Date horarioEntrada, Date horarioSalida, String tipoEmpleado, double sueldo, boolean gerente,
+			LocalModel local, Double sueldoNuevo) {
 		super(id, nombre, dni, apellido, fechaNacimiento);
 		this.horarioEntrada = horarioEntrada;
 		this.horarioSalida = horarioSalida;
@@ -125,7 +126,5 @@ public class EmpleadoModel extends PersonaModel {
 	public void setSueldoNuevo(double sueldoNuevo) {
 		this.sueldoNuevo = sueldoNuevo;
 	}
-
-	
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.text.SimpleDateFormat;
@@ -54,11 +55,10 @@ public class LocalController {
 	@Autowired
 	@Qualifier("loteService")
 	private ILoteService loteService;
-	
+
 	@Autowired
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
-	
 
 	@Autowired
 	private IUserRepository userRepository;
@@ -66,36 +66,35 @@ public class LocalController {
 	@GetMapping("")
 	public ModelAndView index(@RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_INDEX);
-		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
-		
+		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
+
 		PageRequest pageRequest = PageRequest.of(page, 5);
-		
+
 		Page<LocalModel> pageLocal = localService.getAllPages(pageRequest);
-		
-		int totalPage= pageLocal.getTotalPages();
-		if(totalPage>0) {
+
+		int totalPage = pageLocal.getTotalPages();
+		if (totalPage > 0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-			mAV.addObject("pages",pages);
-						
+			mAV.addObject("pages", pages);
+
 		}
 		mAV.addObject("locales", pageLocal.getContent());
-		mAV.addObject("current", page+1);
-		mAV.addObject("next" ,page+2);
-		mAV.addObject("prev" ,page);
+		mAV.addObject("current", page + 1);
+		mAV.addObject("next", page + 2);
+		mAV.addObject("prev", page);
 		mAV.addObject("last", totalPage);
-		
-		//agrego datos de ususario
+
+		// agrego datos de ususario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		mAV.addObject("usuario", auth.getName());	    
+		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 		mAV.addObject("empleado", e);
-		
+
 		return mAV;
 	}
 
-	
 	@GetMapping("/main/{id}")
 	public ModelAndView main(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_MAIN);
@@ -106,10 +105,10 @@ public class LocalController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
-	
-		
+
 		return mAV;
 	}
+
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/new")
 	public ModelAndView create() {
@@ -122,18 +121,20 @@ public class LocalController {
 		mAV.addObject("empleado", e);
 		return mAV;
 	}
+
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/save")
 	public String create(@Valid @ModelAttribute("local") LocalModel localModel, BindingResult result) {
 		if (result.hasErrors()) {
+
 			return ViewRouteHelper.LOCAL_FORM;
 
 		}
 		localService.insertOrUpdate(localModel);
 
-		
-				return "redirect:/locales/";
+		return "redirect:/locales/";
 	}
+
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/editar/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
@@ -147,11 +148,20 @@ public class LocalController {
 		mAV.addObject("empleado", e);
 		return mAV;
 	}
+
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/eliminar/{id}")
-	public RedirectView delete(Model model, @PathVariable("id") int id) {
-		localService.delete(id);
+	public RedirectView delete(Model model, @PathVariable("id") int id,RedirectAttributes redirect) {
+		if(localService.findById(id).getEmpleados().isEmpty()) {
+			localService.delete(id);
+			return new RedirectView("/locales");
+
+		}else {
+			redirect.addFlashAttribute("popUp", "error");
 		return new RedirectView("/locales");
+			
+		}		
+	
 	}
 
 	@GetMapping("/calculacoordenadas")
@@ -163,6 +173,7 @@ public class LocalController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 
 		return mAV;
 	}
@@ -200,9 +211,9 @@ public class LocalController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 		return mAV;
 	}
-
 
 	@RequestMapping(value = "/reporte/{id}", method = RequestMethod.POST)
 	public ModelAndView sacarprodfechas(@PathVariable("id") int id,

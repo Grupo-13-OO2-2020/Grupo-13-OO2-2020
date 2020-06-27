@@ -1,94 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Nuevo item</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Nuevo Producto</title>
 
-  <div th:replace="header.html"></div>
+<div th:replace="header.html"></div>
 
 </head>
 
 
 <body>
-    <!-- Main container -->
-   	<!-- Main container -->
+	<!-- Main container -->
+	<!-- Main container -->
 	<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			
+
 			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
-			th:include="div :: div"></div>
-	   
-			<div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
-					th:include="div2 :: div"></div>
-		
-	</section>
-        
-      	<section class="full-box page-content">
-			<nav th:replace="nav_user :: nav">			
-			</nav>
-            <div class="container-fluid">
+				th:include="div :: div"></div>
+
+			<div th:unless="${empleado.gerente}"
+				class="full-box nav-lateral-content" th:include="div2 :: div"></div>
+
+		</section>
+
+		<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav"></nav>
+			<div class="container-fluid">
 				<ul class="full-box list-unstyled ">
 					<li><a th:href="@{/productos/}"><i
 							class="fas fa-arrow-alt-circle-left"></i> &nbsp; VOLVER</a>
 				</ul>
-           
-            <!-- Page header -->
-            <div class="full-box page-header" >
-                <h3 class="text-center">
-                    <i class="fas fa-plus-square"></i> &nbsp; AGREGAR PRODUCTO
-                </h3>
-                <p class="text-justify">
-                  
-                </p>
-            </div>
-            
-            <!--CONTENT-->
-            <div class="container-fluid">
-					<fieldset>
-						<legend><i class="far fa-plus-square"></i> &nbsp; Información del producto</legend>
 
-						<form th:action="@{/productos/save}" th:object=${producto} method="POST">
+				<!-- Page header -->
+				<div class="full-box page-header">
+					<h3 class="text-center">
+						<i class="fas fa-plus-square"></i> &nbsp; AGREGAR PRODUCTO
+					</h3>
+					<p class="text-justify"></p>
+				</div>
+
+				<!--CONTENT-->
+				<div class="container-fluid">
+					<fieldset>
+						<legend>
+							<i class="far fa-plus-square"></i> &nbsp; Información del
+							producto
+						</legend>
+
+						<form th:action="@{/productos/save}" th:object=${producto}
+							method="POST">
 							<div class="container-fluid">
 								<div class="row">
 
 									<div>
 										<div class="form-group" style="display: none">
-											<label class="form-group">Id</label>
-											<input th:field="*{id}" type="number" class="form-control" />
+											<label class="form-group">Id</label> <input th:field="*{id}"
+												type="number" class="form-control" />
 										</div>
 									</div>
 
 									<div class="col-12 col-md-4">
 										<div class="form-group">
-											<label for="item_codigo" class="bmd-label-floating color-fuerte">Código de Producto</label>
-											<input th:field="*{codigoProducto}" type="number"  class="form-control" name="item_codigo" id="item_codigo" maxlength="45">
+											<label for="item_codigo"
+												class="bmd-label-floating color-fuerte">Código de
+												Producto</label> <input th:field="*{codigoProducto}" type="number"
+												class="form-control" name="item_codigo" id="item_codigo"
+												maxlength="45">
 										</div>
 									</div>
-									
+
 									<div class="col-12 col-md-8">
 										<div class="form-group">
-											<label for="item_nombre" class="bmd-label-floating color-fuerte">Descripción</label>
-											<input th:field="*{descripcion}" type="text"  class="form-control" name="item_nombre" id="item_nombre" maxlength="140">
+											<label for="item_nombre"
+												class="bmd-label-floating color-fuerte">Descripción</label>
+											<input th:field="*{descripcion}" type="text"
+												class="form-control" name="item_nombre" id="item_nombre"
+												maxlength="140">
 										</div>
 									</div>
 
 									<div class="col-12 col-md-4">
 										<div class="form-group">
-											<label for="item_stock" class="bmd-label-floating color-fuerte">Precio unitario</label>
-											<input th:field="*{precioUnitario}" type="number"  class="form-control" name="item_stock" id="item_stock" maxlength="9">
+											<label for="item_stock"
+												class="bmd-label-floating color-fuerte">Precio
+												unitario</label> <input th:field="*{precioUnitario}" type="number"
+												class="form-control" name="item_stock" id="item_stock"
+												maxlength="9">
 										</div>
 									</div>
 
 									<div class="col-12 col-md-6">
 										<div class="form-group">
-                                            <label for="item_estado" class="bmd-label-floating color-fuerte">Talle</label>
-                                            <input th:field="*{talle}" type="number"  class="form-control" name="item_talle" id="item_talle" maxlength="9">
+											<label for="item_estado"
+												class="bmd-label-floating color-fuerte">Talle</label> <input
+												th:field="*{talle}" type="number" class="form-control"
+												name="item_talle" id="item_talle" maxlength="9">
 										</div>
 									</div>
 								</div>
+
 								
 								
 								<p class="text-center" style="margin-top: 40px;">
@@ -97,19 +111,33 @@
 						<button type="submit" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; GUARDAR</button>
 					</p>
 								
+
+								<div class="card-footer">
+									<i class="far fa-save"></i> <input type="submit"
+										class="btn btn-raised btn-info btn-sm">
+									<button type="reset"
+										class="btn btn-raised btn-secondary btn-sm">
+										<i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR
+									</button>
+									&nbsp; &nbsp;
+								</div>
+
+
+
+
 							</div>
 						</form>
 					</fieldset>
-					<br><br><br>
-			</div>
-        </section>
+					<br> <br> <br>
+				</div>
+		</section>
 
 
 
 
-    </main>
-    <div th:replace="scripts-footer.html"></div>
-    	
-	
+	</main>
+	<div th:replace="scripts-footer.html"></div>
+
+
 </body>
 </html>

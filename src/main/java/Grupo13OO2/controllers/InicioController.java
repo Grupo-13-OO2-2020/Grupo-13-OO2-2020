@@ -21,48 +21,41 @@ import Grupo13OO2.services.IEmpleadoService;
 @RequestMapping("/")
 
 public class InicioController {
-	
+
 	@Autowired
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
-	
 
 	@Autowired
 	private IUserRepository userRepository;
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	    @GetMapping("")
-	    public ModelAndView getInternationalPage() {
-			ModelAndView mAV = new ModelAndView(ViewRouteHelper.INDEX);
-	    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			mAV.addObject("usuario", auth.getName());
-			User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
-			EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-			mAV.addObject("empleado", e);
-	        return mAV;
-	    }
-	
-	    
+	@GetMapping("")
+	public ModelAndView getInternationalPage() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.INDEX);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("empleado", e);
+		return mAV;
+	}
 
-	    @GetMapping("/redirigir")
-	    public RedirectView redirigir() {
+	@GetMapping("/redirigir")
+	public RedirectView redirigir() {
 
-Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
-			EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-			if(!e.isGerente()) {
-	    	
-	
-			return new RedirectView(ViewRouteHelper.LOCAL_USER+e.getLocal().getId());
-	        
-			}
-			else {
-				return new RedirectView(ViewRouteHelper.INDEX);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		if (!e.isGerente()) {
 
-				
-				
-			}
-			
-	    }
- 
+			return new RedirectView(ViewRouteHelper.LOCAL_USER + e.getLocal().getId());
+
+		} else {
+			return new RedirectView(ViewRouteHelper.INDEX);
+
+		}
+
+	}
+
 }

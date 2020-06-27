@@ -1,6 +1,5 @@
 package Grupo13OO2.services.implementations;
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,29 +18,29 @@ import org.springframework.stereotype.Service;
 import Grupo13OO2.Entities.UserRole;
 import Grupo13OO2.repositories.IUserRepository;
 
-
 @Service("userService")
 public class UserService implements UserDetailsService {
 
 	@Autowired
 	@Qualifier("userRepository")
 	private IUserRepository userRepository;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-	Grupo13OO2.Entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
+		Grupo13OO2.Entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
 		return buildUser(user, buildGrantedAuthorities(user.getUserRoles()));
 	}
-	
+
 	private User buildUser(Grupo13OO2.Entities.User user, List<GrantedAuthority> grantedAuthorities) {
-		return new User(user.getUsername(), user.getPassword(), user.isEnabled(),
-						true, true, true, //accountNonExpired, credentialsNonExpired, accountNonLocked,
-						grantedAuthorities);
+		return new User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, // accountNonExpired,
+																									// credentialsNonExpired,
+																									// accountNonLocked,
+				grantedAuthorities);
 	}
-	
+
 	private List<GrantedAuthority> buildGrantedAuthorities(Set<UserRole> userRoles) {
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
-		for(UserRole userRole: userRoles) {
+		for (UserRole userRole : userRoles) {
 			grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getRole()));
 		}
 		return new ArrayList<GrantedAuthority>(grantedAuthorities);
@@ -50,6 +49,6 @@ public class UserService implements UserDetailsService {
 	// @Override
 	// public User ListarId(int id) {
 
-	// 	return userRepository..findById(id);
+	// return userRepository..findById(id);
 	// }
 }

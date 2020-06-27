@@ -141,7 +141,8 @@ public class EmpleadoService implements IEmpleadoService {
 	@Override
 	public boolean findDependency(int id){
 		EmpleadoModel e = ListarId(id);
-		if(empleadoRemitos(e) || empleadoSolicitudes(e)){
+
+		if(empleadoRemitos(e) == true || empleadoSolicitudes(e) == true){
 			return true;
 		}
 		return false;
@@ -149,9 +150,9 @@ public class EmpleadoService implements IEmpleadoService {
 
 	private boolean empleadoRemitos(EmpleadoModel e ){
 		List<RemitoModel> remitos = localService.getRemitos(e.getLocal());
-		if(remitos !=null){
+		if(!remitos.isEmpty()){
 			for (RemitoModel r : remitos) {
-				if(r.getVendedor() == e){
+				if(r.getVendedor().getId() == e.getId()){
 					return true;
 				}
 			}
@@ -161,9 +162,9 @@ public class EmpleadoService implements IEmpleadoService {
 
 	private boolean empleadoSolicitudes(EmpleadoModel e ){
 		List<SolicitudStockModel> solicitudes = localService.getSolicitudesStock(e.getLocal());
-		if(solicitudes !=null){
+		if(!solicitudes.isEmpty()){
 			for (SolicitudStockModel r : solicitudes) {
-				if(r.getVendedor() == e || r.getColaborador() == e){
+				if(r.getVendedor().getId() == e.getId() || (r.getColaborador()!=null && r.getColaborador().getId() == e.getId())){
 					return true;
 				}
 			}

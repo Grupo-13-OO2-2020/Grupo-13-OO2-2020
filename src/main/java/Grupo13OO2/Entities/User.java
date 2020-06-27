@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,61 +13,59 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="username", unique=true, nullable=false, length=45)
+
+	@Column(name = "username", unique = true, nullable = false, length = 45)
 	private String username;
-	
-	@Column(name="password", nullable=false, length=60)
+
+	@Column(name = "password", nullable = false, length = 60)
 	private String password;
-	
-	@Column(name="enabled")
+
+	@Column(name = "enabled")
 	private boolean enabled;
-	
-	@Column(name="createdat")
+
+	@Column(name = "createdat")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
-	
-	@Column(name="updatedat")
+
+	@Column(name = "updatedat")
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-	
+
 	@OneToOne
 	@JoinColumn(name = "empleado_id")
-	protected  Empleado empleado;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="user")
-	private Set<UserRole> userRoles = new HashSet<UserRole>();
-	
-	
+	protected Empleado empleado;
 
-	public User() {}
-	
-	public User(String username, String password, boolean enabled,Empleado empleado) {
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<UserRole> userRoles = new HashSet<UserRole>();
+
+	public User() {
+	}
+
+	public User(String username, String password, boolean enabled, Empleado empleado) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
-		this.empleado= empleado;
+		this.empleado = empleado;
 
 	}
-	
-	public User(String username, String password, boolean enabled,Empleado empleado, Set<UserRole> userRoles) {
+
+	public User(String username, String password, boolean enabled, Empleado empleado, Set<UserRole> userRoles) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
-		this.empleado= empleado;
+		this.empleado = empleado;
 		this.userRoles = userRoles;
 	}
 

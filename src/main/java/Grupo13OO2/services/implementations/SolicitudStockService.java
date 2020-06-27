@@ -50,13 +50,13 @@ public class SolicitudStockService implements ISolicitudStockService {
 	@Override
 	public List<SolicitudStockModel> getAll() {
 
-		List<SolicitudStock> solicitudes=  solicitudStockRepository.findAll();
-		List<SolicitudStockModel> solicitudModels= new ArrayList<SolicitudStockModel>();
-		for(SolicitudStock sS: solicitudes) {
+		List<SolicitudStock> solicitudes = solicitudStockRepository.findAll();
+		List<SolicitudStockModel> solicitudModels = new ArrayList<SolicitudStockModel>();
+		for (SolicitudStock sS : solicitudes) {
 			solicitudModels.add(solicitudStockConverter.entityToModel(sS));
 		}
 		return solicitudModels;
-		
+
 	}
 
 	@Override
@@ -64,11 +64,12 @@ public class SolicitudStockService implements ISolicitudStockService {
 		solicitudStockModel.setVendedor(empleadoService.ListarId(solicitudStockModel.getVendedor().getId()));
 		solicitudStockModel
 				.setLocalDestinatario(localService.findById(solicitudStockModel.getLocalDestinatario().getId()));
-		
+
 		if (solicitudStockModel.getColaborador() != null) {
 			solicitudStockModel.setColaborador(empleadoService.ListarId(solicitudStockModel.getColaborador().getId()));
 		}
-		SolicitudStock solicitudStock = solicitudStockRepository.save(solicitudStockConverter.modelToEntity(solicitudStockModel));
+		SolicitudStock solicitudStock = solicitudStockRepository
+				.save(solicitudStockConverter.modelToEntity(solicitudStockModel));
 		return solicitudStockConverter.entityToModel(solicitudStock);
 	}
 
@@ -106,12 +107,13 @@ public class SolicitudStockService implements ISolicitudStockService {
 
 	@Override
 	public Page<SolicitudStockModel> getAllPages(Pageable pageable) {
-		Page<SolicitudStock> solicitudes=  solicitudStockRepository.findAll(pageable);
-		Page<SolicitudStockModel> pages= solicitudes.map(new Function <SolicitudStock, SolicitudStockModel>(){
-			public SolicitudStockModel apply(SolicitudStock solicitud){
-				SolicitudStockModel sSModel= solicitudStockConverter.entityToModel(solicitud);
-			
-			return sSModel;}
+		Page<SolicitudStock> solicitudes = solicitudStockRepository.findAll(pageable);
+		Page<SolicitudStockModel> pages = solicitudes.map(new Function<SolicitudStock, SolicitudStockModel>() {
+			public SolicitudStockModel apply(SolicitudStock solicitud) {
+				SolicitudStockModel sSModel = solicitudStockConverter.entityToModel(solicitud);
+
+				return sSModel;
+			}
 		});
 
 		return pages;
@@ -120,12 +122,13 @@ public class SolicitudStockService implements ISolicitudStockService {
 	@Override
 	public Page<SolicitudStockModel> getAllPagesLocal(Pageable pageable, int id) {
 
-		Page<SolicitudStock> solicitudes=  solicitudStockRepository.findByLocal(id, pageable);
-		Page<SolicitudStockModel> pages= solicitudes.map(new Function <SolicitudStock, SolicitudStockModel>(){
-			public SolicitudStockModel apply(SolicitudStock solicitud){
-				SolicitudStockModel sSModel= solicitudStockConverter.entityToModel(solicitud);
-			
-			return sSModel;}
+		Page<SolicitudStock> solicitudes = solicitudStockRepository.findByLocal(id, pageable);
+		Page<SolicitudStockModel> pages = solicitudes.map(new Function<SolicitudStock, SolicitudStockModel>() {
+			public SolicitudStockModel apply(SolicitudStock solicitud) {
+				SolicitudStockModel sSModel = solicitudStockConverter.entityToModel(solicitud);
+
+				return sSModel;
+			}
 		});
 
 		return pages;

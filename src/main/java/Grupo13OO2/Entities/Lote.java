@@ -45,22 +45,26 @@ public class Lote {
 	public Lote() {
 	}
 
-	public Lote(int id, int numeroDeLote, int cantidadRecibida, Producto producto, int cantidadExistente, Local local, Date fechaIngreso) {
+	public Lote(int id, int numeroDeLote, int cantidadRecibida, Producto producto, int cantidadExistente, Local local,
+			Date fechaIngreso) {
 		setId(id);
 		this.numeroDeLote = numeroDeLote;
 		this.cantidadRecibida = cantidadRecibida;
 		this.producto = producto;
 		this.cantidadExistente = cantidadExistente;
 		this.local = local;
-		this.fechaIngreso=fechaIngreso;	}
+		this.fechaIngreso = fechaIngreso;
+	}
 
-	public Lote(int id, int numeroDeLote, int cantidadRecibida, Producto producto, int cantidadExistente,Date fechaIngreso) {
+	public Lote(int id, int numeroDeLote, int cantidadRecibida, Producto producto, int cantidadExistente,
+			Date fechaIngreso) {
 		setId(id);
 		this.numeroDeLote = numeroDeLote;
 		this.cantidadRecibida = cantidadRecibida;
 		this.producto = producto;
 		this.cantidadExistente = cantidadExistente;
-	 	this.fechaIngreso =fechaIngreso;}
+		this.fechaIngreso = fechaIngreso;
+	}
 
 	public int getId() {
 		return id;

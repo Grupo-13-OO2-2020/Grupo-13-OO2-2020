@@ -27,12 +27,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Entities.User;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.ProductoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
-import Grupo13OO2.repositories.IProductoRepository;
 import Grupo13OO2.repositories.IUserRepository;
 import Grupo13OO2.services.IEmpleadoService;
 import Grupo13OO2.services.ILocalService;
@@ -49,25 +47,20 @@ public class ProductoController {
 	@Autowired
 	@Qualifier("localService")
 	private ILocalService localService;
-	
+
 	@Autowired
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
-	
 
 	@Autowired
 	private IUserRepository userRepository;
+
 	
-
-	@Autowired
-	private IProductoRepository productoRepository;
-
-
 
 	@GetMapping("/new")
 	public ModelAndView create(@ModelAttribute("producto") ProductoModel productomodel) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_FORM);
-		//informacion del usuario
+		// informacion del usuario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
@@ -104,34 +97,34 @@ public class ProductoController {
 	}
 
 	@GetMapping("/eliminar/{id}")
-	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect){
-		List<ProductoModel> p= productoService.findDependency(id);
-		if (p.isEmpty()){
+	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect) {
+		List<ProductoModel> p = productoService.findDependency(id);
+		if (p.isEmpty()) {
 			productoService.delete(id);
 			return new RedirectView(ViewRouteHelper.PRODUCTO);
-		}else
-			
+		} else
+
 			redirect.addFlashAttribute("popUp", "error");
-			return new RedirectView(ViewRouteHelper.PRODUCTO);
+		return new RedirectView(ViewRouteHelper.PRODUCTO);
 	}
 
 	@GetMapping(value = "/")
-	public String findAll(@RequestParam Map<String, Object> params, Model model){
-		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
+	public String findAll(@RequestParam Map<String, Object> params, Model model) {
+		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
 		PageRequest pageRequest = PageRequest.of(page, 3);
 		Page<ProductoModel> pageProducto = productoService.getAllPages(pageRequest);
 		int totalPage = pageProducto.getTotalPages();
-		if(totalPage > 0){
+		if (totalPage > 0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
 			model.addAttribute("pages", pages);
-		
-				}
-		model.addAttribute("current", page+1);
-		model.addAttribute("next" ,page+2);
-		model.addAttribute("prev" ,page);
+
+		}
+		model.addAttribute("current", page + 1);
+		model.addAttribute("next", page + 2);
+		model.addAttribute("prev", page);
 		model.addAttribute("last", totalPage);
 		model.addAttribute("list", pageProducto.getContent());
-		//datos de ususario
+		// datos de ususario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		model.addAttribute("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
@@ -140,9 +133,9 @@ public class ProductoController {
 		model.addAttribute("local", localService.findById(e.getLocal().getId()));
 		return ViewRouteHelper.PRODUCTO_INDEX;
 	}
-	
+
 	@RequestMapping("/search")
-	public String search(Model model, @Param("keyword") String keyword){
+	public String search(Model model, @Param("keyword") String keyword) {
 		List<ProductoModel> list = productoService.listAll(keyword);
 		model.addAttribute("list", list);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -153,7 +146,5 @@ public class ProductoController {
 		model.addAttribute("local", localService.findById(e.getLocal().getId()));
 		return "producto/search";
 	}
-	
-	
 
 }
