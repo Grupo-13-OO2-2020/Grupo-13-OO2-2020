@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import Grupo13OO2.Models.SolicitudStockModel;
-import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Models.LocalModel;
 
 public interface ISolicitudStockService {
@@ -21,8 +20,7 @@ public interface ISolicitudStockService {
 
 	public List<LocalModel> getLocalesCercanos(int idProducto, int idVendedor, int cantidad);
 
-	
 	public Page<SolicitudStockModel> getAllPages(Pageable pageable);
-	
+
 	public Page<SolicitudStockModel> getAllPagesLocal(Pageable pageable, int id);
 }

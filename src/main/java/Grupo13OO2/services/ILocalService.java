@@ -7,7 +7,6 @@ import java.util.Set;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import Grupo13OO2.Entities.Local;
 import Grupo13OO2.Models.*;
 
 public interface ILocalService {

@@ -39,7 +39,7 @@ public class ProductoMasVendidoController {
 	@Autowired
 	@Qualifier("pedidoService")
 	private IPedidoService pedidoService;
-	
+
 	@Autowired
 	@Qualifier("remitoService")
 	private IRemitoService remitoService;
@@ -47,20 +47,18 @@ public class ProductoMasVendidoController {
 	@Autowired
 	@Qualifier("solicitudStockService")
 	private ISolicitudStockService solicitudStockService;
-	
+
 	@Autowired
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
-	
 
 	@Autowired
 	private IUserRepository userRepository;
 
-	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.MASVENDIDO_INDEX);
-		List<ProductoMasVendidoModel> PMasVendido = ProdMasVend(remitoService.getAll(),solicitudStockService.getAll());
+		List<ProductoMasVendidoModel> PMasVendido = ProdMasVend(remitoService.getAll(), solicitudStockService.getAll());
 		mAV.addObject("prodmasVendido", PMasVendido);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
@@ -73,7 +71,7 @@ public class ProductoMasVendidoController {
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.MASVENDIDO_INDEX);
-		List<ProductoMasVendidoModel> PdtMVendido = ProdMasVend(remitoService.getAll(),solicitudStockService.getAll());
+		List<ProductoMasVendidoModel> PdtMVendido = ProdMasVend(remitoService.getAll(), solicitudStockService.getAll());
 		mAV.addObject("prodmasVendido", PdtMVendido);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());

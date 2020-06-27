@@ -36,8 +36,7 @@ public class RemitoService implements IRemitoService {
 	@Autowired
 	@Qualifier("clienteService")
 	private ClienteService clienteService;
-	
-	
+
 	@Autowired
 	@Qualifier("localService")
 	private ILocalService localService;
@@ -46,7 +45,7 @@ public class RemitoService implements IRemitoService {
 	public List<RemitoModel> getAll() {
 		List<Remito> remitos = remitoRepository.findAll();
 		List<RemitoModel> remitoModels = new ArrayList<RemitoModel>();
-		for(Remito r : remitos) {
+		for (Remito r : remitos) {
 			remitoModels.add(remitoConverter.entityToModel(r));
 		}
 		return remitoModels;
@@ -76,49 +75,49 @@ public class RemitoService implements IRemitoService {
 
 	@Override
 	public Page<RemitoModel> getAllPages(Pageable pageable) {
-		Page<Remito> remitos= remitoRepository.findAll(pageable);
-	
-		Page<RemitoModel> pages= remitos.map(new Function <Remito, RemitoModel>(){
+		Page<Remito> remitos = remitoRepository.findAll(pageable);
+
+		Page<RemitoModel> pages = remitos.map(new Function<Remito, RemitoModel>() {
 			public RemitoModel apply(Remito remito) {
-				RemitoModel remitoModel= remitoConverter.entityToModel(remito);
+				RemitoModel remitoModel = remitoConverter.entityToModel(remito);
 				return remitoModel;
 			}
 		});
-		
+
 		return pages;
 	}
 
-	public Page<RemitoModel> getAllPages(int id,Pageable pageable) {
-	
-	List<RemitoModel> remito=	localService.getRemitos(localService.findById(id));
-    Page<RemitoModel> pages = new PageImpl<RemitoModel>(remito, pageable, remito.size());	
-	
-	
-	return pages;	
+	public Page<RemitoModel> getAllPages(int id, Pageable pageable) {
+
+		List<RemitoModel> remito = localService.getRemitos(localService.findById(id));
+		Page<RemitoModel> pages = new PageImpl<RemitoModel>(remito, pageable, remito.size());
+
+		return pages;
 	}
+
 	@Override
 	public Page<RemitoModel> getAllPagesLocal(Pageable pageable, int id) {
 
-		Page<Remito> remitos= remitoRepository.findByLocal(id, pageable);
-		Page<RemitoModel> pages= remitos.map(new Function <Remito, RemitoModel>(){
+		Page<Remito> remitos = remitoRepository.findByLocal(id, pageable);
+		Page<RemitoModel> pages = remitos.map(new Function<Remito, RemitoModel>() {
 			public RemitoModel apply(Remito remito) {
-				RemitoModel remitoModel= remitoConverter.entityToModel(remito);
+				RemitoModel remitoModel = remitoConverter.entityToModel(remito);
 				return remitoModel;
 			}
 		});
-		
+
 		return pages;
 	}
 
 	@Override
 	public List<RemitoModel> listAll(String keyword) {
-		List<RemitoModel> models= new ArrayList<RemitoModel>();
-		List<Remito> remitos=	remitoRepository.findAll(keyword);
-		for(Remito r: remitos) {
+		List<RemitoModel> models = new ArrayList<RemitoModel>();
+		List<Remito> remitos = remitoRepository.findAll(keyword);
+		for (Remito r : remitos) {
 			models.add(remitoConverter.entityToModel(r));
-			
+
 		}
-		
+
 		return models;
 	}
 

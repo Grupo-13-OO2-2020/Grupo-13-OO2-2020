@@ -43,11 +43,9 @@ public class EmpleadoController {
 	@Autowired
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
-	
 
 	@Autowired
 	private IUserRepository userRepository;
-	
 
 	@Autowired
 	@Qualifier("localService")
@@ -56,31 +54,31 @@ public class EmpleadoController {
 	@GetMapping("")
 	public ModelAndView index(@RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX);
-		//paginacion
-		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
-		
+		// paginacion
+		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
+
 		PageRequest pageRequest = PageRequest.of(page, 4);
-		
+
 		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPages(pageRequest);
-		
-		int totalPage= pageEmpleado.getTotalPages();
-		if(totalPage>0) {
+
+		int totalPage = pageEmpleado.getTotalPages();
+		if (totalPage > 0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-			mAV.addObject("pages",pages);
+			mAV.addObject("pages", pages);
 		}
 
 		mAV.addObject("empleados", pageEmpleado.getContent());
-		mAV.addObject("current", page+1);
-		mAV.addObject("next" ,page+2);
-		mAV.addObject("prev" ,page);
+		mAV.addObject("current", page + 1);
+		mAV.addObject("next", page + 2);
+		mAV.addObject("prev", page);
 		mAV.addObject("last", totalPage);
-		//datos de usuario
+		// datos de usuario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
-		
+
 		return mAV;
 	}
 
@@ -94,45 +92,41 @@ public class EmpleadoController {
 		return empleadoService.sueldoxEmpleado(empleadoService.ListarId(id));
 	}
 
-	
 	@GetMapping("{id}")
-	public ModelAndView local(@PathVariable("id") int id, Model model,@RequestParam Map<String, Object> params) {
+	public ModelAndView local(@PathVariable("id") int id, Model model, @RequestParam Map<String, Object> params) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX_LOCAL);
-		//agrego local
+		// agrego local
 		mAV.addObject("local", localService.findById(id));
-		//paginacion
-int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
-		
+		// paginacion
+		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
+
 		PageRequest pageRequest = PageRequest.of(page, 4);
-		
+
 		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPagesLocal(pageRequest, id);
-		
-		int totalPage= pageEmpleado.getTotalPages();
-		if(totalPage>0) {
+
+		int totalPage = pageEmpleado.getTotalPages();
+		if (totalPage > 0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-			mAV.addObject("pages",pages);
+			mAV.addObject("pages", pages);
 		}
 
 		mAV.addObject("empleados", pageEmpleado.getContent());
-		mAV.addObject("current", page+1);
-		mAV.addObject("next" ,page+2);
-		mAV.addObject("prev" ,page);
+		mAV.addObject("current", page + 1);
+		mAV.addObject("next", page + 2);
+		mAV.addObject("prev", page);
 		mAV.addObject("last", totalPage);
-		
-		//datos de usuario
-		
+
+		// datos de usuario
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
-		
-		return mAV;
-		
-		
-	
-	}
 
+		return mAV;
+
+	}
 
 	@GetMapping("/new")
 	public ModelAndView create() {
@@ -172,17 +166,16 @@ int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toStri
 	}
 
 	@GetMapping("/eliminar/{id}")
-	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect){
+	public RedirectView delete(Model model, @PathVariable("id") int id, RedirectAttributes redirect) {
 
-		if (!empleadoService.findDependency(id)){
+		if (!empleadoService.findDependency(id)) {
 			empleadoService.delete(id);
 			return new RedirectView("/empleados");
-		}else
+		} else
 			redirect.addFlashAttribute("popUp", "error");
-			return new RedirectView("/empleados");
+		return new RedirectView("/empleados");
 	}
-	
-	
+
 	@GetMapping("/partial/{id}")
 	public ModelAndView getPartial(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX);
