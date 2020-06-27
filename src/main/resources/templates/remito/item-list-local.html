@@ -78,6 +78,7 @@
 						<tbody>
 							<tr th:each="remito:${remitos}" th:if="${remito.vendedor.local.id}==${local.id}">
 
+
 								<td th:text="${remito.id}"></td>
 								<td th:text="${remito.fecha}"></td>
 								<td th:text="${remito.producto.descripcion}"></td>
@@ -85,6 +86,7 @@
 								<td th:text="${remito.vendedor.nombre}"></td>
 								<td th:text="${remito.cliente.nombre}"></td>
 								<td th:text="${remito.formaDePago}"></td>
+
 								<td><a
 									th:href="@{/remitos/eliminar/} + ${remito.id}"
 									type="button" class="btn btn-warning"
@@ -114,7 +116,7 @@
 				</nav>
 			</div>
 		</section>
-
+@chi
 
 
 
