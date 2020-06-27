@@ -164,6 +164,7 @@ public class LocalController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 
 		return mAV;
 	}
@@ -201,6 +202,7 @@ public class LocalController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 		return mAV;
 	}
 

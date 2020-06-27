@@ -6,7 +6,41 @@
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <title>Lista de Locales</title>
 
-<div th:replace="header.html"></div>
+<!-- Normalize V8.0.1 -->
+<link rel="stylesheet" href="./css/normalize.css">
+
+<!-- Bootstrap V4.3 -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+<!-- Bootstrap Material Design V4.0 -->
+<link rel="stylesheet" href="/css/bootstrap-material-design.min.css">
+
+<!-- Toastr -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" integrity="sha256-xykLhwtLN4WyS7cpam2yiUOwr709tvF3N/r7+gOMxJw=" crossorigin="anonymous" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha256-xykLhwtLN4WyS7cpam2yiUOwr709tvF3N/r7+gOMxJw=" crossorigin="anonymous" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+
+
+<!-- Font Awesome V5.9.0 -->
+<link rel="stylesheet" href="/css/all.css">
+
+<!-- Sweet Alerts V8.13.0 CSS file -->
+<link rel="stylesheet" href="/css/sweetalert2.min.css">
+
+<!-- Sweet Alert V8.13.0 JS file-->
+<script src="/js/sweetalert2.min.js"></script>
+
+<!-- jQuery Custom Content Scroller V3.1.5 -->
+<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+
+<!-- General Styles -->
+<link rel="stylesheet" href="/css/style.css">
+
 
 </head>
 
@@ -94,8 +128,7 @@
 								<td>
 									<a 
 										th:href="@{/locales/eliminar/{id}(id=${local.id})}"
-										type="button" class="btn btn-warning"
-										onclick="alert('El cliente fue eliminado con exito!')"> <i
+										type="button" class="btn btn-warning"> <i
 											class="far fa-trash-alt"></i>
 									</a>
 								</td>
