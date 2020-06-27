@@ -38,6 +38,30 @@
 							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR SOLICITUD</a></li>
 				</ul>
 			</div>
+	
+			   <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+       var all =  /*[[ ${sinStock} ]]*/;
+
+    /*]]>*/
+    
+    if(all!=null){
+    	    	alert("No hay stock suficiente se ha rechazado el pedido");
+
+    }
+</script>
+	
+			   <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+       var all =  /*[[ ${sinAceptar} ]]*/;
+
+    /*]]>*/
+    
+    if(all!=null){
+    	    	alert("No acepto el Pedido");
+
+    }
+</script>
 
 
 			<!--CONTENT-->

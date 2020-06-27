@@ -122,7 +122,7 @@ public class LocalController {
 		mAV.addObject("empleado", e);
 		return mAV;
 	}
-
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/save")
 	public String create(@Valid @ModelAttribute("local") LocalModel localModel, BindingResult result) {
 		if (result.hasErrors()) {

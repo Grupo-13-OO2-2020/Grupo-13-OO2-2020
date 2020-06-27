@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import Grupo13OO2.Entities.SolicitudStock;
@@ -150,13 +151,28 @@ public class SolicitudStockController {
 	}
 
 	@PostMapping("/save")
-	public RedirectView create(@ModelAttribute("solicitudStock") SolicitudStockModel solicitudStockModel) {
-
+	public RedirectView create(@ModelAttribute("solicitudStock") SolicitudStockModel solicitudStockModel,RedirectAttributes redirect) {
+		//datos de usuario
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		
 		solicitudStockService.insertOrUpdate(solicitudStockModel);
 		if (solicitudStockModel.isAceptado()) {
-			localService.consumirLoteSolicitud(solicitudStockModel);
-		}
-		return new RedirectView("/solicitudesStock");
+			if(localService.validarStockLocal(solicitudStockModel.getProducto().getCodigoProducto(), solicitudStockModel.getCantidad(), solicitudStockModel.getVendedor().getLocal().getId()))
+			{localService.consumirLoteSolicitud(solicitudStockModel);
+			return new RedirectView("/solicitudesStock/"+e.getLocal().getId());}
+			else {
+				solicitudStockModel.setAceptado(false);
+				redirect.addFlashAttribute("sinStock", "sinStock");
+				return new RedirectView("/solicitudesStock/"+e.getLocal().getId());}
+
+			}
+		
+		
+		redirect.addFlashAttribute("sinAceptar", "sinAceptar");
+
+		return new RedirectView("/solicitudesStock/"+e.getLocal().getId());
 	}
 
 	@GetMapping("/editar/{id}")
@@ -169,6 +185,7 @@ public class SolicitudStockController {
 		mAV.addObject("clientes", clienteService.getAll());
 		mAV.addObject("locales", localService.getAll());
 		mAV.addObject("local", localService.findById(solicitudStockModel.getVendedor().getLocal().getId()));
+		//datos de usuario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());

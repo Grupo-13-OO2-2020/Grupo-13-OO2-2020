@@ -27,10 +27,7 @@ import java.util.stream.IntStream;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 
-import Grupo13OO2.Entities.Empleado;
-import Grupo13OO2.Entities.Producto;
 import Grupo13OO2.Entities.User;
-import Grupo13OO2.Models.ClienteModel;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.repositories.IUserRepository;
@@ -40,7 +37,7 @@ import Grupo13OO2.services.ILocalService;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/empleados")
 public class EmpleadoController {
 	@Autowired

@@ -164,32 +164,30 @@ public class LocalService implements ILocalService {
 		int aux = solicitudStockModel.getCantidad();
 		Set<LoteModel> auxlotes = local.getLotes();
 		List<LoteModel> auxList= new ArrayList<LoteModel>(auxlotes);
-		
 		auxList.sort(Comparator.comparing(LoteModel::getId));
-		Set<LoteModel> lotes= new HashSet<LoteModel>(auxList);
 		
-		ProductoModel producto = productoService.ListarId(solicitudStockModel.getProducto().getId());
-		Iterator<LoteModel> it = lotes.iterator();
-		while (aux > 0) {
-			LoteModel l = it.next();
+int i=0;
+	
+while (i<auxList.size()-1) {
 			
-			if (l.getProducto().getCodigoProducto() == producto.getCodigoProducto()) {
 
-				if (l.getCantidadExistente() - aux >= 0) {
-					l.setCantidadExistente(l.getCantidadExistente() - aux);
+			if (auxList.get(i).getProducto().getCodigoProducto() == solicitudStockModel.getProducto().getCodigoProducto() && auxList.get(i).getCantidadExistente()>0) {
+
+				if (auxList.get(i).getCantidadExistente() - aux > 0) {
+					auxList.get(i).setCantidadExistente(auxList.get(i).getCantidadExistente() - aux);
 					aux = 0;
-					l.setLocal(solicitudStockModel.getLocalDestinatario());
-					loteService.insertOrUpdate(l);
+					auxList.get(i).setLocal(solicitudStockModel.getVendedor().getLocal());
+					loteService.insertOrUpdate(auxList.get(i));
 
-				} else {
-					aux = aux - l.getCantidadExistente();
-					l.setCantidadExistente(0);
-					l.setLocal(solicitudStockModel.getLocalDestinatario());
-					loteService.insertOrUpdate(l);
+				} else if(auxList.get(i).getCantidadExistente() - aux <= 0) {
+					aux = aux - auxList.get(i).getCantidadExistente();
+					auxList.get(i).setCantidadExistente(0);
+					auxList.get(i).setLocal(solicitudStockModel.getVendedor().getLocal());
+					loteService.insertOrUpdate(auxList.get(i));
 				}
 
 			}
-		}
+		i++;}
 		consumo = true;
 		return consumo;
 	}

@@ -119,6 +119,7 @@
 							</tr>
 						</thead>
 						<tbody>
+
 							<tr th:each="e:${empleados}" class="text-center">
 						
 								<td th:text="${e.id}"></td>
@@ -132,6 +133,7 @@
 								<td th:text="${e.sueldo}"></td>
 								<td th:text="${e.gerente}"></td>
 								<td th:text="${e.local.direccion}"></td>
+
 								<td>
 									<a th:href="@{/empleados/eliminar/{id}(id=${e.id})}"
 									 type="button" class="btn btn-warning"> 
@@ -139,11 +141,13 @@
 									</a>
 								</td>
 
+
 								<td>
 									<a th:href="@{/empleados/editar/{id}(id=${e.id})}" class="btn btn-success">
 										 <i class="fas fa-sync-alt"></i>
 									</a>
 								</td>
+
 							</tr>
 						</tbody>
 					</table>
