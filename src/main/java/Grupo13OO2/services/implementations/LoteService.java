@@ -104,6 +104,23 @@ public class LoteService implements ILoteService {
 	
 		
 		Page<Lote> lotes= loteRepository.findAll(pageable);
+		
+		Page<LoteModel> pages= lotes.map(new Function <Lote, LoteModel>(){
+			public LoteModel apply(Lote lote) {
+				LoteModel remitoModel= loteConverter.entityToModel(lote);
+				return remitoModel;
+			}
+		});
+		
+		return pages;
+	}
+
+	@Override
+	public Page<LoteModel> getAllPagesLocal(Pageable pageable, int id) {
+	
+		
+		Page<Lote> lotes= loteRepository.findByLocal(id, pageable);
+		
 		Page<LoteModel> pages= lotes.map(new Function <Lote, LoteModel>(){
 			public LoteModel apply(Lote lote) {
 				LoteModel remitoModel= loteConverter.entityToModel(lote);

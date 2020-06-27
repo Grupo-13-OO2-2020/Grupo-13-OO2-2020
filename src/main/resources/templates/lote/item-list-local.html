@@ -68,8 +68,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="lote:${lotes}" 
-								th:if="${lote.local.id}==${local.id}">
+								<tr th:each="lote:${lotes}" th:if="${lote.local.id}==${local.id}">
 
 									<td th:text="${lote.numeroDeLote}"></td>
 									<td th:text="${lote.cantidadRecibida}"></td>
@@ -96,24 +95,23 @@
 						</table>
 					</div>
 					<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-
-						<li class="page-item"
-							th:classappend="${prev == 0 ? 'disabled': '' }"><a
-							class="page-link" th:href="@{|/lotes/${local.id}?page=${prev}|}">Anterior</a>
+				<ul class="pagination justify-content-center">
+					
+					<li class="page-item"
+						th:classappend="${prev == 0 ? 'disabled': '' }">
+						<a class="page-link" th:href="@{|/lotes/?page=${prev}|}">Anterior</a>
 						</li>
-						<li class="page-item" th:each="page : ${pages}"
-							th:classappend="${current == page ? 'active': '' }"><a
-							class="page-link" th:href="@{|/lotes/${local.id}?page=${page}|}"
-							th:text="${page}"></a>
+					<li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active': '' }">
+					<a	class="page-link" th:href="@{|/lotes/?page=${page}|}"
+						th:text="${page}"></a>
 						<li class="page-item"
-							th:classappend="${current == last ? 'disabled': '' }"><a
-							class="page-link" th:href="@{|/lotes/${local.id}?page=${next}|}">Proxima</a>
-						</li>
-
-					</ul>
-				</nav>
-				</div>
+						th:classappend="${current == last ? 'disabled': '' }">
+						<a class="page-link" th:href="@{|/lotes/?page=${next}|}">Proxima</a>
+						</li>	
+						
+				</ul>
+			</nav>
+		</div>
 		</section>
 
 
