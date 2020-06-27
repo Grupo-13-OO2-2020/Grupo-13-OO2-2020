@@ -18,7 +18,9 @@ public interface ILoteService {
 
 	public String delete(int id);
 	
-	Page<LoteModel> getAllPages(Pageable pageable);
+	public Page<LoteModel> getAllPages(Pageable pageable);
+
+	public Page<LoteModel> getAllPagesLocal(Pageable pageable, int id);
 
 	public boolean findDependency(int id);
 }
