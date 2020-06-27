@@ -34,10 +34,7 @@
 					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; REPORTE DE
 					PROUCTOS
 				</h3>
-				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Harum delectus eos enim numquam fugit optio
-					accusantium, aperiam eius facere architecto facilis quibusdam
-					asperiores veniam omnis saepe est et, quod obcaecati.</p>
+				<p class="text-justify"></p>
 			</div>
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
@@ -74,9 +71,7 @@
 								<th>PRECIO UNITARIO</th>
 								<th>TALLE</th>
 								<th>CODIGO PRODUCTO</th>
-								<th>ACTUALIZAR</th>
-								<th>ELIMINAR</th>
-							</tr>
+															</tr>
 						</thead>
 						<tbody>
 							<tr th:each="producto:${productosFecha}"
@@ -86,13 +81,7 @@
 								<td th:text="${producto.precioUnitario}"></td>
 								<td th:text="${producto.talle}"></td>
 								<td th:text="${producto.codigoProducto}"></td>
-								<td><a th:href="@{productos/editar/} + ${producto.id}"
-									class="btn btn-success"> <i class="fas fa-sync-alt"></i>
-								</a></td>
-								<td><a
-									th:href="@{productos/eliminar/{id}(id=${producto.id})}"
-									class="btn btn-warning"> <i class="far fa-trash-alt"></i>
-								</a></td>
+								
 
 							</tr>
 						</tbody>
