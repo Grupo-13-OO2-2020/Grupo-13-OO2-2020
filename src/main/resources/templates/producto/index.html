@@ -51,15 +51,14 @@
 		<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
-			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-					<div th:if="!${empleado.gerente}" >
-			<div class="full-box nav-lateral-content"
-				 th:replace="div2 :: div"></div>
-			 </div>
-			<div th:if="${empleado.gerente}" >
-			<div class="full-box nav-lateral-content"
-				 th:replace="div :: div"></div>
-             </div>
+            <div class="full-box nav-lateral-bg show-nav-lateral"></div>
+            
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+			th:include="div :: div"></div>
+	   
+			<div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
+                    th:include="div2 :: div"></div>
+                    
         <div th:replace="scripts-footer.html"></div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
@@ -169,11 +168,6 @@
 
 
     </main>
-    
-    	<div th:replace="scripts-footer.html"></div>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
 	
 </body>
 </html>
