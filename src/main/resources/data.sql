@@ -49,7 +49,6 @@ insert into user_role (id,createdat,role,updatedat,user_id) values
 
  insert into user_role (id,createdat,role,updatedat,user_id) values 
 (4,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",4);
-=======
 -- insert into local  ( id,direccion, latitud, longitud, numero_telefono) values (1,"Avellaneda",-34.6601800,-58.3674400,33334444);
 -- insert into local ( id,direccion, latitud, longitud, numero_telefono) values (2,"Lanus",-34.7025200,-58.3955000,55556666);
 -- insert into local ( id,direccion, latitud, longitud, numero_telefono) values (3,"Murature",50.0218, 79.5265,11112222);
@@ -141,5 +140,5 @@ insert into user_role (id,createdat,role,updatedat,user_id) values
 
 --  insert into user_role (id,createdat,role,updatedat,user_id) values 
 -- (4,"2020-03-22 00:00:01","ROLE_USER","2020-03-22 00:00:01",4);
->>>>>>> f74036d839c975d2875ef06fe766a1df65342015
+
 
