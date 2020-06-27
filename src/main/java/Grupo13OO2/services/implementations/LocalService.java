@@ -1,8 +1,6 @@
 package Grupo13OO2.services.implementations;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
@@ -11,8 +9,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
-import static java.time.temporal.ChronoUnit.DAYS;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -20,8 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import Grupo13OO2.Entities.Local;
-import Grupo13OO2.Entities.Remito;
-import Grupo13OO2.Entities.SolicitudStock;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LocalModel;
 import Grupo13OO2.Models.LoteModel;
@@ -154,24 +148,21 @@ public class LocalService implements ILocalService {
 		return valido;
 	}
 
-	
-	
-	
 	@Override
 	public boolean consumirLoteSolicitud(SolicitudStockModel solicitudStockModel) {
 		LocalModel local = this.findById(solicitudStockModel.getLocalDestinatario().getId());
 		boolean consumo = false;
 		int aux = solicitudStockModel.getCantidad();
 		Set<LoteModel> auxlotes = local.getLotes();
-		List<LoteModel> auxList= new ArrayList<LoteModel>(auxlotes);
+		List<LoteModel> auxList = new ArrayList<LoteModel>(auxlotes);
 		auxList.sort(Comparator.comparing(LoteModel::getId));
-		
-int i=0;
-	
-while (i<auxList.size()-1) {
-			
 
-			if (auxList.get(i).getProducto().getCodigoProducto() == solicitudStockModel.getProducto().getCodigoProducto() && auxList.get(i).getCantidadExistente()>0) {
+		int i = 0;
+
+		while (i < auxList.size() - 1) {
+
+			if (auxList.get(i).getProducto().getCodigoProducto() == solicitudStockModel.getProducto()
+					.getCodigoProducto() && auxList.get(i).getCantidadExistente() > 0) {
 
 				if (auxList.get(i).getCantidadExistente() - aux > 0) {
 					auxList.get(i).setCantidadExistente(auxList.get(i).getCantidadExistente() - aux);
@@ -179,7 +170,7 @@ while (i<auxList.size()-1) {
 					auxList.get(i).setLocal(solicitudStockModel.getVendedor().getLocal());
 					loteService.insertOrUpdate(auxList.get(i));
 
-				} else if(auxList.get(i).getCantidadExistente() - aux <= 0) {
+				} else if (auxList.get(i).getCantidadExistente() - aux <= 0) {
 					aux = aux - auxList.get(i).getCantidadExistente();
 					auxList.get(i).setCantidadExistente(0);
 					auxList.get(i).setLocal(solicitudStockModel.getVendedor().getLocal());
@@ -187,7 +178,8 @@ while (i<auxList.size()-1) {
 				}
 
 			}
-		i++;}
+			i++;
+		}
 		consumo = true;
 		return consumo;
 	}
@@ -198,14 +190,14 @@ while (i<auxList.size()-1) {
 		boolean consumo = false;
 		int aux = remito.getCantidad();
 		Set<LoteModel> auxlotes = local.getLotes();
-		List<LoteModel> auxList= new ArrayList<LoteModel>(auxlotes);
-		
-		auxList.sort(Comparator.comparing(LoteModel::getId));
-		int i=0;
-		while (i<auxList.size()-1) {
-			
+		List<LoteModel> auxList = new ArrayList<LoteModel>(auxlotes);
 
-			if (auxList.get(i).getProducto().getCodigoProducto() == remito.getProducto().getCodigoProducto() && auxList.get(i).getCantidadExistente()>0) {
+		auxList.sort(Comparator.comparing(LoteModel::getId));
+		int i = 0;
+		while (i < auxList.size() - 1) {
+
+			if (auxList.get(i).getProducto().getCodigoProducto() == remito.getProducto().getCodigoProducto()
+					&& auxList.get(i).getCantidadExistente() > 0) {
 
 				if (auxList.get(i).getCantidadExistente() - aux > 0) {
 					auxList.get(i).setCantidadExistente(auxList.get(i).getCantidadExistente() - aux);
@@ -213,7 +205,7 @@ while (i<auxList.size()-1) {
 					auxList.get(i).setLocal(remito.getVendedor().getLocal());
 					loteService.insertOrUpdate(auxList.get(i));
 
-				} else if(auxList.get(i).getCantidadExistente() - aux <= 0) {
+				} else if (auxList.get(i).getCantidadExistente() - aux <= 0) {
 					aux = aux - auxList.get(i).getCantidadExistente();
 					auxList.get(i).setCantidadExistente(0);
 					auxList.get(i).setLocal(remito.getVendedor().getLocal());
@@ -221,63 +213,13 @@ while (i<auxList.size()-1) {
 				}
 
 			}
-		i++;}
+			i++;
+		}
 		consumo = true;
 		return consumo;
 	}
 
-	// public List<EmpleadoModel> calcularSueldos(int id) {
-	// 	Set<EmpleadoModel> empleados = this.findById(id).getEmpleados();
-	// 	List<EmpleadoModel> mostrarSueldos = new ArrayList<EmpleadoModel>();
-	// 	Iterator<EmpleadoModel> itEmpleado = empleados.iterator();
-	// 	List<RemitoModel> remitos = this.getRemitos(this.findById(id));
-	// 	Iterator<RemitoModel> itRemito = remitos.iterator();
-	// 	List<SolicitudStockModel> solicitudes = this.getSolicitudesStock(this.findById(id));
-	// 	Iterator<SolicitudStockModel> itSolicitud = solicitudes.iterator();
-
-	// 	while (itEmpleado.hasNext()) {
-	// 		EmpleadoModel e = itEmpleado.next();
-	// 		double contadorRemitos = 0;
-	// 		double contadorVendedor = 0;
-	// 		double contadorColaborador = 0;
-
-	// 		while (itRemito.hasNext()) {
-	// 			RemitoModel r = itRemito.next();
-	// 			if (r.getVendedor().getDni() == e.getDni()) {
-
-	// 				contadorRemitos = contadorRemitos
-	// 						+ ((r.getProducto().getPrecioUnitario() * r.getCantidad()) * 5 / 100);
-	// 			}
-
-	// 		}
-	// 		while (itSolicitud.hasNext()) {
-	// 			SolicitudStockModel s = itSolicitud.next();
-	// 			if (s.getVendedor().getDni() == e.getDni()) {
-	// 				contadorVendedor = contadorVendedor
-	// 						+ ((s.getProducto().getPrecioUnitario() * s.getCantidad()) * 3 / 100);
-	// 			}
-	// 			if (s.getColaborador() != null) {
-	// 				if (s.getColaborador().getDni() == e.getDni()) {
-	// 					contadorColaborador = contadorColaborador
-	// 							+ ((s.getProducto().getPrecioUnitario() * s.getCantidad()) * 2 / 100);
-	// 				}
-	// 			}
-
-	// 		}
-	// 		LocalDate fin = LocalDate.now();
-	// 		LocalDate inicio = fin.withDayOfMonth(1);
-
-	// 		long dias = DAYS.between(inicio, fin) + 1;
-	// 		double basicoPorDia = 1000;
-	// 		double sueldoBasico = dias * basicoPorDia;
-	// 		double sueldo = sueldoBasico + contadorColaborador + contadorVendedor + contadorRemitos;
-	// 		e.setSueldo((double) Math.round(sueldo));
-	// 		mostrarSueldos.add(e);
-
-	// 	}
-
-	// 	return mostrarSueldos;
-	// }
+	
 
 	@Override
 	public Page<LocalModel> getAllPages(Pageable pageable) {
@@ -295,16 +237,15 @@ while (i<auxList.size()-1) {
 
 	@Override
 	public List<EmpleadoModel> calculoSueldos(int id) {
-		List<EmpleadoModel>	empleados = new ArrayList<EmpleadoModel>();
+		List<EmpleadoModel> empleados = new ArrayList<EmpleadoModel>();
 		empleados.addAll(findById(id).getEmpleados());
-		List<Double> sueldosTotales = new ArrayList<Double>();
 
 		for (EmpleadoModel e : empleados) {
 			e.setSueldoNuevo(empleadoService.sueldoxEmpleado(e));
 		}
 		return empleados;
 	}
-	
+
 	@Override
 	public Set<ProductoModel> productosVendidosEntreFechas(LocalModel local, Date comienzo, Date fin) {
 
@@ -313,16 +254,16 @@ while (i<auxList.size()-1) {
 
 		Set<ProductoModel> productoList = new HashSet<ProductoModel>();
 
-		for(RemitoModel r : remitos){
-			if(r.getFecha().before(fin) && r.getFecha().after(comienzo) ) {
-					productoList.add(r.getProducto());
+		for (RemitoModel r : remitos) {
+			if (r.getFecha().before(fin) && r.getFecha().after(comienzo)) {
+				productoList.add(r.getProducto());
 			}
 		}
 
 		for (SolicitudStockModel s : solicitudes) {
-			if(s.getFecha().before(fin) && s.getFecha().after(comienzo) && (s.isAceptado() == true) ) {
-					productoList.add(s.getProducto());
-				
+			if (s.getFecha().before(fin) && s.getFecha().after(comienzo) && (s.isAceptado() == true)) {
+				productoList.add(s.getProducto());
+
 			}
 		}
 

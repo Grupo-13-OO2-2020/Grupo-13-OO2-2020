@@ -2,8 +2,6 @@ package Grupo13OO2.Models;
 
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Min;
 
 public class LoteModel {
 
@@ -19,7 +17,7 @@ public class LoteModel {
 	private ProductoModel producto;
 //	@Min(value = 1, message = "cantidad no puede ser 0")
 	private int cantidadExistente;
-	//@NotNull(message = "es obligatorio indicar local")
+	// @NotNull(message = "es obligatorio indicar local")
 	private LocalModel local;
 
 	public LoteModel() {
@@ -34,10 +32,11 @@ public class LoteModel {
 		this.producto = producto;
 		this.cantidadExistente = cantidadExistente;
 		this.local = local;
-		this.fechaIngreso= fechaIngreso;
+		this.fechaIngreso = fechaIngreso;
 	}
 
-	public LoteModel(int id, int numeroDeLote, int cantidadRecibida, ProductoModel producto, int cantidadExistente, Date fechaIngreso) {
+	public LoteModel(int id, int numeroDeLote, int cantidadRecibida, ProductoModel producto, int cantidadExistente,
+			Date fechaIngreso) {
 
 		this.id = id;
 		this.numeroDeLote = numeroDeLote;

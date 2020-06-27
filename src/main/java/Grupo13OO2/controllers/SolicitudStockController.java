@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,7 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import Grupo13OO2.Entities.SolicitudStock;
 import Grupo13OO2.Entities.User;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.Models.LocalModel;
@@ -58,9 +56,6 @@ public class SolicitudStockController {
 	@Autowired
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
-	
-
-	
 
 	@Autowired
 	private IUserRepository userRepository;
@@ -77,62 +72,59 @@ public class SolicitudStockController {
 	@GetMapping("")
 	public ModelAndView index(@RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_INDEX);
-		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
+		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
 		PageRequest pageRequest = PageRequest.of(page, 5);
-		
-		Page<SolicitudStockModel> pageSolicitud= solicitudStockService.getAllPages(pageRequest);
-		
-		int totalPage= pageSolicitud.getTotalPages();
-		if(totalPage>0) {
+
+		Page<SolicitudStockModel> pageSolicitud = solicitudStockService.getAllPages(pageRequest);
+
+		int totalPage = pageSolicitud.getTotalPages();
+		if (totalPage > 0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-			mAV.addObject("pages",pages);
+			mAV.addObject("pages", pages);
 		}
 		mAV.addObject("solicitudesStock", pageSolicitud.getContent());
-		mAV.addObject("current", page+1);
-		mAV.addObject("next" ,page+2);
-		mAV.addObject("prev" ,page);
+		mAV.addObject("current", page + 1);
+		mAV.addObject("next", page + 2);
+		mAV.addObject("prev", page);
 		mAV.addObject("last", totalPage);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
-		
+
 		return mAV;
 	}
 
 	@GetMapping("{id}")
-	public ModelAndView local(@PathVariable("id") int id,@RequestParam Map<String, Object> params, Model model) {
+	public ModelAndView local(@PathVariable("id") int id, @RequestParam Map<String, Object> params, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_INDEX_LOCAL);
 		mAV.addObject("local", localService.findById(id));
-		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
+		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
 		PageRequest pageRequest = PageRequest.of(page, 5);
-		
-		Page<SolicitudStockModel> pageSolicitud= solicitudStockService.getAllPagesLocal(pageRequest, id);
-		
-		int totalPage= pageSolicitud.getTotalPages();
-		if(totalPage>0) {
+
+		Page<SolicitudStockModel> pageSolicitud = solicitudStockService.getAllPagesLocal(pageRequest, id);
+
+		int totalPage = pageSolicitud.getTotalPages();
+		if (totalPage > 0) {
 			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-			mAV.addObject("pages",pages);
+			mAV.addObject("pages", pages);
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			mAV.addObject("usuario", auth.getName());
 		}
 		mAV.addObject("solicitudesStock", pageSolicitud.getContent());
-		mAV.addObject("current", page+1);
-		mAV.addObject("next" ,page+2);
-		mAV.addObject("prev" ,page);
+		mAV.addObject("current", page + 1);
+		mAV.addObject("next", page + 2);
+		mAV.addObject("prev", page);
 		mAV.addObject("last", totalPage);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
-				
-		
-		
+
 		return mAV;
 	}
-
 
 	@GetMapping("/new/{id}")
 	public ModelAndView create(@PathVariable("id") int id) {
@@ -151,28 +143,30 @@ public class SolicitudStockController {
 	}
 
 	@PostMapping("/save")
-	public RedirectView create(@ModelAttribute("solicitudStock") SolicitudStockModel solicitudStockModel,RedirectAttributes redirect) {
-		//datos de usuario
+	public RedirectView create(@ModelAttribute("solicitudStock") SolicitudStockModel solicitudStockModel,
+			RedirectAttributes redirect) {
+		// datos de usuario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-		
+
 		solicitudStockService.insertOrUpdate(solicitudStockModel);
 		if (solicitudStockModel.isAceptado()) {
-			if(localService.validarStockLocal(solicitudStockModel.getProducto().getCodigoProducto(), solicitudStockModel.getCantidad(), solicitudStockModel.getVendedor().getLocal().getId()))
-			{localService.consumirLoteSolicitud(solicitudStockModel);
-			return new RedirectView("/solicitudesStock/"+e.getLocal().getId());}
-			else {
+			if (localService.validarStockLocal(solicitudStockModel.getProducto().getCodigoProducto(),
+					solicitudStockModel.getCantidad(), solicitudStockModel.getVendedor().getLocal().getId())) {
+				localService.consumirLoteSolicitud(solicitudStockModel);
+				return new RedirectView("/solicitudesStock/" + e.getLocal().getId());
+			} else {
 				solicitudStockModel.setAceptado(false);
 				redirect.addFlashAttribute("sinStock", "sinStock");
-				return new RedirectView("/solicitudesStock/"+e.getLocal().getId());}
-
+				return new RedirectView("/solicitudesStock/" + e.getLocal().getId());
 			}
-		
-		
+
+		}
+
 		redirect.addFlashAttribute("sinAceptar", "sinAceptar");
 
-		return new RedirectView("/solicitudesStock/"+e.getLocal().getId());
+		return new RedirectView("/solicitudesStock/" + e.getLocal().getId());
 	}
 
 	@GetMapping("/editar/{id}")
@@ -185,7 +179,7 @@ public class SolicitudStockController {
 		mAV.addObject("clientes", clienteService.getAll());
 		mAV.addObject("locales", localService.getAll());
 		mAV.addObject("local", localService.findById(solicitudStockModel.getVendedor().getLocal().getId()));
-		//datos de usuario
+		// datos de usuario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());

@@ -1,8 +1,6 @@
 package Grupo13OO2.Entities;
 
 import java.time.LocalDate;
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;

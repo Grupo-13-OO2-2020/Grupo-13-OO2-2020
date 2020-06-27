@@ -1,21 +1,19 @@
 package Grupo13OO2.Models;
 
 public class ProductoMasVendidoModel {
-    private int idProductoVendido;
-    private String nombreProductoVendido;
-    private int cantidadProductosVendidos;
+	private int idProductoVendido;
+	private String nombreProductoVendido;
+	private int cantidadProductosVendidos;
 
-   
 	public ProductoMasVendidoModel(String nombreProductoVendido, int cantidadProductosVendidos) {
 		super();
 		this.nombreProductoVendido = nombreProductoVendido;
 		this.cantidadProductosVendidos = cantidadProductosVendidos;
 	}
-	
-	 public ProductoMasVendidoModel() {
-	    	
-	    }
 
+	public ProductoMasVendidoModel() {
+
+	}
 
 	public int getIdProductoVendido() {
 		return idProductoVendido;
@@ -40,6 +38,5 @@ public class ProductoMasVendidoModel {
 	public void setCantidadProductosVendidos(int cantidadProductosVendidos) {
 		this.cantidadProductosVendidos = cantidadProductosVendidos;
 	}
-    
-   
+
 }

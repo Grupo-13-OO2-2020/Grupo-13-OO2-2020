@@ -7,10 +7,8 @@ import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
 
 import Grupo13OO2.Entities.Cliente;
 import Grupo13OO2.Models.ClienteModel;
@@ -71,11 +69,11 @@ public class ClienteService implements IClienteService {
 	}
 
 	@Override
-	public List<ClienteModel> findDependency(int id){
-		List<Cliente> clientes= clienteRepository.findIfExist(id);
-		List<ClienteModel> pM= new ArrayList<ClienteModel>();
+	public List<ClienteModel> findDependency(int id) {
+		List<Cliente> clientes = clienteRepository.findIfExist(id);
+		List<ClienteModel> pM = new ArrayList<ClienteModel>();
 
-		for(Cliente p : clientes) {
+		for (Cliente p : clientes) {
 			pM.add(clienteConverter.entityToModel(p));
 		}
 

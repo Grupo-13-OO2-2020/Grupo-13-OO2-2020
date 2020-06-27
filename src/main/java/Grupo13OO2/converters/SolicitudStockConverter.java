@@ -30,15 +30,15 @@ public class SolicitudStockConverter {
 			sM = new SolicitudStockModel(solicitudStock.getId(), solicitudStock.getFecha(),
 					productoConverter.entityToModel(solicitudStock.getProducto()), solicitudStock.getCantidad(),
 					empleadoConverter.entityToModel(solicitudStock.getVendedor()),
-					clienteConverter.entityToModel(solicitudStock.getCliente()), 
+					clienteConverter.entityToModel(solicitudStock.getCliente()),
 					empleadoConverter.entityToModel(solicitudStock.getColaborador()), solicitudStock.isAceptado(),
 					localConverter.entityToModel(solicitudStock.getLocalDestinatario()));
 		} else {
 			sM = new SolicitudStockModel(solicitudStock.getId(), solicitudStock.getFecha(),
 					productoConverter.entityToModel(solicitudStock.getProducto()), solicitudStock.getCantidad(),
 					empleadoConverter.entityToModel(solicitudStock.getVendedor()),
-					clienteConverter.entityToModel(solicitudStock.getCliente()), null,
-					false, localConverter.entityToModel(solicitudStock.getLocalDestinatario()));
+					clienteConverter.entityToModel(solicitudStock.getCliente()), null, false,
+					localConverter.entityToModel(solicitudStock.getLocalDestinatario()));
 		}
 		return sM;
 	}
@@ -49,15 +49,15 @@ public class SolicitudStockConverter {
 			s = new SolicitudStock(solicitudStock.getId(), solicitudStock.getFecha(),
 					productoConverter.modelToEntity(solicitudStock.getProducto()), solicitudStock.getCantidad(),
 					empleadoConverter.modelToEntity(solicitudStock.getVendedor()),
-					clienteConverter.modelToEntity(solicitudStock.getCliente()), 
+					clienteConverter.modelToEntity(solicitudStock.getCliente()),
 					empleadoConverter.modelToEntity(solicitudStock.getColaborador()), solicitudStock.isAceptado(),
 					localConverter.modelToEntity(solicitudStock.getLocalDestinatario()));
 		} else {
 			s = new SolicitudStock(solicitudStock.getId(), solicitudStock.getFecha(),
 					productoConverter.modelToEntity(solicitudStock.getProducto()), solicitudStock.getCantidad(),
 					empleadoConverter.modelToEntity(solicitudStock.getVendedor()),
-					clienteConverter.modelToEntity(solicitudStock.getCliente()),  null,
-					false, localConverter.modelToEntity(solicitudStock.getLocalDestinatario()));
+					clienteConverter.modelToEntity(solicitudStock.getCliente()), null, false,
+					localConverter.modelToEntity(solicitudStock.getLocalDestinatario()));
 		}
 
 		return s;

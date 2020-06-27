@@ -4,25 +4,23 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 import javax.validation.constraints.NotNull;
 
-
-
 public class PedidoModel {
-	@NotNull(message="es obligatorio indicar id")
+	@NotNull(message = "es obligatorio indicar id")
 	private int id;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message="es obligatorio indicar fecha")
+	@NotNull(message = "es obligatorio indicar fecha")
 	private Date fecha;
-	@NotNull(message="es obligatorio indicar cantidad")
+	@NotNull(message = "es obligatorio indicar cantidad")
 	protected int cantidad;
-	@NotNull(message="es obligatorio indicar si esta facturando")
+	@NotNull(message = "es obligatorio indicar si esta facturando")
 	protected ProductoModel producto;
 	protected EmpleadoModel vendedor;
 	protected ClienteModel cliente;
-	
-	public PedidoModel() {}
+
+	public PedidoModel() {
+	}
 
 	public PedidoModel(int id, Date fecha, ProductoModel producto, int cantidad, EmpleadoModel vendedor,
 			ClienteModel cliente) {
@@ -34,8 +32,6 @@ public class PedidoModel {
 		this.vendedor = vendedor;
 		this.cliente = cliente;
 	}
-	
-	
 
 	public int getId() {
 		return id;
@@ -84,10 +80,5 @@ public class PedidoModel {
 	public void setCliente(ClienteModel cliente) {
 		this.cliente = cliente;
 	}
-
-	
-
-	
-	
 
 }

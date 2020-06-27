@@ -23,7 +23,7 @@ public class RemitoConverter {
 	public RemitoModel entityToModel(Remito remito) {
 		return new RemitoModel(remito.getId(), remito.getFecha(), productoConverter.entityToModel(remito.getProducto()),
 				remito.getCantidad(), empleadoConverter.entityToModel(remito.getVendedor()),
-				clienteConverter.entityToModel(remito.getCliente()),  remito.getFormaDePago());
+				clienteConverter.entityToModel(remito.getCliente()), remito.getFormaDePago());
 	}
 
 	public Remito modelToEntity(RemitoModel remito) {

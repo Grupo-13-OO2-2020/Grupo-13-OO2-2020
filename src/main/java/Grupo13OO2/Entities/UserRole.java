@@ -1,6 +1,5 @@
 package Grupo13OO2.Entities;
 
-
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -18,30 +17,31 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="user_role", uniqueConstraints=@UniqueConstraint(columnNames= {"role", "user_id"}))
+@Table(name = "user_role", uniqueConstraints = @UniqueConstraint(columnNames = { "role", "user_id" }))
 public class UserRole {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id", nullable=false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
-	
-	@Column(name="role", nullable=false, length=100)
+
+	@Column(name = "role", nullable = false, length = 100)
 	private String role;
 
-	@Column(name="createdat")
+	@Column(name = "createdat")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
-	
-	@Column(name="updatedat")
+
+	@Column(name = "updatedat")
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
-	public UserRole() {}
-	
+	public UserRole() {
+	}
+
 	public UserRole(int id, User user, String role) {
 		this.id = id;
 		this.user = user;
