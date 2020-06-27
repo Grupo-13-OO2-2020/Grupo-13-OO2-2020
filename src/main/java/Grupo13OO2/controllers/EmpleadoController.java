@@ -40,7 +40,7 @@ import Grupo13OO2.services.ILocalService;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/empleados")
 public class EmpleadoController {
 	@Autowired
