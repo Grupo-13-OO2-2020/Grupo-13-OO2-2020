@@ -1,10 +1,10 @@
 
 <nav class="full-box nav-lateral-menu">
 	<ul>
-		<li><a href="/"><i class="fab fa-dashcube fa-fw"></i>
-				&nbsp; Dashboard</a></li>
-	<li><a th:href="@{/locales/main/{id}(id=${empleado.local.id})}"><i class="fas fa-store-alt fa-fw"></i>
-				&nbsp; Local</a></li>
+		<li><a href="/"><i class="fab fa-dashcube fa-fw"></i> &nbsp;
+				Dashboard</a></li>
+		<li><a th:href="@{/locales/main/{id}(id=${empleado.local.id})}"><i
+				class="fas fa-store-alt fa-fw"></i> &nbsp; Local</a></li>
 
 		<li><a href="#" class="nav-btn-submenu"><i
 				class="fas fa-users fa-fw"></i> &nbsp; Clientes <i
@@ -27,27 +27,32 @@
 			</ul></li>
 
 		<li><a href="#" class="nav-btn-submenu"><i
-				class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Solicitud Externa <i
-				class="fas fa-chevron-down"></i></a>
-			<ul>	<li><a th:href="@{/solicitudesStock/new/{id}(id=${empleado.local.id})}"><i class="fas fa-plus fa-fw"></i>
-						&nbsp; Nueva Solicitud</a></li>
-				<li><a th:href="@{/solicitudesStock/{id}(id=${empleado.local.id})}"><i
-						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Solicitudes</a></li>
+				class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Solicitud
+				Externa <i class="fas fa-chevron-down"></i></a>
+			<ul>
+				<li><a
+					th:href="@{/solicitudesStock/new/{id}(id=${empleado.local.id})}"><i
+						class="fas fa-plus fa-fw"></i> &nbsp; Nueva Solicitud</a></li>
+				<li><a
+					th:href="@{/solicitudesStock/{id}(id=${empleado.local.id})}"><i
+						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de
+						Solicitudes</a></li>
 
 
 			</ul></li>
-			
-			<li><a href="#" class="nav-btn-submenu"><i
+
+		<li><a href="#" class="nav-btn-submenu"><i
 				class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Remitos <i
 				class="fas fa-chevron-down"></i></a>
 			<ul>
-			<li><a th:href="@{/remitos/new/{id}(id=${empleado.local.id})}"><i class="fas fa-plus fa-fw"></i>
-						&nbsp; Nuevo Remito</a></li>
+				<li><a th:href="@{/remitos/new/{id}(id=${empleado.local.id})}"><i
+						class="fas fa-plus fa-fw"></i> &nbsp; Nuevo Remito</a></li>
 				<li><a th:href="@{/remitos/{id}(id=${empleado.local.id})}"><i
 						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Remitos</a></li>
 
 				<li><a href="/remitos"><i
-						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Remitos Globales</a></li>
+						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Remitos
+						Globales</a></li>
 				<li><a href="/remitos"><i
 						class="fas fa-search-dollar fa-fw"></i> &nbsp; Buscar Remitos</a></li>
 
@@ -62,7 +67,7 @@
 				<li><a href="/empleados"><i
 						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de empleados</a></li>
 			</ul></li>
-		
+
 		<li><a href="#" class="nav-btn-submenu"><i
 				class="fas fa-store-alt fa-fw"></i> &nbsp; Locales <i
 				class="fas fa-chevron-down"></i></a>
@@ -71,24 +76,24 @@
 						&nbsp; Agregar Local</a></li>
 				<li><a href="/locales"><i
 						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Locales</a></li>
-						
-						
+
+
 
 			</ul>
-			<li><a href="#" class="nav-btn-submenu"><i
+		<li><a href="#" class="nav-btn-submenu"><i
 				class="fas fa-pallet fa-fw"></i> &nbsp; Lotes <i
 				class="fas fa-chevron-down"></i></a>
 			<ul>
-li><a th:href="@{/lotes/new/{id}(id=${empleado.local.id})}"><i class="fas fa-plus fa-fw"></i>
-						&nbsp;Agregar Lote</a></li>
+				<li><a th:href="@{/lotes/new/{id}(id=${empleado.local.id})}"><i
+						class="fas fa-plus fa-fw"></i> &nbsp;Agregar Lote</a></li>
 				<li><a th:href="@{/lotes/{id}(id=${empleado.local.id})}"><i
 						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Lotes</a></li>
-			
-				<li><a th:href="@{/lotes/}"><i
 
-						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Lotes Globales</a></li>
-				<li><a href="#"><i class="fas fa-search fa-fw"></i>
-						&nbsp; Buscar Lote</a></li>
+				<li><a th:href="@{/lotes/}"><i
+						class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Lotes
+						Globales</a></li>
+				<li><a href="#"><i class="fas fa-search fa-fw"></i> &nbsp;
+						Buscar Lote</a></li>
 
 			</ul></li>
 	</ul>
