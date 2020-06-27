@@ -107,7 +107,7 @@ public class SolicitudStockController {
 		int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toString()) -1) : 0;
 		PageRequest pageRequest = PageRequest.of(page, 5);
 		
-		Page<SolicitudStockModel> pageSolicitud= solicitudStockService.getAllPages(pageRequest);
+		Page<SolicitudStockModel> pageSolicitud= solicitudStockService.getAllPagesLocal(pageRequest, id);
 		
 		int totalPage= pageSolicitud.getTotalPages();
 		if(totalPage>0) {

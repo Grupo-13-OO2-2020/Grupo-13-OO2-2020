@@ -17,7 +17,9 @@ public interface IEmpleadoService {
 
 	public String delete(int id);
 	
-	Page<EmpleadoModel> getAllPages(Pageable pageable);
+	public Page<EmpleadoModel> getAllPages(Pageable pageable);
+
+	public Page<EmpleadoModel> getAllPagesLocal(Pageable pageable, int id);
 
 	public double sueldoxEmpleado(EmpleadoModel empleado);
 

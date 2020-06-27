@@ -108,7 +108,7 @@ int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toStri
 		
 		PageRequest pageRequest = PageRequest.of(page, 4);
 		
-		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPages(pageRequest);
+		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPagesLocal(pageRequest, id);
 		
 		int totalPage= pageEmpleado.getTotalPages();
 		if(totalPage>0) {

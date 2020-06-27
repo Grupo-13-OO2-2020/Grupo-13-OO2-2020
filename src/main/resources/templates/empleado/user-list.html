@@ -119,58 +119,31 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="empleado:${empleados}" class="text-center">
+							<tr th:each="e:${empleados}" class="text-center">
 						
-								<td th:text="${empleado.id}"></td>
-								<td th:text="${empleado.dni}"></td>
-								<td th:text="${empleado.nombre}"></td>
-								<td th:text="${empleado.apellido}"></td>
-								<td th:text="${empleado.fechaNacimiento}"></td>
-								<td th:text="${empleado.horarioEntrada}"></td>
-								<td th:text="${empleado.horarioSalida}"></td>
-								<td th:text="${empleado.tipoEmpleado}"></td>
-								<td th:text="${empleado.sueldo}"></td>
-								<td th:text="${empleado.gerente}"></td>
-								<td th:text="${empleado.local.direccion}"></td>
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-								<td><a
-									th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
-									class="btn btn-success"> <i class="fas fa-sync-alt"></i>
-								</a></td>
-										
-								<td ><a 
-									th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}" button
-									type="button"
-									onclick="alert('El cliente fue eliminado con exito!')"> <i
-										class="far fa-trash-alt"></i>
-								</a>
-								</td>
-								
-								
-								
-								
-=======
-=======
->>>>>>> 0563a43704c39a1454a0f79eead16777d922c08b
+								<td th:text="${e.id}"></td>
+								<td th:text="${e.dni}"></td>
+								<td th:text="${e.nombre}"></td>
+								<td th:text="${e.apellido}"></td>
+								<td th:text="${e.fechaNacimiento}"></td>
+								<td th:text="${e.horarioEntrada}"></td>
+								<td th:text="${e.horarioSalida}"></td>
+								<td th:text="${e.tipoEmpleado}"></td>
+								<td th:text="${e.sueldo}"></td>
+								<td th:text="${e.gerente}"></td>
+								<td th:text="${e.local.direccion}"></td>
 								<td>
-									<a th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}"
+									<a th:href="@{/empleados/eliminar/{id}(id=${e.id})}"
 									 type="button" class="btn btn-warning"> 
 									<i class="far fa-trash-alt"></i>
 									</a>
 								</td>
 
 								<td>
-									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-success">
+									<a th:href="@{/empleados/editar/{id}(id=${e.id})}" class="btn btn-success">
 										 <i class="fas fa-sync-alt"></i>
 									</a>
 								</td>
-<<<<<<< HEAD
->>>>>>> 8caed7c75bc8ae3485cd48a053b9aaf502124e71
-=======
-
->>>>>>> 0563a43704c39a1454a0f79eead16777d922c08b
 							</tr>
 						</tbody>
 					</table>

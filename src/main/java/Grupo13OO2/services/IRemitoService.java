@@ -21,4 +21,6 @@ public interface IRemitoService {
 	
 	public List<RemitoModel> listAll(String keyword);
 
+	public Page<RemitoModel> getAllPagesLocal(Pageable pageable, int id);
+
 }

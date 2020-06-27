@@ -81,6 +81,20 @@ public class RemitoService implements IRemitoService {
 	}
 
 	@Override
+	public Page<RemitoModel> getAllPagesLocal(Pageable pageable, int id) {
+
+		Page<Remito> remitos= remitoRepository.findByLocal(id, pageable);
+		Page<RemitoModel> pages= remitos.map(new Function <Remito, RemitoModel>(){
+			public RemitoModel apply(Remito remito) {
+				RemitoModel remitoModel= remitoConverter.entityToModel(remito);
+				return remitoModel;
+			}
+		});
+		
+		return pages;
+	}
+
+	@Override
 	public List<RemitoModel> listAll(String keyword) {
 		List<RemitoModel> models= new ArrayList<RemitoModel>();
 		List<Remito> remitos=	remitoRepository.findAll(keyword);

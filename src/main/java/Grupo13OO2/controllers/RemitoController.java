@@ -112,7 +112,7 @@ public class RemitoController {
 		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
 		PageRequest pageRequest = PageRequest.of(page, 5);
 
-		Page<RemitoModel> pageRemito = remitoService.getAllPages(pageRequest);
+		Page<RemitoModel> pageRemito = remitoService.getAllPagesLocal(pageRequest, id);
 
 		int totalPage = pageRemito.getTotalPages();
 		if (totalPage > 0) {
