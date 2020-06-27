@@ -170,34 +170,22 @@ public class SolicitudStockController {
 	}
 
 	@GetMapping("/editar/{id}")
-	public RedirectView get(@PathVariable("id") int id, RedirectAttributes redirect) {
-		
+	public ModelAndView get(@PathVariable("id") int id) {
+
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.SOLICITUDSTOCK_FORM_LOCAL);
+		SolicitudStockModel solicitudStockModel = solicitudStockService.ListarId(id);
+		mAV.addObject("solicitudStock", solicitudStockModel);
+		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("clientes", clienteService.getAll());
+		mAV.addObject("locales", localService.getAll());
+		mAV.addObject("local", localService.findById(solicitudStockModel.getVendedor().getLocal().getId()));
 		// datos de usuario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		mAV.addObject("usuario", auth.getName());
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
-
-		SolicitudStockModel solicitudStockModel = solicitudStockService.ListarId(id);
-		if(solicitudStockModel.isAceptado() || (e.getId() == solicitudStockModel.getVendedor().getId())){
-			redirect.addFlashAttribute("popUp", "error");
-			
-			return new RedirectView("/solicitudesStock/" + e.getLocal().getId());
-		}
-		mAV.addObject("solicitudStock", solicitudStockModel);
-		mAV.addObject("productos", productoService.getAll());
-		mAV.addObject("clientes", clienteService.getAll());
-		mAV.addObject("locales", localService.getAll());
-		mAV.addObject("local", localService.findById(solicitudStockModel.getVendedor().getLocal().getId()));
-		
-		return new RedirectView("/solicitudesStock/obtener");
-	}
-
-	@GetMapping("/obtener")
-	public String obtener(Model model) {
-		return ("/solicitudstock/form-solicitudStock-local");
+		return mAV;
 	}
 
 	@GetMapping("/eliminar/{id}")

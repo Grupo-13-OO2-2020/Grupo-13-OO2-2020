@@ -40,28 +40,16 @@
 			</div>
 
 			<script type="text/javascript" th:inline="javascript">
-    /*<![CDATA[*/
-       var all =  /*[[ ${sinStock} ]]*/;
+				/*<![CDATA[*/
+				var all =  /*[[ ${sinStock} ]]*/;
 
-    /*]]>*/
-    
-    if(all!=null){
-    	    	alert("No hay stock suficiente se ha rechazado el pedido");
+				/*]]>*/
+				
+				if(all!=null){
+							alert("No hay stock suficiente se ha rechazado el pedido");
 
-    }
-</script>
-
-			<script type="text/javascript" th:inline="javascript">
-    /*<![CDATA[*/
-       var all =  /*[[ ${sinAceptar} ]]*/;
-
-    /*]]>*/
-    
-    if(all!=null){
-    	    	alert("No acepto el Pedido");
-
-    }
-</script>
+				}
+			</script>
 
 
 			<!--CONTENT-->
@@ -84,7 +72,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="solicitudStock:${solicitudesStock}">
+							<tr th:each="solicitudStock:${solicitudesStock}" class="text-center">
 
 
 								<td th:text="${solicitudStock.id}"></td>
@@ -98,7 +86,9 @@
 								<td th:unless="${solicitudStock.aceptado}"></td>
 								<td th:text="${solicitudStock.aceptado}"></td>
 								<td th:text="${solicitudStock.localDestinatario.direccion}"></td>
-								<td><a
+								<td th:unless="solicitudStock.aceptado"></td>
+								<td th:if="!solicitudStock.aceptado">
+									<a
 									th:href="@{/solicitudesStock/editar/{id}(id=*{solicitudStock.id})}"
 									class="btn btn-warning">Aceptar</a></td>
 								<td><a th:href="@{/locales/main/{id}(id=${local.id})}"
