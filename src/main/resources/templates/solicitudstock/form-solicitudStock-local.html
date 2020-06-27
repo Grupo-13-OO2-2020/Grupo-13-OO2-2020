@@ -64,10 +64,7 @@
 				<h3 class="text-left">
 					<i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR SOLICITUD DE STOCK
 				</h3>
-				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Suscipit nostrum rerum animi natus beatae ex.
-					Culpa blanditiis tempore amet alias placeat, obcaecati quaerat
-					ullam, sunt est, odio aut veniam ratione.</p>
+				<p class="text-justify">Aceptar</p>
 			</div>
 
 			<div class="container-fluid">
@@ -100,14 +97,14 @@
 								<div class="col-12 col-md-3">
 									<div class="form-group">
 										<label>FECHA</label>
-										<input th:field="*{fecha}" type="date" value="2011-08-19" class="form-control" placeholder="Fecha">
+										<input disabled="disabled" th:field="*{fecha}" type="date" value="2011-08-19" class="form-control" placeholder="Fecha">
 									</div>
 								</div>
                                 
                                 <div class="col-12 col-md-5">
 									<div class="form-group">
 										<label>PRODUCTO</label> 
-										<select id="producto-select" class="form-control" placeholder="Producto" th:field="*{producto.id}">
+										<select disabled="disabled" id="producto-select" class="form-control" placeholder="Producto" th:field="*{producto.id}">
 											<option th:each="producto : ${productos}" th:value="${producto.id}" th:text="${producto.descripcion}+${producto.talle}"></option>
 										</select> 
 										<small class="form-text text-danger"th:if="${#fields.hasErrors('producto.id')}" th:errors="*{producto.id}"></small>
@@ -117,14 +114,14 @@
                                 <div class="col-12 col-md-3">
 									<div class="form-group">
 										<label>CANTIDAD</label>
-										<input id="cantidad-select" th:field="*{cantidad}" type="number"  class="form-control">
+										<input disabled="disabled" id="cantidad-select" th:field="*{cantidad}" type="number"  class="form-control">
 									</div>
 								</div>
                                 
                                 <div class="col-12 col-md-5">
 									<div class="form-group">
 										<label>VENDEDOR</label> 
-										<select id="vendedor-select" class="form-control" placeholder="Vendedor" th:field="*{vendedor.id}">
+										<select  disabled="disabled"  id="vendedor-select" class="form-control" placeholder="Vendedor" th:field="*{vendedor.id}">
 											<option th:each="vendedor : ${local.empleados}" th:value="${vendedor.id}" th:text="${vendedor.nombre}"></option>
 										</select> 
 										<small class="form-text text-danger"th:if="${#fields.hasErrors('vendedor')}" th:errors="*{vendedor}"></small>
@@ -133,8 +130,8 @@
                                 
                                 <div class="col-12 col-md-5">
 									<div class="form-group">
-										<label>CLIENTE</label> <select class="form-control" placeholder="Cliente" th:field="*{cliente.id}">
-											<option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
+										<label>CLIENTE</label> <select disabled="disabled" class="form-control" placeholder="Cliente" th:field="*{cliente.id}">
+											<option  th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
 										</select> 
 										<small class="form-text text-danger"th:if="${#fields.hasErrors('cliente.id')}" th:errors="*{cliente.id}"></small>
 									</div>
@@ -143,7 +140,7 @@
                                 <div class="col-12 col-md-6">
                                     <label>Local Destinatario</label> 
                     
-                                    <select class="form-control"placeholder="Local" th:field="*{localDestinatario.id}">
+                                    <select disabled="disabled" class="form-control"placeholder="Local" th:field="*{localDestinatario.id}">
                                         
                                     <option th:each="localDestinatario : ${locales}" th:value="${localDestinatario.id}"
                                         th:text="${localDestinatario.direccion}"></option>
