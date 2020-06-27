@@ -2,6 +2,8 @@ package Grupo13OO2.services.implementations;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -152,18 +154,25 @@ public class LocalService implements ILocalService {
 		return valido;
 	}
 
+	
+	
+	
 	@Override
 	public boolean consumirLoteSolicitud(SolicitudStockModel solicitudStockModel) {
 		LocalModel local = this.findById(solicitudStockModel.getLocalDestinatario().getId());
 		boolean consumo = false;
 		int aux = solicitudStockModel.getCantidad();
-		Set<LoteModel> lotes = local.getLotes();
+		Set<LoteModel> auxlotes = local.getLotes();
+		List<LoteModel> auxList= new ArrayList<LoteModel>(auxlotes);
+		
+		auxList.sort(Comparator.comparing(LoteModel::getId));
+		Set<LoteModel> lotes= new HashSet<LoteModel>(auxList);
+		
 		ProductoModel producto = productoService.ListarId(solicitudStockModel.getProducto().getId());
 		Iterator<LoteModel> it = lotes.iterator();
-
 		while (aux > 0) {
 			LoteModel l = it.next();
-
+			
 			if (l.getProducto().getCodigoProducto() == producto.getCodigoProducto()) {
 
 				if (l.getCantidadExistente() - aux >= 0) {
