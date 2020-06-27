@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Lista de Productos</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Lista de Productos Mas Vendidos</title>
+
 
 <!-- Normalize V8.0.1 -->
 <link rel="stylesheet" href="./css/normalize.css">
@@ -44,10 +46,11 @@
 
 
 <body>
-    <main class="full-box main-container">
+	<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
+
 
 			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
 			th:include="div :: div"></div>
@@ -64,10 +67,12 @@
 			<nav th:replace="nav_user :: nav">			
 			</nav>
             <div class="container-fluid">
+
 				<ul class="full-box list-unstyled ">
 					<li><a th:href="@{/productos/}"><i
 							class="fas fa-arrow-alt-circle-left"></i> &nbsp; VOLVER</a></li>
 				</ul>
+
 			</div>
             <!-- Page header -->
             <div class="full-box page-header">
@@ -97,15 +102,15 @@
 							</tr>
 						</tbody>
 					</table>
+
 				</div>
-			</div>
-        </section>
+		</section>
 
 
 
 
-    </main>
-    
+	</main>
+
 	<div th:replace="scripts-footer.html"></div>
 </body>
 </html>

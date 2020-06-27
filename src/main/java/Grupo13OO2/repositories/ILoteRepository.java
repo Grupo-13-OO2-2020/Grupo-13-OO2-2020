@@ -17,4 +17,5 @@ public interface ILoteRepository extends JpaRepository<Lote, Integer> {
        nativeQuery = true)
 	Page<Lote> findByLocal(int local, Pageable pageable);
 	
+
 }

@@ -10,21 +10,19 @@
 </head>
 <body>
 
-		<!-- Main container -->
+	<!-- Main container -->
 	<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content"
-				 th:replace="div :: div"></div>
-			
-		
-	</section>
+			<div class="full-box nav-lateral-content" th:replace="div :: div"></div>
+
+
+		</section>
 
 		<!-- Page content -->
-			<section class="full-box page-content">
-			<nav th:replace="nav_user :: nav">			
-			</nav>
+		<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav"></nav>
 
 			<!-- Page header -->
 			<div class="full-box page-header">
@@ -48,7 +46,9 @@
 			<!-- Content -->
 			<div class="container-fluid">
 				<fieldset>
-					<legend><i class="far fa-plus-square"></i> &nbsp; Información de Locales</legend>
+					<legend>
+						<i class="far fa-plus-square"></i> &nbsp; Información de Locales
+					</legend>
 
 					<form th:action="@{/locales/save}" th:object=${local} method="POST">
 						<div class="container-fluid">
@@ -56,40 +56,49 @@
 
 								<div>
 									<div class="form-group" style="display: none">
-										<label class="form-group">Id</label>
-										<input th:field="*{id}" type="number" class="form-control" />
-									</div>
-								</div>
-								
-								<div class="col-12 col-md-4">
-									<div class="form-group">
-										<label>DIRECCION</label>
-										<input th:field="*{direccion}" type="text" class="form-control" placeholder="Direccion" maxlength="50">
-										<small class="form-text text-danger" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></small>
-									</div>
-								</div>
-								
-								<div class="col-12 col-md-4">
-									<div class="form-group">
-										<label>LATITUD</label>
-										<input th:field="*{latitud}" type="text" class="form-control" placeholder="Latitud" maxlength="50">
-										<small class="form-text text-danger" th:if="${#fields.hasErrors('latitud')}" th:errors="*{latitud}"></small>
+										<label class="form-group">Id</label> <input th:field="*{id}"
+											type="number" class="form-control" />
 									</div>
 								</div>
 
 								<div class="col-12 col-md-4">
 									<div class="form-group">
-										<label>LONGITUD</label>
-										<input th:field="*{longitud}" type="text" class="form-control" placeholder="Longitud" maxlength="50">
-										<small class="form-text text-danger" th:if="${#fields.hasErrors('longitud')}" th:errors="*{longitud}"></small>
+										<label>DIRECCION</label> <input th:field="*{direccion}"
+											type="text" class="form-control" placeholder="Direccion"
+											maxlength="50"> <small class="form-text text-danger"
+											th:if="${#fields.hasErrors('direccion')}"
+											th:errors="*{direccion}"></small>
 									</div>
 								</div>
-								
+
 								<div class="col-12 col-md-4">
 									<div class="form-group">
-										<label>NUMERO DE TELEFONO</label>
-										<input th:field="*{numeroTelefono}" type="text" class="form-control" placeholder="Numero de telefono" maxlength="50">
-										<small class="form-text text-danger" th:if="${#fields.hasErrors('numeroTelefono')}" th:errors="*{numeroTelefono}"></small>
+										<label>LATITUD</label> <input th:field="*{latitud}"
+											type="text" class="form-control" placeholder="Latitud"
+											maxlength="50"> <small class="form-text text-danger"
+											th:if="${#fields.hasErrors('latitud')}"
+											th:errors="*{latitud}"></small>
+									</div>
+								</div>
+
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+										<label>LONGITUD</label> <input th:field="*{longitud}"
+											type="text" class="form-control" placeholder="Longitud"
+											maxlength="50"> <small class="form-text text-danger"
+											th:if="${#fields.hasErrors('longitud')}"
+											th:errors="*{longitud}"></small>
+									</div>
+								</div>
+
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+										<label>NUMERO DE TELEFONO</label> <input
+											th:field="*{numeroTelefono}" type="text" class="form-control"
+											placeholder="Numero de telefono" maxlength="50"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('numeroTelefono')}"
+											th:errors="*{numeroTelefono}"></small>
 									</div>
 								</div>
 
@@ -103,26 +112,30 @@
 								</div>
 
 
-<!-- 								 <div class="col-12 col-md-6"> -->
-<!-- 									<div class="form-group"> -->
-<!-- 										<label>GERENTE</label> <select class="form-control" placeholder="Local" th:field="*{empleado}"> -->
-<!-- 											<option th:each="empleado : *{empleados}" th:value="${empleado.id}" th:text="${empleado.nombre}"></option> -->
-<!-- 										</select> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
+								<!-- 								 <div class="col-12 col-md-6"> -->
+								<!-- 									<div class="form-group"> -->
+								<!-- 										<label>GERENTE</label> <select class="form-control" placeholder="Local" th:field="*{empleado}"> -->
+								<!-- 											<option th:each="empleado : *{empleados}" th:value="${empleado.id}" th:text="${empleado.nombre}"></option> -->
+								<!-- 										</select> -->
+								<!-- 									</div> -->
+								<!-- 								</div> -->
 
 							</div>
 							<div class="card-footer">
-								<i class="far fa-save"></i>
-								<input type="submit" class="btn btn-raised btn-info btn-sm">
-							<button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
-						&nbsp; &nbsp;
+								<i class="far fa-save"></i> <input type="submit"
+									class="btn btn-raised btn-info btn-sm">
+								<button type="reset" class="btn btn-raised btn-secondary btn-sm">
+									<i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR
+								</button>
+								&nbsp; &nbsp;
 							</div>
 						</div>
 					</form>
 				</fieldset>
-				<br><br><br>
-					
+				<br>
+				<br>
+				<br>
+
 			</div>
 
 
@@ -153,6 +166,6 @@
 		});
 	</script>
 	<script src="/js/main.js"></script>
-	
+
 </body>
 </html>

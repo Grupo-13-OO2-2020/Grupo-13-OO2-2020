@@ -10,105 +10,103 @@
 </head>
 <body>
 
-		<!-- Main container -->
+	<!-- Main container -->
 	<main class="full-box main-container">
 		<!-- Nav lateral -->
-			<section class="full-box nav-lateral">
+		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
 
 			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
-				 th:include="div :: div"></div>
-			
-			<div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
-				 th:include="div2 :: div"></div>
-	</section>
+				th:include="div :: div"></div>
+
+			<div th:unless="${empleado.gerente}"
+				class="full-box nav-lateral-content" th:include="div2 :: div"></div>
+		</section>
 
 		<!-- Page content -->
-			<section class="full-box page-content">
-			<nav th:replace="nav_user :: nav">			
-			</nav>>
+		<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav"></nav>
+			>
 
 			<!-- Page header -->
 			<div class="full-box page-header">
 				<h3 class="text-left">
 					<i class="fab fa-dashcube fa-fw"></i> &nbsp; Bienvenido
 				</h3>
-				<p class="text-justify"> Aqui encontrara las categorias discriminadas por el local,
-				esta vista debera sera la principal si se loguea un vendedor, ya que solo podra acceder a la informacion
-				del local en el cual trabaja.</p>
+				<p class="text-justify">Aqui encontrara las categorias
+					discriminadas por el local, esta vista debera sera la principal si
+					se loguea un vendedor, ya que solo podra acceder a la informacion
+					del local en el cual trabaja.</p>
 			</div>
 
 			<!-- Content -->
 			<div class="full-box tile-container">
 
-				 <a th:href="@{/lotes/{id}(id=${local.id})}" class="tile">
+				<a th:href="@{/lotes/{id}(id=${local.id})}" class="tile">
 					<div class="tile-tittle">Lotes</div>
 					<div class="tile-icon">
 						<i class="fas fa-pallet fa-fw"></i>
 						<p></p>
 					</div>
-				</a> 
-
-				<a th:href="@{/remitos/{id}(id=${local.id})}" class="tile">
+				</a> <a th:href="@{/remitos/{id}(id=${local.id})}" class="tile">
 					<div class="tile-tittle">Remitos</div>
 					<div class="tile-icon">
 						<i class="fas fa-file-invoice-dollar fa-fw"></i>
 						<p></p>
 					</div>
-				</a>
-
-				<a th:href="@{/solicitudesStock/{id}(id=${local.id})}" class="tile">
+				</a> <a th:href="@{/solicitudesStock/{id}(id=${local.id})}" class="tile">
 					<div class="tile-tittle">Solicitudes Externas</div>
 					<div class="tile-icon">
 						<i class="fas fa-file-invoice-dollar fa-fw"></i>
 						<p></p>
 					</div>
-				</a> 
-				
-				<a th:href="@{/productos/}" class="tile">
+				</a> <a th:href="@{/productos/}" class="tile">
 					<div class="tile-tittle">Productos</div>
 					<div class="tile-icon">
 						<i class="fas fa-pallet fa-fw"></i>
 						<p></p>
 					</div>
-				</a> 
+				</a>
 				<div>
 					<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-							Reporte productos vendidos
-						</button>
-						
-						<!-- Modal -->
-						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered" role="document">
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#exampleModalCenter">Reporte productos
+						vendidos</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalCenterTitle"
+						aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLongTitle">Seleccionar entre fechas</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
+									<h5 class="modal-title" id="exampleModalLongTitle">Seleccionar
+										entre fechas</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
 								</div>
 
 								<div class="modal-body">
-									<form th:action="@{/locales/reporte/{id}(id=${local.id})}" class="formulario" novalidate method="Post">
+									<form th:action="@{/locales/reporte/{id}(id=${local.id})}"
+										class="formulario" novalidate method="Post">
 
 										<div class="text-center">
 											<h2>Productos vendidos entre fechas</h2>
 										</div>
 
 										<div class="form-group">
-											<strong>Fecha 1</strong>
-											<input name="fecha1" class="form-control form-control-sm" type="date" required />
-											<div class="invalid-feedback">
-												Debe ingresar la fecha minima
-											</div>
+											<strong>Fecha 1</strong> <input name="fecha1"
+												class="form-control form-control-sm" type="date" required />
+											<div class="invalid-feedback">Debe ingresar la fecha
+												minima</div>
 										</div>
 										<div class="form-group">
-											<strong>Fecha 2</strong>
-											<input name="fecha2" class="form-control form-control-sm" type="date" required />
-											<div class="invalid-feedback">
-												Debe ingresar la fecha maxima
-											</div>
+											<strong>Fecha 2</strong> <input name="fecha2"
+												class="form-control form-control-sm" type="date" required />
+											<div class="invalid-feedback">Debe ingresar la fecha
+												maxima</div>
 										</div>
 										<div class="text-center">
 											<input class="btn btn-primary button" type="submit" />
@@ -117,18 +115,20 @@
 								</div>
 
 								<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Save changes</button>
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save
+										changes</button>
 								</div>
-							</div>
 							</div>
 						</div>
 					</div>
+				</div>
 			</div>
 
 
 		</section>
 	</main>
-		<div th:replace="scripts-footer.html"></div>
+	<div th:replace="scripts-footer.html"></div>
 </body>
 </html>

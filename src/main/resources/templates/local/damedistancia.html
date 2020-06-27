@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Nuevo item</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Calculo Distancia</title>
 <div th:replace="header.html"></div>
 
 
@@ -12,57 +13,77 @@
 
 
 <body>
-    		<!-- Main container -->
+	<!-- Main container -->
 	<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			
+
 			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
-				 th:include="div :: div"></div>
-			
-			<div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
-				 th:include="div2 :: div"></div>
-			
-		
-	</section>
+				th:include="div :: div"></div>
+
+			<div th:unless="${empleado.gerente}"
+				class="full-box nav-lateral-content" th:include="div2 :: div"></div>
+
+
+		</section>
 
 		<!-- Page content -->
 
-			<div class="container-fluid">
-				<ul class="full-box list-unstyled ">
-					<li><a th:href="@{/locales/calculacoordenadas}"><i
-							class="fas fa-arrow-alt-circle-left"></i> &nbsp; VOLVER</a>
-				</ul>
+		<div class="container-fluid">
+			<ul class="full-box list-unstyled ">
+				<li><a th:href="@{/locales/calculacoordenadas}"><i
+						class="fas fa-arrow-alt-circle-left"></i> &nbsp; VOLVER</a>
+			</ul>
+		</div>
+		<div class="card border-dark mb-3"
+			style="max-width: 45rem; margin-left: auto; margin-right: auto;">
+			<div class="card-header" style="text-align: center;">
+				<h1></h1>
+				<h2>DISTANCIAS ENTRE LOCALES</h2>
+				<h3>
+					<i class="fas fa-route"></i>
+				</h3>
 			</div>
-			<div class="card border-dark mb-3"
-					style="max-width: 45rem; margin-left: auto; margin-right: auto;">
-					<div class="card-header" style="text-align: center;">
-					    <h1></h1>
-						<h2>DISTANCIAS ENTRE LOCALES</h2>
-						<h3><i class="fas fa-route"></i></h3>
-					</div>
-					<div class="card-body text-center" >
-						<p><strong><h5>Primer Local</h5></strong></p>
-                        <h1></h1>
-                        <p><h6>Ubicacion: <span th:text="${dir1}" />, Latitud: <span th:text="${lat1}" />, longitud: <span th:text="${lng1}" /></h6></p>
-					</div>
-					<div class="card-body text-center">
-						<p><strong><h5>Segundo Local</h5></strong></p>
-                        <p> <h6>Ubicacion: <span th:text="${dir2}" />, Latitud: <span th:text="${lat2}" />, longitud: <span th:text="${lng2}" /></h6></p>
-					</div>
+			<div class="card-body text-center">
+				<p>
+					<strong><h5>Primer Local</h5></strong>
+				</p>
+				<h1></h1>
+				<p>
+				<h6>
+					Ubicacion: <span th:text="${dir1}" />, Latitud: <span
+						th:text="${lat1}" />, longitud: <span th:text="${lng1}" />
+				</h6>
+				</p>
+			</div>
+			<div class="card-body text-center">
+				<p>
+					<strong><h5>Segundo Local</h5></strong>
+				</p>
+				<p>
+				<h6>
+					Ubicacion: <span th:text="${dir2}" />, Latitud: <span
+						th:text="${lat2}" />, longitud: <span th:text="${lng2}" />
+				</h6>
+				</p>
+			</div>
 
-                    <div class="card-body text-center text-primary">
-                    <hr>
-						<p><strong><h3>La distancia en kilometros es:</h3></strong><h3><span th:text="${distancia}+' kms'"/></h3></p>
-					</div>
-				</div>
-				
-				
-			
+			<div class="card-body text-center text-primary">
+				<hr>
+				<p>
+					<strong><h3>La distancia en kilometros es:</h3></strong>
+				<h3>
+					<span th:text="${distancia}+' kms'" />
+				</h3>
+				</p>
+			</div>
+		</div>
 
-    	
+
+
+
+
 		<div th:replace="scripts-footer.html"></div>
-		
 </body>
 </html>
