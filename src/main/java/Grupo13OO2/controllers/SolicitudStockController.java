@@ -149,11 +149,11 @@ public class SolicitudStockController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
-
+		solicitudStockModel.setProducto(productoService.ListarId(solicitudStockModel.getProducto().getId()));
 		solicitudStockService.insertOrUpdate(solicitudStockModel);
 		if (solicitudStockModel.isAceptado()) {
 			if (localService.validarStockLocal(solicitudStockModel.getProducto().getCodigoProducto(),
-					solicitudStockModel.getCantidad(), solicitudStockModel.getVendedor().getLocal().getId())) {
+					solicitudStockModel.getCantidad(), e.getLocal().getId())==true) {
 				localService.consumirLoteSolicitud(solicitudStockModel);
 				return new RedirectView("/solicitudesStock/" + e.getLocal().getId());
 			} else {
@@ -163,8 +163,8 @@ public class SolicitudStockController {
 			}
 
 		}
-
-		redirect.addFlashAttribute("sinAceptar", "sinAceptar");
+		if(solicitudStockModel.getId()>0) {
+		redirect.addFlashAttribute("sinAceptar", "sinAceptar");}
 
 		return new RedirectView("/solicitudesStock/" + e.getLocal().getId());
 	}

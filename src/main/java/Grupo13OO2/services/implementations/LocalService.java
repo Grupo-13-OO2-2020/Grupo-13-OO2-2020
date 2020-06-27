@@ -159,7 +159,7 @@ public class LocalService implements ILocalService {
 
 		int i = 0;
 
-		while (i < auxList.size() - 1) {
+		while (i < auxList.size()  && aux>0) {
 
 			if (auxList.get(i).getProducto().getCodigoProducto() == solicitudStockModel.getProducto()
 					.getCodigoProducto() && auxList.get(i).getCantidadExistente() > 0) {
@@ -194,7 +194,7 @@ public class LocalService implements ILocalService {
 
 		auxList.sort(Comparator.comparing(LoteModel::getId));
 		int i = 0;
-		while (i < auxList.size() - 1) {
+		while (i < auxList.size()  && aux>0) {
 
 			if (auxList.get(i).getProducto().getCodigoProducto() == remito.getProducto().getCodigoProducto()
 					&& auxList.get(i).getCantidadExistente() > 0) {

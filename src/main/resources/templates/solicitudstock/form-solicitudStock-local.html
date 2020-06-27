@@ -101,7 +101,7 @@
 
 								<div class="col-12 col-md-3">
 									<div class="form-group">
-										<label>FECHA</label> <input disabled="disabled"
+										<label>FECHA</label> <input  readonly="readonly" 
 											th:field="*{fecha}" type="date" value="2011-08-19"
 											class="form-control" placeholder="Fecha">
 									</div>
@@ -109,7 +109,7 @@
 
 								<div class="col-12 col-md-5">
 									<div class="form-group">
-										<label>PRODUCTO</label> <select disabled="disabled"
+										<label>PRODUCTO</label> <select   readonly="readonly" 
 											id="producto-select" class="form-control"
 											placeholder="Producto" th:field="*{producto.id}">
 											<option th:each="producto : ${productos}"
@@ -123,7 +123,7 @@
 
 								<div class="col-12 col-md-3">
 									<div class="form-group">
-										<label>CANTIDAD</label> <input disabled="disabled"
+										<label>CANTIDAD</label> <input  readonly="readonly" 
 											id="cantidad-select" th:field="*{cantidad}" type="number"
 											class="form-control">
 									</div>
@@ -131,7 +131,7 @@
 
 								<div class="col-12 col-md-5">
 									<div class="form-group">
-										<label>VENDEDOR</label> <select disabled="disabled"
+										<label>VENDEDOR</label> <select  readonly="readonly" 
 											id="vendedor-select" class="form-control"
 											placeholder="Vendedor" th:field="*{vendedor.id}">
 											<option th:each="vendedor : ${local.empleados}"
@@ -144,19 +144,19 @@
 
 								<div class="col-12 col-md-5">
 									<div class="form-group">
-										<label>CLIENTE</label> <select disabled="disabled"
+										<label>CLIENTE</label> <select  readonly="readonly" 
 											class="form-control" placeholder="Cliente"
 											th:field="*{cliente.id}">
 											<option th:each="cliente : ${clientes}"
 												th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
-										</select> <small class="form-text text-danger"
+										</select> <small class="form-text text-danger" 
 											th:if="${#fields.hasErrors('cliente.id')}"
 											th:errors="*{cliente.id}"></small>
 									</div>
 								</div>
 
 								<div class="col-12 col-md-6">
-									<label>Local Destinatario</label> <select disabled="disabled"
+									<label>Local Destinatario</label> <select  readonly="readonly" 
 										class="form-control" placeholder="Local"
 										th:field="*{localDestinatario.id}">
 
