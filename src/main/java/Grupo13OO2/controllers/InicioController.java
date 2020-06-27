@@ -52,7 +52,7 @@ public class InicioController {
 			return new RedirectView(ViewRouteHelper.LOCAL_USER + e.getLocal().getId());
 
 		} else {
-			return new RedirectView(ViewRouteHelper.INDEX);
+			return new RedirectView(ViewRouteHelper.REDIRECT);
 
 		}
 
