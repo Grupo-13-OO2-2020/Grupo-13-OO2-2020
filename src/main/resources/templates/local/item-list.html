@@ -6,6 +6,7 @@
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <title>Lista de Locales</title>
 
+
 	<!-- Normalize V8.0.1 -->
 	<link rel="stylesheet" href="./css/normalize.css">
 
@@ -44,6 +45,7 @@
 	<div th:replace="scripts-footer.html"></div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+
 
 </head>
 
@@ -138,14 +140,20 @@
 									</button>
 								</td>
 
-								<td><a th:href="@{/locales/eliminar/{id}(id=${local.id})}"
-									type="button" class="btn btn-warning"
-									> <i
-										class="far fa-trash-alt"></i>
-								</a></td>
 
-								<td><a th:href="@{/locales/editar/{id}(id=${local.id})}"
-									class="btn btn-success"> <i class="fas fa-sync-alt"></i></a></td>
+								<td>
+									<a 
+										th:href="@{/locales/eliminar/{id}(id=${local.id})}"
+										type="button" class="btn btn-warning"> <i
+											class="far fa-trash-alt"></i>
+									</a>
+								</td>
+								
+								<td>	
+								<a th:href="@{/locales/editar/{id}(id=${local.id})}"
+									class="btn btn-success"> <i class="fas fa-sync-alt"></i></a>
+								</td>
+					
 
 							</tr>
 						</tbody>

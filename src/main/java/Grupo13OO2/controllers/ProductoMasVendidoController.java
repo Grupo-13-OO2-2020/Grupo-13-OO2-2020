@@ -28,9 +28,11 @@ import Grupo13OO2.Models.SolicitudStockModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.repositories.IUserRepository;
 import Grupo13OO2.services.IEmpleadoService;
+import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.IPedidoService;
 import Grupo13OO2.services.IRemitoService;
 import Grupo13OO2.services.ISolicitudStockService;
+import Grupo13OO2.services.implementations.LocalService;
 
 @Controller
 @RequestMapping("/Productomasvendido")
@@ -53,6 +55,10 @@ public class ProductoMasVendidoController {
 	private IEmpleadoService empleadoService;
 
 	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
+
+	@Autowired
 	private IUserRepository userRepository;
 
 	@GetMapping("")
@@ -65,6 +71,7 @@ public class ProductoMasVendidoController {
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
 		return mAV;
 	}
 
