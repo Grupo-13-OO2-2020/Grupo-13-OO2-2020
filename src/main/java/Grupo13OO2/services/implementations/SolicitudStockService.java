@@ -91,9 +91,12 @@ public class SolicitudStockService implements ISolicitudStockService {
 		EmpleadoModel vendedor = empleadoService.ListarId(idVendedor);
 		LocalModel local = vendedor.getLocal();
 		for (LocalModel l : localService.getAll()) {
-			if (localService.validarStockLocal(producto.getCodigoProducto(), cantidad, l.getId())) {
+			if(!(l.getId() == local.getId())){
+				if (localService.validarStockLocal(producto.getCodigoProducto(), cantidad, l.getId())) {
 				localesStock.add(l);
+				}
 			}
+			
 		}
 		Collections.sort(localesStock, new Comparator<LocalModel>() {
 			@Override

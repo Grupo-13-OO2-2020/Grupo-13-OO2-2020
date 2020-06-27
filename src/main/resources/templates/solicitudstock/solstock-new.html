@@ -69,14 +69,14 @@
 									</div>
 								</div>
 
-								<div class="col-12 col-md-6">
+								<div class="col-12 col-md-3">
 									<div class="form-group">
 										<label>FECHA</label> <input th:field="*{fecha}" type="date"
 											value="2011-08-19" class="form-control" placeholder="Fecha">
 									</div>
 								</div>
-
-								<div class="col-12 col-md-6">
+                                
+                                <div class="col-12 col-md-4">
 									<div class="form-group">
 										<label>PRODUCTO</label> <select id="producto-select"
 											class="form-control" placeholder="Producto"
@@ -89,15 +89,15 @@
 											th:errors="*{producto.id}"></small>
 									</div>
 								</div>
-
-								<div class="col-12 col-md-6">
+                                
+                                <div class="col-12 col-md-1">
 									<div class="form-group">
 										<label>CANTIDAD</label> <input id="cantidad-select"
 											th:field="*{cantidad}" type="number" class="form-control">
 									</div>
 								</div>
-
-								<div class="col-12 col-md-6">
+                                
+                                <div class="col-12 col-md-4">
 									<div class="form-group">
 										<label>VENDEDOR</label> <select id="vendedor-select"
 											class="form-control" placeholder="Vendedor"
@@ -109,8 +109,8 @@
 											th:errors="*{vendedor}"></small>
 									</div>
 								</div>
-
-								<div class="col-12 col-md-6">
+                                
+                                <div class="col-12 col-md-4">
 									<div class="form-group">
 										<label>CLIENTE</label> <select class="form-control"
 											placeholder="Cliente" th:field="*{cliente.id}">
@@ -122,21 +122,23 @@
 									</div>
 								</div>
 
-								<div>
-									<div class="m-3">
-										<label class="mr-5">Local Destino</label> <span><a
-											id="bot" class="btn btn-primary" style="background: #71FEFB"
-											role="button">Buscar Locales mas cercanos y con stock</a></span>
-
+								<div class="col-12 col-md-4">
+									<div class="mt-4"><a
+										id="bot" class="btn btn-primary" style="background:#f0ad4e" role="button">Buscar Locales mas cercanos y con stock</a></div>
+								</div>	
+								
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+											<label >LOCAL DESTINATARIO</label>
+											<select id="select1" class="form-control mdb-select md-form" placeholder="Local"
+												th:field="*{localDestinatario.id}">
+											</select>
 									</div>
-
-									<select id="select1" class="form-control" placeholder="Local"
-										th:field="*{localDestinatario.id}">
-									</select>
 								</div>
 
 
 							</div>
+							
 							<div class="card-footer">
 								<i class="far fa-save"></i> <input type="submit"
 									class="btn btn-raised btn-info btn-sm">
