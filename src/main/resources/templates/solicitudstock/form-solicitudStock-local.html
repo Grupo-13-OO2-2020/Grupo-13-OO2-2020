@@ -34,19 +34,19 @@
 </head>
 <body>
 
-	    <!-- Main container -->
-  <main class="full-box main-container">
+	<!-- Main container -->
+	<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
 			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
-            th:include="div :: div"></div>
-        
-            <div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
-                    th:include="div2 :: div"></div>
-			
-		
-	</section>
+				th:include="div :: div"></div>
+
+			<div th:unless="${empleado.gerente}"
+				class="full-box nav-lateral-content" th:include="div2 :: div"></div>
+
+
+		</section>
 
 		<!-- Page content -->
 		<section class="full-box page-content">
@@ -72,7 +72,8 @@
 					<li><a class="active" href="user-new.html"><i
 							class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR SOLICITUD STOCK</a></li>
 					<li><a href="user-list.html"><i
-							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA SOLICITUD STOCK</a></li>
+							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA SOLICITUD
+							STOCK</a></li>
 					<li><a href="user-search.html"><i
 							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR SOLICITUD STOCK</a></li>
 				</ul>
@@ -81,109 +82,134 @@
 			<!-- Content -->
 			<div class="container-fluid">
 				<fieldset>
-					<legend><i class="far fa-plus-square"></i> &nbsp; Información de la Solicitud de Stock</legend>
+					<legend>
+						<i class="far fa-plus-square"></i> &nbsp; Información de la
+						Solicitud de Stock
+					</legend>
 
-					<form th:action="@{/solicitudesStock/save}" th:object=${solicitudStock} method="POST">
+					<form th:action="@{/solicitudesStock/save}"
+						th:object=${solicitudStock} method="POST">
 						<div class="container-fluid">
 							<div class="row">
 
 								<div>
 									<div class="form-group" style="display: none">
-										<label class="form-group">Id</label>
-										<input th:field="*{id}" type="number" class="form-control" />
+										<label class="form-group">Id</label> <input th:field="*{id}"
+											type="number" class="form-control" />
 									</div>
 								</div>
 
 								<div class="col-12 col-md-3">
 									<div class="form-group">
-										<label>FECHA</label>
-										<input disabled="disabled" th:field="*{fecha}" type="date" value="2011-08-19" class="form-control" placeholder="Fecha">
+										<label>FECHA</label> <input disabled="disabled"
+											th:field="*{fecha}" type="date" value="2011-08-19"
+											class="form-control" placeholder="Fecha">
 									</div>
 								</div>
-                                
-                                <div class="col-12 col-md-5">
-									<div class="form-group">
-										<label>PRODUCTO</label> 
-										<select disabled="disabled" id="producto-select" class="form-control" placeholder="Producto" th:field="*{producto.id}">
-											<option th:each="producto : ${productos}" th:value="${producto.id}" th:text="${producto.descripcion}+${producto.talle}"></option>
-										</select> 
-										<small class="form-text text-danger"th:if="${#fields.hasErrors('producto.id')}" th:errors="*{producto.id}"></small>
-									</div>
-								</div>
-                                
-                                <div class="col-12 col-md-3">
-									<div class="form-group">
-										<label>CANTIDAD</label>
-										<input disabled="disabled" id="cantidad-select" th:field="*{cantidad}" type="number"  class="form-control">
-									</div>
-								</div>
-                                
-                                <div class="col-12 col-md-5">
-									<div class="form-group">
-										<label>VENDEDOR</label> 
-										<select  disabled="disabled"  id="vendedor-select" class="form-control" placeholder="Vendedor" th:field="*{vendedor.id}">
-											<option th:each="vendedor : ${local.empleados}" th:value="${vendedor.id}" th:text="${vendedor.nombre}"></option>
-										</select> 
-										<small class="form-text text-danger"th:if="${#fields.hasErrors('vendedor')}" th:errors="*{vendedor}"></small>
-									</div>
-								</div>
-                                
-                                <div class="col-12 col-md-5">
-									<div class="form-group">
-										<label>CLIENTE</label> <select disabled="disabled" class="form-control" placeholder="Cliente" th:field="*{cliente.id}">
-											<option  th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
-										</select> 
-										<small class="form-text text-danger"th:if="${#fields.hasErrors('cliente.id')}" th:errors="*{cliente.id}"></small>
-									</div>
-                                </div >
 
-                                <div class="col-12 col-md-6">
-                                    <label>Local Destinatario</label> 
-                    
-                                    <select disabled="disabled" class="form-control"placeholder="Local" th:field="*{localDestinatario.id}">
-                                        
-                                    <option th:each="localDestinatario : ${locales}" th:value="${localDestinatario.id}"
-                                        th:text="${localDestinatario.direccion}"></option>
-                                    </select>	
-                            </div>
-                            
-                                <div class="col-12 col-md-6">
-                                    <label>Colaborador</label> 
-                                    <select class="form-control"placeholder="Colaborador" th:field="*{colaborador.id}">
-                                    <option th:each="colaborador : *{localDestinatario.empleados}" th:value="${colaborador.id}"
-                                        th:text="${colaborador.nombre}"></option>
-                                    </select>		
-                                </div>
+								<div class="col-12 col-md-5">
+									<div class="form-group">
+										<label>PRODUCTO</label> <select disabled="disabled"
+											id="producto-select" class="form-control"
+											placeholder="Producto" th:field="*{producto.id}">
+											<option th:each="producto : ${productos}"
+												th:value="${producto.id}"
+												th:text="${producto.descripcion}+${producto.talle}"></option>
+										</select> <small class="form-text text-danger"
+											th:if="${#fields.hasErrors('producto.id')}"
+											th:errors="*{producto.id}"></small>
+									</div>
+								</div>
 
-                                <div class="col-12 col-md-2">
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox">
-                                            <input th:field="*{aceptado}" type="checkbox" class="custom-control-input" id="defaultUnchecked2">
-                                            <label class="custom-control-label" for="defaultUnchecked2">Aceptado</label>
-                                        </div>
-                                    </div>
-                                
+								<div class="col-12 col-md-3">
+									<div class="form-group">
+										<label>CANTIDAD</label> <input disabled="disabled"
+											id="cantidad-select" th:field="*{cantidad}" type="number"
+											class="form-control">
+									</div>
+								</div>
 
-                                </div>
-                               
-                    
-								
+								<div class="col-12 col-md-5">
+									<div class="form-group">
+										<label>VENDEDOR</label> <select disabled="disabled"
+											id="vendedor-select" class="form-control"
+											placeholder="Vendedor" th:field="*{vendedor.id}">
+											<option th:each="vendedor : ${local.empleados}"
+												th:value="${vendedor.id}" th:text="${vendedor.nombre}"></option>
+										</select> <small class="form-text text-danger"
+											th:if="${#fields.hasErrors('vendedor')}"
+											th:errors="*{vendedor}"></small>
+									</div>
+								</div>
+
+								<div class="col-12 col-md-5">
+									<div class="form-group">
+										<label>CLIENTE</label> <select disabled="disabled"
+											class="form-control" placeholder="Cliente"
+											th:field="*{cliente.id}">
+											<option th:each="cliente : ${clientes}"
+												th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
+										</select> <small class="form-text text-danger"
+											th:if="${#fields.hasErrors('cliente.id')}"
+											th:errors="*{cliente.id}"></small>
+									</div>
+								</div>
+
+								<div class="col-12 col-md-6">
+									<label>Local Destinatario</label> <select disabled="disabled"
+										class="form-control" placeholder="Local"
+										th:field="*{localDestinatario.id}">
+
+										<option th:each="localDestinatario : ${locales}"
+											th:value="${localDestinatario.id}"
+											th:text="${localDestinatario.direccion}"></option>
+									</select>
+								</div>
+
+								<div class="col-12 col-md-6">
+									<label>Colaborador</label> <select class="form-control"
+										placeholder="Colaborador" th:field="*{colaborador.id}">
+										<option th:each="colaborador : *{localDestinatario.empleados}"
+											th:value="${colaborador.id}" th:text="${colaborador.nombre}"></option>
+									</select>
+								</div>
+
+								<div class="col-12 col-md-2">
+									<div class="form-group">
+										<div class="custom-control custom-checkbox">
+											<input th:field="*{aceptado}" type="checkbox"
+												class="custom-control-input" id="defaultUnchecked2">
+											<label class="custom-control-label" for="defaultUnchecked2">Aceptado</label>
+										</div>
+									</div>
+
+
+								</div>
+
+
+
 
 
 							</div>
 							<div class="card-footer">
-								<i class="far fa-save"></i>
-								<input type="submit" class="btn btn-raised btn-info btn-sm">
+								<i class="far fa-save"></i> <input type="submit"
+									class="btn btn-raised btn-info btn-sm">
 							</div>
 						</div>
 					</form>
 				</fieldset>
-				<br><br><br>
-					<p class="text-center" style="margin-top: 40px;">
-						<button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
-						&nbsp; &nbsp;
-						<button type="submit" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; GUARDAR</button>
-					</p>
+				<br>
+				<br>
+				<br>
+				<p class="text-center" style="margin-top: 40px;">
+					<button type="reset" class="btn btn-raised btn-secondary btn-sm">
+						<i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR
+					</button>
+					&nbsp; &nbsp;
+					<button type="submit" class="btn btn-raised btn-info btn-sm">
+						<i class="far fa-save"></i> &nbsp; GUARDAR
+					</button>
+				</p>
 			</div>
 
 
@@ -192,6 +218,6 @@
 
 
 	<div th:replace="scripts-footer.html"></div>
-	
+
 </body>
 </html>

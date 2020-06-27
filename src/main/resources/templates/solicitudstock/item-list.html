@@ -16,27 +16,27 @@
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
 			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
-            th:include="div :: div"></div>
-        
-            <div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
-                    th:include="div2 :: div"></div>
-			
-		
-	</section>
+				th:include="div :: div"></div>
 
-			<section class="full-box page-content">
-			<nav th:replace="nav_user :: nav">			
-			</nav>
+			<div th:unless="${empleado.gerente}"
+				class="full-box nav-lateral-content" th:include="div2 :: div"></div>
+
+
+		</section>
+
+		<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav"></nav>
 			<!-- Page header -->
 			<div class="full-box page-header">
 				<h3 class="text-left">
-					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; SOLICITUDES DE STOCK A OTRO LOCAL
+					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; SOLICITUDES DE
+					STOCK A OTRO LOCAL
 				</h3>
 				<p class="text-justify"></p>
 			</div>
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-							<li><a href="item-search.html"><i
+					<li><a href="item-search.html"><i
 							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR SOLICITUD</a></li>
 				</ul>
 			</div>
@@ -56,7 +56,6 @@
 								<th>COLABORADOR</th>
 								<th>ACEPTADO</th>
 								<th>LOCAL</th>
-								<th>ELIMINAR</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -71,37 +70,34 @@
 								<td th:text="${solicitudStock.cliente.nombre}"></td>
 								<td th:if="${solicitudStock.aceptado}"
 									th:text="${solicitudStock.colaborador.nombre}"></td>
-								
-						<td  th:unless="${solicitudStock.colaborador}" th:text="'Sin Asignar'" ></td>
-					
-								
+
+								<td th:unless="${solicitudStock.colaborador}"
+									th:text="'Sin Asignar'"></td>
+
+
 								<td th:text="${solicitudStock.aceptado}"></td>
 								<td th:text="${solicitudStock.localDestinatario.direccion}"></td>
-								<td><a
-									th:href="@{solicitudesStock/eliminar/}+ ${solicitudStock.id}"
-									type="button" class="btn btn-warning"
-									onclick="alert('El cliente fue eliminado con exito!')"> <i
-										class="far fa-trash-alt"></i>
-								</a></td>
+								
 							</tr>
 						</tbody>
 					</table>
 				</div>
-						<nav aria-label="Page navigation example">
+				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
-						
+
 						<li class="page-item"
-							th:classappend="${prev == 0 ? 'disabled': '' }">
-							<a class="page-link" th:href="@{|/solicitudesStock/?page=${prev}|}">Anterior</a>
-							</li>
-						<li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active': '' }">
-						<a	class="page-link" th:href="@{|/solicitudesStock/?page=${page}|}"
+							th:classappend="${prev == 0 ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/solicitudesStock/?page=${prev}|}">Anterior</a>
+						</li>
+						<li class="page-item" th:each="page : ${pages}"
+							th:classappend="${current == page ? 'active': '' }"><a
+							class="page-link" th:href="@{|/solicitudesStock/?page=${page}|}"
 							th:text="${page}"></a>
-							<li class="page-item"
-							th:classappend="${current == last ? 'disabled': '' }">
-							<a class="page-link" th:href="@{|/solicitudesStock/?page=${next}|}">Proxima</a>
-							</li>	
-							
+						<li class="page-item"
+							th:classappend="${current == last ? 'disabled': '' }"><a
+							class="page-link" th:href="@{|/solicitudesStock/?page=${next}|}">Proxima</a>
+						</li>
+
 					</ul>
 				</nav>
 			</div>
@@ -113,6 +109,6 @@
 	</main>
 
 
-		<div th:replace="scripts-footer.html"></div>
+	<div th:replace="scripts-footer.html"></div>
 </body>
 </html>

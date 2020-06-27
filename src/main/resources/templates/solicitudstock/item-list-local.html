@@ -16,30 +16,30 @@
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
 			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
-            th:include="div :: div"></div>
-        
-            <div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
-                    th:include="div2 :: div"></div>
+				th:include="div :: div"></div>
+
+			<div th:unless="${empleado.gerente}"
+				class="full-box nav-lateral-content" th:include="div2 :: div"></div>
 		</section>
 
-			<section class="full-box page-content">
-			<nav th:replace="nav_user :: nav">			
-			</nav>
+		<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav"></nav>
 			<!-- Page header -->
 			<div class="full-box page-header">
 				<h3 class="text-left">
-					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; SOLICITUDES DE STOCK A OTRO LOCAL
+					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; SOLICITUDES DE
+					STOCK A OTRO LOCAL
 				</h3>
 				<p class="text-justify"></p>
 			</div>
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-							<li><a href="item-search.html"><i
+					<li><a href="item-search.html"><i
 							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR SOLICITUD</a></li>
 				</ul>
 			</div>
-	
-			   <script type="text/javascript" th:inline="javascript">
+
+			<script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/
        var all =  /*[[ ${sinStock} ]]*/;
 
@@ -50,8 +50,8 @@
 
     }
 </script>
-	
-			   <script type="text/javascript" th:inline="javascript">
+
+			<script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/
        var all =  /*[[ ${sinAceptar} ]]*/;
 
@@ -85,7 +85,7 @@
 						</thead>
 						<tbody>
 							<tr th:each="solicitudStock:${solicitudesStock}">
-								
+
 
 								<td th:text="${solicitudStock.id}"></td>
 								<td th:text="${solicitudStock.fecha}"></td>
@@ -98,14 +98,12 @@
 								<td th:unless="${solicitudStock.aceptado}"></td>
 								<td th:text="${solicitudStock.aceptado}"></td>
 								<td th:text="${solicitudStock.localDestinatario.direccion}"></td>
-								<td>
-									 <a th:href="@{/solicitudesStock/editar/{id}(id=*{solicitudStock.id})}" class="btn btn-warning"
-									 >Aceptar</a>
-               					 </td>
-								<td>
-									<a th:href="@{/locales/main/{id}(id=${local.id})}" class="btn btn-warning">Volver</a>
-								</td>
-								
+								<td><a
+									th:href="@{/solicitudesStock/editar/{id}(id=*{solicitudStock.id})}"
+									class="btn btn-warning">Aceptar</a></td>
+								<td><a th:href="@{/locales/main/{id}(id=${local.id})}"
+									class="btn btn-warning">Volver</a></td>
+
 							</tr>
 						</tbody>
 					</table>
@@ -115,15 +113,18 @@
 
 						<li class="page-item"
 							th:classappend="${prev == 0 ? 'disabled': '' }"><a
-							class="page-link" th:href="@{|/solicitudesStock/${local.id}?page=${prev}|}">Anterior</a>
+							class="page-link"
+							th:href="@{|/solicitudesStock/${local.id}?page=${prev}|}">Anterior</a>
 						</li>
 						<li class="page-item" th:each="page : ${pages}"
 							th:classappend="${current == page ? 'active': '' }"><a
-							class="page-link" th:href="@{|/solicitudesStock/${local.id}?page=${page}|}"
+							class="page-link"
+							th:href="@{|/solicitudesStock/${local.id}?page=${page}|}"
 							th:text="${page}"></a>
 						<li class="page-item"
 							th:classappend="${current == last ? 'disabled': '' }"><a
-							class="page-link" th:href="@{|/solicitudesStock/${local.id}?page=${next}|}">Proxima</a>
+							class="page-link"
+							th:href="@{|/solicitudesStock/${local.id}?page=${next}|}">Proxima</a>
 						</li>
 
 					</ul>
@@ -137,6 +138,6 @@
 	</main>
 
 
-		<div th:replace="scripts-footer.html"></div>
+	<div th:replace="scripts-footer.html"></div>
 </body>
 </html>

@@ -13,23 +13,22 @@
 
 	<main class="full-box main-container">
 		<!-- Nav lateral -->
-	<section class="full-box nav-lateral">
+		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			
+
 			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
-            th:include="div :: div"></div>
-        
-            <div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
-                    th:include="div2 :: div"></div>
-			 
-			 
-	</section>
+				th:include="div :: div"></div>
+
+			<div th:unless="${empleado.gerente}"
+				class="full-box nav-lateral-content" th:include="div2 :: div"></div>
+
+
+		</section>
 
 
 		<!-- Page content -->
-			<section class="full-box page-content">
-			<nav th:replace="nav_user :: nav">			
-			</nav>
+		<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav"></nav>
 
 			<!-- Page header -->
 			<div class="full-box page-header">
@@ -56,80 +55,97 @@
 			<!-- Content -->
 			<div class="container-fluid">
 				<fieldset>
-					<legend><i class="far fa-plus-square"></i> &nbsp; Información de Remitos</legend>
+					<legend>
+						<i class="far fa-plus-square"></i> &nbsp; Información de Remitos
+					</legend>
 
-					<form th:action="@{/remitos/save}" th:object=${remito} method="POST">
+					<form th:action="@{/remitos/save}" th:object=${remito}
+						method="POST">
 						<div class="container-fluid">
 							<div class="row">
 
 								<div>
 									<div class="form-group" style="display: none">
-										<label class="form-group">Id</label>
-										<input th:field="*{id}" type="number" class="form-control" />
+										<label class="form-group">Id</label> <input th:field="*{id}"
+											type="number" class="form-control" />
 									</div>
 								</div>
 
 								<div class="col-12 col-md-6">
 									<div class="form-group">
-										<label>FECHA</label>
-										<input th:field="*{fecha}" type="date" value="2011-08-19" class="form-control" placeholder="Fecha">
-									</div>
-								</div>
-                                
-                                <div class="col-12 col-md-6">
-									<div class="form-group">
-										<label>PRODUCTO</label> <select class="form-control" placeholder="Producto" th:field="*{producto.id}">
-											<option th:each="producto : ${productos}" th:value="${producto.id}" th:text="${producto.descripcion}+${producto.talle}"></option>
-										</select> 
-										<small class="form-text text-danger"th:if="${#fields.hasErrors('producto.id')}" th:errors="*{producto.id}"></small>
-									</div>
-								</div>
-                                
-                                <div class="col-12 col-md-6">
-									<div class="form-group">
-										<label>CANTIDAD</label>
-										<input th:field="*{cantidad}" type="number"  class="form-control">
-									</div>
-								</div>
-                                
-                                <div class="col-12 col-md-6">
-									<div class="form-group">
-										<label>VENDEDOR</label> <select class="form-control" placeholder="Vendedor" th:field="*{vendedor.id}">
-											<option th:each="vendedor : ${local.empleados}" th:value="${vendedor.id}" th:text="${vendedor.nombre}"></option>
-										</select> 
-										<small class="form-text text-danger"th:if="${#fields.hasErrors('vendedor')}" th:errors="*{vendedor}"></small>
-									</div>
-								</div>
-                                
-                                <div class="col-12 col-md-6">
-									<div class="form-group">
-										<label>CLIENTE</label> <select class="form-control" placeholder="Cliente" th:field="*{cliente.id}">
-											<option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
-										</select> 
-										<small class="form-text text-danger"th:if="${#fields.hasErrors('cliente.id')}" th:errors="*{cliente.id}"></small>
+										<label>FECHA</label> <input th:field="*{fecha}" type="date"
+											value="2011-08-19" class="form-control" placeholder="Fecha">
 									</div>
 								</div>
 
 								<div class="col-12 col-md-6">
 									<div class="form-group">
-										<label>FORMA DE PAGO</label>
-										<input th:field="*{formaDePago}" type="text" class="form-control" placeholder="Forma de pago">
+										<label>PRODUCTO</label> <select class="form-control"
+											placeholder="Producto" th:field="*{producto.id}">
+											<option th:each="producto : ${productos}"
+												th:value="${producto.id}"
+												th:text="${producto.descripcion}+${producto.talle}"></option>
+										</select> <small class="form-text text-danger"
+											th:if="${#fields.hasErrors('producto.id')}"
+											th:errors="*{producto.id}"></small>
+									</div>
+								</div>
+
+								<div class="col-12 col-md-6">
+									<div class="form-group">
+										<label>CANTIDAD</label> <input th:field="*{cantidad}"
+											type="number" class="form-control">
+									</div>
+								</div>
+
+								<div class="col-12 col-md-6">
+									<div class="form-group">
+										<label>VENDEDOR</label> <select class="form-control"
+											placeholder="Vendedor" th:field="*{vendedor.id}">
+											<option th:each="vendedor : ${local.empleados}"
+												th:value="${vendedor.id}" th:text="${vendedor.nombre}"></option>
+										</select> <small class="form-text text-danger"
+											th:if="${#fields.hasErrors('vendedor')}"
+											th:errors="*{vendedor}"></small>
+									</div>
+								</div>
+
+								<div class="col-12 col-md-6">
+									<div class="form-group">
+										<label>CLIENTE</label> <select class="form-control"
+											placeholder="Cliente" th:field="*{cliente.id}">
+											<option th:each="cliente : ${clientes}"
+												th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
+										</select> <small class="form-text text-danger"
+											th:if="${#fields.hasErrors('cliente.id')}"
+											th:errors="*{cliente.id}"></small>
+									</div>
+								</div>
+
+								<div class="col-12 col-md-6">
+									<div class="form-group">
+										<label>FORMA DE PAGO</label> <input th:field="*{formaDePago}"
+											type="text" class="form-control" placeholder="Forma de pago">
 									</div>
 								</div>
 
 
 							</div>
 							<div class="card-footer">
-								<i class="far fa-save"></i>
-								<input type="submit" class="btn btn-raised btn-info btn-sm">
-								<button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
-						&nbsp; &nbsp;
+								<i class="far fa-save"></i> <input type="submit"
+									class="btn btn-raised btn-info btn-sm">
+								<button type="reset" class="btn btn-raised btn-secondary btn-sm">
+									<i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR
+								</button>
+								&nbsp; &nbsp;
 							</div>
 						</div>
 					</form>
 				</fieldset>
-				<br><br><br>
-			
+				<br>
+				<br>
+				<br>
+
 			</div>
 
 
@@ -160,6 +176,6 @@
 		});
 	</script>
 	<script src="/js/main.js"></script>
-	
+
 </body>
 </html>

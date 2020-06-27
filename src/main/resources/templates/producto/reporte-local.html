@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Lista de Productos</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Lista de Productos</title>
 
 <div th:replace="header.html"></div>
 
@@ -11,101 +12,101 @@
 
 
 <body>
-   <main class="full-box main-container">
+	<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
-            <div class="full-box nav-lateral-bg show-nav-lateral"></div>
-            
-            <div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
-            th:include="div :: div"></div>
-        
-            <div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
-                    th:include="div2 :: div"></div>
-			
-		
-	</section>
+			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
 
-       	<section class="full-box page-content">
-			<nav th:replace="nav_user :: nav">			
-			</nav>
-            <!-- Page header -->
-            <div class="full-box page-header">
-                <h3 class="text-left">
-                    <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; REPORTE DE PROUCTOS
-                </h3>
-                <p class="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum delectus eos enim numquam fugit optio accusantium, aperiam eius facere architecto facilis quibusdam asperiores veniam omnis saepe est et, quod obcaecati.
-                </p>
-            </div>
-            <div class="container-fluid">
-                <ul class="full-box list-unstyled page-nav-tabs">
-                    <li>
-                        <a th:href="@{/productos/new}"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a>
-                    </li>
-                    <li>
-                        <a  th:href="@{/productos/}"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/Productomasvendido/}"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; PRODUCTOS MAS VENDIDOS</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/productos/search}"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR PRODUCTO</a>
-                    </li>
-                </ul>
-            </div>
-            
-            <!--CONTENT-->
-            <div class="container-fluid">
-                
-        
-                <div class="table-responsive">
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+				th:include="div :: div"></div>
 
-                    <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${fecha2 != null}" th:text="'Reporte de productos ente '+ ${fecha1} +' y '+ ${fecha2}" class="alert-dark m-2">
-                    </div>
-                    
-                    <table class="table table-dark table-sm">
-                        <thead>
-                            <tr class="text-center roboto-medium">
-                                <th>ID</th>
-                                <th>DESCRIPCION</th>
-                                <th>PRECIO UNITARIO</th>
-                                <th>TALLE</th>
-                                <th>CODIGO PRODUCTO</th>
-                                <th>ACTUALIZAR</th>
-                                <th>ELIMINAR</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="producto:${productosFecha}" style="text-align:center;">
-                                <td th:text="${producto.id}"></td>
-                                <td th:text="${producto.descripcion}"></td>
-                                <td th:text="${producto.precioUnitario}"></td>
-                                <td th:text="${producto.talle}"></td>
-                                <td th:text="${producto.codigoProducto}"></td>
-                                <td>
-                                    <a th:href="@{productos/editar/} + ${producto.id}" class="btn btn-success">
-                                        <i class="fas fa-sync-alt"></i> 
-                                    </a>
-                                </td>
-                                <td>
-                                    <a th:href ="@{productos/eliminar/{id}(id=${producto.id})}" class="btn btn-warning">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
-                                </td>
-            
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </section>
+			<div th:unless="${empleado.gerente}"
+				class="full-box nav-lateral-content" th:include="div2 :: div"></div>
 
 
+		</section>
+
+		<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav"></nav>
+			<!-- Page header -->
+			<div class="full-box page-header">
+				<h3 class="text-left">
+					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; REPORTE DE
+					PROUCTOS
+				</h3>
+				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit. Harum delectus eos enim numquam fugit optio
+					accusantium, aperiam eius facere architecto facilis quibusdam
+					asperiores veniam omnis saepe est et, quod obcaecati.</p>
+			</div>
+			<div class="container-fluid">
+				<ul class="full-box list-unstyled page-nav-tabs">
+					<li><a th:href="@{/productos/new}"><i
+							class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a></li>
+					<li><a th:href="@{/productos/}"><i
+							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE
+							PRODUCTOS</a></li>
+					<li><a th:href="@{/Productomasvendido/}"><i
+							class="fas fa-clipboard-list fa-fw"></i> &nbsp; PRODUCTOS MAS
+							VENDIDOS</a></li>
+					<li><a th:href="@{/productos/search}"><i
+							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR PRODUCTO</a></li>
+				</ul>
+			</div>
+
+			<!--CONTENT-->
+			<div class="container-fluid">
 
 
-    </main>
-    
+				<div class="table-responsive">
+
+					<div
+						th:classappend="'alert-' + (${clase != null} ? ${clase} : info)"
+						th:if="${fecha2 != null}"
+						th:text="'Reporte de productos ente '+ ${fecha1} +' y '+ ${fecha2}"
+						class="alert-dark m-2"></div>
+
+					<table class="table table-dark table-sm">
+						<thead>
+							<tr class="text-center roboto-medium">
+								<th>ID</th>
+								<th>DESCRIPCION</th>
+								<th>PRECIO UNITARIO</th>
+								<th>TALLE</th>
+								<th>CODIGO PRODUCTO</th>
+								<th>ACTUALIZAR</th>
+								<th>ELIMINAR</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="producto:${productosFecha}"
+								style="text-align: center;">
+								<td th:text="${producto.id}"></td>
+								<td th:text="${producto.descripcion}"></td>
+								<td th:text="${producto.precioUnitario}"></td>
+								<td th:text="${producto.talle}"></td>
+								<td th:text="${producto.codigoProducto}"></td>
+								<td><a th:href="@{productos/editar/} + ${producto.id}"
+									class="btn btn-success"> <i class="fas fa-sync-alt"></i>
+								</a></td>
+								<td><a
+									th:href="@{productos/eliminar/{id}(id=${producto.id})}"
+									class="btn btn-warning"> <i class="far fa-trash-alt"></i>
+								</a></td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</section>
+
+
+
+
+	</main>
+
 	<div th:replace="scripts-footer.html"></div>
 </body>
 </html>

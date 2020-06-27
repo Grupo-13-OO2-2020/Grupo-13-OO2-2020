@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.text.SimpleDateFormat;
@@ -150,9 +151,17 @@ public class LocalController {
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/eliminar/{id}")
-	public RedirectView delete(Model model, @PathVariable("id") int id) {
-		localService.delete(id);
+	public RedirectView delete(Model model, @PathVariable("id") int id,RedirectAttributes redirect) {
+		if(localService.findById(id).getEmpleados().isEmpty()) {
+			localService.delete(id);
+			return new RedirectView("/locales");
+
+		}else {
+			redirect.addFlashAttribute("popUp", "error");
 		return new RedirectView("/locales");
+			
+		}		
+	
 	}
 
 	@GetMapping("/calculacoordenadas")

@@ -1,77 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Lista de Productos</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Lista de Productos Mas Vendidos</title>
 
-   <div th:replace="header.html"></div>
+<div th:replace="header.html"></div>
 
 </head>
 
 
 <body>
-    <main class="full-box main-container">
+	<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
 
-			
-			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
-            th:include="div :: div"></div>
-        
-            <div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
-                    th:include="div2 :: div"></div>
-			
-		
-	</section>
 
-        	<section class="full-box page-content">
-			<nav th:replace="nav_user :: nav">			
-			</nav>
-            <div class="container-fluid">
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+				th:include="div :: div"></div>
+
+			<div th:unless="${empleado.gerente}"
+				class="full-box nav-lateral-content" th:include="div2 :: div"></div>
+
+
+		</section>
+
+		<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav"></nav>
+			<div class="container-fluid">
 				<ul class="full-box list-unstyled ">
 					<li><a th:href="@{/productos/}"><i
 							class="fas fa-arrow-alt-circle-left"></i> &nbsp; VOLVER</a>
 				</ul>
-            
-            <!-- Page header -->
-            <div class="full-box page-header">
-                <h3 class="text-left">
-                    <i class="fas fa-cart-plus"></i> &nbsp; RANKING DE PRODUCTOS
-                </h3>
-                <p class="text-justify text-primary">
-				A continuacion se detallara el ranking de productos mas vendidos de locales.
-                </p>
-                <hr>
-            </div>
-            
-            <!--CONTENT-->
-           <div class="container-fluid">
-				<div class="table-responsive" style="text-align: center;">
-					<table class="table table-dark table-sm">
-						<thead>
-							<tr class="text-center roboto-medium" >
-                                <th>Nombre producto</th>
-                                <th>Ventas por producto</th>
-							</tr>
-						</thead>
-						<tbody >
-							  <tr th:each="cpvendido : ${prodmasVendido}">
-                                    <td th:text="${cpvendido.nombreProductoVendido}"></td>
-                                    <td th:text="${cpvendido.cantidadProductosVendidos}"></td>
-							</tr>
-						</tbody>
-					</table>
+
+				<!-- Page header -->
+				<div class="full-box page-header">
+					<h3 class="text-left">
+						<i class="fas fa-cart-plus"></i> &nbsp; RANKING DE PRODUCTOS
+					</h3>
+					<p class="text-justify text-primary">A continuacion se
+						detallara el ranking de productos mas vendidos de locales.</p>
+					<hr>
 				</div>
-			</div>
-        </section>
+
+				<!--CONTENT-->
+				<div class="container-fluid">
+					<div class="table-responsive" style="text-align: center;">
+						<table class="table table-dark table-sm">
+							<thead>
+								<tr class="text-center roboto-medium">
+									<th>Nombre producto</th>
+									<th>Ventas por producto</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="cpvendido : ${prodmasVendido}">
+									<td th:text="${cpvendido.nombreProductoVendido}"></td>
+									<td th:text="${cpvendido.cantidadProductosVendidos}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+		</section>
 
 
 
 
-    </main>
-    
+	</main>
+
 	<div th:replace="scripts-footer.html"></div>
 </body>
 </html>
