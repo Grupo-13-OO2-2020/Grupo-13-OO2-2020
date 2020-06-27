@@ -94,19 +94,6 @@ public class SolicitudStockService implements ISolicitudStockService {
 				localesStock.add(l);
 			}
 		}
-		// List<LocalModel> localesCercanos = new ArrayList<LocalModel>();
-
-		// for(LocalModel l : localesStock){
-		// double aux = distanciaCoord(local, l);//local 1
-		// for(int i=0;i>localesStock.size();i++){//pasa por todos los locales
-
-		// if(aux < distanciaCoord(local, localesStock.get(i+1))){//compara si local 1 >
-		// otros
-		// aux = distanciaCoord(local, localesStock.get(i+1));
-		// }
-		// }
-		// }
-
 		Collections.sort(localesStock, new Comparator<LocalModel>() {
 			@Override
 			public int compare(LocalModel o1, LocalModel o2) {
@@ -130,21 +117,17 @@ public class SolicitudStockService implements ISolicitudStockService {
 		return pages;
 	}
 
-//	@Override
-//	public List<SolicitudStockModel> listAll(String keyword) {
-//		if(keyword != null){List<SolicitudStock> s= solicitudStockRepository.findAll(keyword);
-//		List<SolicitudStockModel> sS= new ArrayList<SolicitudStockModel>();
-//		for(SolicitudStock solicitud: s) {
-//			sS.add(solicitudStockConverter.entityToModel(solicitud));
-//		}
-//		return sS;
-//		}
-//		
-//		List<SolicitudStock> s= solicitudStockRepository.findAll(keyword);
-//		List<SolicitudStockModel> sS= new ArrayList<SolicitudStockModel>();
-//		for(SolicitudStock solicitud: s) {
-//			sS.add(solicitudStockConverter.entityToModel(solicitud));
-//		}
-//		return sS;
-//	}
+	@Override
+	public Page<SolicitudStockModel> getAllPagesLocal(Pageable pageable, int id) {
+
+		Page<SolicitudStock> solicitudes=  solicitudStockRepository.findByLocal(id, pageable);
+		Page<SolicitudStockModel> pages= solicitudes.map(new Function <SolicitudStock, SolicitudStockModel>(){
+			public SolicitudStockModel apply(SolicitudStock solicitud){
+				SolicitudStockModel sSModel= solicitudStockConverter.entityToModel(solicitud);
+			
+			return sSModel;}
+		});
+
+		return pages;
+	}
 }

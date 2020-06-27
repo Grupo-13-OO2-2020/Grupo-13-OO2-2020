@@ -91,6 +91,21 @@ public class EmpleadoService implements IEmpleadoService {
 		
 		return pages;
 	}
+
+	@Override
+	public Page<EmpleadoModel> getAllPagesLocal(Pageable pageable, int id) {
+	
+		
+		Page<Empleado> empleados= empleadoRepository.findByLocal(id, pageable);
+		Page<EmpleadoModel> pages= empleados.map(new Function<Empleado, EmpleadoModel>(){
+			public EmpleadoModel apply(Empleado empleado) {
+				EmpleadoModel empleadoModel = empleadoConverter.entityToModel(empleado);
+				return empleadoModel;
+			}
+		});
+		
+		return pages;
+	}
 	
 	@Override
 	public double sueldoxEmpleado(EmpleadoModel empleado){//hay q hacer q lo cuente solo en tal mes 

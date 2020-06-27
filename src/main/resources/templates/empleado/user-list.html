@@ -119,36 +119,34 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="emp:${empleados}" class="text-center">
+
+							<tr th:each="e:${empleados}" class="text-center">
 						
-								<td th:text="${emp.id}"></td>
-								<td th:text="${emp.dni}"></td>
-								<td th:text="${emp.nombre}"></td>
-								<td th:text="${emp.apellido}"></td>
-								<td th:text="${emp.fechaNacimiento}"></td>
-								<td th:text="${emp.horarioEntrada}"></td>
-								<td th:text="${emp.horarioSalida}"></td>
-								<td th:text="${emp.tipoEmpleado}"></td>
-								<td th:text="${emp.sueldo}"></td>
-								<td th:text="${emp.gerente}"></td>
-								<td th:text="${emp.local.direccion}"></td>
+								<td th:text="${e.id}"></td>
+								<td th:text="${e.dni}"></td>
+								<td th:text="${e.nombre}"></td>
+								<td th:text="${e.apellido}"></td>
+								<td th:text="${e.fechaNacimiento}"></td>
+								<td th:text="${e.horarioEntrada}"></td>
+								<td th:text="${e.horarioSalida}"></td>
+								<td th:text="${e.tipoEmpleado}"></td>
+								<td th:text="${e.sueldo}"></td>
+								<td th:text="${e.gerente}"></td>
+								<td th:text="${e.local.direccion}"></td>
 
 								<td>
-									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-success">
-										 <i class="fas fa-sync-alt"></i>
-									</a>
-								</td>
-								
-								
-
-								<td>
-									<a th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}"
+									<a th:href="@{/empleados/eliminar/{id}(id=${e.id})}"
 									 type="button" class="btn btn-warning"> 
 									<i class="far fa-trash-alt"></i>
 									</a>
 								</td>
 
-							
+
+								<td>
+									<a th:href="@{/empleados/editar/{id}(id=${e.id})}" class="btn btn-success">
+										 <i class="fas fa-sync-alt"></i>
+									</a>
+								</td>
 
 							</tr>
 						</tbody>
