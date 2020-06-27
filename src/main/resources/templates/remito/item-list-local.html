@@ -76,8 +76,7 @@
 						<tbody>
 
 
-							<div th:each="remito:${remitos}"
-								th:if="${remito.vendedor.local.id}==${local.id}">
+							<tr th:each="remito:${remitos}">
 								<td th:text="${remito.id}"></td>
 								<td th:text="${remito.fecha}"></td>
 								<td th:text="${remito.producto.descripcion}"></td>
@@ -94,7 +93,7 @@
 									class="btn btn-danger">Eliminar</a></td>
 								<td><a th:href="@{/locales/main/{id}(id=${local.id})}"
 									class="btn btn-warning">Volver</a></td>
-							</div>
+							</tr>
 
 
 						</tbody>

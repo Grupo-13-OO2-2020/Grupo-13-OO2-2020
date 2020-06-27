@@ -8,12 +8,14 @@ import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import Grupo13OO2.Entities.Remito;
 import Grupo13OO2.Models.RemitoModel;
 import Grupo13OO2.converters.RemitoConverter;
 import Grupo13OO2.repositories.IRemitoRepository;
+import Grupo13OO2.services.ILocalService;
 import Grupo13OO2.services.IRemitoService;
 
 @Service("remitoService")
@@ -34,6 +36,11 @@ public class RemitoService implements IRemitoService {
 	@Autowired
 	@Qualifier("clienteService")
 	private ClienteService clienteService;
+	
+	
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
 
 	@Override
 	public List<RemitoModel> getAll() {
@@ -70,6 +77,7 @@ public class RemitoService implements IRemitoService {
 	@Override
 	public Page<RemitoModel> getAllPages(Pageable pageable) {
 		Page<Remito> remitos= remitoRepository.findAll(pageable);
+	
 		Page<RemitoModel> pages= remitos.map(new Function <Remito, RemitoModel>(){
 			public RemitoModel apply(Remito remito) {
 				RemitoModel remitoModel= remitoConverter.entityToModel(remito);
@@ -80,6 +88,14 @@ public class RemitoService implements IRemitoService {
 		return pages;
 	}
 
+	public Page<RemitoModel> getAllPages(int id,Pageable pageable) {
+	
+	List<RemitoModel> remito=	localService.getRemitos(localService.findById(id));
+    Page<RemitoModel> pages = new PageImpl<RemitoModel>(remito, pageable, remito.size());	
+	
+	
+	return pages;	
+	}
 	@Override
 	public List<RemitoModel> listAll(String keyword) {
 		List<RemitoModel> models= new ArrayList<RemitoModel>();
