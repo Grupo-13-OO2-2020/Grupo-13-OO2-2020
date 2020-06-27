@@ -38,6 +38,7 @@ public class ViewRouteHelper {
 	public final static String PRODUCTO = "/productos/";
 	public final static String REMITO = "/remitos/";
 	public final static String LOCAL_USER = "locales/main/";
+	public final static String LOCAL_LISTADO = "local/listado";
 
 	// USER
 	public final static String USER_LOGIN = "user/login";
