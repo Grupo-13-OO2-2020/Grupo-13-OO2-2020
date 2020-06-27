@@ -126,6 +126,7 @@ public class LocalController {
 	@PostMapping("/save")
 	public String create(@Valid @ModelAttribute("local") LocalModel localModel, BindingResult result) {
 		if (result.hasErrors()) {
+			
 			return ViewRouteHelper.LOCAL_FORM;
 
 		}
