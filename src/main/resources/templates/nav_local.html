@@ -1,7 +1,7 @@
 
 <nav class="full-box nav-lateral-menu">
 	<ul>
-		<li><a href="/locales"><i class="fab fa-dashcube fa-fw"></i>
+		<li><a th:href="@{/locales/listado}"><i class="fab fa-dashcube fa-fw"></i>
 				&nbsp; Listado Locales</a></li>
 		<li><a th:href="@{/locales/main/{id}(id=${empleado.local.id})}"><i
 				class="fas fa-store-alt fa-fw"></i> &nbsp; Local</a></li>
