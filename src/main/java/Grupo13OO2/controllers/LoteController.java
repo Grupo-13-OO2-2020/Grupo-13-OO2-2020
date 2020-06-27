@@ -103,7 +103,7 @@ public class LoteController {
 		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
 		PageRequest pageRequest = PageRequest.of(page, 5);
 
-		Page<LoteModel> pageLote = loteService.getAllPages(pageRequest);
+		Page<LoteModel> pageLote = loteService.getAllPagesLocal(pageRequest, id);
 
 		int totalPage = pageLote.getTotalPages();
 		if (totalPage > 0) {

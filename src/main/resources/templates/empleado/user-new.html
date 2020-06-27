@@ -10,14 +10,22 @@
 </head>
 <body>
 
+
 		<!-- Main container -->
+
+	<!-- Main container -->
+		
+
 	<main class="full-box main-container">
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content"
-				 th:replace="div :: div"></div>
 			
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+				 th:include="div :: div"></div>
+			
+			<div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
+				 th:include="div2 :: div"></div>
 		
 	</section>
 
@@ -54,9 +62,9 @@
 			<!-- Content -->
 			<div class="container-fluid">
 				<fieldset>
-					<legend><i class="far fa-plus-square"></i> &nbsp; Información del producto</legend>
+					<legend><i class="far fa-plus-square"></i> &nbsp; Información del Empleado</legend>
 
-					<form th:action="@{/empleados/save}" th:object=${empleado} method="POST">
+					<form th:action="@{/empleados/save}" th:object=${empleadoNew} method="POST">
 						<div class="container-fluid">
 							<div class="row">
 
@@ -135,14 +143,15 @@
 										<small class="form-text text-danger"th:if="${#fields.hasErrors('local')}" th:errors="*{local}"></small>
 									</div>
 								</div>
-
+								
+								<div class="col-12 col-md-4">
 								<div class="form-group">
 									<div class="custom-control custom-checkbox">
 										<input th:field="*{gerente}" type="checkbox" class="custom-control-input" id="defaultUnchecked">
 										<label class="custom-control-label" for="defaultUnchecked">Gerente</label>
 									</div>
 								</div>
-			
+			                </div>
 							</div>
 							
 						</div>

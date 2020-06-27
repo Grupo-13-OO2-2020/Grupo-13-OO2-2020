@@ -22,9 +22,7 @@ public interface ISolicitudStockService {
 	public List<LocalModel> getLocalesCercanos(int idProducto, int idVendedor, int cantidad);
 
 	
-	Page<SolicitudStockModel> getAllPages(Pageable pageable);
+	public Page<SolicitudStockModel> getAllPages(Pageable pageable);
 	
-//		public List<SolicitudStockModel> listAll(String keyword);
-	// public void aceptarSolcitudStock(SolicitudStockModel
-	// solicitudStockModel,EmpleadoModel empleado,LocalModel local);
+	public Page<SolicitudStockModel> getAllPagesLocal(Pageable pageable, int id);
 }

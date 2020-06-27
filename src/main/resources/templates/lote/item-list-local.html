@@ -17,7 +17,12 @@
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content" th:replace="div2 :: div"></div>
+			
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+				 th:include="div :: div"></div>
+			
+			<div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
+				 th:include="div2 :: div"></div>
 
 
 		</section>
@@ -44,10 +49,9 @@
 				</ul>
 			</div>
 
-			<!--CONTENT-->
-			<div class="container-fluid">
+			
 				<!--CONTENT-->
-				<div class="container-fluid">
+				<div class="container-fluid" >
 					<div class="table-responsive">
 						<table class="table table-dark table-sm">
 							<thead>
@@ -56,21 +60,24 @@
 									<th>CANTIDAD INICIAL</th>
 									<th>FECHA DE INGRESO</th>
 									<th>CANTIDAD EXISTENTE</th>
+									<th>DESCRIPCION PRODUCTO</th>
 									<th>CODIGO PRODUCTO</th>
 									<th>TALLE</th>
+									<th>ACTUALIZAR</th>
+									<th>ELIMINAR</th>
 									
 									<th></th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="lote:${lotes}" 
-								th:if="${lote.local.id}==${local.id}">
+								<tr th:each="lote:${lotes}" th:if="${lote.local.id}==${local.id}">
 
 									<td th:text="${lote.numeroDeLote}"></td>
 									<td th:text="${lote.cantidadRecibida}"></td>
 									<td th:text="${lote.fechaIngreso}"></td>
 									<td th:text="${lote.cantidadExistente}"></td>
+									<td th:text="${lote.producto.descripcion}"></td>
 									<td th:text="${lote.producto.codigoProducto}"></td>
 									<td th:text="${lote.producto.talle}"></td>
 									<td><a th:href="@{/lotes/editar/{id}(id=${lote.id})} + ${lote.id}"
@@ -92,26 +99,24 @@
 						</table>
 					</div>
 					<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-
-						<li class="page-item"
-							th:classappend="${prev == 0 ? 'disabled': '' }"><a
-							class="page-link" th:href="@{|/lote/${local.id}?page=${prev}|}">Anterior</a>
+				<ul class="pagination justify-content-center">
+					
+					<li class="page-item"
+						th:classappend="${prev == 0 ? 'disabled': '' }">
+						<a class="page-link" th:href="@{|/lotes/?page=${prev}|}">Anterior</a>
 						</li>
-						<li class="page-item" th:each="page : ${pages}"
-							th:classappend="${current == page ? 'active': '' }"><a
-							class="page-link" th:href="@{|/lote/${local.id}?page=${page}|}"
-							th:text="${page}"></a>
+					<li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active': '' }">
+					<a	class="page-link" th:href="@{|/lotes/?page=${page}|}"
+						th:text="${page}"></a>
 						<li class="page-item"
-							th:classappend="${current == last ? 'disabled': '' }"><a
-							class="page-link" th:href="@{|/lote/${local.id}?page=${next}|}">Proxima</a>
-						</li>
-
-					</ul>
-				</nav>
-				</div>
+						th:classappend="${current == last ? 'disabled': '' }">
+						<a class="page-link" th:href="@{|/lotes/?page=${next}|}">Proxima</a>
+						</li>	
+						
+				</ul>
+			</nav>
+		</div>
 		</section>
-
 
 
 

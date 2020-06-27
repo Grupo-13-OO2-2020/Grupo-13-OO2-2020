@@ -16,8 +16,12 @@
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content"
-				 th:replace="div2 :: div"></div>
+			
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+            th:include="div :: div"></div>
+        
+            <div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
+                    th:include="div2 :: div"></div>
 			
 		
 	</section>
@@ -68,16 +72,13 @@
 								<th>VENDEDOR</th>
 								<th>CLIENTE</th>
 								<th>FORMA DE PAGO</th>
-								<th></th>
-								<th></th>
-								<th></th>
+								<th>ELIMINAR</th>
 							</tr>
 						</thead>
 						<tbody>
+							<tr th:each="remito:${remitos}" style="text-align: center;">
 
 
-							<div th:each="remito:${remitos}"
-								th:if="${remito.vendedor.local.id}==${local.id}">
 								<td th:text="${remito.id}"></td>
 								<td th:text="${remito.fecha}"></td>
 								<td th:text="${remito.producto.descripcion}"></td>
@@ -86,41 +87,36 @@
 								<td th:text="${remito.cliente.nombre}"></td>
 								<td th:text="${remito.formaDePago}"></td>
 
-
-
-								<td><a th:href="@{/remitos/editar/} + ${remito.id}"
-									class="btn btn-warning">Editar</a></td>
-								<td><a th:href="@{/remitos/eliminar/} + ${remito.id}"
-									class="btn btn-danger">Eliminar</a></td>
-								<td><a th:href="@{/locales/main/{id}(id=${local.id})}"
-									class="btn btn-warning">Volver</a></td>
-							</div>
-
-
+								<td><a
+									th:href="@{/remitos/eliminar/} + ${remito.id}"
+									type="button" class="btn btn-warning"
+									onclick="alert('El remito fue eliminado con exito!')"> <i
+										class="far fa-trash-alt"></i>
+								</a>
+							</tr>
 						</tbody>
 					</table>
 				</div>
 			<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
-
+						
 						<li class="page-item"
-							th:classappend="${prev == 0 ? 'disabled': '' }"><a
-							class="page-link" th:href="@{|/remitos/${local.id}?page=${prev}|}">Anterior</a>
-						</li>
-						<li class="page-item" th:each="page : ${pages}"
-							th:classappend="${current == page ? 'active': '' }"><a
-							class="page-link" th:href="@{|/remitos/${local.id}?page=${page}|}"
+							th:classappend="${prev == 0 ? 'disabled': '' }">
+							<a class="page-link" th:href="@{|/remitos/?page=${prev}|}">Anterior</a>
+							</li>
+						<li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active': '' }">
+						<a	class="page-link" th:href="@{|/remitos/?page=${page}|}"
 							th:text="${page}"></a>
-						<li class="page-item"
-							th:classappend="${current == last ? 'disabled': '' }"><a
-							class="page-link" th:href="@{|/remitos/${local.id}?page=${next}|}">Proxima</a>
-						</li>
-
+							<li class="page-item"
+							th:classappend="${current == last ? 'disabled': '' }">
+							<a class="page-link" th:href="@{|/remitos/?page=${next}|}">Proxima</a>
+							</li>	
+							
 					</ul>
 				</nav>
 			</div>
 		</section>
-
+@chi
 
 
 

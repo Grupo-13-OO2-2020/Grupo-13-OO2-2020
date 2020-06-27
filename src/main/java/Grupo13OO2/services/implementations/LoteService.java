@@ -71,6 +71,11 @@ public class LoteService implements ILoteService {
 		LocalModel localModel = localConverter.entityToModel(local);
 		loteModel.setLocal(localModel);
 		loteModel.setProducto(producto);
+		if(loteModel.getId()<1) {
+			loteModel.setCantidadExistente(loteModel.getCantidadRecibida());
+		}
+		
+		
 		Lote lote = loteRepository.save(loteConverter.modelToEntity(loteModel));
 
 		lote.getLocal().getLotes().add(lote);
@@ -99,6 +104,23 @@ public class LoteService implements ILoteService {
 	
 		
 		Page<Lote> lotes= loteRepository.findAll(pageable);
+		
+		Page<LoteModel> pages= lotes.map(new Function <Lote, LoteModel>(){
+			public LoteModel apply(Lote lote) {
+				LoteModel remitoModel= loteConverter.entityToModel(lote);
+				return remitoModel;
+			}
+		});
+		
+		return pages;
+	}
+
+	@Override
+	public Page<LoteModel> getAllPagesLocal(Pageable pageable, int id) {
+	
+		
+		Page<Lote> lotes= loteRepository.findByLocal(id, pageable);
+		
 		Page<LoteModel> pages= lotes.map(new Function <Lote, LoteModel>(){
 			public LoteModel apply(Lote lote) {
 				LoteModel remitoModel= loteConverter.entityToModel(lote);

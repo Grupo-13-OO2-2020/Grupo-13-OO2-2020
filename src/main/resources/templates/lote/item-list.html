@@ -53,7 +53,12 @@
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content" th:replace="div :: div"></div>
+			
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+				 th:include="div :: div"></div>
+			
+			<div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
+				 th:include="div2 :: div"></div>
 
 
 		</section>
@@ -101,20 +106,22 @@
 									<th>CANTIDAD INICIAL</th>
 									<th>FECHA DE INGRESO</th>
 									<th>CANTIDAD EXISTENTE</th>
+									<th>DESCRIPCION PRODUCTO</th>
 									<th>CODIGO PRODUCTO</th>
 									<th>TALLE</th>
 									<th>LOCAL</th>
-									<th></th>
-									<th></th>
+									<th>ACTUALIZAR</th>
+									<th>ELIMINAR</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="lote:${lotes}">
+								<tr th:each="lote:${lotes}" style="text-align:center;">
 
 									<td th:text="${lote.numeroDeLote}"></td>
 									<td th:text="${lote.cantidadRecibida}"></td>
 									<td th:text="${lote.fechaIngreso}"></td>
 									<td th:text="${lote.cantidadExistente}"></td>
+									<td th:text="${lote.producto.descripcion}"></td>
 									<td th:text="${lote.producto.codigoProducto}"></td>
 									<td th:text="${lote.producto.talle}"></td>
 									<td th:text="${lote.local.direccion}"></td>									

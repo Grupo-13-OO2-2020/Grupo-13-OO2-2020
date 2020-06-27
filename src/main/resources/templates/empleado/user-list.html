@@ -54,10 +54,12 @@
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content"
-				 th:replace="div :: div"></div>
 			
-		
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+				 th:include="div :: div"></div>
+			
+			<div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
+				 th:include="div2 :: div"></div>
 	</section>
 
 		<!-- Page content -->
@@ -112,37 +114,40 @@
 								<th>SUELDO</th>
 								<th>GERENTE</th>
 								<th>LOCAL</th>
-								<th></th>
-								<th></th>
+								<th>ACTUALIZAR</th>
+								<th>ELIMINAR</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="empleado:${empleados}" class="text-center">
+
+							<tr th:each="e:${empleados}" class="text-center">
 						
-								<td th:text="${empleado.id}"></td>
-								<td th:text="${empleado.dni}"></td>
-								<td th:text="${empleado.nombre}"></td>
-								<td th:text="${empleado.apellido}"></td>
-								<td th:text="${empleado.fechaNacimiento}"></td>
-								<td th:text="${empleado.horarioEntrada}"></td>
-								<td th:text="${empleado.horarioSalida}"></td>
-								<td th:text="${empleado.tipoEmpleado}"></td>
-								<td th:text="${empleado.sueldo}"></td>
-								<td th:text="${empleado.gerente}"></td>
-								<td th:text="${empleado.local.direccion}"></td>
+								<td th:text="${e.id}"></td>
+								<td th:text="${e.dni}"></td>
+								<td th:text="${e.nombre}"></td>
+								<td th:text="${e.apellido}"></td>
+								<td th:text="${e.fechaNacimiento}"></td>
+								<td th:text="${e.horarioEntrada}"></td>
+								<td th:text="${e.horarioSalida}"></td>
+								<td th:text="${e.tipoEmpleado}"></td>
+								<td th:text="${e.sueldo}"></td>
+								<td th:text="${e.gerente}"></td>
+								<td th:text="${e.local.direccion}"></td>
 
 								<td>
-									<a th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}"
+									<a th:href="@{/empleados/eliminar/{id}(id=${e.id})}"
 									 type="button" class="btn btn-warning"> 
 									<i class="far fa-trash-alt"></i>
 									</a>
 								</td>
 
+
 								<td>
-									<a th:href="@{/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-success">
+									<a th:href="@{/empleados/editar/{id}(id=${e.id})}" class="btn btn-success">
 										 <i class="fas fa-sync-alt"></i>
 									</a>
 								</td>
+
 							</tr>
 						</tbody>
 					</table>

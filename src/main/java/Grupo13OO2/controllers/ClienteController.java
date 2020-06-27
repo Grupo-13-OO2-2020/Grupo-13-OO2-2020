@@ -114,10 +114,12 @@ public class ClienteController {
 	}
 
 	@PostMapping("/save")
-	public String create(@Valid @ModelAttribute("cliente") ClienteModel clienteModel, BindingResult result) {
+	public String save(@Valid @ModelAttribute("cliente") ClienteModel clienteModel, BindingResult result) {
 		if (result.hasErrors()) {
 			return ViewRouteHelper.CLIENTE_FORM;
+			
 		}
+		clienteService.insertOrUpdate(clienteModel);
 		return "redirect:/clientes";
 	}
 

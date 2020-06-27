@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>Lista de items</title>
+<title>Lista de Solicitudes</title>
 <div th:replace="header.html"></div>
 
 </head>
@@ -15,38 +15,54 @@
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content"
-				 th:replace="div2 :: div"></div>
-			
-		
-	</section>
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+            th:include="div :: div"></div>
+        
+            <div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
+                    th:include="div2 :: div"></div>
+		</section>
 
-		<section class="full-box page-content">
-			<nav class="full-box navbar-info">
-				<a href="#" class="float-left show-nav-lateral"> <i
-					class="fas fa-exchange-alt"></i>
-				</a> <a href="user-update.html"> <i class="fas fa-user-cog"></i>
-				</a> <a href="#" class="btn-exit-system"> <i
-					class="fas fa-power-off"></i>
-				</a>
+			<section class="full-box page-content">
+			<nav th:replace="nav_user :: nav">			
 			</nav>
 			<!-- Page header -->
 			<div class="full-box page-header">
 				<h3 class="text-left">
-					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS
+					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; SOLICITUDES DE STOCK A OTRO LOCAL
 				</h3>
 				<p class="text-justify"></p>
 			</div>
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
-					<li><a href="item-new.html"><i class="fas fa-plus fa-fw"></i>
-							&nbsp; AGREGAR ITEM</a></li>
-					<li><a class="active" href="item-list.html"><i
-							class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS</a></li>
-					<li><a href="item-search.html"><i
-							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM</a></li>
+							<li><a href="item-search.html"><i
+							class="fas fa-search fa-fw"></i> &nbsp; BUSCAR SOLICITUD</a></li>
 				</ul>
 			</div>
+	
+			   <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+       var all =  /*[[ ${sinStock} ]]*/;
+
+    /*]]>*/
+    
+    if(all!=null){
+    	    	alert("No hay stock suficiente se ha rechazado el pedido");
+
+    }
+</script>
+	
+			   <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+       var all =  /*[[ ${sinAceptar} ]]*/;
+
+    /*]]>*/
+    
+    if(all!=null){
+    	    	alert("No acepto el Pedido");
+
+    }
+</script>
+
 
 			<!--CONTENT-->
 			<div class="container-fluid">
@@ -68,8 +84,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<div th:each="solicitudStock:${solicitudesStock}"
-							th:if="${solicitudStock.vendedor.local.id}==${local.id}">
+							<tr th:each="solicitudStock:${solicitudesStock}">
 								
 
 								<td th:text="${solicitudStock.id}"></td>
@@ -91,7 +106,7 @@
 									<a th:href="@{/locales/main/{id}(id=${local.id})}" class="btn btn-warning">Volver</a>
 								</td>
 								
-							</div>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -100,15 +115,15 @@
 
 						<li class="page-item"
 							th:classappend="${prev == 0 ? 'disabled': '' }"><a
-							class="page-link" th:href="@{|/empleados/${local.id}?page=${prev}|}">Anterior</a>
+							class="page-link" th:href="@{|/solicitudesStock/${local.id}?page=${prev}|}">Anterior</a>
 						</li>
 						<li class="page-item" th:each="page : ${pages}"
 							th:classappend="${current == page ? 'active': '' }"><a
-							class="page-link" th:href="@{|/empleados/${local.id}?page=${page}|}"
+							class="page-link" th:href="@{|/solicitudesStock/${local.id}?page=${page}|}"
 							th:text="${page}"></a>
 						<li class="page-item"
 							th:classappend="${current == last ? 'disabled': '' }"><a
-							class="page-link" th:href="@{|/empleados/${local.id}?page=${next}|}">Proxima</a>
+							class="page-link" th:href="@{|/solicitudesStock/${local.id}?page=${next}|}">Proxima</a>
 						</li>
 
 					</ul>

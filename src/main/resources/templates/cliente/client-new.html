@@ -15,14 +15,12 @@
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-				<div th:if="!${empleado.gerente}" >
-			<div class="full-box nav-lateral-content"
-				 th:replace="div2 :: div"></div>
-			 </div>
-			<div th:if="${empleado.gerente}" >
-			<div class="full-box nav-lateral-content"
-				 th:replace="div :: div"></div>
-			 </div>
+
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+			th:include="div :: div"></div>
+	   
+			<div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
+					th:include="div2 :: div"></div>
 	</section>
 
 
@@ -33,13 +31,10 @@
 
 			<!-- Page header -->
 			<div class="full-box page-header">
-				<h3 class="text-left">
+				<h3 class="text-center">
 					<i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR CLIENTE
 				</h3>
-				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Quidem odit amet asperiores quis minus, dolorem
-					repellendus optio doloremque error a omnis soluta quae magnam
-					dignissimos, ipsam, temporibus sequi, commodi accusantium!</p>
+				<p class="text-justify"></p>
 			</div>
 
 			<div class="container-fluid">
@@ -56,17 +51,17 @@
 
 			<!-- Content here-->
 			<div class="container-fluid">
-				<form action="#" th:action="@{/clientes/save}" th:object=${cliente}
-					method="POST">
-					<fieldset>
-						<legend>
-							<i class="fas fa-user"></i> &nbsp; Información básica
-						</legend>
+			<fieldset>
+			<legend><i class="fas fa-user"></i> &nbsp; Información básica </legend>
+			
+				<form th:action="@{/clientes/save}" th:object=${cliente} method="POST">
 						<div class="container-fluid">
 							<div class="row">
+							    <div>
 								<div class="form-group" style="display: none">
 									<label>ID</label> <input th:field="*{id}" type="text"
 										class="form-control" />
+								</div>
 								</div>
 								<div class="col-12 col-md-2">
 									<div class="form-group">
@@ -126,33 +121,43 @@
 								</div>
 								<div class="col-12 col-md-4">
 									<div class="form-group">
-										<label class="bmd-label-floating">Correo Electronico</label> 
-										<input th:field="*{email}" type="Email" class="form-control"
-											pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#- ]{1,150}" maxlength="50">
+										<label for="email" class="bmd-label-floating">Correo Electronico</label> 
+										<input th:field="*{email}" type="email" class="form-control"
+											pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#- ]{1,150}" id="email" maxlength="50">
 										<small class="form-text text-danger"
 											th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
 									</div>
 								</div>
 							</div>
+
 							
 						</div>
-					</fieldset>
-					<br>
-					<br>
-					<br>
-					<p class="text-center" style="margin-top: 40px;">
-						<button type="reset" class="btn btn-raised btn-secondary btn-sm">
-							<i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR
-						</button>
-						&nbsp; &nbsp;
-						<button type="submit" class="btn btn-raised btn-info btn-sm">
-							<i class="far fa-save"></i> &nbsp; GUARDAR>
-						</button>
-					</p>
-				</form>
-			</div>
 
-		</section>
+							<div class="card-footer">
+                                    <i class="far fa-save"></i>
+									<input type="submit" class="btn btn-raised btn-info btn-sm">
+								</div>
+
+						<p class="text-center" style="margin-top: 40px;">
+							<button type="reset" class="btn btn-raised btn-secondary btn-sm">
+								<i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR
+							</button>
+							&nbsp; &nbsp;
+							<button type="submit" class="btn btn-raised btn-info btn-sm">
+								<i class="far fa-save"></i> &nbsp; GUARDAR>
+							</button>
+						</p>
+
+					</div>
+					</form>
+
+					</fieldset>
+					<br><br><br>
+					
+				
+			</div>
+            </section>
+            
 	</main>
 
 

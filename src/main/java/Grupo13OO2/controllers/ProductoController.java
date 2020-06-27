@@ -126,7 +126,6 @@ public class ProductoController {
 			model.addAttribute("pages", pages);
 		
 				}
-		model.addAttribute("locales", pageProducto.getContent());
 		model.addAttribute("current", page+1);
 		model.addAttribute("next" ,page+2);
 		model.addAttribute("prev" ,page);

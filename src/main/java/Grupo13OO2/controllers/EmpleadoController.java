@@ -28,7 +28,6 @@ import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 
 import Grupo13OO2.Entities.User;
-import Grupo13OO2.Models.ClienteModel;
 import Grupo13OO2.Models.EmpleadoModel;
 import Grupo13OO2.helpers.ViewRouteHelper;
 import Grupo13OO2.repositories.IUserRepository;
@@ -39,7 +38,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
-
 @RequestMapping("/empleados")
 public class EmpleadoController {
 	@Autowired
@@ -107,7 +105,7 @@ int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toStri
 		
 		PageRequest pageRequest = PageRequest.of(page, 4);
 		
-		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPages(pageRequest);
+		Page<EmpleadoModel> pageEmpleado = empleadoService.getAllPagesLocal(pageRequest, id);
 		
 		int totalPage= pageEmpleado.getTotalPages();
 		if(totalPage>0) {
@@ -144,7 +142,7 @@ int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toStri
 		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
 		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
 		mAV.addObject("empleado", e);
-		mAV.addObject("empleado", new EmpleadoModel());
+		mAV.addObject("empleadoNew", new EmpleadoModel());
 		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
@@ -183,7 +181,8 @@ int page =params.get("page") !=null ? (Integer.valueOf(params.get("page").toStri
 			redirect.addFlashAttribute("popUp", "error");
 			return new RedirectView("/empleados");
 	}
-
+	
+	
 	@GetMapping("/partial/{id}")
 	public ModelAndView getPartial(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_INDEX);

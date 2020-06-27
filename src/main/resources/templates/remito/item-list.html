@@ -16,8 +16,11 @@
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content"
-				 th:replace="div :: div"></div>
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+            th:include="div :: div"></div>
+        
+            <div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
+                    th:include="div2 :: div"></div>
 			
 		
 	</section>
@@ -51,9 +54,8 @@
 								<th>CANTIDAD</th>
 								<th>VENDEDOR</th>
 								<th>CLIENTE</th>
-								<th>FACTURADO</th>
 								<th>FORMA DE PAGO</th>
-								<th></th>
+								<th>ELIMINAR</th>
 							</tr>
 						</thead>
 						<tbody>

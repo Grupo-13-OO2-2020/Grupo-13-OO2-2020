@@ -15,8 +15,11 @@
 		<!-- Nav lateral -->
 		<section class="full-box nav-lateral">
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content"
-				 th:replace="div :: div"></div>
+			<div th:if="${empleado.gerente}" class="full-box nav-lateral-content"
+            th:include="div :: div"></div>
+        
+            <div th:unless="${empleado.gerente}" class="full-box nav-lateral-content"
+                    th:include="div2 :: div"></div>
 			
 		
 	</section>
@@ -53,7 +56,7 @@
 								<th>COLABORADOR</th>
 								<th>ACEPTADO</th>
 								<th>LOCAL</th>
-								<th></th>
+								<th>ELIMINAR</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -79,7 +82,7 @@
 									type="button" class="btn btn-warning"
 									onclick="alert('El cliente fue eliminado con exito!')"> <i
 										class="far fa-trash-alt"></i>
-								</a>
+								</a></td>
 							</tr>
 						</tbody>
 					</table>
