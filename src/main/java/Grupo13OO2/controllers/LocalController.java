@@ -237,4 +237,36 @@ public class LocalController {
 
 		return mAV;
 	}
+	
+	@GetMapping("/listado")
+	public ModelAndView listado(@RequestParam Map<String, Object> params, Model model) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_LISTADO);
+		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
+
+		PageRequest pageRequest = PageRequest.of(page, 5);
+
+		Page<LocalModel> pageLocal = localService.getAllPages(pageRequest);
+
+		int totalPage = pageLocal.getTotalPages();
+		if (totalPage > 0) {
+			List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+			mAV.addObject("pages", pages);
+
+		}
+		mAV.addObject("locales", pageLocal.getContent());
+		mAV.addObject("current", page + 1);
+		mAV.addObject("next", page + 2);
+		mAV.addObject("prev", page);
+		mAV.addObject("last", totalPage);
+
+		// agrego datos de ususario
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		mAV.addObject("usuario", auth.getName());
+		User u = userRepository.findByUsernameAndFetchUserRolesEagerly(auth.getName());
+		EmpleadoModel e = empleadoService.ListarId(u.getEmpleado().getId());
+		mAV.addObject("local", localService.findById(e.getLocal().getId()));
+		mAV.addObject("empleado", e);
+
+		return mAV;
+	}
 }
